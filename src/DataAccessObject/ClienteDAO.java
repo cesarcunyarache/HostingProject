@@ -187,7 +187,9 @@ public class ClienteDAO implements Crud<ClienteDTO> {
                 String correo = rs.getString("correo");
                 String direccion = rs.getString("direccion");
                 String genero = rs.getString("genero");
+                
                 cliente = new ClienteDTO(id, numDoc, tipoDocumentoID, nombres, apellidos, telefono, nacionalidad, correo, direccion, genero.charAt(0));
+                
             }
 
         } catch (Exception e) {

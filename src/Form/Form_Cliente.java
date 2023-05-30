@@ -1,8 +1,12 @@
 package Form;
 
 import BusinessObject.Cliente;
+import BusinessObject.TipoDocumento;
 import TransferObject.ClienteDTO;
+import TransferObject.TipoDocumentoDTO;
 import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,12 +17,24 @@ import javax.swing.table.DefaultTableModel;
 public class Form_Cliente extends javax.swing.JPanel {
 
     Cliente cliente;
+    TipoDocumento tipoDocumento;
     DefaultTableModel df;
+    DefaultComboBoxModel modelo;
+    int id = 0;
 
     public Form_Cliente() {
         initComponents();
+        tipoDocumento = new TipoDocumento();
         cliente = new Cliente();
-        df = new DefaultTableModel();
+        modelo = new DefaultComboBoxModel(llenarCombo());
+        cbo_tipoDoc.setModel(modelo);
+        df = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+
+        };
         llenarTabla();
     }
 
@@ -102,6 +118,11 @@ public class Form_Cliente extends javax.swing.JPanel {
         jPanel1.add(cbo_genero, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 210, -1));
 
         btn_Actualizar.setText("Actualizar");
+        btn_Actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ActualizarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btn_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 360, 120, -1));
 
         btn_Buscar.setText("Buscar");
@@ -131,6 +152,11 @@ public class Form_Cliente extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabla);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, 770, 270));
@@ -154,10 +180,10 @@ public class Form_Cliente extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BuscarActionPerformed
-        String codBusqueda = JOptionPane.showInputDialog("Ingrese el ID a buscar");
+        id = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID a buscar"));
 
-        ClienteDTO clienteDTO = cliente.Buscar(Integer.parseInt(codBusqueda));
-        
+        ClienteDTO clienteDTO = cliente.Buscar(id);
+         
         if (clienteDTO != null) {
             txt_numDoc.setText(clienteDTO.getNumDocumento());
             cbo_tipoDoc.setSelectedItem(clienteDTO.getTipoDocumentoID());
@@ -166,7 +192,16 @@ public class Form_Cliente extends javax.swing.JPanel {
             txt_telefono.setText(clienteDTO.getTelefono());
             txt_correo.setText(clienteDTO.getCorreo());
             txt_direccion.setText(clienteDTO.getDireccion());
-            cbo_genero.setSelectedItem(clienteDTO.getGenero());
+
+            switch (clienteDTO.getGenero()) {
+                case 'M' ->
+                    cbo_genero.setSelectedIndex(1);
+                case 'F' ->
+                    cbo_genero.setSelectedIndex(2);
+                default ->
+                    cbo_genero.setSelectedIndex(0);
+            }
+
             cbo_nacionalidad.setSelectedItem(clienteDTO.getNacionalidad());
 
         }
@@ -182,14 +217,15 @@ public class Form_Cliente extends javax.swing.JPanel {
                 && !cbo_tipoDoc.getSelectedItem().equals("")) {
 
             String numDoc = txt_numDoc.getText();
-            int tipoDoc = cbo_tipoDoc.getSelectedIndex();
+            TipoDocumentoDTO var = (TipoDocumentoDTO) cbo_tipoDoc.getSelectedItem();
+            int tipoDoc = var.getIdTipoDocumento();
             String nombres = txt_nombres.getText();
             String apellidos = txt_apellidos.getText();
             String telefono = txt_telefono.getText();
             String correo = txt_correo.getText();
             String direccion = txt_direccion.getText();
             String genero = cbo_genero.getSelectedItem().toString();
-            String nacionaldad = cbo_tipoDoc.getSelectedItem().toString();
+            String nacionaldad = cbo_nacionalidad.getSelectedItem().toString();
 
             String mensaje = cliente.Agregar(numDoc, 2, nombres, apellidos, telefono, nacionaldad, correo, direccion, genero.charAt(0));
 
@@ -204,12 +240,74 @@ public class Form_Cliente extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btn_AgregarActionPerformed
 
+    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+        id = (int) (tabla.getValueAt(tabla.getSelectedRow(), 0));
+        if (id == -1) {
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
+        } else {
+            ClienteDTO clienteDTO = cliente.Buscar(id);
+            
+            if (clienteDTO != null) {
+                txt_numDoc.setText(clienteDTO.getNumDocumento());
+                cbo_tipoDoc.setSelectedItem(clienteDTO.getTipoDocumentoID());
+                txt_nombres.setText(clienteDTO.getNombres());
+                txt_apellidos.setText(clienteDTO.getApellidos());
+                txt_telefono.setText(clienteDTO.getTelefono());
+                txt_correo.setText(clienteDTO.getCorreo());
+                txt_direccion.setText(clienteDTO.getDireccion());
+                
+                switch (clienteDTO.getGenero()) {
+                    case 'M' ->
+                        cbo_genero.setSelectedIndex(1);
+                    case 'F' ->
+                        cbo_genero.setSelectedIndex(2);
+                    default ->
+                        cbo_genero.setSelectedIndex(0);
+
+                }
+                cbo_nacionalidad.setSelectedItem(clienteDTO.getNacionalidad());
+
+            }
+        }
+    }//GEN-LAST:event_tablaMouseClicked
+
+    private void btn_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ActualizarActionPerformed
+        if (!txt_numDoc.getText().isEmpty() && !cbo_tipoDoc.getSelectedItem().equals("-Seleccione-")
+                && !txt_nombres.getText().isEmpty() && !txt_apellidos.getText().isEmpty()
+                && !txt_telefono.getText().isEmpty() && !txt_correo.getText().isEmpty()
+                && !txt_direccion.getText().isEmpty() && !cbo_genero.getSelectedItem().equals("-Seleccione-")
+                && !cbo_tipoDoc.getSelectedItem().equals("")) {
+
+            String numDoc = txt_numDoc.getText();
+            TipoDocumentoDTO var = (TipoDocumentoDTO) cbo_tipoDoc.getSelectedItem();
+            int tipoDoc = var.getIdTipoDocumento();
+            String nombres = txt_nombres.getText();
+            String apellidos = txt_apellidos.getText();
+            String telefono = txt_telefono.getText();
+            String correo = txt_correo.getText();
+            String direccion = txt_direccion.getText();
+            String genero = cbo_genero.getSelectedItem().toString();
+            String nacionaldad = cbo_nacionalidad.getSelectedItem().toString();
+
+            String mensaje = cliente.Actualizar(id, numDoc, 2, nombres, apellidos, telefono, nacionaldad, correo, direccion, genero.charAt(0));
+
+            if (!mensaje.equals("")) {
+                JOptionPane.showMessageDialog(null, mensaje);
+
+            } else {
+                JOptionPane.showMessageDialog(null, mensaje);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Error, uno o más campos vacios!");
+        }
+    }//GEN-LAST:event_btn_ActualizarActionPerformed
+
     public void llenarTabla() {
 
         df.setColumnCount(0);
         df.setRowCount(0);
 
-        String[] cabezera = {"N° de documento", "Nombres", "Apellidos", "Telefono", "Género", "Correo"};
+        String[] cabezera = {"#", "N° de documento", "Nombres", "Apellidos", "Telefono", "Género", "Correo"};
         df.setColumnIdentifiers(cabezera);
 
         Object[] datos = new Object[df.getColumnCount()];
@@ -221,12 +319,13 @@ public class Form_Cliente extends javax.swing.JPanel {
             for (int i = 0; i < lista.size(); i++) {
                 ClienteDTO c = lista.get(i);
 
-                datos[0] = c.getNumDocumento();
-                datos[1] = c.getNombres();
-                datos[2] = c.getApellidos();
-                datos[3] = c.getTelefono();
-                datos[4] = c.getGenero();
-                datos[5] = c.getCorreo();
+                datos[0] = c.getIdCliente();
+                datos[1] = c.getNumDocumento();
+                datos[2] = c.getNombres();
+                datos[3] = c.getApellidos();
+                datos[4] = c.getTelefono();
+                datos[5] = c.getGenero();
+                datos[6] = c.getCorreo();
 
                 df.addRow(datos);
             }
@@ -234,6 +333,19 @@ public class Form_Cliente extends javax.swing.JPanel {
             tabla.setModel(df);
 
         }
+    }
+
+    public Vector<TipoDocumentoDTO> llenarCombo() {
+        Vector<TipoDocumentoDTO> combo = new Vector<TipoDocumentoDTO>();
+        ArrayList<TipoDocumentoDTO> lista = new ArrayList<>();
+
+        lista = (ArrayList<TipoDocumentoDTO>) tipoDocumento.Listar();
+        if (lista != null) {
+            for (TipoDocumentoDTO tipoDocumentoDTO : lista) {
+                combo.add(tipoDocumentoDTO);
+            }
+        }
+        return combo;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

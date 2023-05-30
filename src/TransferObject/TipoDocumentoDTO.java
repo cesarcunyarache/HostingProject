@@ -40,7 +40,7 @@ public class TipoDocumentoDTO {
 
     @Override
     public String toString() {
-        return "TipoDocumentoDTO{" + "idTipoDocumento=" + idTipoDocumento + ", nombre=" + nombre + '}';
+        return nombre;
     }
 
     public void finalize() throws Throwable {
