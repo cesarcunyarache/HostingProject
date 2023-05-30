@@ -14,11 +14,16 @@ public class TipoEmpleadoDTO {
 
     }
 
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
     public TipoEmpleadoDTO(String nombre, Double sueldo) {
         this.nombre = nombre;
         this.sueldo = sueldo;
     }
- 
+
     public TipoEmpleadoDTO(int idTipoEmpleado, String nombre, Double sueldo) {
         this.idTipoEmpleado = idTipoEmpleado;
         this.nombre = nombre;

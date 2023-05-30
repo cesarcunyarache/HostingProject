@@ -3,6 +3,8 @@ package Menu;
 import Form.Form1;
 import Form.Form2;
 import Form.Form_Cliente;
+import Form.Form_Empleados;
+import Form.Form_Habitaciones;
 import Swing.ButtonCustom;
 import Swing.MenuItem;
 import java.awt.BorderLayout;
@@ -20,6 +22,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
@@ -118,7 +121,7 @@ public class Menu extends javax.swing.JPanel {
                     //showForm(new Form_Home());
 
                 } else if (index == 1) {
-                    //showForm(new Form_Habitaciones());
+                    showForm(new Form_Habitaciones());
 
                 } else if (index == 2) {
                     //showForm(new Form_Reservas());
@@ -127,7 +130,7 @@ public class Menu extends javax.swing.JPanel {
                 } else if (index == 4) {
                     //showForm(new Form_Documento());
                 } else if (index == 5){
-                    
+                    showForm(new Form_Empleados());
                 }
             }
         });

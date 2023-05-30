@@ -1,8 +1,6 @@
-package Form;
+public class NewJPanel extends javax.swing.JPanel {
 
-public class Form_Habitaciones extends javax.swing.JPanel {
-
-    public Form_Habitaciones() {
+    public NewJPanel() {
         initComponents();
     }
 

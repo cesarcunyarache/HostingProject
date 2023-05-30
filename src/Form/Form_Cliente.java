@@ -72,6 +72,11 @@ public class Form_Cliente extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
 
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Número de documento");
@@ -183,7 +188,7 @@ public class Form_Cliente extends javax.swing.JPanel {
         id = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID a buscar"));
 
         ClienteDTO clienteDTO = cliente.Buscar(id);
-         
+
         if (clienteDTO != null) {
             txt_numDoc.setText(clienteDTO.getNumDocumento());
             cbo_tipoDoc.setSelectedItem(clienteDTO.getTipoDocumentoID());
@@ -238,6 +243,7 @@ public class Form_Cliente extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "Error, uno o más campos vacios!");
         }
+        llenarTabla();
     }//GEN-LAST:event_btn_AgregarActionPerformed
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
@@ -246,16 +252,16 @@ public class Form_Cliente extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
         } else {
             ClienteDTO clienteDTO = cliente.Buscar(id);
-            
+
             if (clienteDTO != null) {
-                txt_numDoc.setText(clienteDTO.getNumDocumento());
+
                 cbo_tipoDoc.setSelectedItem(clienteDTO.getTipoDocumentoID());
                 txt_nombres.setText(clienteDTO.getNombres());
                 txt_apellidos.setText(clienteDTO.getApellidos());
                 txt_telefono.setText(clienteDTO.getTelefono());
                 txt_correo.setText(clienteDTO.getCorreo());
                 txt_direccion.setText(clienteDTO.getDireccion());
-                
+
                 switch (clienteDTO.getGenero()) {
                     case 'M' ->
                         cbo_genero.setSelectedIndex(1);
@@ -300,7 +306,12 @@ public class Form_Cliente extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "Error, uno o más campos vacios!");
         }
+        llenarTabla();
     }//GEN-LAST:event_btn_ActualizarActionPerformed
+
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+
+    }//GEN-LAST:event_jPanel1MouseClicked
 
     public void llenarTabla() {
 

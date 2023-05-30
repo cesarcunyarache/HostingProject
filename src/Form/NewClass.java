@@ -9,5 +9,8 @@ package Form;
  * @author cesarcunyarache
  */
 public class NewClass {
-    
+    public static void main(String[] args) {
+        Form_Empleados f = new Form_Empleados();
+        f.setVisible(true);
+    }
 }
