@@ -72,11 +72,11 @@ public class MenuItem extends javax.swing.JPanel {
         if (selected) {
             Graphics2D g2 = (Graphics2D) grphcs;
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2.setColor(new Color(1, 122, 167));
+            g2.setColor(new Color(25, 55, 109));
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
             g2.fillRect(0, 0, getWidth(), getHeight());
             g2.setComposite(AlphaComposite.SrcOver);
-            g2.setColor(new Color(245, 245, 245));
+            g2.setColor(new Color(0, 0, 0));
             g2.fillRect(0, 0, 2, getHeight());
         }
         super.paintComponent(grphcs);
@@ -102,7 +102,7 @@ public class MenuItem extends javax.swing.JPanel {
         lbIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         lbName.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        lbName.setForeground(new java.awt.Color(250, 250, 250));
+        lbName.setForeground(new java.awt.Color(0, 0, 0));
         lbName.setText("Menu Name");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

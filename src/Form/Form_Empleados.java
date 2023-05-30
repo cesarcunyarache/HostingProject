@@ -8,12 +8,12 @@ package Form;
  *
  * @author cesarcunyarache
  */
-public class Empleados extends javax.swing.JPanel {
+public class Form_Empleados extends javax.swing.JPanel {
 
     /**
      * Creates new form Empleados
      */
-    public Empleados() {
+    public Form_Empleados() {
         initComponents();
     }
 

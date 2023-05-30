@@ -8,12 +8,12 @@ package Form;
  *
  * @author cesarcunyarache
  */
-public class Clientes extends javax.swing.JPanel {
+public class Form_Habitaciones extends javax.swing.JPanel {
 
     /**
-     * Creates new form NewJPanel
+     * Creates new form Habitaciones
      */
-    public Clientes() {
+    public Form_Habitaciones() {
         initComponents();
     }
 
@@ -30,11 +30,11 @@ public class Clientes extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 651, Short.MAX_VALUE)
+            .addGap(0, 633, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 386, Short.MAX_VALUE)
+            .addGap(0, 402, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -36,6 +36,9 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="24" green="0" red="0" type="rgb"/>
+        </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="sansserif" size="18" style="1"/>
         </Property>
@@ -43,7 +46,7 @@
           <Color blue="b1" green="62" red="7" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.ImageIcon(getClass().getResource(&quot;/Image/hotel.png&quot;))" type="code"/>
+          <Connection code="new javax.swing.ImageIcon(getClass().getResource(&quot;/Image/hotel2.png&quot;))" type="code"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Hospedaje"/>
       </Properties>

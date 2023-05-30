@@ -23,9 +23,10 @@ public class Header extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
 
+        jLabel1.setBackground(new java.awt.Color(0, 0, 36));
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(7, 98, 177));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/hotel.png")));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/hotel2.png")));
         jLabel1.setText("Hospedaje");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

@@ -19,7 +19,7 @@ public class Bottom extends javax.swing.JPanel {
     public Bottom() {
         initComponents();
         setOpaque(false);
-        setBackground(new Color(65, 152, 216));
+        setBackground(new Color(238, 238, 238));
     }
 
     @SuppressWarnings("unchecked")
@@ -35,10 +35,10 @@ public class Bottom extends javax.swing.JPanel {
         imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/user.png")));
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(237, 237, 237));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Usuario");
 
-        jLabel2.setForeground(new java.awt.Color(237, 237, 237));
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Programador");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

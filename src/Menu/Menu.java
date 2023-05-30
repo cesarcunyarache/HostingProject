@@ -2,6 +2,7 @@ package Menu;
 
 import Form.Form1;
 import Form.Form2;
+import Form.Form_Cliente;
 import Swing.ButtonCustom;
 import Swing.MenuItem;
 import java.awt.BorderLayout;
@@ -39,36 +40,36 @@ public class Menu extends javax.swing.JPanel {
     private boolean menuShow;
     private Menu menu;
     private Menu comp = this;
-    Form1 form1;
- 
+    Form_Cliente cliente;
+
     public Menu(JPanel main, JPanel body, Menu menu) {
         initComponents();
         this.main = main;
         this.body = body;
         this.menu = menu;
-        form1 = new Form1();
+        cliente = new Form_Cliente();
         setOpaque(false);
         init();
-        
+
     }
-    
+
     public void setEvent(EventMenuSelected event) {
         this.event = event;
     }
-    
-    public void inicio(){
-        
+
+    public void inicio() {
+
         layout = new MigLayout("fill", "0[]10[]5", "0[fill]0");
         body.setLayout(layout);
         main.setOpaque(false);
         main.setLayout(new BorderLayout());
-        main.setBackground(new Color(60,60,60));
-        
+        main.setBackground(new Color(60, 60, 60));
+
         bottom.Evento(new MouseListener() {
-            
+
             @Override
             public void mousePressed(MouseEvent e) {
-                
+
             }
 
             @Override
@@ -82,16 +83,16 @@ public class Menu extends javax.swing.JPanel {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                bottom.setBackground(new Color(32, 123, 190));
+                bottom.setBackground(new Color(248, 248, 248));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                bottom.setBackground(new Color(65, 152, 216));
+                bottom.setBackground(new Color(238, 238, 238));
             }
 
         });
-        
+
         addEventLogout(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -99,8 +100,8 @@ public class Menu extends javax.swing.JPanel {
                 System.exit(0);
             }
         });
-        
-         addEventMenu(new ActionListener() {
+
+        addEventMenu(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 if (!animator.isRunning()) {
@@ -109,32 +110,38 @@ public class Menu extends javax.swing.JPanel {
                 }
             }
         });
-        
+
         setEvent(new EventMenuSelected() {
             @Override
             public void selected(int index) {
                 if (index == 0) {
-                    showForm(new Form1());
-                    System.out.println("Formulario1");
+                    //showForm(new Form_Home());
+
                 } else if (index == 1) {
-                    showForm(new Form2());
-                    System.out.println("Formulario2");
-                } else if (index == 2){
-                    System.out.println("Formulario3");
+                    //showForm(new Form_Habitaciones());
+
+                } else if (index == 2) {
+                    //showForm(new Form_Reservas());
+                } else if (index == 3) {
+                    showForm(cliente);
+                } else if (index == 4) {
+                    //showForm(new Form_Documento());
+                } else if (index == 5){
+                    
                 }
             }
         });
-        
-        
-        addMenu(new ModelMenu("Empleado", new ImageIcon(getClass().getResource("/Image/user.png"))));
-        addMenu(new ModelMenu("Mensajes", new ImageIcon(getClass().getResource("/Image/message.png"))));
-        addMenu(new ModelMenu("Reportes", new ImageIcon(getClass().getResource("/Image/report.png"))));
-        addMenu(new ModelMenu("Configuracion", new ImageIcon(getClass().getResource("/Image/setting.png"))));
-        //addMenu(new ModelMenu("Contras", new ImageIcon(getClass().getResource("/Image/key.png"))));
-      
+
+        addMenu(new ModelMenu("Home", new ImageIcon(getClass().getResource("/Image/home.png"))));
+        addMenu(new ModelMenu("Habitaciones", new ImageIcon(getClass().getResource("/Image/habitacion.png"))));
+        addMenu(new ModelMenu("Reservas", new ImageIcon(getClass().getResource("/Image/reserva.png"))));
+        addMenu(new ModelMenu("Clientes", new ImageIcon(getClass().getResource("/Image/cliente.png"))));
+        addMenu(new ModelMenu("Documento", new ImageIcon(getClass().getResource("/Image/tipoDocumento.png"))));
+        addMenu(new ModelMenu("Empleados", new ImageIcon(getClass().getResource("/Image/empleado.png"))));
+
         body.add(comp, "w 50!");
         body.add(main, "w 100%");
-        
+
         TimingTarget target = new TimingTargetAdapter() {
             @Override
             public void timingEvent(float fraction) {
@@ -147,7 +154,7 @@ public class Menu extends javax.swing.JPanel {
                     setAlpha(fraction);
                 }
                 System.out.println(width);
-                
+
                 layout.setComponentConstraints(comp, "w " + width + "!");
                 body.revalidate();
             }
@@ -163,14 +170,13 @@ public class Menu extends javax.swing.JPanel {
         animator.setDeceleration(0.5f);
         //showForm(new Form8());
     }
-    
+
     private void showForm(Component com) {
         main.removeAll();
         main.add(com);
         main.repaint();
         main.revalidate();
     }
-
 
     private void init() {
         setLayout(new MigLayout("wrap, fillx, insets 0", "[fill]", "0[]20[]push[60]0"));
@@ -180,7 +186,7 @@ public class Menu extends javax.swing.JPanel {
         createButtonMenu();
         createButtonLogout();
         panelMenu.setOpaque(false);
-        
+
         // layout del menu            correr a la derecha  separacion entre opciones
         layout = new MigLayout("fillx, wrap", "0[fill]0", "0[]10[]0");
         panelMenu.setLayout(layout);
@@ -207,13 +213,13 @@ public class Menu extends javax.swing.JPanel {
         cmdMenu = new JButton();
         cmdMenu.setContentAreaFilled(false);
         cmdMenu.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        cmdMenu.setIcon(new ImageIcon(getClass().getResource("/Image/menu.png")));
+        cmdMenu.setIcon(new ImageIcon(getClass().getResource("/Image/menu2.png")));
         cmdMenu.setBorder(new EmptyBorder(5, 12, 5, 12));
     }
 
     private void createButtonLogout() {
         cmdLogOut = new ButtonCustom();
-        cmdLogOut.setIcon(new ImageIcon(getClass().getResource("/Image/exit.png")));
+        cmdLogOut.setIcon(new ImageIcon(getClass().getResource("/Image/salir.png")));
     }
 
     @SuppressWarnings("unchecked")
@@ -235,7 +241,7 @@ public class Menu extends javax.swing.JPanel {
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
-        GradientPaint gra = new GradientPaint(0, 0, Color.decode("#000000"), 0, getHeight(), Color.decode("#000000"));
+        GradientPaint gra = new GradientPaint(0, 0, Color.decode("#E4E4E4"), 0, getHeight(), Color.decode("#E4E4E4"));
         g2.setPaint(gra);
         g2.fillRect(0, 0, getWidth(), getHeight());
         super.paintComponent(grphcs);
@@ -257,8 +263,6 @@ public class Menu extends javax.swing.JPanel {
     public void addEventLogout(ActionListener event) {
         cmdLogOut.addActionListener(event);
     }
-    
-    
 
     public void setAlpha(float alpha) {
         header.setAlpha(alpha);
