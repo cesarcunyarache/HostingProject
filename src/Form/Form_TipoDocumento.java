@@ -148,6 +148,8 @@ public class Form_TipoDocumento extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
             }
             
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR: Uno o más campos vacios");
         }
         llenarTabla();
     }//GEN-LAST:event_btn_ActualizarActionPerformed

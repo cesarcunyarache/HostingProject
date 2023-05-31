@@ -21,7 +21,7 @@ public class Form_Cliente extends javax.swing.JPanel {
     DefaultTableModel df;
     DefaultComboBoxModel modelo;
     Vector<TipoDocumentoDTO> combo;
-    int id;
+    int id = 0;
 
     public Form_Cliente() {
         initComponents();
@@ -190,32 +190,38 @@ public class Form_Cliente extends javax.swing.JPanel {
     private void btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BuscarActionPerformed
         String dni = JOptionPane.showInputDialog("Ingrese el DNI a buscar");
 
-        ClienteDTO clienteDTO = cliente.Buscar(0, dni);
+        if (dni.matches("[0-9]*")) {
+            ClienteDTO clienteDTO = cliente.Buscar(0, dni);
 
-        if (clienteDTO != null) {
-            txt_numDoc.setText(clienteDTO.getNumDocumento());
-            for (TipoDocumentoDTO tipoDocumentoDTO : combo) {
-                if (tipoDocumentoDTO.getIdTipoDocumento() == clienteDTO.getTipoDocumentoID()) {
-                    modelo.setSelectedItem(tipoDocumentoDTO);
+            if (clienteDTO != null) {
+                txt_numDoc.setText(clienteDTO.getNumDocumento());
+                for (TipoDocumentoDTO tipoDocumentoDTO : combo) {
+                    if (tipoDocumentoDTO.getIdTipoDocumento() == clienteDTO.getTipoDocumentoID()) {
+                        modelo.setSelectedItem(tipoDocumentoDTO);
+                    }
                 }
+                txt_nombres.setText(clienteDTO.getNombres());
+                txt_apellidos.setText(clienteDTO.getApellidos());
+                txt_telefono.setText(clienteDTO.getTelefono());
+                txt_correo.setText(clienteDTO.getCorreo());
+                txt_direccion.setText(clienteDTO.getDireccion());
+
+                switch (clienteDTO.getGenero()) {
+                    case 'M' ->
+                        cbo_genero.setSelectedIndex(1);
+                    case 'F' ->
+                        cbo_genero.setSelectedIndex(2);
+                    default ->
+                        cbo_genero.setSelectedIndex(0);
+                }
+
+                cbo_nacionalidad.setSelectedItem(clienteDTO.getNacionalidad());
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Valor no encontrado");
             }
-            txt_nombres.setText(clienteDTO.getNombres());
-            txt_apellidos.setText(clienteDTO.getApellidos());
-            txt_telefono.setText(clienteDTO.getTelefono());
-            txt_correo.setText(clienteDTO.getCorreo());
-            txt_direccion.setText(clienteDTO.getDireccion());
-
-            switch (clienteDTO.getGenero()) {
-                case 'M' ->
-                    cbo_genero.setSelectedIndex(1);
-                case 'F' ->
-                    cbo_genero.setSelectedIndex(2);
-                default ->
-                    cbo_genero.setSelectedIndex(0);
-            }
-
-            cbo_nacionalidad.setSelectedItem(clienteDTO.getNacionalidad());
-
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese solo valores númericos");
         }
 
 
@@ -256,7 +262,7 @@ public class Form_Cliente extends javax.swing.JPanel {
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         id = (int) (tabla.getValueAt(tabla.getSelectedRow(), 0));
-        if (id == -1) {
+        if (id == 0) {
             JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
         } else {
             ClienteDTO clienteDTO = cliente.Buscar(id, "");
@@ -288,6 +294,8 @@ public class Form_Cliente extends javax.swing.JPanel {
                 }
                 cbo_nacionalidad.setSelectedItem(clienteDTO.getNacionalidad());
 
+            } else {
+                JOptionPane.showMessageDialog(null, "Valor no encontrado");
             }
         }
     }//GEN-LAST:event_tablaMouseClicked
