@@ -63,4 +63,14 @@ public class Usuario {
 
     }
 
+    public UsuarioDTO ValidadUsuario(String user, String password) {
+        usuarioDTO = new UsuarioDTO(user, password);
+        if (usuarioDAO.validar(usuarioDTO) != null) {
+            return usuarioDAO.validar(usuarioDTO);
+        } else {
+            return null;
+        }
+
+    }
+
 }

@@ -54,10 +54,6 @@ public class ClienteOrganizacionDTO {
         return "ClienteOrganizacion{" + "id=" + id + ", idCliente=" + idCliente + ", idOrganizacion=" + idOrganizacion + '}';
     }
 
-    
-    
-    
-
     public void finalize() throws Throwable {
 
     }

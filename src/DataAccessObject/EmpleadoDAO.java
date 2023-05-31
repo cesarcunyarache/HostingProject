@@ -85,7 +85,7 @@ public class EmpleadoDAO implements Crud<EmpleadoDTO> {
             ps.setString(9, t.getNumDocumento());
             ps.setInt(10, t.getTipoEmpleadoID());
             ps.setInt(11, t.getEstado());
-            ps.setInt(11, t.getIdEmpleado());
+            ps.setInt(12, t.getIdEmpleado());
 
             r = ps.executeUpdate();
             return r == 1;

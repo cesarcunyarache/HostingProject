@@ -135,9 +135,9 @@ public class Menu extends javax.swing.JPanel {
                     showForm(cliente);
                 } else if (index == 4) {
                     showForm(tipo);
-                } else if (index == 5){
-                     showForm(organizacion);
-                }else if (index == 6){
+                } else if (index == 5) {
+                    showForm(organizacion);
+                } else if (index == 6) {
                     showForm(empleado);
                 }
             }
@@ -165,7 +165,6 @@ public class Menu extends javax.swing.JPanel {
                     width = 50 + (150 * fraction);
                     setAlpha(fraction);
                 }
-                
 
                 layout.setComponentConstraints(comp, "w " + width + "!");
                 body.revalidate();

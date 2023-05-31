@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package Form;
 
 import BusinessObject.Empleado;
@@ -27,7 +23,7 @@ public class Form_Empleados extends javax.swing.JPanel {
     DefaultComboBoxModel modelo;
 
     public Form_Empleados() {
-         initComponents();
+        initComponents();
         tp = new TipoEmpleado();
         emp = new Empleado();
         modelo = new DefaultComboBoxModel(llenarCombo());
@@ -39,20 +35,37 @@ public class Form_Empleados extends javax.swing.JPanel {
             }
 
         };
+
         llenarTabla();
     }
 
-   public Vector<TipoEmpleadoDTO> llenarCombo() {
-        Vector<TipoEmpleadoDTO> combo = new Vector<TipoEmpleadoDTO>();
+    public Vector<String> llenarCombo() {
+        Vector<String> combo = new Vector<String>();
         ArrayList<TipoEmpleadoDTO> lista = new ArrayList<>();
-
+        combo.add("-Seleccione-");
         lista = (ArrayList<TipoEmpleadoDTO>) tp.Listar();
         if (lista != null) {
             for (TipoEmpleadoDTO tipoDocumentoDTO : lista) {
-                combo.add(tipoDocumentoDTO);
+                combo.add(tipoDocumentoDTO.getNombre());
             }
         }
         return combo;
+    }
+
+    public void limpiar() {
+        txt_nombres.setText("");
+        txt_apellidos1.setText("");
+        txt_edad.setText("");
+        txt_telefono.setText("");
+        txt_correo.setText("");
+        cbo_estado.setSelectedIndex(0);
+        cbo_tipoEmpleado.setSelectedIndex(0);
+        txt_numDoc.setText("");
+        cbo_nacionalidad1.setSelectedIndex(0);
+        txt_direccion.setText("");
+        cbo_genero1.setSelectedIndex(0);
+        tabla.clearSelection();
+        id = -1;
     }
 
     public void llenarTabla() {
@@ -60,7 +73,9 @@ public class Form_Empleados extends javax.swing.JPanel {
         dt.setColumnCount(0);
         dt.setRowCount(0);
 
-        String[] cabezera = {"#", "Nombres",
+        String[] cabezera = {
+            "#",
+            "Nombres",
             "Apellidos",
             "Telefono",
             "Correo",
@@ -92,12 +107,37 @@ public class Form_Empleados extends javax.swing.JPanel {
                 datos[7] = c.getNacionalidad();
                 datos[8] = c.getGenero();
                 datos[9] = c.getNumDocumento();
-                datos[10] = c.getTipoEmpleadoID();
-                datos[11] = c.getEstado();
+
+                datos[10] = tp.Buscar(c.getTipoEmpleadoID()).getNombre();
+
+                switch (c.getEstado()) {
+                    case 0:
+                        datos[11] = "Inactivo";
+                        break;
+                    case 1:
+
+                        datos[11] = "Activo";
+                        break;
+                    default:
+                        throw new AssertionError();
+                }
                 dt.addRow(datos);
+
             }
 
             tabla.setModel(dt);
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(25);
+            tabla.getColumnModel().getColumn(1).setPreferredWidth(50);
+            tabla.getColumnModel().getColumn(2).setPreferredWidth(50);
+            tabla.getColumnModel().getColumn(3).setPreferredWidth(50);
+            tabla.getColumnModel().getColumn(4).setPreferredWidth(145);
+            tabla.getColumnModel().getColumn(5).setPreferredWidth(130);
+            tabla.getColumnModel().getColumn(6).setPreferredWidth(20);
+            tabla.getColumnModel().getColumn(7).setPreferredWidth(40);
+            tabla.getColumnModel().getColumn(8).setPreferredWidth(20);
+            tabla.getColumnModel().getColumn(9).setPreferredWidth(60);
+            tabla.getColumnModel().getColumn(10).setPreferredWidth(70);
+            tabla.getColumnModel().getColumn(11).setPreferredWidth(40);
 
         }
     }
@@ -112,102 +152,38 @@ public class Form_Empleados extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        txt_numDoc = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        cbo_tipoEmpleado = new javax.swing.JComboBox<>();
-        txt_nombres = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txt_edad = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txt_telefono = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        cbo_estado = new javax.swing.JComboBox<>();
-        txt_correo = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        txt_direccion = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        btn_Actualizar = new javax.swing.JButton();
-        btn_Buscar = new javax.swing.JButton();
-        btn_Agregar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
-        jLabel10 = new javax.swing.JLabel();
-        txt_apellidos1 = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        btn_Actualizar = new javax.swing.JButton();
+        btn_Agregar = new javax.swing.JButton();
+        btn_Buscar = new javax.swing.JButton();
+        cbo_estado = new javax.swing.JComboBox<>();
+        txt_edad = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         cbo_genero1 = new javax.swing.JComboBox<>();
         cbo_nacionalidad1 = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        cbo_tipoEmpleado = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        txt_direccion = new javax.swing.JTextField();
+        txt_numDoc = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txt_apellidos1 = new javax.swing.JTextField();
+        txt_correo = new javax.swing.JTextField();
+        txt_telefono = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txt_nombres = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        btn_nuevo = new javax.swing.JButton();
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setText("Número de documento");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 190, -1, -1));
-        jPanel1.add(txt_numDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 210, 210, 30));
-
-        jLabel2.setText("Tipo de Empleado");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 110, -1));
-
-        cbo_tipoEmpleado.setToolTipText("");
-        jPanel1.add(cbo_tipoEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 230, 30));
-        jPanel1.add(txt_nombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 230, 30));
-
-        jLabel3.setText("Nombres");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, 60, -1));
-        jPanel1.add(txt_edad, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 80, 120, 30));
-
-        jLabel4.setText("Edad");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 60, -1, -1));
-        jPanel1.add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 230, 30));
-
-        jLabel5.setText("Telefono");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 60, -1));
-
-        jLabel6.setText("Nacionalidad");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, -1, -1));
-
-        cbo_estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Seleccione-", "Activo", "Inactivo" }));
-        cbo_estado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbo_estadoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(cbo_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 140, 130, 30));
-        jPanel1.add(txt_correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 210, 30));
-
-        jLabel7.setText("Correo");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, -1, -1));
-        jPanel1.add(txt_direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, 210, 30));
-
-        jLabel8.setText("Dirección");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 250, -1, -1));
-
-        jLabel9.setText("Género");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, -1, -1));
-
-        btn_Actualizar.setText("Actualizar");
-        btn_Actualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_ActualizarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btn_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 340, 110, 30));
-
-        btn_Buscar.setText("Buscar");
-        btn_Buscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_BuscarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, 110, 30));
-
-        btn_Agregar.setText("Agregar");
-        btn_Agregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_AgregarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btn_Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, 110, 30));
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -220,6 +196,7 @@ public class Form_Empleados extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabla.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaMouseClicked(evt);
@@ -227,90 +204,354 @@ public class Form_Empleados extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tabla);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, 770, 270));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 1110, 300));
 
-        jLabel10.setText("Apellidos");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, -1, -1));
-        jPanel1.add(txt_apellidos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 80, 210, 30));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gestión Empleados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
+
+        btn_Actualizar.setText("Actualizar");
+        btn_Actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ActualizarActionPerformed(evt);
+            }
+        });
+
+        btn_Agregar.setText("Agregar");
+        btn_Agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AgregarActionPerformed(evt);
+            }
+        });
+
+        btn_Buscar.setText("Buscar");
+        btn_Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_BuscarActionPerformed(evt);
+            }
+        });
+
+        cbo_estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Seleccione-", "Activo", "Inactivo" }));
+        cbo_estado.setEnabled(false);
+        cbo_estado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbo_estadoMouseClicked(evt);
+            }
+        });
+        cbo_estado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbo_estadoActionPerformed(evt);
+            }
+        });
+
+        txt_edad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_edadKeyPressed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setText("Edad");
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel11.setText("Estado");
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel9.setText("Género");
 
         cbo_genero1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Seleccione-", "Masculino", "Femenino" }));
-        jPanel1.add(cbo_genero1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, 140, 30));
+        cbo_genero1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbo_genero1MouseClicked(evt);
+            }
+        });
 
-        cbo_nacionalidad1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Afganistán", "Albania", "Alemania", "Andorra", "Angola", "Antigua y Barbuda", "Arabia Saudita", "Argelia", "Argentina", "Armenia", "Australia", "Austria", "Azerbaiyán", "Bahamas", "Bangladés", "Barbados", "Baréin", "Bélgica", "Belice", "Benín", "Bielorrusia", "Birmania", "Bolivia", "Bosnia y Herzegovina", "Botsuana", "Brasil", "Brunéi", "Bulgaria", "Burkina Faso", "Burundi", "Bután", "Cabo Verde", "Camboya", "Camerún", "Canadá", "Catar", "Chad", "Chile", "China", "Chipre", "Ciudad del Vaticano", "Colombia", "Comoras", "Corea del Norte", "Corea del Sur", "Costa de Marfil", "Costa Rica", "Croacia", "Cuba", "Dinamarca", "Dominica", "Ecuador", "Egipto", "El Salvador", "Emiratos Árabes Unidos", "Eritrea", "Eslovaquia", "Eslovenia", "España", "Estados Unidos", "Estonia", "Etiopía", "Filipinas", "Finlandia", "Fiyi", "Francia", "Gabón", "Gambia", "Georgia", "Ghana", "Granada", "Grecia", "Guatemala", "Guyana", "Guinea", "Guinea ecuatorial", "Guinea-Bisáu", "Haití", "Honduras", "Hungría", "India", "Indonesia", "Irak", "Irán", "Irlanda", "Islandia", "Islas Marshall", "Islas Salomón", "Israel", "Italia", "Jamaica", "Japón", "Jordania", "Kazajistán", "Kenia", "Kirguistán", "Kiribati", "Kuwait", "Laos", "Lesoto", "Letonia", "Líbano", "Liberia", "Libia", "Liechtenstein", "Lituania", "Luxemburgo", "Macedonia del Norte", "Madagascar", "Malasia", "Malaui", "Maldivas", "Malí", "Malta", "Marruecos", "Mauricio", "Mauritania", "México", "Micronesia", "Moldavia", "Mónaco", "Mongolia", "Montenegro", "Mozambique", "Namibia", "Nauru", "Nepal", "Nicaragua", "Níger", "Nigeria", "Noruega", "Nueva Zelanda", "Omán", "Países Bajos", "Pakistán", "Palaos", "Panamá", "Papúa Nueva Guinea", "Paraguay", "Perú", "Polonia", "Portugal", "Reino Unido", "República Centroafricana", "República Checa", "República del Congo", "República Democrática del Congo", "República Dominicana", "Ruanda", "Rumanía", "Rusia", "Samoa", "San Cristóbal y Nieves", "San Marino", "San Vicente y las Granadinas", "Santa Lucía", "Santo Tomé y Príncipe", "Senegal", "Serbia", "Seychelles", "Sierra Leona", "Singapur", "Siria", "Somalia", "Sri Lanka", "Suazilandia", "Sudáfrica", "Sudán", "Sudán del Sur", "Suecia", "Suiza", "Surinam", "Tailandia", "Tanzania", "Tayikistán", "Timor Oriental", "Togo", "Tonga", "Trinidad y Tobago", "Túnez", "Turkmenistán", "Turquía", "Tuvalu", "Ucrania", "Uganda", "Uruguay", "Uzbekistán", "Vanuatu", "Venezuela", "Vietnam", "Yemen", "Yibuti", "Zambia", "Zimbabue" }));
+        cbo_nacionalidad1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Seleccione-", "Afganistán", "Albania", "Alemania", "Andorra", "Angola", "Antigua y Barbuda", "Arabia Saudita", "Argelia", "Argentina", "Armenia", "Australia", "Austria", "Azerbaiyán", "Bahamas", "Bangladés", "Barbados", "Baréin", "Bélgica", "Belice", "Benín", "Bielorrusia", "Birmania", "Bolivia", "Bosnia y Herzegovina", "Botsuana", "Brasil", "Brunéi", "Bulgaria", "Burkina Faso", "Burundi", "Bután", "Cabo Verde", "Camboya", "Camerún", "Canadá", "Catar", "Chad", "Chile", "China", "Chipre", "Ciudad del Vaticano", "Colombia", "Comoras", "Corea del Norte", "Corea del Sur", "Costa de Marfil", "Costa Rica", "Croacia", "Cuba", "Dinamarca", "Dominica", "Ecuador", "Egipto", "El Salvador", "Emiratos Árabes Unidos", "Eritrea", "Eslovaquia", "Eslovenia", "España", "Estados Unidos", "Estonia", "Etiopía", "Filipinas", "Finlandia", "Fiyi", "Francia", "Gabón", "Gambia", "Georgia", "Ghana", "Granada", "Grecia", "Guatemala", "Guyana", "Guinea", "Guinea ecuatorial", "Guinea-Bisáu", "Haití", "Honduras", "Hungría", "India", "Indonesia", "Irak", "Irán", "Irlanda", "Islandia", "Islas Marshall", "Islas Salomón", "Israel", "Italia", "Jamaica", "Japón", "Jordania", "Kazajistán", "Kenia", "Kirguistán", "Kiribati", "Kuwait", "Laos", "Lesoto", "Letonia", "Líbano", "Liberia", "Libia", "Liechtenstein", "Lituania", "Luxemburgo", "Macedonia del Norte", "Madagascar", "Malasia", "Malaui", "Maldivas", "Malí", "Malta", "Marruecos", "Mauricio", "Mauritania", "México", "Micronesia", "Moldavia", "Mónaco", "Mongolia", "Montenegro", "Mozambique", "Namibia", "Nauru", "Nepal", "Nicaragua", "Níger", "Nigeria", "Noruega", "Nueva Zelanda", "Omán", "Países Bajos", "Pakistán", "Palaos", "Panamá", "Papúa Nueva Guinea", "Paraguay", "Perú", "Polonia", "Portugal", "Reino Unido", "República Centroafricana", "República Checa", "República del Congo", "República Democrática del Congo", "República Dominicana", "Ruanda", "Rumanía", "Rusia", "Samoa", "San Cristóbal y Nieves", "San Marino", "San Vicente y las Granadinas", "Santa Lucía", "Santo Tomé y Príncipe", "Senegal", "Serbia", "Seychelles", "Sierra Leona", "Singapur", "Siria", "Somalia", "Sri Lanka", "Suazilandia", "Sudáfrica", "Sudán", "Sudán del Sur", "Suecia", "Suiza", "Surinam", "Tailandia", "Tanzania", "Tayikistán", "Timor Oriental", "Togo", "Tonga", "Trinidad y Tobago", "Túnez", "Turkmenistán", "Turquía", "Tuvalu", "Ucrania", "Uganda", "Uruguay", "Uzbekistán", "Vanuatu", "Venezuela", "Vietnam", "Yemen", "Yibuti", "Zambia", "Zimbabue" }));
+        cbo_nacionalidad1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbo_nacionalidad1MouseClicked(evt);
+            }
+        });
         cbo_nacionalidad1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbo_nacionalidad1ActionPerformed(evt);
             }
         });
-        jPanel1.add(cbo_nacionalidad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 230, 30));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setText("Nacionalidad");
+
+        cbo_tipoEmpleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Seleccione-" }));
+        cbo_tipoEmpleado.setToolTipText("");
+        cbo_tipoEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbo_tipoEmpleadoMouseClicked(evt);
+            }
+        });
+        cbo_tipoEmpleado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cbo_tipoEmpleadoKeyPressed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setText("Tipo de Empleado");
+
+        txt_direccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_direccionKeyPressed(evt);
+            }
+        });
+
+        txt_numDoc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_numDocKeyPressed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setText("Número de documento");
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setText("Correo");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setText("Nombres");
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel10.setText("Apellidos");
+
+        txt_apellidos1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_apellidos1KeyPressed(evt);
+            }
+        });
+
+        txt_correo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_correoKeyPressed(evt);
+            }
+        });
+
+        txt_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_telefonoKeyPressed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setText("Telefono");
+
+        txt_nombres.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_nombresKeyPressed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setText("Dirección");
+
+        btn_nuevo.setText("Nuevo");
+        btn_nuevo.setEnabled(false);
+        btn_nuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_nuevoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(246, 246, 246)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(cbo_genero1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_Agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addComponent(txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txt_correo, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18))
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addGap(300, 300, 300)
+                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txt_apellidos1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cbo_nacionalidad1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cbo_tipoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txt_nombres, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(40, 40, 40)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txt_numDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txt_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(16, 16, 16)))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbo_estado, 0, 103, Short.MAX_VALUE)
+                                    .addComponent(txt_edad)
+                                    .addComponent(btn_nuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(205, 205, 205))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10)
+                        .addComponent(jLabel4)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txt_apellidos1, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(txt_nombres)
+                    .addComponent(txt_edad))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7)
+                        .addComponent(jLabel5)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbo_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_correo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbo_tipoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_numDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbo_nacionalidad1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel9)
+                .addGap(3, 3, 3)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_Agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbo_genero1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 1110, 370));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1180, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 733, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BuscarActionPerformed
+
         String codBusqueda = JOptionPane.showInputDialog("Ingrese el ID a buscar");
 
-        EmpleadoDTO clienteDTO = emp.buscarPorID(Integer.parseInt(codBusqueda));
+        EmpleadoDTO empDTO = emp.buscarPorID(Integer.parseInt(codBusqueda));
 
-        if (clienteDTO != null) {
-            txt_numDoc.setText(clienteDTO.getNumDocumento());
-            cbo_tipoEmpleado.setSelectedItem(clienteDTO.getIdEmpleado());
-            txt_nombres.setText(clienteDTO.getNombres());
-            txt_edad.setText(clienteDTO.getApellidos());
-            txt_telefono.setText(clienteDTO.getTelefono());
-            txt_correo.setText(clienteDTO.getCorreo());
-            txt_direccion.setText(clienteDTO.getDireccion());
-            cbo_genero1.setSelectedItem(clienteDTO.getGenero());
-            cbo_estado.setSelectedItem(clienteDTO.getNacionalidad());
+        if (empDTO != null) {
+            id = Integer.parseInt(codBusqueda);
+            JOptionPane.showMessageDialog(null, "Registro encontrado");
+            txt_nombres.setText(empDTO.getNombres());
+            txt_apellidos1.setText(empDTO.getApellidos());
+            txt_telefono.setText(empDTO.getTelefono());
+            txt_correo.setText(empDTO.getCorreo());
+            txt_direccion.setText(empDTO.getDireccion());
+            txt_edad.setText(String.valueOf(empDTO.getEdad()));
+            cbo_nacionalidad1.setSelectedItem(String.valueOf(empDTO.getNacionalidad()));
 
+            switch (empDTO.getGenero()) {
+                case 'M' ->
+                    cbo_genero1.setSelectedIndex(1);
+                case 'F' ->
+                    cbo_genero1.setSelectedIndex(2);
+                default ->
+                    cbo_genero1.setSelectedIndex(0);
+
+            }
+
+            txt_numDoc.setText(empDTO.getNumDocumento());
+
+            cbo_tipoEmpleado.setSelectedItem(tp.Buscar(empDTO.getTipoEmpleadoID()).getNombre());
+
+            switch (empDTO.getEstado()) {
+                case 1 ->
+                    cbo_estado.setSelectedIndex(1);
+                case 0 ->
+                    cbo_estado.setSelectedIndex(2);
+                default ->
+                    cbo_estado.setSelectedIndex(0);
+
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Registro no encontrado");
         }
 
     }//GEN-LAST:event_btn_BuscarActionPerformed
 
     private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
-        if (!txt_numDoc.getText().isEmpty() && !cbo_tipoEmpleado.getSelectedItem().equals("-Seleccione-")
+        if (!txt_numDoc.getText().isEmpty()
                 && !txt_nombres.getText().isEmpty() && !txt_edad.getText().isEmpty()
                 && !txt_telefono.getText().isEmpty() && !txt_correo.getText().isEmpty()
                 && !txt_direccion.getText().isEmpty() && !cbo_genero1.getSelectedItem().equals("-Seleccione-")
-                && !cbo_tipoEmpleado.getSelectedItem().equals("")) {
-
-            String numDoc = txt_numDoc.getText();
-            int tipoEmpleado = 1;
-
-            if (cbo_tipoEmpleado.getSelectedItem() == "Recepcionista") {
-                tipoEmpleado = 1;
-            } else if (cbo_tipoEmpleado.getSelectedItem() == "Limpieza") {
-                tipoEmpleado = 2;
-            } else {
-
-            }
+                && !cbo_tipoEmpleado.getSelectedItem().equals("-Seleccione-")
+                && !cbo_nacionalidad1.getSelectedItem().equals("-Seleccione-")) {
 
             String nombres = txt_nombres.getText();
-            String apellidos = txt_edad.getText();
+            String apellidos = txt_apellidos1.getText();
             String telefono = txt_telefono.getText();
             String correo = txt_correo.getText();
+            String tipoEmpleado = cbo_tipoEmpleado.getSelectedItem().toString();
+            String numDoc = txt_numDoc.getText();
+            String nacionaldad = cbo_nacionalidad1.getSelectedItem().toString();
             String direccion = txt_direccion.getText();
             String generoSeleccionado = cbo_genero1.getSelectedItem().toString();
             char genero = generoSeleccionado.charAt(0);
 
-            String nacionaldad = cbo_tipoEmpleado.getSelectedItem().toString();
-            Byte edad = 0;
-            String mensaje = emp.agregar(tipoEmpleado, nombres, apellidos, telefono, correo, direccion, edad, nacionaldad, genero, numDoc);
+            Byte edad = Byte.parseByte(txt_edad.getText());
+            String mensaje = emp.agregar(tp.BuscarName(tipoEmpleado).getIdTipoEmpleado(), nombres, apellidos, telefono, correo, direccion, edad, nacionaldad, genero, numDoc);
 
             if (!mensaje.equals("")) {
                 JOptionPane.showMessageDialog(null, mensaje);
@@ -333,6 +574,10 @@ public class Form_Empleados extends javax.swing.JPanel {
         if (id == -1) {
             JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
         } else {
+            btn_nuevo.setEnabled(true);
+            btn_Agregar.setEnabled(false);
+            cbo_estado.setEnabled(true);
+
             EmpleadoDTO empDTO = emp.buscarPorID(id);
 
             if (empDTO != null) {
@@ -357,30 +602,12 @@ public class Form_Empleados extends javax.swing.JPanel {
 
                 txt_numDoc.setText(empDTO.getNumDocumento());
 
-                switch (empDTO.getTipoEmpleadoID()) {
-                    case 1 ->
-                        cbo_genero1.setSelectedIndex(1);
-                    case 2 ->
-                        cbo_genero1.setSelectedIndex(2);
-                    default ->
-                        cbo_genero1.setSelectedIndex(0);
-
-                }
-
-                switch (empDTO.getGenero()) {
-                    case 'M' ->
-                        cbo_genero1.setSelectedIndex(1);
-                    case 'F' ->
-                        cbo_genero1.setSelectedIndex(2);
-                    default ->
-                        cbo_genero1.setSelectedIndex(0);
-
-                }
+                cbo_tipoEmpleado.setSelectedItem(tp.Buscar(empDTO.getTipoEmpleadoID()).getNombre());
 
                 switch (empDTO.getEstado()) {
-                    case '1' ->
+                    case 1 ->
                         cbo_estado.setSelectedIndex(1);
-                    case '0' ->
+                    case 0 ->
                         cbo_estado.setSelectedIndex(2);
                     default ->
                         cbo_estado.setSelectedIndex(0);
@@ -393,11 +620,12 @@ public class Form_Empleados extends javax.swing.JPanel {
 
     private void btn_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ActualizarActionPerformed
 
-        if (!txt_numDoc.getText().isEmpty() && !cbo_tipoEmpleado.getSelectedItem().equals("-Seleccione-")
+        if (!txt_numDoc.getText().isEmpty() && !cbo_estado.getSelectedItem().equals("-Seleccione-")
                 && !txt_nombres.getText().isEmpty() && !txt_edad.getText().isEmpty()
                 && !txt_telefono.getText().isEmpty() && !txt_correo.getText().isEmpty()
                 && !txt_direccion.getText().isEmpty() && !cbo_genero1.getSelectedItem().equals("-Seleccione-")
-                && !cbo_tipoEmpleado.getSelectedItem().equals("")) {
+                && !cbo_tipoEmpleado.getSelectedItem().equals("-Seleccione-")
+                && !cbo_nacionalidad1.getSelectedItem().equals("-Seleccione-")) {
 
             String nombres = txt_nombres.getText();
             String apellidos = txt_apellidos1.getText();
@@ -413,22 +641,9 @@ public class Form_Empleados extends javax.swing.JPanel {
 
             String numDoc = txt_numDoc.getText();
 
-            TipoEmpleadoDTO var = (TipoEmpleadoDTO) cbo_tipoEmpleado.getSelectedItem();
+            String tipoEmpleado = cbo_tipoEmpleado.getSelectedItem().toString();
 
-            int tipoEmpleado;
             int estado;
-
-            switch (cbo_estado.getSelectedItem().toString()) {
-                case "Recepcionista" -> {
-                    tipoEmpleado = 1;
-                }
-                case "Limpieza" -> {
-                    tipoEmpleado = 0;
-                }
-
-                default ->
-                    throw new AssertionError();
-            }
 
             switch (cbo_estado.getSelectedItem().toString()) {
                 case "Activo" -> {
@@ -437,12 +652,11 @@ public class Form_Empleados extends javax.swing.JPanel {
                 case "Inactivo" -> {
                     estado = 0;
                 }
-
                 default ->
                     throw new AssertionError();
             }
 
-            String mensaje = emp.actualizar(id, tipoEmpleado, nombres, apellidos, telefono, correo, direccion, edad, nacionaldad, genero, numDoc, estado);
+            String mensaje = emp.actualizar(id, tp.BuscarName(tipoEmpleado).getIdTipoEmpleado(), nombres, apellidos, telefono, correo, direccion, edad, nacionaldad, genero, numDoc, estado);
 
             if (!mensaje.equals("")) {
                 JOptionPane.showMessageDialog(null, mensaje);
@@ -461,17 +675,74 @@ public class Form_Empleados extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbo_nacionalidad1ActionPerformed
 
+    private void btn_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nuevoActionPerformed
+        btn_Agregar.setEnabled(true);
+        cbo_estado.setEnabled(false);
+        limpiar();
+
+    }//GEN-LAST:event_btn_nuevoActionPerformed
+
+    private void txt_nombresKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombresKeyPressed
+        btn_nuevo.setEnabled(true);
+    }//GEN-LAST:event_txt_nombresKeyPressed
+
+    private void txt_apellidos1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_apellidos1KeyPressed
+        btn_nuevo.setEnabled(true);
+    }//GEN-LAST:event_txt_apellidos1KeyPressed
+
+    private void txt_telefonoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_telefonoKeyPressed
+        btn_nuevo.setEnabled(true);
+    }//GEN-LAST:event_txt_telefonoKeyPressed
+
+    private void txt_correoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_correoKeyPressed
+        btn_nuevo.setEnabled(true);
+    }//GEN-LAST:event_txt_correoKeyPressed
+
+    private void cbo_tipoEmpleadoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbo_tipoEmpleadoKeyPressed
+
+    }//GEN-LAST:event_cbo_tipoEmpleadoKeyPressed
+
+    private void cbo_tipoEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbo_tipoEmpleadoMouseClicked
+        btn_nuevo.setEnabled(true);
+    }//GEN-LAST:event_cbo_tipoEmpleadoMouseClicked
+
+    private void txt_numDocKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_numDocKeyPressed
+        btn_nuevo.setEnabled(true);
+    }//GEN-LAST:event_txt_numDocKeyPressed
+
+    private void txt_edadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_edadKeyPressed
+        btn_nuevo.setEnabled(true);
+    }//GEN-LAST:event_txt_edadKeyPressed
+
+    private void cbo_estadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbo_estadoMouseClicked
+        btn_nuevo.setEnabled(true);
+    }//GEN-LAST:event_cbo_estadoMouseClicked
+
+    private void cbo_nacionalidad1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbo_nacionalidad1MouseClicked
+        btn_nuevo.setEnabled(true);
+    }//GEN-LAST:event_cbo_nacionalidad1MouseClicked
+
+    private void txt_direccionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_direccionKeyPressed
+        btn_nuevo.setEnabled(true);
+    }//GEN-LAST:event_txt_direccionKeyPressed
+
+    private void cbo_genero1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbo_genero1MouseClicked
+        btn_nuevo.setEnabled(true);
+    }//GEN-LAST:event_cbo_genero1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Actualizar;
     private javax.swing.JButton btn_Agregar;
     private javax.swing.JButton btn_Buscar;
+    private javax.swing.JButton btn_nuevo;
     private javax.swing.JComboBox<String> cbo_estado;
     private javax.swing.JComboBox<String> cbo_genero1;
     private javax.swing.JComboBox<String> cbo_nacionalidad1;
     private javax.swing.JComboBox<String> cbo_tipoEmpleado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -481,6 +752,7 @@ public class Form_Empleados extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txt_apellidos1;

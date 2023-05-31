@@ -1,5 +1,5 @@
-
 package DataAccessObject;
+
 import DataSource.Conexion;
 import TransferObject.ClienteOrganizacionDTO;
 import java.sql.Connection;
@@ -174,4 +174,3 @@ public class ClienteOrganizacionDAO implements Crud<ClienteOrganizacionDTO> {
         return clienteOrganizacion;
     }
 }
-

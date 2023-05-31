@@ -19,14 +19,19 @@ public class UsuarioDTO {
     public UsuarioDTO(int idUsuario) {
         this.idUsuario = idUsuario;
     }
-    
+
+    public UsuarioDTO(String usuario, String contrasena) {
+        this.usuario = usuario;
+        this.contrasena = contrasena;
+    }
+
     public UsuarioDTO(int empleadoID, String usuario, String contrasena, String rol) {
         this.empleadoID = empleadoID;
         this.usuario = usuario;
         this.contrasena = contrasena;
         this.rol = rol;
     }
-    
+
     public UsuarioDTO(int idUsuario, int empleadoID, String usuario, String contrasena, String rol) {
         this.idUsuario = idUsuario;
         this.empleadoID = empleadoID;

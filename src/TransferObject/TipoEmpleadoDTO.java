@@ -19,6 +19,10 @@ public class TipoEmpleadoDTO {
         return nombre;
     }
 
+    public TipoEmpleadoDTO(String nombre) {
+        this.nombre = nombre;
+    }
+
     public TipoEmpleadoDTO(String nombre, Double sueldo) {
         this.nombre = nombre;
         this.sueldo = sueldo;

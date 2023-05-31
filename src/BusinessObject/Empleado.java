@@ -71,7 +71,19 @@ public class Empleado {
         }
     }
 
-    public String actualizar(int idEmpleado, int tipoEmpleadoID, String nombre, String apellido, String telefono, String correo, String direccion, Byte edad, String nacionalidad, char genero, String numDoc, int estado) {
+    public String actualizar(int idEmpleado, 
+            int tipoEmpleadoID, 
+            String nombre,
+            String apellido,
+            String telefono,
+            String correo, 
+            String direccion,
+            Byte edad,
+            String nacionalidad, 
+            char genero, 
+            String numDoc, 
+            int estado) {
+        
         String mensaje = "";
         empleadoDTO = new EmpleadoDTO(idEmpleado, tipoEmpleadoID, estado, nombre, apellido, telefono, correo, direccion, edad, nacionalidad, genero, numDoc);
         if (empleadoDAO.Update(empleadoDTO)) {

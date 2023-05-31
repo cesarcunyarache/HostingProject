@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Menu;
 
 import Menu.Menu;
@@ -10,26 +6,21 @@ import java.awt.Toolkit;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
-/**
- *
- * @author cesarcunyarache
- */
 public class NewJFrame2 extends javax.swing.JFrame {
 
     /**
      * Creates new form NewJFrame2
      */
-    
     private JPanel main = new JPanel();
     private Menu menu;
+
     public NewJFrame2() {
-         this.setExtendedState(this.MAXIMIZED_BOTH);
+        this.setExtendedState(this.MAXIMIZED_BOTH);
         initComponents();
-        
+
         menu = new Menu(main, body, menu);
         body.add(menu);
         menu.inicio();
-       
 
     }
 
@@ -83,10 +74,9 @@ public class NewJFrame2 extends javax.swing.JFrame {
         try {
             UIManager.setLookAndFeel(new FlatArcIJTheme());
             //FlatLightFlatIJTheme.setup();
-            
-        } catch (Exception ex){
-            
-            
+
+        } catch (Exception ex) {
+
         }
         //</editor-fold>
         //</editor-fold>

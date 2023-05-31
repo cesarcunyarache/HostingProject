@@ -1,25 +1,26 @@
 package Login;
 
+import BusinessObject.Usuario;
 import java.awt.Color;
 import java.awt.Menu;
 import Menu.NewJFrame2;
+import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
+    Usuario user;
     //mover ventana
     int xMouse, yMouse;
-   
-    
+
     public Login() {
-        
+
         //Panel con color de fondp
         setUndecorated(true);                   //Eliminar bordes
-        
+        user = new Usuario();
         initComponents();
         difuminado.setBackground(new Color(15, 23, 42, 150));
         this.setLocationRelativeTo(null);
-        
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -168,49 +169,49 @@ public class Login extends javax.swing.JFrame {
     final String MENSAJEPASS = "1234";
     final String BLANCO = "";
     final String MENSAJEUSUARIO = "Introduzca su usuario";
-    
-    public boolean estaVacio(){
-        if (txtuser.getText().isEmpty() || txtpass.getText().isEmpty() ){
+
+    public boolean estaVacio() {
+        if (txtuser.getText().isEmpty() || txtpass.getText().isEmpty()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    
-    
+
+
     private void txtpassMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtpassMouseEntered
-        if (txtpass.getText().equals(MENSAJEPASS)){
+        if (txtpass.getText().equals(MENSAJEPASS)) {
             txtpass.setText(BLANCO);
         } else {
         }
     }//GEN-LAST:event_txtpassMouseEntered
 
     private void txtpassMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtpassMouseExited
-        if (estaVacio()){
+        if (estaVacio()) {
             txtpass.setText(MENSAJEPASS);
-        } else{
+        } else {
         }
     }//GEN-LAST:event_txtpassMouseExited
 
     private void txtuserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtuserMouseEntered
-        if (txtuser.getText().equals(MENSAJEUSUARIO)){
+        if (txtuser.getText().equals(MENSAJEUSUARIO)) {
             txtuser.setText(BLANCO);
         } else {
         }
     }//GEN-LAST:event_txtuserMouseEntered
 
     private void txtuserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtuserMouseExited
-        if (estaVacio()){
+        if (estaVacio()) {
             txtuser.setText(MENSAJEUSUARIO);
-        } else{
+        } else {
         }
     }//GEN-LAST:event_txtuserMouseExited
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
-                //mover ventana
+        //mover ventana
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
-        this.setLocation(x - xMouse,y - yMouse);
+        this.setLocation(x - xMouse, y - yMouse);
 
     }//GEN-LAST:event_formMouseDragged
 
@@ -223,9 +224,21 @@ public class Login extends javax.swing.JFrame {
 
     private void btnaccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaccederActionPerformed
         //comprobamos sí los campos estan llenos
-        this.dispose();
-        NewJFrame2 ven2 = new NewJFrame2();
-        ven2.setVisible(true);
+
+        String usuario = txtuser.getText();
+        char[] contraseñaArray = txtpass.getPassword();
+        String contrasena = new String(contraseñaArray);
+
+        if (user.ValidadUsuario(usuario, contrasena) != null) {
+            this.dispose();
+            NewJFrame2 ven2 = new NewJFrame2();
+            ven2.setVisible(true);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Datos incorrectos");
+        }
+
+
     }//GEN-LAST:event_btnaccederActionPerformed
 
     public static void main(String args[]) {

@@ -64,4 +64,14 @@ public class TipoEmpleado {
 
     }
 
+    public TipoEmpleadoDTO BuscarName(String name) {
+        tipoEmpleadoDTO = new TipoEmpleadoDTO(name);
+        if (tipoEmpleadoDAO.SearchName(tipoEmpleadoDTO) != null) {
+            return tipoEmpleadoDAO.Search(tipoEmpleadoDTO);
+        } else {
+            return null;
+        }
+
+    }
+
 }

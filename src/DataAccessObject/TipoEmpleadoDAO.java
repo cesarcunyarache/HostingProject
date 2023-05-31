@@ -126,4 +126,36 @@ public class TipoEmpleadoDAO implements Crud<TipoEmpleadoDTO> {
 
     }
 
+    public TipoEmpleadoDTO SearchName(TipoEmpleadoDTO t) {
+        boolean encontrado = false;
+
+        try {
+            ps = conexion.getConnection().prepareStatement("SELECT * FROM tipoEmpleado WHERE nombre=?");
+            ps.setString(1, t.getNombre());
+            rs = ps.executeQuery();
+
+            //registros por leer
+            while (rs.next()) {
+
+                t.setIdTipoEmpleado(rs.getInt(1));
+                t.setNombre(rs.getString(2));
+                t.setSueldo(rs.getDouble(3));
+
+                encontrado = true;
+            }
+
+            if (encontrado) {
+                return t;
+            } else {
+                return null;
+            }
+        } catch (SQLException ex) {
+            return null;
+
+        } finally {
+            conexion.desconectar();
+        }
+
+    }
+
 }
