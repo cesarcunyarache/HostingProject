@@ -1,3 +1,5 @@
+package Form;
+
 public class NewJPanel extends javax.swing.JPanel {
 
     public NewJPanel() {

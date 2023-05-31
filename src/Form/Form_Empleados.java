@@ -86,7 +86,7 @@ public class Form_Empleados extends javax.swing.JPanel {
                 datos[1] = c.getNombres();
                 datos[2] = c.getApellidos();
                 datos[3] = c.getTelefono();
-                datos[3] = c.getCorreo();
+                datos[4] = c.getCorreo();
                 datos[5] = c.getDireccion();
                 datos[6] = c.getEdad();
                 datos[7] = c.getNacionalidad();

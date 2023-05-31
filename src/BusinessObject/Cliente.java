@@ -49,8 +49,8 @@ public class Cliente {
         return mensaje;
     }
 
-    public ClienteDTO Buscar(int idCliente) {
-        ClienteDTO clienteDTO = new ClienteDTO(idCliente);
+    public ClienteDTO Buscar(int id, String numDoc) {
+        ClienteDTO clienteDTO = new ClienteDTO(id, numDoc);
         return clienteDAO.Search(clienteDTO);
     }
 

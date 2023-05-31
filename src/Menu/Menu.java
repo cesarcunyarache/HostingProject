@@ -1,10 +1,10 @@
 package Menu;
 
-import Form.Form1;
-import Form.Form2;
 import Form.Form_Cliente;
 import Form.Form_Empleados;
 import Form.Form_Habitaciones;
+import Form.Form_Organizacion;
+import Form.Form_TipoDocumento;
 import Swing.ButtonCustom;
 import Swing.MenuItem;
 import java.awt.BorderLayout;
@@ -44,6 +44,10 @@ public class Menu extends javax.swing.JPanel {
     private Menu menu;
     private Menu comp = this;
     Form_Cliente cliente;
+    Form_Empleados empleado;
+    Form_TipoDocumento tipo;
+    Form_Habitaciones habitacion;
+    Form_Organizacion organizacion;
 
     public Menu(JPanel main, JPanel body, Menu menu) {
         initComponents();
@@ -51,6 +55,10 @@ public class Menu extends javax.swing.JPanel {
         this.body = body;
         this.menu = menu;
         cliente = new Form_Cliente();
+        empleado = new Form_Empleados();
+        tipo = new Form_TipoDocumento();
+        habitacion = new Form_Habitaciones();
+        organizacion = new Form_Organizacion();
         setOpaque(false);
         init();
 
@@ -119,18 +127,18 @@ public class Menu extends javax.swing.JPanel {
             public void selected(int index) {
                 if (index == 0) {
                     //showForm(new Form_Home());
-
                 } else if (index == 1) {
-                    showForm(new Form_Habitaciones());
-
+                    showForm(habitacion);
                 } else if (index == 2) {
                     //showForm(new Form_Reservas());
                 } else if (index == 3) {
                     showForm(cliente);
                 } else if (index == 4) {
-                    //showForm(new Form_Documento());
+                    showForm(tipo);
                 } else if (index == 5){
-                    showForm(new Form_Empleados());
+                     showForm(organizacion);
+                }else if (index == 6){
+                    showForm(empleado);
                 }
             }
         });
@@ -140,6 +148,7 @@ public class Menu extends javax.swing.JPanel {
         addMenu(new ModelMenu("Reservas", new ImageIcon(getClass().getResource("/Image/reserva.png"))));
         addMenu(new ModelMenu("Clientes", new ImageIcon(getClass().getResource("/Image/cliente.png"))));
         addMenu(new ModelMenu("Documento", new ImageIcon(getClass().getResource("/Image/tipoDocumento.png"))));
+        addMenu(new ModelMenu("Organizacion", new ImageIcon(getClass().getResource("/Image/organizacion.png"))));
         addMenu(new ModelMenu("Empleados", new ImageIcon(getClass().getResource("/Image/empleado.png"))));
 
         body.add(comp, "w 50!");
@@ -156,7 +165,7 @@ public class Menu extends javax.swing.JPanel {
                     width = 50 + (150 * fraction);
                     setAlpha(fraction);
                 }
-                System.out.println(width);
+                
 
                 layout.setComponentConstraints(comp, "w " + width + "!");
                 body.revalidate();

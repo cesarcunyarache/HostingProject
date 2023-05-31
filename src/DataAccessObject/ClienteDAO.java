@@ -24,7 +24,7 @@ public class ClienteDAO implements Crud<ClienteDTO> {
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement("INSERT INTO Cliente(numDoc, tipoDocumentoID, nombres, apellidos, telefono, nacionalidad, correo, direccion, genero) VALUES(?,?,?,?,?,?,?,?,?)");
-            
+
             ps.setString(1, cliente.getNumDocumento());
             ps.setInt(2, cliente.getTipoDocumentoID());
             ps.setString(3, cliente.getNombres());
@@ -34,7 +34,7 @@ public class ClienteDAO implements Crud<ClienteDTO> {
             ps.setString(7, cliente.getCorreo());
             ps.setString(8, cliente.getDireccion());
             ps.setString(9, String.valueOf(cliente.getGenero()));
-            
+
             int res = ps.executeUpdate();
             if (res > 0) {
                 return true;
@@ -74,7 +74,7 @@ public class ClienteDAO implements Crud<ClienteDTO> {
                 String nombres = rs.getString("nombres");
                 String apellidos = rs.getString("apellidos");
                 String telefono = rs.getString("telefono");
-                String nacionalidad =  rs.getString("nacionalidad");
+                String nacionalidad = rs.getString("nacionalidad");
                 String correo = rs.getString("correo");
                 String direccion = rs.getString("direccion");
                 String genero = rs.getString("genero");
@@ -105,7 +105,7 @@ public class ClienteDAO implements Crud<ClienteDTO> {
 
         try {
             ps = con.prepareStatement("UPDATE Cliente SET numDoc=?, tipoDocumentoID=?, nombres=?, apellidos=?, telefono=?, nacionalidad=?,  correo=?, direccion=?, genero=? WHERE idCliente=" + cliente.getIdCliente());
-            
+
             ps.setString(1, cliente.getNumDocumento());
             ps.setInt(2, cliente.getTipoDocumentoID());
             ps.setString(3, cliente.getNombres());
@@ -172,8 +172,14 @@ public class ClienteDAO implements Crud<ClienteDTO> {
         ResultSet rs = null;
 
         try {
-            ps = con.prepareStatement("SELECT * FROM Cliente WHERE idCliente=?");
-            ps.setInt(1, clie.getIdCliente());
+            if (clie.getIdCliente() == 0) {
+                ps = con.prepareStatement("SELECT * FROM Cliente WHERE numDoc=?");
+                ps.setString(1, clie.getNumDocumento());
+            } else {
+                ps = con.prepareStatement("SELECT * FROM Cliente WHERE idCliente=?");
+                ps.setInt(1, clie.getIdCliente());
+            }
+
             rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -183,13 +189,13 @@ public class ClienteDAO implements Crud<ClienteDTO> {
                 String nombres = rs.getString("nombres");
                 String apellidos = rs.getString("apellidos");
                 String telefono = rs.getString("telefono");
-                String nacionalidad= rs.getString("nacionalidad");
+                String nacionalidad = rs.getString("nacionalidad");
                 String correo = rs.getString("correo");
                 String direccion = rs.getString("direccion");
                 String genero = rs.getString("genero");
-                
+
                 cliente = new ClienteDTO(id, numDoc, tipoDocumentoID, nombres, apellidos, telefono, nacionalidad, correo, direccion, genero.charAt(0));
-                
+
             }
 
         } catch (Exception e) {
@@ -207,4 +213,3 @@ public class ClienteDAO implements Crud<ClienteDTO> {
         return cliente;
     }
 }
-

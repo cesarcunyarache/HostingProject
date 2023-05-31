@@ -13,6 +13,14 @@ public class ClienteDTO extends PersonaDTO {
         this.idCliente = idCliente;
     }
 
+    public ClienteDTO(int idCliente, String numDocumento) {
+        super(numDocumento);
+        this.idCliente = idCliente;
+    }
+
+   
+
+
     public ClienteDTO(String numDocumento, int tipoDocumentoID, String nombres, String apellidos, String telefono, String nacionalidad, String correo, String direccion, char genero) {
         super(nombres, apellidos, telefono, correo, direccion, nacionalidad, genero, numDocumento);
         this.tipoDocumentoID = tipoDocumentoID;
@@ -23,6 +31,8 @@ public class ClienteDTO extends PersonaDTO {
         this.idCliente = idCliente;
         this.tipoDocumentoID = tipoDocumentoID;
     }
+    
+    
 
     public int getIdCliente() {
         return idCliente;

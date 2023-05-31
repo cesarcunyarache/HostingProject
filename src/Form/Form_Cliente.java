@@ -20,12 +20,14 @@ public class Form_Cliente extends javax.swing.JPanel {
     TipoDocumento tipoDocumento;
     DefaultTableModel df;
     DefaultComboBoxModel modelo;
-    int id = 0;
+    Vector<TipoDocumentoDTO> combo;
+    int id;
 
     public Form_Cliente() {
         initComponents();
         tipoDocumento = new TipoDocumento();
         cliente = new Cliente();
+        combo = new Vector<>();
         modelo = new DefaultComboBoxModel(llenarCombo());
         cbo_tipoDoc.setModel(modelo);
         df = new DefaultTableModel() {
@@ -36,6 +38,7 @@ public class Form_Cliente extends javax.swing.JPanel {
 
         };
         llenarTabla();
+        cbo_nacionalidad.setSelectedItem("Perú");
     }
 
     /**
@@ -185,13 +188,17 @@ public class Form_Cliente extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BuscarActionPerformed
-        id = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID a buscar"));
+        String dni = JOptionPane.showInputDialog("Ingrese el DNI a buscar");
 
-        ClienteDTO clienteDTO = cliente.Buscar(id);
+        ClienteDTO clienteDTO = cliente.Buscar(0, dni);
 
         if (clienteDTO != null) {
             txt_numDoc.setText(clienteDTO.getNumDocumento());
-            cbo_tipoDoc.setSelectedItem(clienteDTO.getTipoDocumentoID());
+            for (TipoDocumentoDTO tipoDocumentoDTO : combo) {
+                if (tipoDocumentoDTO.getIdTipoDocumento() == clienteDTO.getTipoDocumentoID()) {
+                    modelo.setSelectedItem(tipoDocumentoDTO);
+                }
+            }
             txt_nombres.setText(clienteDTO.getNombres());
             txt_apellidos.setText(clienteDTO.getApellidos());
             txt_telefono.setText(clienteDTO.getTelefono());
@@ -232,7 +239,7 @@ public class Form_Cliente extends javax.swing.JPanel {
             String genero = cbo_genero.getSelectedItem().toString();
             String nacionaldad = cbo_nacionalidad.getSelectedItem().toString();
 
-            String mensaje = cliente.Agregar(numDoc, 2, nombres, apellidos, telefono, nacionaldad, correo, direccion, genero.charAt(0));
+            String mensaje = cliente.Agregar(numDoc, tipoDoc, nombres, apellidos, telefono, nacionaldad, correo, direccion, genero.charAt(0));
 
             if (!mensaje.equals("")) {
                 JOptionPane.showMessageDialog(null, mensaje);
@@ -244,6 +251,7 @@ public class Form_Cliente extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Error, uno o más campos vacios!");
         }
         llenarTabla();
+        limpiar();
     }//GEN-LAST:event_btn_AgregarActionPerformed
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
@@ -251,11 +259,18 @@ public class Form_Cliente extends javax.swing.JPanel {
         if (id == -1) {
             JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
         } else {
-            ClienteDTO clienteDTO = cliente.Buscar(id);
+            ClienteDTO clienteDTO = cliente.Buscar(id, "");
 
             if (clienteDTO != null) {
 
-                cbo_tipoDoc.setSelectedItem(clienteDTO.getTipoDocumentoID());
+                txt_numDoc.setText(clienteDTO.getNumDocumento());
+
+                for (TipoDocumentoDTO tipoDocumentoDTO : combo) {
+                    if (tipoDocumentoDTO.getIdTipoDocumento() == clienteDTO.getTipoDocumentoID()) {
+                        modelo.setSelectedItem(tipoDocumentoDTO);
+                    }
+                }
+
                 txt_nombres.setText(clienteDTO.getNombres());
                 txt_apellidos.setText(clienteDTO.getApellidos());
                 txt_telefono.setText(clienteDTO.getTelefono());
@@ -295,7 +310,7 @@ public class Form_Cliente extends javax.swing.JPanel {
             String genero = cbo_genero.getSelectedItem().toString();
             String nacionaldad = cbo_nacionalidad.getSelectedItem().toString();
 
-            String mensaje = cliente.Actualizar(id, numDoc, 2, nombres, apellidos, telefono, nacionaldad, correo, direccion, genero.charAt(0));
+            String mensaje = cliente.Actualizar(id, numDoc, tipoDoc, nombres, apellidos, telefono, nacionaldad, correo, direccion, genero.charAt(0));
 
             if (!mensaje.equals("")) {
                 JOptionPane.showMessageDialog(null, mensaje);
@@ -307,6 +322,7 @@ public class Form_Cliente extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Error, uno o más campos vacios!");
         }
         llenarTabla();
+        limpiar();
     }//GEN-LAST:event_btn_ActualizarActionPerformed
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
@@ -347,7 +363,7 @@ public class Form_Cliente extends javax.swing.JPanel {
     }
 
     public Vector<TipoDocumentoDTO> llenarCombo() {
-        Vector<TipoDocumentoDTO> combo = new Vector<TipoDocumentoDTO>();
+
         ArrayList<TipoDocumentoDTO> lista = new ArrayList<>();
 
         lista = (ArrayList<TipoDocumentoDTO>) tipoDocumento.Listar();
@@ -357,6 +373,18 @@ public class Form_Cliente extends javax.swing.JPanel {
             }
         }
         return combo;
+    }
+
+    public void limpiar() {
+        txt_numDoc.setText("");
+        txt_nombres.setText("");
+        txt_apellidos.setText("");
+        txt_telefono.setText("");
+        txt_correo.setText("");
+        txt_direccion.setText("");
+        cbo_genero.setSelectedIndex(0);
+        cbo_nacionalidad.setSelectedItem("Perú");
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
