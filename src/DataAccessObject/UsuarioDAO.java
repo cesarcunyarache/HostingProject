@@ -133,6 +133,41 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
 
     }
 
+     public UsuarioDTO SearchUser(UsuarioDTO t) {
+        boolean encontrado = false;
+
+        try {
+            ps = conexion.getConnection().prepareStatement("SELECT * FROM Usuario WHERE [user]=?");
+            ps.setString(1, t.getUsuario());
+            rs = ps.executeQuery();
+
+            //registros por leer
+            while (rs.next()) {
+
+                t.setIdUsuario(rs.getInt(1));
+                t.setEmpleadoID(rs.getInt(2));
+                t.setUsuario(rs.getString(3));
+                t.setContrasena(rs.getString(4));
+                t.setRol(rs.getString(5));
+
+                encontrado = true;
+            }
+
+            if (encontrado) {
+                return t;
+            } else {
+                return null;
+            }
+        } catch (SQLException ex) {
+            return null;
+
+        } finally {
+            conexion.desconectar();
+        }
+
+    }
+     
+     
     public UsuarioDTO validar(UsuarioDTO t) {
         boolean encontrado = false;
 

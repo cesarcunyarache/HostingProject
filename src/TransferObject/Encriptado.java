@@ -8,11 +8,11 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.swing.JOptionPane;
 import org.apache.commons.codec.binary.Base64;
 
-public class EncriptadoAES {
+public class Encriptado {
 
     String secretKey = "El Blue Label es el mejor whisky del mundo";
 
-    public EncriptadoAES() {
+    public Encriptado() {
     }
 
     public String ecnode(String cadena) {

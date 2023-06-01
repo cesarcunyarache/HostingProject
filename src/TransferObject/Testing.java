@@ -13,25 +13,13 @@ public class Testing {
     public static void main(String[] args) {
         // AES
 
-        EncriptadoAES encrip = new EncriptadoAES();
-        System.out.println(encrip.ecnode("Contraseña12346"));
+        Encriptado encrip = new Encriptado();
+        System.out.println(encrip.ecnode("admin"));
 
         // Cifrado Cesar
-        CifradoCesar cif = new CifradoCesar();
-        System.out.println(cif.encrypt("Contraseña12346", 10));
+        System.out.println(encrip.deecnode(encrip.ecnode("admin")));
 
-        //AES Dinamico
-        Encriptador en = new Encriptador();
-
-        String clave = "contraseña123";
-
-        String mensajeEncriptado = en.encriptarClave(clave);
-        
-        System.out.println("Mensaje encriptado: " + mensajeEncriptado);
-        
-
-        String mensajeDesencriptado = en.desencriptarClave(mensajeEncriptado);
-        System.out.println("Mensaje desencriptado: " + mensajeDesencriptado);
+       
     }
 
 }

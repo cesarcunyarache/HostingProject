@@ -16,6 +16,11 @@ public class UsuarioDTO {
 
     }
 
+    public UsuarioDTO(String usuario) {
+        this.usuario = usuario;
+    }
+    
+
     public UsuarioDTO(int idUsuario) {
         this.idUsuario = idUsuario;
     }

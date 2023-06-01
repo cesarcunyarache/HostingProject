@@ -3,14 +3,17 @@ package BusinessObject;
 import java.util.List;
 import TransferObject.UsuarioDTO;
 import DataAccessObject.UsuarioDAO;
+import TransferObject.Encriptado;
 
 public class Usuario {
 
     private UsuarioDTO usuarioDTO;
     private UsuarioDAO usuarioDAO;
+    private Encriptado enc;
 
     public Usuario() {
         usuarioDAO = new UsuarioDAO();
+        enc = new Encriptado();
     }
 
     public String Agregar(int idEmpleado, String usuario, String contrasena, String rol) {
@@ -63,10 +66,34 @@ public class Usuario {
 
     }
 
-    public UsuarioDTO ValidadUsuario(String user, String password) {
-        usuarioDTO = new UsuarioDTO(user, password);
-        if (usuarioDAO.validar(usuarioDTO) != null) {
-            return usuarioDAO.validar(usuarioDTO);
+    public UsuarioDTO BuscarUsuario(String user) {
+        usuarioDTO = new UsuarioDTO(user);
+        if (usuarioDAO.Search(usuarioDTO) != null) {
+            return usuarioDAO.Search(usuarioDTO);
+        } else {
+            return null;
+        }
+    }
+
+//    public UsuarioDTO ValidadUsuario(String user, String password) {
+//        usuarioDTO = new UsuarioDTO(user, password);
+//        if (usuarioDAO.validar(usuarioDTO) != null) {
+//            return usuarioDAO.validar(usuarioDTO);
+//        } else {
+//            return null;
+//        }
+//
+//    }
+    public UsuarioDTO ValidarUsuario(String user, String password) {
+        usuarioDTO = new UsuarioDTO(user);
+        if (usuarioDAO.SearchUser(usuarioDTO) != null) {
+            String contraseña = enc.deecnode(usuarioDTO.getContrasena());
+            if (password.equalsIgnoreCase(contraseña)) {
+                return usuarioDAO.validar(usuarioDTO);
+            } else {
+                return null;
+            }
+
         } else {
             return null;
         }

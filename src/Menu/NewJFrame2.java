@@ -1,6 +1,8 @@
 package Menu;
 
+import BusinessObject.Empleado;
 import Menu.Menu;
+import TransferObject.EmpleadoDTO;
 import com.formdev.flatlaf.intellijthemes.FlatArcIJTheme;
 import java.awt.Toolkit;
 import javax.swing.JPanel;
@@ -14,7 +16,7 @@ public class NewJFrame2 extends javax.swing.JFrame {
     private JPanel main = new JPanel();
     private Menu menu;
 
-    public NewJFrame2() {
+    public NewJFrame2(EmpleadoDTO empleado) {
         this.setExtendedState(this.MAXIMIZED_BOTH);
         initComponents();
 
@@ -82,11 +84,11 @@ public class NewJFrame2 extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new NewJFrame2().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new NewJFrame2().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

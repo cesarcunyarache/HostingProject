@@ -2,13 +2,18 @@ package Login;
 
 import BusinessObject.Usuario;
 import java.awt.Color;
-import java.awt.Menu;
 import Menu.NewJFrame2;
+import TransferObject.EmpleadoDTO;
+import TransferObject.Encriptado;
+import TransferObject.UsuarioDTO;
+import com.formdev.flatlaf.intellijthemes.FlatArcIJTheme;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 public class Login extends javax.swing.JFrame {
 
     Usuario user;
+  
     //mover ventana
     int xMouse, yMouse;
 
@@ -20,6 +25,7 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         difuminado.setBackground(new Color(15, 23, 42, 150));
         this.setLocationRelativeTo(null);
+       
 
     }
 
@@ -228,10 +234,13 @@ public class Login extends javax.swing.JFrame {
         String usuario = txtuser.getText();
         char[] contraseñaArray = txtpass.getPassword();
         String contrasena = new String(contraseñaArray);
-
-        if (user.ValidadUsuario(usuario, contrasena) != null) {
+        
+        UsuarioDTO obj = user.ValidarUsuario(usuario, contrasena);
+        
+        if (obj != null) {
             this.dispose();
-            NewJFrame2 ven2 = new NewJFrame2();
+            EmpleadoDTO empleadoDTO = new EmpleadoDTO(obj.getEmpleadoID());
+            NewJFrame2 ven2 = new NewJFrame2(empleadoDTO);
             ven2.setVisible(true);
 
         } else {
@@ -247,21 +256,12 @@ public class Login extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+         try {
+            UIManager.setLookAndFeel(new FlatArcIJTheme());
+            //FlatLightFlatIJTheme.setup();
+
+        } catch (Exception ex) {
+
         }
         //</editor-fold>
 
