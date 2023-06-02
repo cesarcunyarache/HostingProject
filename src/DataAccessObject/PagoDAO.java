@@ -20,11 +20,11 @@ public class PagoDAO implements Crud<PagoDTO> {
         Connection con = conexion.getConnection();
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement("INSERT INTO Pago(idPago, monto, idTipo, descripcion) VALUES (?, ?, ?,?)");
-            ps.setInt(1, pago.getIdPago());
-            ps.setDouble(2, pago.getMonto());
-            ps.setInt(3, pago.getIdTipo());
-            ps.setString(4, pago.getDescripcion());
+            ps = con.prepareStatement("INSERT INTO Pago(monto, idTipo, descripcion) VALUES (?,?,?)");
+ 
+            ps.setDouble(1, pago.getMonto());
+            ps.setInt(2, pago.getIdTipo());
+            ps.setString(3, pago.getDescripcion());
             int res = ps.executeUpdate();
             if (res > 0) {
                 return true;
@@ -175,5 +175,8 @@ public class PagoDAO implements Crud<PagoDTO> {
 
         return pago;
     }
+    
+    
+    
 }
 

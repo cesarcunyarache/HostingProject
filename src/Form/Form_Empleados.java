@@ -45,8 +45,8 @@ public class Form_Empleados extends javax.swing.JPanel {
         combo.add("-Seleccione-");
         lista = (ArrayList<TipoEmpleadoDTO>) tp.Listar();
         if (lista != null) {
-            for (TipoEmpleadoDTO tipoDocumentoDTO : lista) {
-                combo.add(tipoDocumentoDTO.getNombre());
+            for (TipoEmpleadoDTO tipoEmpleadoDTO : lista) {
+                combo.add(tipoEmpleadoDTO.getNombre());
             }
         }
         return combo;

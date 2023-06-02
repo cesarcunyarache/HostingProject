@@ -1,5 +1,5 @@
-
 package DataAccessObject;
+
 import DataSource.Conexion;
 import TransferObject.TipoPagoDTO;
 import java.util.ArrayList;
@@ -135,7 +135,7 @@ public class TipoPagoDAO implements Crud<TipoPagoDTO> {
         return isDelete;
     }
 
-    @Override
+        @Override
     public TipoPagoDTO Search(TipoPagoDTO tipoPago) {
         Connection con = conexion.getConnection();
         PreparedStatement ps = null;
@@ -144,6 +144,37 @@ public class TipoPagoDAO implements Crud<TipoPagoDTO> {
         try {
             ps = con.prepareStatement("SELECT * FROM TipoPago WHERE idTipo=?");
             ps.setInt(1, tipoPago.getIdTPago());
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int idTPago = rs.getInt("idTipo");
+                String nombre = rs.getString("nombre");
+                tipoPago = new TipoPagoDTO(idTPago, nombre);
+            }
+
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            try {
+                con.close();
+                ps.close();
+                rs.close();
+            } catch (SQLException ex) {
+                System.err.println(ex);
+            }
+        }
+
+        return tipoPago;
+    }
+
+    public TipoPagoDTO SearchName(TipoPagoDTO tipoPago) {
+        Connection con = conexion.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = con.prepareStatement("SELECT * FROM TipoPago WHERE nombre=?");
+            ps.setString(1, tipoPago.getNombre());
             rs = ps.executeQuery();
 
             if (rs.next()) {

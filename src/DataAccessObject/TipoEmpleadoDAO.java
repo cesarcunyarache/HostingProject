@@ -21,10 +21,7 @@ public class TipoEmpleadoDAO implements Crud<TipoEmpleadoDTO> {
         int r = 0;
         try {
             ps = conexion.getConnection().prepareStatement(
-                    "INSERT INTO tipoEmpleado("
-                    + ",nombre"
-                    + ",sueldo"
-                    + ") values(?,?) ");
+                    "INSERT INTO tipoEmpleado(nombre,sueldo) values(?,?) ");
 
             ps.setString(1, t.getNombre());
             ps.setDouble(2, t.getSueldo());
@@ -43,10 +40,10 @@ public class TipoEmpleadoDAO implements Crud<TipoEmpleadoDTO> {
     public boolean Update(TipoEmpleadoDTO t) {
         int r = 0;
         try {
-            ps = conexion.getConnection().prepareStatement("UPDATE tipoEmpleado set nombre=?,sueldo=?  WHERE idEmpleado=? ");
+            ps = conexion.getConnection().prepareStatement("UPDATE tipoEmpleado set nombre=?,sueldo=?  WHERE tipoEmpleado=? ");
             ps.setString(1, t.getNombre());
-            ps.setDouble(1, t.getSueldo());
-            ps.setInt(1, t.getIdTipoEmpleado());
+            ps.setDouble(2, t.getSueldo());
+            ps.setInt(3, t.getIdTipoEmpleado());
 
             r = ps.executeUpdate();
             return r == 1;

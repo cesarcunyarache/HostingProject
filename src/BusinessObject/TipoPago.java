@@ -54,6 +54,16 @@ public class TipoPago {
             return null;
         }
     }
+    
+    
+     public TipoPagoDTO buscarName(String nombre) {
+        tipoPagoDTO = tipoPagoDAO.SearchName(new TipoPagoDTO(nombre));
+        if (tipoPagoDTO != null) {
+            return tipoPagoDTO;
+        } else {
+            return null;
+        }
+    }
 
     public List<TipoPagoDTO> listar() {
         if (tipoPagoDAO.Read() != null) {

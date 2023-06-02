@@ -127,7 +127,7 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
 
     }
 
-     public UsuarioDTO SearchUser(UsuarioDTO t) {
+    public UsuarioDTO SearchUser(UsuarioDTO t) {
         boolean encontrado = false;
 
         try {
@@ -160,9 +160,8 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
         }
 
     }
-     
-     
-      public UsuarioDTO SearchUpadate(UsuarioDTO t) {
+
+    public UsuarioDTO SearchUpadate(UsuarioDTO t) {
         boolean encontrado = false;
 
         try {
@@ -196,7 +195,7 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
         }
 
     }
-     
+
     public UsuarioDTO validar(UsuarioDTO t) {
         boolean encontrado = false;
 
