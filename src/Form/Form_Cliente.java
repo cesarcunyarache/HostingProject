@@ -246,13 +246,8 @@ public class Form_Cliente extends javax.swing.JPanel {
             String nacionaldad = cbo_nacionalidad.getSelectedItem().toString();
 
             String mensaje = cliente.Agregar(numDoc, tipoDoc, nombres, apellidos, telefono, nacionaldad, correo, direccion, genero.charAt(0));
-
-            if (!mensaje.equals("")) {
                 JOptionPane.showMessageDialog(null, mensaje);
 
-            } else {
-                JOptionPane.showMessageDialog(null, mensaje);
-            }
         } else {
             JOptionPane.showMessageDialog(null, "Error, uno o más campos vacios!");
         }
@@ -320,12 +315,8 @@ public class Form_Cliente extends javax.swing.JPanel {
 
             String mensaje = cliente.Actualizar(id, numDoc, tipoDoc, nombres, apellidos, telefono, nacionaldad, correo, direccion, genero.charAt(0));
 
-            if (!mensaje.equals("")) {
-                JOptionPane.showMessageDialog(null, mensaje);
+            JOptionPane.showMessageDialog(null, mensaje);
 
-            } else {
-                JOptionPane.showMessageDialog(null, mensaje);
-            }
         } else {
             JOptionPane.showMessageDialog(null, "Error, uno o más campos vacios!");
         }

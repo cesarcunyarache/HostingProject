@@ -144,6 +144,10 @@ public class Menu extends javax.swing.JPanel {
                     showForm(empleado);
                 } else if (index == 7){
                     showForm(usuario);
+                } else if (index == 8){
+                    
+                } else if (index == 9){
+                    
                 }
             }
         });
@@ -155,8 +159,9 @@ public class Menu extends javax.swing.JPanel {
         addMenu(new ModelMenu("Documento", new ImageIcon(getClass().getResource("/Image/tipoDocumento.png"))));
         addMenu(new ModelMenu("Organizacion", new ImageIcon(getClass().getResource("/Image/organizacion.png"))));
         addMenu(new ModelMenu("Empleados", new ImageIcon(getClass().getResource("/Image/empleado.png"))));
-        addMenu(new ModelMenu("Usuarios", new ImageIcon(getClass().getResource("/Image/empleado.png"))));
-
+        addMenu(new ModelMenu("Usuarios", new ImageIcon(getClass().getResource("/Image/usuarios.png"))));
+        addMenu(new ModelMenu("Pagos", new ImageIcon(getClass().getResource("/Image/pagos.png"))));
+        addMenu(new ModelMenu("Reportes", new ImageIcon(getClass().getResource("/Image/reportes.png"))));
         body.add(comp, "w 50!");
         body.add(main, "w 100%");
 

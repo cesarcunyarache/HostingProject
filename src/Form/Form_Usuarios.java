@@ -2,13 +2,11 @@ package Form;
 
 import BusinessObject.Empleado;
 import BusinessObject.Usuario;
-import TransferObject.ClienteDTO;
 import TransferObject.EmpleadoDTO;
 import TransferObject.Encriptado;
 import TransferObject.UsuarioDTO;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
