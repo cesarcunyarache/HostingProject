@@ -16,7 +16,7 @@ public class NewJFrame2 extends javax.swing.JFrame {
     private JPanel main = new JPanel();
     private Menu menu;
 
-    public NewJFrame2(EmpleadoDTO empleado) {
+    public NewJFrame2() {
         this.setExtendedState(this.MAXIMIZED_BOTH);
         initComponents();
 
@@ -80,15 +80,13 @@ public class NewJFrame2 extends javax.swing.JFrame {
         } catch (Exception ex) {
 
         }
-        //</editor-fold>
-        //</editor-fold>
-
+      
         /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new NewJFrame2().setVisible(true);
-//            }
-//        });
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new NewJFrame2().setVisible(true);
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

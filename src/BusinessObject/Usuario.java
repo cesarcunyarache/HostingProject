@@ -35,7 +35,7 @@ public class Usuario {
         }
     }
 
-    public String Actualizar(int idEmpleado, String user, String password, String rol, int idUsuario) {
+    public String Actualizar(int idUsuario, int idEmpleado, String user, String password, String rol) {
         String mensaje = "";
         usuarioDTO = new UsuarioDTO(idUsuario, idEmpleado, user, mensaje, rol);
         if (usuarioDAO.Update(usuarioDTO)) {
@@ -68,12 +68,23 @@ public class Usuario {
 
     public UsuarioDTO BuscarUsuario(String user) {
         usuarioDTO = new UsuarioDTO(user);
-        if (usuarioDAO.Search(usuarioDTO) != null) {
-            return usuarioDAO.Search(usuarioDTO);
+        if (usuarioDAO.SearchUser(usuarioDTO) != null) {
+            return usuarioDAO.SearchUser(usuarioDTO);
         } else {
             return null;
         }
     }
+    
+    public UsuarioDTO BuscarActualizar(String user, int id) {
+        usuarioDTO = new UsuarioDTO(id, user);
+        if (usuarioDAO.SearchUpadate(usuarioDTO) != null) {
+            return usuarioDAO.SearchUpadate(usuarioDTO);
+        } else {
+            return null;
+        }
+    }
+    
+    
 
 //    public UsuarioDTO ValidadUsuario(String user, String password) {
 //        usuarioDTO = new UsuarioDTO(user, password);

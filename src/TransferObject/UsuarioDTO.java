@@ -15,15 +15,24 @@ public class UsuarioDTO {
     public void finalize() throws Throwable {
 
     }
+    
+    
 
     public UsuarioDTO(String usuario) {
         this.usuario = usuario;
     }
+
+    public UsuarioDTO(int empleadoID) {
+        this.empleadoID = empleadoID;
+    }
+
+    public UsuarioDTO(int idUsuario, String usuario) {
+        this.idUsuario = idUsuario;
+        this.usuario = usuario;
+    }
     
 
-    public UsuarioDTO(int idUsuario) {
-        this.idUsuario = idUsuario;
-    }
+    
 
     public UsuarioDTO(String usuario, String contrasena) {
         this.usuario = usuario;

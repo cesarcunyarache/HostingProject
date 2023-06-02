@@ -240,8 +240,8 @@ public class Login extends javax.swing.JFrame {
         if (obj != null) {
             this.dispose();
             EmpleadoDTO empleadoDTO = new EmpleadoDTO(obj.getEmpleadoID());
-            NewJFrame2 ven2 = new NewJFrame2(empleadoDTO);
-            ven2.setVisible(true);
+//            NewJFrame2 ven2 = new NewJFrame2(empleadoDTO);
+            //ven2.setVisible(true);
 
         } else {
             JOptionPane.showMessageDialog(null, "Datos incorrectos");

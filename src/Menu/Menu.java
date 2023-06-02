@@ -5,6 +5,7 @@ import Form.Form_Empleados;
 import Form.Form_Habitaciones;
 import Form.Form_Organizacion;
 import Form.Form_TipoDocumento;
+import Form.Form_Usuarios;
 import Swing.ButtonCustom;
 import Swing.MenuItem;
 import java.awt.BorderLayout;
@@ -48,6 +49,7 @@ public class Menu extends javax.swing.JPanel {
     Form_TipoDocumento tipo;
     Form_Habitaciones habitacion;
     Form_Organizacion organizacion;
+    Form_Usuarios usuario;
 
     public Menu(JPanel main, JPanel body, Menu menu) {
         initComponents();
@@ -59,6 +61,7 @@ public class Menu extends javax.swing.JPanel {
         tipo = new Form_TipoDocumento();
         habitacion = new Form_Habitaciones();
         organizacion = new Form_Organizacion();
+        usuario = new Form_Usuarios();
         setOpaque(false);
         init();
 
@@ -139,6 +142,8 @@ public class Menu extends javax.swing.JPanel {
                     showForm(organizacion);
                 } else if (index == 6) {
                     showForm(empleado);
+                } else if (index == 7){
+                    showForm(usuario);
                 }
             }
         });
@@ -150,6 +155,7 @@ public class Menu extends javax.swing.JPanel {
         addMenu(new ModelMenu("Documento", new ImageIcon(getClass().getResource("/Image/tipoDocumento.png"))));
         addMenu(new ModelMenu("Organizacion", new ImageIcon(getClass().getResource("/Image/organizacion.png"))));
         addMenu(new ModelMenu("Empleados", new ImageIcon(getClass().getResource("/Image/empleado.png"))));
+        addMenu(new ModelMenu("Usuarios", new ImageIcon(getClass().getResource("/Image/empleado.png"))));
 
         body.add(comp, "w 50!");
         body.add(main, "w 100%");
