@@ -99,7 +99,7 @@ public class Usuario {
         usuarioDTO = new UsuarioDTO(user);
         if (usuarioDAO.SearchUser(usuarioDTO) != null) {
             String contraseña = enc.deecnode(usuarioDTO.getContrasena());
-            if (password.equalsIgnoreCase(contraseña)) {
+            if (password.equals(contraseña)) {
                 return usuarioDAO.validar(usuarioDTO);
             } else {
                 return null;

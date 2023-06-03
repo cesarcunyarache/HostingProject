@@ -1,31 +1,29 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Form;
 
-import BusinessObject.TipoEmpleado;
-import TransferObject.TipoEmpleadoDTO;
+import BusinessObject.TipoHabitacion;
+import TransferObject.TipoHabitacionDTO;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import javax.swing.JOptionPane;
 /**
  *
- * @author chero
+ * @author cesarcunyarache
  */
-public class Form_TipoEmpleado extends javax.swing.JFrame {
+public class Form_TipoHabitacion2 extends javax.swing.JPanel {
 
     int id;
-    TipoEmpleado te;
+    TipoHabitacion th;
     DefaultTableModel dt;
     DefaultComboBoxModel modelo;
-
-    public Form_TipoEmpleado() {
+    
+    public Form_TipoHabitacion2() {
         initComponents();
-
-        te = new TipoEmpleado();
+        th = new TipoHabitacion();
         dt = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -50,16 +48,16 @@ public class Form_TipoEmpleado extends javax.swing.JFrame {
 
         Object[] datos = new Object[dt.getColumnCount()];
 
-        ArrayList<TipoEmpleadoDTO> lista = new ArrayList<>();
-        lista = (ArrayList<TipoEmpleadoDTO>) te.Listar();
+        ArrayList<TipoHabitacionDTO> lista = new ArrayList<>();
+        lista = (ArrayList<TipoHabitacionDTO>) th.listar();
         if (lista != null) {
 
             for (int i = 0; i < lista.size(); i++) {
-                TipoEmpleadoDTO c = lista.get(i);
+                TipoHabitacionDTO c = lista.get(i);
 
-                datos[0] = c.getIdTipoEmpleado();
+                datos[0] = c.getIdTipo();
                 datos[1] = c.getNombre();
-                datos[2] = c.getSueldo();
+                datos[2] = c.getPrecio();
 
                 dt.addRow(datos);
 
@@ -72,7 +70,15 @@ public class Form_TipoEmpleado extends javax.swing.JFrame {
 
         }
     }
-
+    
+    public void limpiar(){
+        txt_idTipo.setText("");
+        txt_nombre.setText("");
+        txt_precio.setText("");
+        tabla.clearSelection();
+        id = -1;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -86,17 +92,15 @@ public class Form_TipoEmpleado extends javax.swing.JFrame {
         txt_nombre = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
         btn_Agregar = new javax.swing.JButton();
+        txt_precio = new javax.swing.JTextField();
         btn_buscar = new javax.swing.JButton();
         btn_Actualizar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txt_idTipo = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txt_sueldo = new javax.swing.JTextField();
         btn_nuevo = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -117,6 +121,8 @@ public class Form_TipoEmpleado extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tabla);
+
+        jLabel3.setText("Precio");
 
         btn_Agregar.setText("Agregar");
         btn_Agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -147,14 +153,6 @@ public class Form_TipoEmpleado extends javax.swing.JFrame {
         txt_idTipo.setEnabled(false);
         txt_idTipo.setFocusable(false);
 
-        jLabel3.setText("Sueldo");
-
-        txt_sueldo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_sueldoActionPerformed(evt);
-            }
-        });
-
         btn_nuevo.setText("Nuevo");
         btn_nuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,38 +165,40 @@ public class Form_TipoEmpleado extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(129, 129, 129)
+                .addGap(119, 119, 119)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_idTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txt_sueldo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                            .addComponent(txt_nombre, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_idTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btn_buscar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_nuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btn_Agregar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_Actualizar)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(177, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txt_precio, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txt_nombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btn_buscar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btn_nuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btn_Agregar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btn_Actualizar)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(239, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(96, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(txt_idTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -211,53 +211,27 @@ public class Form_TipoEmpleado extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txt_sueldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_buscar)
                     .addComponent(btn_nuevo))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
+                .addGap(17, 17, 17)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btn_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ActualizarActionPerformed
-        if (!txt_nombre.getText().isEmpty() && !txt_sueldo.getText().isEmpty()) {
-
-            String nombre = txt_nombre.getText();
-            Double sueldo = Double.parseDouble(txt_sueldo.getText());
-
-            String mensaje = te.Actualizar(id, nombre, sueldo);
-
-            if (!mensaje.equals("")) {
-                JOptionPane.showMessageDialog(null, mensaje);
-
-            } else {
-                JOptionPane.showMessageDialog(null, mensaje);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Error, uno o más campos vacios!");
-        }
-        llenarTabla();
-    }//GEN-LAST:event_btn_ActualizarActionPerformed
-
-    private void txt_sueldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_sueldoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_sueldoActionPerformed
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         id = (int) (tabla.getValueAt(tabla.getSelectedRow(), 0));
@@ -267,53 +241,24 @@ public class Form_TipoEmpleado extends javax.swing.JFrame {
             btn_nuevo.setEnabled(true);
             btn_Agregar.setEnabled(false);
 
-            TipoEmpleadoDTO teDTO = te.Buscar(id);
+            TipoHabitacionDTO tpDTO = th.buscar(id);
 
-            if (teDTO != null) {
+            if (tpDTO != null) {
                 txt_idTipo.setText(String.valueOf(id));
-                txt_nombre.setText(String.valueOf(teDTO.getNombre()));
-                txt_sueldo.setText(String.valueOf(teDTO.getSueldo()));
+                txt_nombre.setText(String.valueOf(tpDTO.getNombre()));
+                txt_precio.setText(String.valueOf(tpDTO.getPrecio()));
 
             }
         }
     }//GEN-LAST:event_tablaMouseClicked
 
-    private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
-        String codBusqueda = JOptionPane.showInputDialog("Ingrese el ID a buscar");
-
-        TipoEmpleadoDTO teDTO = te.Buscar(Integer.parseInt(codBusqueda));
-
-        if (teDTO != null) {
-            id = Integer.parseInt(codBusqueda);
-            JOptionPane.showMessageDialog(null, "Registro encontrado");
-            txt_idTipo.setText(String.valueOf(id));
-            txt_nombre.setText(String.valueOf(teDTO.getNombre()));
-            txt_sueldo.setText(String.valueOf(teDTO.getSueldo()));
-            btn_Agregar.setEnabled(false);
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Registro no encontrado");
-        }
-    }//GEN-LAST:event_btn_buscarActionPerformed
-public void limpiar(){
-       txt_idTipo.setText("");
-        txt_nombre.setText("");
-        txt_sueldo.setText("");
-        tabla.clearSelection();
-        id = -1;
-}
-    private void btn_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nuevoActionPerformed
-     limpiar();
-     btn_Agregar.setEnabled(true);
-    }//GEN-LAST:event_btn_nuevoActionPerformed
-
     private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
-      if (!txt_nombre.getText().isEmpty() && !txt_sueldo.getText().isEmpty()) {
+        if (!txt_nombre.getText().isEmpty()) {
 
             String nombre = txt_nombre.getText();
-            Double sueldo = Double.valueOf(txt_sueldo.getText());
+            Double precio = Double.parseDouble(txt_precio.getText());
 
-            String mensaje = te.Agregar(nombre,sueldo);
+            String mensaje = th.agregar(nombre,precio);
 
             if (!mensaje.equals("")) {
                 JOptionPane.showMessageDialog(null, mensaje);
@@ -328,40 +273,48 @@ public void limpiar(){
         llenarTabla();
     }//GEN-LAST:event_btn_AgregarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Form_TipoEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Form_TipoEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Form_TipoEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Form_TipoEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
+        String codBusqueda = JOptionPane.showInputDialog("Ingrese el ID a buscar");
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Form_TipoEmpleado().setVisible(true);
+        TipoHabitacionDTO pgDTO = th.buscar(Integer.parseInt(codBusqueda));
+
+        if (pgDTO != null) {
+            id = Integer.parseInt(codBusqueda);
+            JOptionPane.showMessageDialog(null, "Registro encontrado");
+            txt_idTipo.setText(String.valueOf(id));
+            txt_nombre.setText(String.valueOf(pgDTO.getNombre()));
+            txt_precio.setText(String.valueOf(pgDTO.getPrecio()));
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Registro no encontrado");
+        }
+    }//GEN-LAST:event_btn_buscarActionPerformed
+
+    private void btn_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ActualizarActionPerformed
+        if (!txt_nombre.getText().isEmpty() && !txt_precio.getText().isEmpty()) {
+
+            String nombre = txt_nombre.getText();
+            Double precio = Double.parseDouble(txt_precio.getText());
+
+            String mensaje = th.actualizar(id, nombre, precio);
+
+            if (!mensaje.equals("")) {
+                JOptionPane.showMessageDialog(null, mensaje);
+
+            } else {
+                JOptionPane.showMessageDialog(null, mensaje);
             }
-        });
-    }
+        } else {
+            JOptionPane.showMessageDialog(null, "Error, uno o más campos vacios!");
+        }
+        llenarTabla();
+    }//GEN-LAST:event_btn_ActualizarActionPerformed
+
+    private void btn_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nuevoActionPerformed
+        limpiar();
+        btn_Agregar.setEnabled(true);
+    }//GEN-LAST:event_btn_nuevoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Actualizar;
@@ -376,6 +329,6 @@ public void limpiar(){
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txt_idTipo;
     private javax.swing.JTextField txt_nombre;
-    private javax.swing.JTextField txt_sueldo;
+    private javax.swing.JTextField txt_precio;
     // End of variables declaration//GEN-END:variables
 }
