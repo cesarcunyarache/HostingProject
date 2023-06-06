@@ -13,7 +13,7 @@ import javax.swing.UIManager;
 public class Login extends javax.swing.JFrame {
 
     Usuario user;
-  
+
     //mover ventana
     int xMouse, yMouse;
 
@@ -25,7 +25,6 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         difuminado.setBackground(new Color(15, 23, 42, 150));
         this.setLocationRelativeTo(null);
-       
 
     }
 
@@ -235,18 +234,19 @@ public class Login extends javax.swing.JFrame {
         char[] contraseñaArray = txtpass.getPassword();
         String contrasena = new String(contraseñaArray);
         
-        UsuarioDTO obj = user.ValidarUsuario(usuario, contrasena);
-        
-        if (obj != null) {
-            this.dispose();
-            EmpleadoDTO empleadoDTO = new EmpleadoDTO(obj.getEmpleadoID());
-//            NewJFrame2 ven2 = new NewJFrame2(empleadoDTO);
-            //ven2.setVisible(true);
-
+        if (usuario.matches("^[a-zA-Z0-9_]+$")) {
+            UsuarioDTO obj = user.ValidarUsuario(usuario, contrasena);
+            if (obj != null) {
+                this.dispose();
+                EmpleadoDTO empleadoDTO = new EmpleadoDTO(obj.getEmpleadoID());
+//              NewJFrame2 ven2 = new NewJFrame2(empleadoDTO);
+                //ven2.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Datos incorrectos");
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Datos incorrectos");
+            JOptionPane.showMessageDialog(null, "Error: valores admitidos [a-zA-Z0-9_]");
         }
-
 
     }//GEN-LAST:event_btnaccederActionPerformed
 
@@ -256,7 +256,7 @@ public class Login extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-         try {
+        try {
             UIManager.setLookAndFeel(new FlatArcIJTheme());
             //FlatLightFlatIJTheme.setup();
 
