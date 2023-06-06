@@ -190,40 +190,44 @@ public class Form_Cliente extends javax.swing.JPanel {
     private void btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BuscarActionPerformed
         String dni = JOptionPane.showInputDialog("Ingrese el DNI a buscar");
 
-        if (dni.matches("[0-9]*")) {
-            ClienteDTO clienteDTO = cliente.Buscar(0, dni);
+        if (!dni.equals("")) {
+            if (dni.matches("[0-9]*")) {
+                ClienteDTO clienteDTO = cliente.BuscarDNI(dni);
 
-            if (clienteDTO != null) {
-                txt_numDoc.setText(clienteDTO.getNumDocumento());
-                for (TipoDocumentoDTO tipoDocumentoDTO : combo) {
-                    if (tipoDocumentoDTO.getIdTipoDocumento() == clienteDTO.getTipoDocumentoID()) {
-                        modelo.setSelectedItem(tipoDocumentoDTO);
+                if (clienteDTO != null) {
+                    txt_numDoc.setText(clienteDTO.getNumDocumento());
+                    for (TipoDocumentoDTO tipoDocumentoDTO : combo) {
+                        if (tipoDocumentoDTO.getIdTipoDocumento() == clienteDTO.getTipoDocumentoID()) {
+                            modelo.setSelectedItem(tipoDocumentoDTO);
+                        }
                     }
+                    txt_nombres.setText(clienteDTO.getNombres());
+                    txt_apellidos.setText(clienteDTO.getApellidos());
+                    txt_telefono.setText(clienteDTO.getTelefono());
+                    txt_correo.setText(clienteDTO.getCorreo());
+                    txt_direccion.setText(clienteDTO.getDireccion());
+
+                    switch (clienteDTO.getGenero()) {
+                        case 'M' ->
+                            cbo_genero.setSelectedIndex(1);
+                        case 'F' ->
+                            cbo_genero.setSelectedIndex(2);
+                        default ->
+                            cbo_genero.setSelectedIndex(0);
+                    }
+
+                    cbo_nacionalidad.setSelectedItem(clienteDTO.getNacionalidad());
+                    id = clienteDTO.getIdCliente();
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Valor no encontrado");
                 }
-                txt_nombres.setText(clienteDTO.getNombres());
-                txt_apellidos.setText(clienteDTO.getApellidos());
-                txt_telefono.setText(clienteDTO.getTelefono());
-                txt_correo.setText(clienteDTO.getCorreo());
-                txt_direccion.setText(clienteDTO.getDireccion());
-
-                switch (clienteDTO.getGenero()) {
-                    case 'M' ->
-                        cbo_genero.setSelectedIndex(1);
-                    case 'F' ->
-                        cbo_genero.setSelectedIndex(2);
-                    default ->
-                        cbo_genero.setSelectedIndex(0);
-                }
-
-                cbo_nacionalidad.setSelectedItem(clienteDTO.getNacionalidad());
-
             } else {
-                JOptionPane.showMessageDialog(null, "Valor no encontrado");
+                JOptionPane.showMessageDialog(null, "Ingrese solo valores númericos");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Ingrese solo valores númericos");
+            JOptionPane.showMessageDialog(null, "Campo vacio");
         }
-
 
     }//GEN-LAST:event_btn_BuscarActionPerformed
 
@@ -246,7 +250,7 @@ public class Form_Cliente extends javax.swing.JPanel {
             String nacionaldad = cbo_nacionalidad.getSelectedItem().toString();
 
             String mensaje = cliente.Agregar(numDoc, tipoDoc, nombres, apellidos, telefono, nacionaldad, correo, direccion, genero.charAt(0));
-                JOptionPane.showMessageDialog(null, mensaje);
+            JOptionPane.showMessageDialog(null, mensaje);
 
         } else {
             JOptionPane.showMessageDialog(null, "Error, uno o más campos vacios!");
@@ -260,7 +264,7 @@ public class Form_Cliente extends javax.swing.JPanel {
         if (id == 0) {
             JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
         } else {
-            ClienteDTO clienteDTO = cliente.Buscar(id, "");
+            ClienteDTO clienteDTO = cliente.Buscar(id);
 
             if (clienteDTO != null) {
 
@@ -316,6 +320,7 @@ public class Form_Cliente extends javax.swing.JPanel {
             String mensaje = cliente.Actualizar(id, numDoc, tipoDoc, nombres, apellidos, telefono, nacionaldad, correo, direccion, genero.charAt(0));
 
             JOptionPane.showMessageDialog(null, mensaje);
+            id = 0;
 
         } else {
             JOptionPane.showMessageDialog(null, "Error, uno o más campos vacios!");

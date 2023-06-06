@@ -76,12 +76,13 @@ public class Usuario {
     }
     
     public UsuarioDTO BuscarActualizar(String user, int id) {
-        usuarioDTO = new UsuarioDTO(id, user);
+        UsuarioDTO usu = new UsuarioDTO(id, user);
+        UsuarioDTO obj = null;
         if (usuarioDAO.SearchUpadate(usuarioDTO) != null) {
-            return usuarioDAO.SearchUpadate(usuarioDTO);
-        } else {
-            return null;
-        }
+            obj = usuarioDAO.SearchUpadate(usu);
+        } 
+        
+        return obj;
     }
     
     

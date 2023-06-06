@@ -9,8 +9,7 @@ import java.util.ArrayList;
 public class UsuarioDAO implements Crud<UsuarioDTO> {
 
     private Conexion conexion;
-    private PreparedStatement ps;
-    private ResultSet rs;
+    
 
     public UsuarioDAO() {
         conexion = new Conexion();
@@ -20,6 +19,7 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
 
         int r = 0;
         try {
+            PreparedStatement ps = null;
             ps = conexion.getConnection().prepareStatement("INSERT INTO Usuario values(?,?,?,?) ");
 
             ps.setInt(1, t.getEmpleadoID());
@@ -41,6 +41,7 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
     public boolean Update(UsuarioDTO t) {
         int r = 0;
         try {
+            PreparedStatement ps = null;
             ps = conexion.getConnection().prepareStatement("UPDATE Usuario set idEmpleado=?,[user]=?,password=?,rol=?  WHERE idUsuario=? ");
             ps.setInt(1, t.getEmpleadoID());
             ps.setDouble(2, t.getIdUsuario());
@@ -63,6 +64,8 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
         List<UsuarioDTO> listaUsuarios = new ArrayList<>();
 
         try {
+            PreparedStatement ps = null;
+             ResultSet rs = null;
             ps = conexion.getConnection().prepareStatement("SELECT * FROM Usuario");
             rs = ps.executeQuery();
 
@@ -97,6 +100,8 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
         boolean encontrado = false;
 
         try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
             ps = conexion.getConnection().prepareStatement("SELECT * FROM Usuario WHERE idEmpleado=?");
             ps.setInt(1, t.getEmpleadoID());
             rs = ps.executeQuery();
@@ -131,6 +136,8 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
         boolean encontrado = false;
 
         try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
             ps = conexion.getConnection().prepareStatement("SELECT * FROM Usuario WHERE [user]=?");
             ps.setString(1, t.getUsuario());
             rs = ps.executeQuery();
@@ -165,6 +172,8 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
         boolean encontrado = false;
 
         try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
             ps = conexion.getConnection().prepareStatement("SELECT * FROM Usuario WHERE [user]=? AND NOT idUsuario =?");
             ps.setString(1, t.getUsuario());
             ps.setInt(2, t.getIdUsuario());
@@ -200,6 +209,8 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
         boolean encontrado = false;
 
         try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
             ps = conexion.getConnection().prepareStatement("SELECT * FROM Usuario WHERE [user]=? AND password=?");
             ps.setString(1, t.getUsuario());
             ps.setString(2, t.getContrasena());

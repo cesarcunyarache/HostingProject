@@ -183,8 +183,9 @@ public class Form_Organizacion extends javax.swing.JPanel {
                 txt_nombre.setText(org.getNombre());
                 txt_razon.setText(org.getRazonSocial());
                 txt_ruc.setText(org.getRuc());
-                txt_descripcion.append(org.getDescripcion());
+                txt_descripcion.setText(org.getDescripcion());
                 cbo_estado.setSelectedItem(org.getEstado());
+                id = org.getIdOrganizacion();
             } else {
                 JOptionPane.showMessageDialog(null, "No encontrado");
             }
@@ -204,7 +205,7 @@ public class Form_Organizacion extends javax.swing.JPanel {
                 txt_nombre.setText(org.getNombre());
                 txt_razon.setText(org.getRazonSocial());
                 txt_ruc.setText(org.getRuc());
-                txt_descripcion.append(org.getDescripcion());
+                txt_descripcion.setText(org.getDescripcion());
                 cbo_estado.setSelectedItem(org.getEstado());
             }
         } else {
@@ -214,7 +215,7 @@ public class Form_Organizacion extends javax.swing.JPanel {
 
     private void btn_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ActualizarActionPerformed
         if (!txt_nombre.getText().isEmpty() && !txt_razon.getText().isEmpty()
-                && txt_ruc.getText().isEmpty()) {
+                && !txt_ruc.getText().isEmpty()) {
 
             String nombre = txt_nombre.getText();
             String razon = txt_razon.getText();
@@ -224,11 +225,11 @@ public class Form_Organizacion extends javax.swing.JPanel {
 
             String mensaje = organizacion.Actualizar(id, nombre, razon, ruc, descripcion, estado);
 
-            JOptionPane.showMessageDialog(null, mensaje);
-            
+            JOptionPane.showMessageDialog(null, mensaje );
+            id = 0;
 
         } else {
-            JOptionPane.showMessageDialog(null, "ERROR : Uno o más campos vacios");
+            JOptionPane.showMessageDialog(null, "ERROR : Uno o más campos vacios HOLA");
         }
         
         llenarTabla();

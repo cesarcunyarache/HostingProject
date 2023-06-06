@@ -25,7 +25,7 @@ public class Form_Usuarios extends javax.swing.JPanel {
         usuario = new Usuario();
         empleado = new Empleado();
         enc = new Encriptado();
-        Disabled(false);
+        Disabled(true);
         df = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -33,6 +33,7 @@ public class Form_Usuarios extends javax.swing.JPanel {
             }
 
         };
+        tabla.setVisible(false);
 
     }
 
@@ -206,6 +207,7 @@ public class Form_Usuarios extends javax.swing.JPanel {
                                     if (var == null) {
                                         String mensaje = usuario.Agregar(obj.getIdEmpleado(), user, enc.ecnode(pass), rol);
                                         JOptionPane.showMessageDialog(null, mensaje);
+                                        limpiar();
                                     } else {
                                         JOptionPane.showMessageDialog(null, "El usuario ya existe");
                                     }
@@ -232,8 +234,11 @@ public class Form_Usuarios extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "Ingrese el DNI del Empleado");
         }
+        
+        
     }//GEN-LAST:event_btn_AgregarActionPerformed
 
+   
     private void txt_dniKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_dniKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!txt_dni.getText().isEmpty()) {
@@ -308,6 +313,7 @@ public class Form_Usuarios extends javax.swing.JPanel {
                                     if (var == null) {
                                         String mensaje = usuario.Actualizar(usr.getIdUsuario(), obj.getIdEmpleado(), user, enc.ecnode(pass), rol);
                                         JOptionPane.showMessageDialog(null, mensaje);
+                                         limpiar();
                                     } else {
                                         JOptionPane.showMessageDialog(null, "El usuario ya existe");
                                     }
@@ -334,6 +340,9 @@ public class Form_Usuarios extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "Ingrese el DNI del Empleado");
         }
+        
+       
+  
     }//GEN-LAST:event_btn_ActualizarActionPerformed
 
     public void Disabled(boolean var) {
@@ -373,6 +382,17 @@ public class Form_Usuarios extends javax.swing.JPanel {
             tabla.setModel(df);
 
         }
+    }
+    
+    
+    public void limpiar (){
+        txt_dni.setText("");
+        txt_nombre.setText("");
+        txt_user.setText("");
+        txt_pass.setText("");
+        txt_confi_pass.setText("");
+        cbo_rol.setSelectedIndex(0);
+     
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

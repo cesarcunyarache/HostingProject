@@ -12,7 +12,7 @@ import javax.swing.*;
 public class ClienteDAO implements Crud<ClienteDTO> {
 
     Conexion conexion;
-    ClienteDTO cliente;
+
 
     public ClienteDAO() {
         conexion = new Conexion();
@@ -22,6 +22,7 @@ public class ClienteDAO implements Crud<ClienteDTO> {
     public boolean Create(ClienteDTO cliente) {
         Connection con = conexion.getConnection();
         PreparedStatement ps = null;
+        
         try {
             ps = con.prepareStatement("INSERT INTO Cliente(numDoc, tipoDocumentoID, nombres, apellidos, telefono, nacionalidad, correo, direccion, genero) VALUES(?,?,?,?,?,?,?,?,?)");
 
@@ -60,7 +61,7 @@ public class ClienteDAO implements Crud<ClienteDTO> {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = conexion.getConnection();
-
+        ClienteDTO cliente;
         ArrayList<ClienteDTO> clientes = new ArrayList<>();
 
         try {
@@ -170,15 +171,55 @@ public class ClienteDAO implements Crud<ClienteDTO> {
         Connection con = conexion.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
+        ClienteDTO cliente = null;
 
         try {
-            if (clie.getIdCliente() == 0) {
-                ps = con.prepareStatement("SELECT * FROM Cliente WHERE numDoc=?");
-                ps.setString(1, clie.getNumDocumento());
-            } else {
-                ps = con.prepareStatement("SELECT * FROM Cliente WHERE idCliente=?");
-                ps.setInt(1, clie.getIdCliente());
+
+            ps = con.prepareStatement("SELECT * FROM Cliente WHERE idCliente=?");
+            ps.setInt(1, clie.getIdCliente());
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int id = rs.getInt("idCliente");
+                String numDoc = rs.getString("numDoc");
+                int tipoDocumentoID = rs.getInt("tipoDocumentoID");
+                String nombres = rs.getString("nombres");
+                String apellidos = rs.getString("apellidos");
+                String telefono = rs.getString("telefono");
+                String nacionalidad = rs.getString("nacionalidad");
+                String correo = rs.getString("correo");
+                String direccion = rs.getString("direccion");
+                String genero = rs.getString("genero");
+
+                cliente = new ClienteDTO(id, numDoc, tipoDocumentoID, nombres, apellidos, telefono, nacionalidad, correo, direccion, genero.charAt(0));
+
             }
+
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            try {
+                con.close();
+                ps.close();
+                rs.close();
+            } catch (SQLException ex) {
+                System.err.println(ex);
+            }
+        }
+
+        return cliente;
+    }
+
+    public ClienteDTO SearchDNI(ClienteDTO clie) {
+        Connection con = conexion.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ClienteDTO cliente = null;
+        try {
+
+            ps = con.prepareStatement("SELECT * FROM Cliente WHERE numDoc=?");
+            ps.setString(1, clie.getNumDocumento());
 
             rs = ps.executeQuery();
 

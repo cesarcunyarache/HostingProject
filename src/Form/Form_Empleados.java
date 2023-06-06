@@ -537,7 +537,8 @@ public class Form_Empleados extends javax.swing.JPanel {
                 && !txt_telefono.getText().isEmpty() && !txt_correo.getText().isEmpty()
                 && !txt_direccion.getText().isEmpty() && !cbo_genero1.getSelectedItem().equals("-Seleccione-")
                 && !cbo_tipoEmpleado.getSelectedItem().equals("-Seleccione-")
-                && !cbo_nacionalidad1.getSelectedItem().equals("-Seleccione-")) {
+                && !cbo_nacionalidad1.getSelectedItem().equals("-Seleccione-")
+                && !txt_apellidos1.getText().isEmpty()) {
 
             String nombres = txt_nombres.getText();
             String apellidos = txt_apellidos1.getText();
@@ -571,7 +572,7 @@ public class Form_Empleados extends javax.swing.JPanel {
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         id = (int) (tabla.getValueAt(tabla.getSelectedRow(), 0));
-        if (id == -1) {
+        if (id == 0) {
             JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
         } else {
             btn_nuevo.setEnabled(true);
@@ -625,7 +626,8 @@ public class Form_Empleados extends javax.swing.JPanel {
                 && !txt_telefono.getText().isEmpty() && !txt_correo.getText().isEmpty()
                 && !txt_direccion.getText().isEmpty() && !cbo_genero1.getSelectedItem().equals("-Seleccione-")
                 && !cbo_tipoEmpleado.getSelectedItem().equals("-Seleccione-")
-                && !cbo_nacionalidad1.getSelectedItem().equals("-Seleccione-")) {
+                && !cbo_nacionalidad1.getSelectedItem().equals("-Seleccione-")
+                && !txt_apellidos1.getText().isEmpty()) {
 
             String nombres = txt_nombres.getText();
             String apellidos = txt_apellidos1.getText();

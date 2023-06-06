@@ -13,6 +13,11 @@ public class ClienteDTO extends PersonaDTO {
         this.idCliente = idCliente;
     }
 
+    public ClienteDTO(String numDocumento) {
+        super(numDocumento);
+    }
+
+    
     public ClienteDTO(int idCliente, String numDocumento) {
         super(numDocumento);
         this.idCliente = idCliente;

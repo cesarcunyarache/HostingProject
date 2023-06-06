@@ -49,9 +49,23 @@ public class Cliente {
         return mensaje;
     }
 
-    public ClienteDTO Buscar(int id, String numDoc) {
-        ClienteDTO clienteDTO = new ClienteDTO(id, numDoc);
-        return clienteDAO.Search(clienteDTO);
+    public ClienteDTO Buscar(int id) {
+        ClienteDTO clienteDTO = new ClienteDTO(id);
+        ClienteDTO obj = null;
+        if (clienteDAO.Search(clienteDTO) != null) {
+            obj = clienteDAO.Search(clienteDTO);
+        }
+        return obj;
+    }
+
+    public ClienteDTO BuscarDNI(String numDoc) {
+        ClienteDTO clienteDTO = new ClienteDTO(numDoc);
+        ClienteDTO obj = null;
+        if (clienteDAO.SearchDNI(clienteDTO) != null) {
+            obj = clienteDAO.SearchDNI(clienteDTO);
+        }
+        return obj;
+
     }
 
 }

@@ -4,9 +4,12 @@ import java.sql.*;
 
 public class Conexion {
 
-    private String url = "jdbc:sqlserver://servergianca04.database.windows.net;databaseName=BDELEmperador;trustServerCertificate=true";
-    private String usuario = "gianca04";
-    private String password = "2004Febrero.";
+//    private String url = "jdbc:sqlserver://servergianca04.database.windows.net;databaseName=BDELEmperador;trustServerCertificate=true";
+//    private String usuario = "gianca04";
+//    private String password = "2004Febrero.";
+    private String url = "jdbc:sqlserver://localhost;databaseName=BDELEmperador;trustServerCertificate=true";
+    private String usuario = "sa";
+    private String password = "yourStrong(!)Password";
     private Connection conex;
 
     public Conexion() {

@@ -4,7 +4,6 @@ import BusinessObject.Usuario;
 import java.awt.Color;
 import Menu.NewJFrame2;
 import TransferObject.EmpleadoDTO;
-import TransferObject.Encriptado;
 import TransferObject.UsuarioDTO;
 import com.formdev.flatlaf.intellijthemes.FlatArcIJTheme;
 import javax.swing.JOptionPane;
@@ -27,6 +26,8 @@ public class Login extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
 
     }
+    
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -233,7 +234,7 @@ public class Login extends javax.swing.JFrame {
         String usuario = txtuser.getText();
         char[] contraseñaArray = txtpass.getPassword();
         String contrasena = new String(contraseñaArray);
-        
+
         if (usuario.matches("^[a-zA-Z0-9_]+$")) {
             UsuarioDTO obj = user.ValidarUsuario(usuario, contrasena);
             if (obj != null) {
