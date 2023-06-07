@@ -208,6 +208,7 @@ public class Form_Usuarios extends javax.swing.JPanel {
                                         String mensaje = usuario.Agregar(obj.getIdEmpleado(), user, enc.ecnode(pass), rol);
                                         JOptionPane.showMessageDialog(null, mensaje);
                                         limpiar();
+                                        obj = null;
                                     } else {
                                         JOptionPane.showMessageDialog(null, "El usuario ya existe");
                                     }
@@ -234,21 +235,22 @@ public class Form_Usuarios extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "Ingrese el DNI del Empleado");
         }
-        
-        
+
+
     }//GEN-LAST:event_btn_AgregarActionPerformed
 
-   
+
     private void txt_dniKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_dniKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!txt_dni.getText().isEmpty()) {
                 String dni = txt_dni.getText();
                 if (dni.matches("[0-9]*")) {
+
                     EmpleadoDTO empleadoDTO = empleado.buscarPorDNI(dni);
                     if (empleadoDTO != null) {
-                        obj = empleadoDTO;
                         Disabled(true);
-                        txt_nombre.setText(obj.getNombres() + " " + obj.getApellidos());
+                        obj = empleadoDTO;
+                        txt_nombre.setText(empleadoDTO.getNombres() + " " + empleadoDTO.getApellidos());
                     } else {
                         JOptionPane.showMessageDialog(null, "Empleado no encontrado");
                     }
@@ -270,6 +272,7 @@ public class Form_Usuarios extends javax.swing.JPanel {
                 if (empleadoDTO != null) {
                     UsuarioDTO us = usuario.Buscar(empleadoDTO.getIdEmpleado());
                     if (us != null) {
+                        obj = empleadoDTO;
                         txt_user.setText(us.getUsuario());
                         txt_pass.setText(enc.deecnode(us.getContrasena()));
                         txt_confi_pass.setText(enc.deecnode(us.getContrasena()));
@@ -310,10 +313,11 @@ public class Form_Usuarios extends javax.swing.JPanel {
                                 UsuarioDTO usr = usuario.Buscar(empleadoDTO.getIdEmpleado());
                                 if (usr != null) {
                                     UsuarioDTO var = usuario.BuscarActualizar(user, usr.getIdUsuario());
-                                    if (var == null) {
-                                        String mensaje = usuario.Actualizar(usr.getIdUsuario(), obj.getIdEmpleado(), user, enc.ecnode(pass), rol);
+                                    if (var.getUsuario() == null) {
+                                        String mensaje = usuario.Actualizar(usr.getIdUsuario(), usr.getEmpleadoID(), user, enc.ecnode(pass), rol);
                                         JOptionPane.showMessageDialog(null, mensaje);
-                                         limpiar();
+                                        obj = null;
+                                        limpiar();
                                     } else {
                                         JOptionPane.showMessageDialog(null, "El usuario ya existe");
                                     }
@@ -340,9 +344,8 @@ public class Form_Usuarios extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "Ingrese el DNI del Empleado");
         }
-        
-       
-  
+
+
     }//GEN-LAST:event_btn_ActualizarActionPerformed
 
     public void Disabled(boolean var) {
@@ -383,16 +386,15 @@ public class Form_Usuarios extends javax.swing.JPanel {
 
         }
     }
-    
-    
-    public void limpiar (){
+
+    public void limpiar() {
         txt_dni.setText("");
         txt_nombre.setText("");
         txt_user.setText("");
         txt_pass.setText("");
         txt_confi_pass.setText("");
         cbo_rol.setSelectedIndex(0);
-     
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

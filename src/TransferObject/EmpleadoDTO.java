@@ -70,4 +70,5 @@ public class EmpleadoDTO extends PersonaDTO {
         this.estado = estado;
     }
 
+
 }//end EmpleadoDTO

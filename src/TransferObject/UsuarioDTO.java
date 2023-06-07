@@ -94,4 +94,11 @@ public class UsuarioDTO {
         this.rol = rol;
     }
 
+    @Override
+    public String toString() {
+        return "UsuarioDTO{" + "idUsuario=" + idUsuario + ", empleadoID=" + empleadoID + ", usuario=" + usuario + ", contrasena=" + contrasena + ", rol=" + rol + '}';
+    }
+    
+    
+
 }//end UsuarioDTO

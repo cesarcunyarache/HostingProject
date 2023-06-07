@@ -37,8 +37,8 @@ public class Usuario {
 
     public String Actualizar(int idUsuario, int idEmpleado, String user, String password, String rol) {
         String mensaje = "";
-        usuarioDTO = new UsuarioDTO(idUsuario, idEmpleado, user, mensaje, rol);
-        if (usuarioDAO.Update(usuarioDTO)) {
+        boolean isUpdate = usuarioDAO.Update(new UsuarioDTO(idUsuario, idEmpleado, user, password, rol));
+        if (isUpdate) {
             mensaje = "El registro se actualizo existosamente";
         } else {
             mensaje = "ERROR: El registro no se pudo actualizar";
@@ -78,7 +78,7 @@ public class Usuario {
     public UsuarioDTO BuscarActualizar(String user, int id) {
         UsuarioDTO usu = new UsuarioDTO(id, user);
         UsuarioDTO obj = null;
-        if (usuarioDAO.SearchUpadate(usuarioDTO) != null) {
+        if (usuarioDAO.SearchUpadate(usu) != null) {
             obj = usuarioDAO.SearchUpadate(usu);
         } 
         

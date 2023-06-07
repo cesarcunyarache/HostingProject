@@ -63,27 +63,29 @@ public class Empleado {
     }
 
     public EmpleadoDTO buscarPorDNI(String dni) {
-        empleadoDTO = empleadoDAO.SearchDNI(new EmpleadoDTO(dni));
-        if (empleadoDTO != null) {
-            return empleadoDTO;
+
+        EmpleadoDTO nue = null;
+        nue = empleadoDAO.SearchDNI(new EmpleadoDTO(dni));
+        if (nue != null) {
+            return nue;
         } else {
             return null;
         }
     }
 
-    public String actualizar(int idEmpleado, 
-            int tipoEmpleadoID, 
+    public String actualizar(int idEmpleado,
+            int tipoEmpleadoID,
             String nombre,
             String apellido,
             String telefono,
-            String correo, 
+            String correo,
             String direccion,
             Byte edad,
-            String nacionalidad, 
-            char genero, 
-            String numDoc, 
+            String nacionalidad,
+            char genero,
+            String numDoc,
             int estado) {
-        
+
         String mensaje = "";
         empleadoDTO = new EmpleadoDTO(idEmpleado, tipoEmpleadoID, estado, nombre, apellido, telefono, correo, direccion, edad, nacionalidad, genero, numDoc);
         if (empleadoDAO.Update(empleadoDTO)) {

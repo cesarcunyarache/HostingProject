@@ -5,6 +5,7 @@ import TransferObject.UsuarioDTO;
 import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
+import javax.xml.transform.sax.SAXSource;
 
 public class UsuarioDAO implements Crud<UsuarioDTO> {
 
@@ -39,24 +40,28 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
 
     @Override
     public boolean Update(UsuarioDTO t) {
-        int r = 0;
+        Connection con = conexion.getConnection();
+        boolean isUpdate = false;
         try {
             PreparedStatement ps = null;
-            ps = conexion.getConnection().prepareStatement("UPDATE Usuario set idEmpleado=?,[user]=?,password=?,rol=?  WHERE idUsuario=? ");
+            ps = con.prepareStatement("UPDATE Usuario SET idEmpleado=?,[user]=?,password=?,rol=?  WHERE idUsuario="+t.getIdUsuario());
             ps.setInt(1, t.getEmpleadoID());
-            ps.setDouble(2, t.getIdUsuario());
+            ps.setString(2, t.getUsuario());
             ps.setString(3, t.getContrasena());
             ps.setString(4, t.getRol());
-            ps.setInt(5, t.getIdUsuario());
-
-            r = ps.executeUpdate();
-            return r == 1;
+           
+            int res = ps.executeUpdate();
+            if (res > 0) {
+                isUpdate = true;
+            }
         } catch (SQLException ex) {
-
-            return false;
+            System.out.println(ex);
+         
         } finally {
             conexion.desconectar();
         }
+        
+        return isUpdate;
     }
 
     @Override
@@ -65,7 +70,7 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
 
         try {
             PreparedStatement ps = null;
-             ResultSet rs = null;
+            ResultSet rs = null;
             ps = conexion.getConnection().prepareStatement("SELECT * FROM Usuario");
             rs = ps.executeQuery();
 
@@ -133,7 +138,7 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
     }
 
     public UsuarioDTO SearchUser(UsuarioDTO t) {
-        boolean encontrado = false;
+        UsuarioDTO obj = null;
 
         try {
             PreparedStatement ps = null;
@@ -143,65 +148,62 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
             rs = ps.executeQuery();
 
             //registros por leer
-            while (rs.next()) {
+            if (rs.next()) {
 
-                t.setIdUsuario(rs.getInt(1));
-                t.setEmpleadoID(rs.getInt(2));
-                t.setUsuario(rs.getString(3));
-                t.setContrasena(rs.getString(4));
-                t.setRol(rs.getString(5));
+                int id = rs.getInt(1);
+                int idEmpleado = rs.getInt(2);
+                String usuario = rs.getString(3);
+                String contraseña = rs.getString(4);
+                String rol = rs.getString(5);
+                
+                obj = new UsuarioDTO(id, idEmpleado, usuario, contraseña, rol);
 
-                encontrado = true;
+               
             }
 
-            if (encontrado) {
-                return t;
-            } else {
-                return null;
-            }
+            
         } catch (SQLException ex) {
-            return null;
+            
 
         } finally {
             conexion.desconectar();
         }
+        return obj;
 
     }
 
     public UsuarioDTO SearchUpadate(UsuarioDTO t) {
-        boolean encontrado = false;
+       UsuarioDTO obj = new UsuarioDTO();
 
         try {
             PreparedStatement ps = null;
             ResultSet rs = null;
+            
             ps = conexion.getConnection().prepareStatement("SELECT * FROM Usuario WHERE [user]=? AND NOT idUsuario =?");
             ps.setString(1, t.getUsuario());
             ps.setInt(2, t.getIdUsuario());
             rs = ps.executeQuery();
 
             //registros por leer
-            while (rs.next()) {
+            if (rs.next()) {
 
-                t.setIdUsuario(rs.getInt(1));
-                t.setEmpleadoID(rs.getInt(2));
-                t.setUsuario(rs.getString(3));
-                t.setContrasena(rs.getString(4));
-                t.setRol(rs.getString(5));
+                obj.setIdUsuario(rs.getInt(1));
+                obj.setEmpleadoID(rs.getInt(2));
+                obj.setUsuario(rs.getString(3));
+                obj.setContrasena(rs.getString(4));
+                obj.setRol(rs.getString(5));
 
-                encontrado = true;
+               
             }
 
-            if (encontrado) {
-                return t;
-            } else {
-                return null;
-            }
+            
         } catch (SQLException ex) {
             return null;
 
         } finally {
             conexion.desconectar();
         }
+        return obj;
 
     }
 

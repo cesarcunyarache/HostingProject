@@ -5,12 +5,12 @@ import TransferObject.EmpleadoDTO;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class EmpleadoDAO implements Crud<EmpleadoDTO> {
 
     private Conexion conexion;
-    private PreparedStatement ps;
-    private ResultSet rs;
+    
 
     public EmpleadoDAO() {
         conexion = new Conexion();
@@ -20,6 +20,8 @@ public class EmpleadoDAO implements Crud<EmpleadoDTO> {
     public boolean Create(EmpleadoDTO t) {
         int r = 0;
         try {
+             PreparedStatement ps = null;
+           
             ps = conexion.getConnection().prepareStatement(
                     "INSERT INTO Empleado("
                     + "nombre"
@@ -59,6 +61,7 @@ public class EmpleadoDAO implements Crud<EmpleadoDTO> {
     public boolean Update(EmpleadoDTO t) {
         int r = 0;
         try {
+             PreparedStatement ps = null;
             ps = conexion.getConnection().prepareStatement(
                     "UPDATE Empleado set "
                     + "nombre=?"
@@ -102,6 +105,8 @@ public class EmpleadoDAO implements Crud<EmpleadoDTO> {
         List<EmpleadoDTO> listaHabitacion = new ArrayList<>();
 
         try {
+             PreparedStatement ps = null;
+             ResultSet rs = null;
             ps = conexion.getConnection().prepareStatement("SELECT * FROM Empleado");
             rs = ps.executeQuery();
 
@@ -144,6 +149,9 @@ public class EmpleadoDAO implements Crud<EmpleadoDTO> {
         boolean encontrado = false;
 
         try {
+            
+            PreparedStatement ps = null;
+            ResultSet rs = null;
             ps = conexion.getConnection().prepareStatement("SELECT * FROM Empleado WHERE idEmpleado=?");
             ps.setInt(1, t.getIdEmpleado());
             rs = ps.executeQuery();
@@ -181,43 +189,40 @@ public class EmpleadoDAO implements Crud<EmpleadoDTO> {
     }
 
     public EmpleadoDTO SearchDNI(EmpleadoDTO t) {
-        boolean encontrado = false;
-
+        Connection con = conexion.getConnection();
+        EmpleadoDTO objeto = new EmpleadoDTO();
         try {
-            ps = conexion.getConnection().prepareStatement("SELECT * FROM Empleado WHERE dni=?");
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            ps = con.prepareStatement("SELECT * FROM Empleado WHERE dni=?");
             ps.setString(1, t.getNumDocumento());
             rs = ps.executeQuery();
 
             //registros por leer
-            while (rs.next()) {
+           if (rs.next()) {
+                objeto.setIdEmpleado(rs.getInt("idEmpleado"));
+                objeto.setNombres(rs.getString("nombre"));
+                objeto.setApellidos(rs.getString("apellido"));
+                objeto.setTelefono(rs.getString("telefono"));
+                objeto.setCorreo(rs.getString("correo"));
+                objeto.setDireccion(rs.getString("direccion"));
+                objeto.setEdad(rs.getInt("edad"));
+                objeto.setNacionalidad(rs.getString("nacionalidad"));
+                objeto.setGenero(rs.getString("genero").charAt(0));
+                objeto.setNumDocumento(rs.getString("dni"));
+                objeto.setTipoEmpleadoID(rs.getInt("idTipo"));
+                objeto.setEstado(rs.getInt("estado"));
+               
+            } 
 
-                t.setIdEmpleado(rs.getInt(1));
-                t.setNombres(rs.getString(2));
-                t.setApellidos(rs.getString(3));
-                t.setTelefono(rs.getString(4));
-                t.setCorreo(rs.getString(5));
-                t.setDireccion(rs.getString(6));
-                t.setEdad(rs.getInt(7));
-                t.setNacionalidad(rs.getString(8));
-                t.setGenero(rs.getString(9).charAt(0));
-                t.setNumDocumento(rs.getString(10));
-                t.setTipoEmpleadoID(rs.getInt(11));
-                t.setEstado(rs.getInt(12));
-
-                encontrado = true;
-            }
-
-            if (encontrado) {
-                return t;
-            } else {
-                return null;
-            }
+            
         } catch (SQLException ex) {
-            return null;
+            System.out.println(ex);
 
         } finally {
             conexion.desconectar();
         }
+        return objeto;
     }
 
     public List<EmpleadoDTO> SearchNames(EmpleadoDTO t) {
@@ -225,6 +230,8 @@ public class EmpleadoDAO implements Crud<EmpleadoDTO> {
         List<EmpleadoDTO> listaEmpleados = new ArrayList<>();
 
         try {
+            PreparedStatement ps = null;
+             ResultSet rs = null;
             ps = conexion.getConnection().prepareStatement("SELECT * FROM Empleado WHERE nombre=?");
             ps.setString(1, t.getNombres());
             rs = ps.executeQuery();
