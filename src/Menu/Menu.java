@@ -1,5 +1,6 @@
 package Menu;
 
+
 import Form.Form_Cliente;
 import Form.Form_Empleados;
 import Form.Form_Habitaciones;
@@ -144,7 +145,7 @@ public class Menu extends javax.swing.JPanel {
                 } else if (index == 7){
                     showForm(usuario);
                 } else if (index == 8){
-                    
+                  
                 } else if (index == 9){
                     
                 }
@@ -262,6 +263,7 @@ public class Menu extends javax.swing.JPanel {
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
+        //fondo de menu 
         GradientPaint gra = new GradientPaint(0, 0, Color.decode("#E4E4E4"), 0, getHeight(), Color.decode("#E4E4E4"));
         g2.setPaint(gra);
         g2.fillRect(0, 0, getWidth(), getHeight());
