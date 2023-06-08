@@ -239,24 +239,29 @@ public class Form_Cliente extends javax.swing.JPanel {
                 && !cbo_tipoDoc.getSelectedItem().equals("")) {
 
             String numDoc = txt_numDoc.getText();
-            TipoDocumentoDTO var = (TipoDocumentoDTO) cbo_tipoDoc.getSelectedItem();
-            int tipoDoc = var.getIdTipoDocumento();
-            String nombres = txt_nombres.getText();
-            String apellidos = txt_apellidos.getText();
-            String telefono = txt_telefono.getText();
-            String correo = txt_correo.getText();
-            String direccion = txt_direccion.getText();
-            String genero = cbo_genero.getSelectedItem().toString();
-            String nacionaldad = cbo_nacionalidad.getSelectedItem().toString();
+            if (numDoc.matches("[0-9]*")) {
+                TipoDocumentoDTO var = (TipoDocumentoDTO) cbo_tipoDoc.getSelectedItem();
+                int tipoDoc = var.getIdTipoDocumento();
+                String nombres = txt_nombres.getText();
+                String apellidos = txt_apellidos.getText();
+                String telefono = txt_telefono.getText();
+                String correo = txt_correo.getText();
+                String direccion = txt_direccion.getText();
+                String genero = cbo_genero.getSelectedItem().toString();
+                String nacionaldad = cbo_nacionalidad.getSelectedItem().toString();
 
-            String mensaje = cliente.Agregar(numDoc, tipoDoc, nombres, apellidos, telefono, nacionaldad, correo, direccion, genero.charAt(0));
-            JOptionPane.showMessageDialog(null, mensaje);
+                String mensaje = cliente.Agregar(numDoc, tipoDoc, nombres, apellidos, telefono, nacionaldad, correo, direccion, genero.charAt(0));
+                JOptionPane.showMessageDialog(null, mensaje);
+                llenarTabla();
+                limpiar();
+            }else {
+                JOptionPane.showMessageDialog(null, "Error, solo ingresa valores númericos");
+            }
 
         } else {
             JOptionPane.showMessageDialog(null, "Error, uno o más campos vacios!");
         }
-        llenarTabla();
-        limpiar();
+
     }//GEN-LAST:event_btn_AgregarActionPerformed
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked

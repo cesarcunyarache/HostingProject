@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 public class EmpleadoDAO implements Crud<EmpleadoDTO> {
 
     private Conexion conexion;
-    
 
     public EmpleadoDAO() {
         conexion = new Conexion();

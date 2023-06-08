@@ -125,6 +125,7 @@ public class Menu extends javax.swing.JPanel {
             }
         });
 
+        // agregar evento al menu
         setEvent(new EventMenuSelected() {
             @Override
             public void selected(int index) {
@@ -151,7 +152,7 @@ public class Menu extends javax.swing.JPanel {
                 }
             }
         });
-
+        // agrega menus
         addMenu(new ModelMenu("Home", new ImageIcon(getClass().getResource("/Image/home.png"))));
         addMenu(new ModelMenu("Habitaciones", new ImageIcon(getClass().getResource("/Image/habitacion.png"))));
         addMenu(new ModelMenu("Reservas", new ImageIcon(getClass().getResource("/Image/reserva.png"))));
