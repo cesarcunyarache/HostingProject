@@ -58,6 +58,10 @@ public class Form_Organizacion extends javax.swing.JPanel {
         tabla = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel49 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtNumDoc = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtNom = new javax.swing.JTextField();
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -136,15 +140,23 @@ public class Form_Organizacion extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tabla);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 530, 710, 240));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 520, 680, 220));
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 30, 30, 740));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 30, 30, 740));
 
         jLabel49.setFont(new java.awt.Font("Roboto", 1, 30)); // NOI18N
         jLabel49.setText("Información de organizaciones");
         jPanel1.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
+
+        jLabel6.setText("Número de documeto");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 50, -1, -1));
+        jPanel1.add(txtNumDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 70, 240, 30));
+
+        jLabel7.setText("Nombres y apeliidos");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 130, -1, -1));
+        jPanel1.add(txtNom, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 150, 230, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -269,11 +281,15 @@ public class Form_Organizacion extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable tabla;
+    private javax.swing.JTextField txtNom;
+    private javax.swing.JTextField txtNumDoc;
     private javax.swing.JTextArea txt_descripcion;
     private javax.swing.JTextField txt_nombre;
     private javax.swing.JTextField txt_razon;
