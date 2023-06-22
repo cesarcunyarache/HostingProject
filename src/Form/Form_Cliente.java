@@ -5,6 +5,7 @@ import BusinessObject.TipoDocumento;
 import TransferObject.ClienteDTO;
 import TransferObject.TipoDocumentoDTO;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -50,6 +51,7 @@ public class Form_Cliente extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txt_numDoc = new javax.swing.JTextField();
@@ -74,7 +76,15 @@ public class Form_Cliente extends javax.swing.JPanel {
         btn_Agregar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        rbCorreo = new javax.swing.JRadioButton();
+        rbDni = new javax.swing.JRadioButton();
+        rbTelefono = new javax.swing.JRadioButton();
+        rbApellidos = new javax.swing.JRadioButton();
+        rbNombre = new javax.swing.JRadioButton();
+        txtBusqueda = new javax.swing.JTextField();
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel1MouseClicked(evt);
@@ -83,17 +93,17 @@ public class Form_Cliente extends javax.swing.JPanel {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Número de documento");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, -1, -1));
 
         txt_numDoc.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_numDocKeyTyped(evt);
             }
         });
-        jPanel1.add(txt_numDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, 210, 30));
+        jPanel1.add(txt_numDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 210, 30));
 
         jLabel2.setText("Tipo de documento");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, -1, -1));
 
         cbo_tipoDoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Seleccione-", "DNI", "Pasaporte" }));
         cbo_tipoDoc.setToolTipText("");
@@ -102,45 +112,45 @@ public class Form_Cliente extends javax.swing.JPanel {
                 cbo_tipoDocItemStateChanged(evt);
             }
         });
-        jPanel1.add(cbo_tipoDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 210, -1));
-        jPanel1.add(txt_nombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 210, 30));
+        jPanel1.add(cbo_tipoDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 210, -1));
+        jPanel1.add(txt_nombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, 210, 30));
 
         jLabel3.setText("Nombres");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
-        jPanel1.add(txt_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, 210, 30));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, -1, -1));
+        jPanel1.add(txt_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 150, 210, 30));
 
         jLabel4.setText("Apellidos");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, -1, -1));
 
         txt_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_telefonoKeyTyped(evt);
             }
         });
-        jPanel1.add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 210, 30));
+        jPanel1.add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, 210, 30));
 
         jLabel5.setText("Telefono");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, -1, -1));
 
         jLabel6.setText("Nacionalidad");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 280, -1, -1));
 
         cbo_nacionalidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Afganistán", "Albania", "Alemania", "Andorra", "Angola", "Antigua y Barbuda", "Arabia Saudita", "Argelia", "Argentina", "Armenia", "Australia", "Austria", "Azerbaiyán", "Bahamas", "Bangladés", "Barbados", "Baréin", "Bélgica", "Belice", "Benín", "Bielorrusia", "Birmania", "Bolivia", "Bosnia y Herzegovina", "Botsuana", "Brasil", "Brunéi", "Bulgaria", "Burkina Faso", "Burundi", "Bután", "Cabo Verde", "Camboya", "Camerún", "Canadá", "Catar", "Chad", "Chile", "China", "Chipre", "Ciudad del Vaticano", "Colombia", "Comoras", "Corea del Norte", "Corea del Sur", "Costa de Marfil", "Costa Rica", "Croacia", "Cuba", "Dinamarca", "Dominica", "Ecuador", "Egipto", "El Salvador", "Emiratos Árabes Unidos", "Eritrea", "Eslovaquia", "Eslovenia", "España", "Estados Unidos", "Estonia", "Etiopía", "Filipinas", "Finlandia", "Fiyi", "Francia", "Gabón", "Gambia", "Georgia", "Ghana", "Granada", "Grecia", "Guatemala", "Guyana", "Guinea", "Guinea ecuatorial", "Guinea-Bisáu", "Haití", "Honduras", "Hungría", "India", "Indonesia", "Irak", "Irán", "Irlanda", "Islandia", "Islas Marshall", "Islas Salomón", "Israel", "Italia", "Jamaica", "Japón", "Jordania", "Kazajistán", "Kenia", "Kirguistán", "Kiribati", "Kuwait", "Laos", "Lesoto", "Letonia", "Líbano", "Liberia", "Libia", "Liechtenstein", "Lituania", "Luxemburgo", "Macedonia del Norte", "Madagascar", "Malasia", "Malaui", "Maldivas", "Malí", "Malta", "Marruecos", "Mauricio", "Mauritania", "México", "Micronesia", "Moldavia", "Mónaco", "Mongolia", "Montenegro", "Mozambique", "Namibia", "Nauru", "Nepal", "Nicaragua", "Níger", "Nigeria", "Noruega", "Nueva Zelanda", "Omán", "Países Bajos", "Pakistán", "Palaos", "Panamá", "Papúa Nueva Guinea", "Paraguay", "Perú", "Polonia", "Portugal", "Reino Unido", "República Centroafricana", "República Checa", "República del Congo", "República Democrática del Congo", "República Dominicana", "Ruanda", "Rumanía", "Rusia", "Samoa", "San Cristóbal y Nieves", "San Marino", "San Vicente y las Granadinas", "Santa Lucía", "Santo Tomé y Príncipe", "Senegal", "Serbia", "Seychelles", "Sierra Leona", "Singapur", "Siria", "Somalia", "Sri Lanka", "Suazilandia", "Sudáfrica", "Sudán", "Sudán del Sur", "Suecia", "Suiza", "Surinam", "Tailandia", "Tanzania", "Tayikistán", "Timor Oriental", "Togo", "Tonga", "Trinidad y Tobago", "Túnez", "Turkmenistán", "Turquía", "Tuvalu", "Ucrania", "Uganda", "Uruguay", "Uzbekistán", "Vanuatu", "Venezuela", "Vietnam", "Yemen", "Yibuti", "Zambia", "Zimbabue" }));
-        jPanel1.add(cbo_nacionalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, 210, -1));
-        jPanel1.add(txt_correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, 210, 30));
+        jPanel1.add(cbo_nacionalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 300, 210, 30));
+        jPanel1.add(txt_correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 230, 210, 30));
 
         jLabel7.setText("Correo");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 180, -1, -1));
-        jPanel1.add(txt_direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 200, 210, 30));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 210, -1, -1));
+        jPanel1.add(txt_direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, 200, 30));
 
         jLabel8.setText("Dirección");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 180, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, -1, -1));
 
         jLabel9.setText("Género");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, -1, -1));
 
         cbo_genero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Seleccione-", "Masculino", "Femenino" }));
-        jPanel1.add(cbo_genero, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 210, -1));
+        jPanel1.add(cbo_genero, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 300, 210, 30));
 
         btn_Actualizar.setText("Actualizar");
         btn_Actualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -148,7 +158,7 @@ public class Form_Cliente extends javax.swing.JPanel {
                 btn_ActualizarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 360, 120, -1));
+        jPanel1.add(btn_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 370, 120, 30));
 
         btn_Buscar.setText("Buscar");
         btn_Buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -156,7 +166,7 @@ public class Form_Cliente extends javax.swing.JPanel {
                 btn_BuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, 120, -1));
+        jPanel1.add(btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, 120, 30));
 
         btn_Agregar.setText("Agregar");
         btn_Agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -164,7 +174,7 @@ public class Form_Cliente extends javax.swing.JPanel {
                 btn_AgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 120, -1));
+        jPanel1.add(btn_Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 120, 30));
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -184,23 +194,85 @@ public class Form_Cliente extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tabla);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, 770, 270));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, 860, 270));
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Busqueda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+
+        buttonGroup1.add(rbCorreo);
+        rbCorreo.setText("Correo");
+
+        buttonGroup1.add(rbDni);
+        rbDni.setText("Dni");
+
+        buttonGroup1.add(rbTelefono);
+        rbTelefono.setText("Telefono");
+
+        buttonGroup1.add(rbApellidos);
+        rbApellidos.setText("Apellidos");
+
+        buttonGroup1.add(rbNombre);
+        rbNombre.setText("Nombres");
+
+        txtBusqueda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBusquedaActionPerformed(evt);
+            }
+        });
+        txtBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBusquedaKeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rbTelefono)
+                            .addComponent(rbNombre)
+                            .addComponent(rbDni)
+                            .addComponent(rbCorreo)
+                            .addComponent(rbApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(rbNombre)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rbApellidos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rbTelefono)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rbDni)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rbCorreo)
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 140, -1, 270));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 875, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1112, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -400,12 +472,95 @@ public class Form_Cliente extends javax.swing.JPanel {
         txt_numDoc.setText("");
     }//GEN-LAST:event_cbo_tipoDocItemStateChanged
 
-    public void llenarTabla() {
+    private void txtBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusquedaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBusquedaActionPerformed
+  private void limpiarTabla() {
+        df = (DefaultTableModel) tabla.getModel();
+        df.getDataVector().removeAllElements();
+        tabla.removeAll();
+    }
+
+    private void asignarFilaDeDatos(DefaultTableModel modelo, Object[] datos, ClienteDTO c) {
+
+        datos[0] = c.getIdCliente();
+        datos[1] = c.getNumDocumento();
+        datos[2] = c.getTipoDocumentoID();
+        datos[3] = c.getNombres();
+        datos[4] = c.getApellidos();
+        datos[5] = c.getTelefono();
+        datos[6] = c.getNacionalidad();
+        datos[7] = c.getCorreo();
+        datos[8] = c.getDireccion();
+        datos[9] = c.getGenero();
+
+        modelo.addRow(datos);
+    }
+    private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
+        try {
+
+            if (!txtBusqueda.getText().isEmpty()) {
+                limpiarTabla();
+
+                df = (DefaultTableModel) tabla.getModel();
+                Object[] ob = new Object[10];
+                if (rbNombre.isSelected()) {
+                    List<ClienteDTO> listaCliente = cliente.buscarPorNombre(txtBusqueda.getText());
+                    if (listaCliente != null) {
+                        for (ClienteDTO c : listaCliente) {
+                            asignarFilaDeDatos(df, ob, c);
+                        }
+                    }
+                } else if (rbApellidos.isSelected()) {
+                    List<ClienteDTO> listaCliente = cliente.buscarPorApellido(txtBusqueda.getText());
+                    if (listaCliente != null) {
+                        for (ClienteDTO c : listaCliente) {
+                            asignarFilaDeDatos(df, ob, c);
+                        }
+
+                    }
+                } else if (rbTelefono.isSelected()) {
+                    List<ClienteDTO> listaCliente = cliente.buscarPorTelefono(txtBusqueda.getText());
+                    if (listaCliente != null) {
+                        for (ClienteDTO c : listaCliente) {
+                            asignarFilaDeDatos(df, ob, c);
+                        }
+                    }
+                } else if (rbDni.isSelected()) {
+                    List<ClienteDTO> listaCliente = cliente.buscarPorDniFiltro(txtBusqueda.getText());
+                    if (listaCliente != null) {
+                        for (ClienteDTO c : listaCliente) {
+                            asignarFilaDeDatos(df, ob, c);
+                        }
+                    }
+                } else if (rbCorreo.isSelected()) {
+                    List<ClienteDTO> listaCliente = cliente.buscarPorCorreo(txtBusqueda.getText());
+                    if (listaCliente != null) {
+                        for (ClienteDTO c : listaCliente) {
+                            asignarFilaDeDatos(df, ob, c);
+                        }
+                    }
+                } else {
+
+                    limpiarTabla();
+                }
+                tabla.setModel(df);
+
+            } else {
+
+                llenarTabla();
+
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_txtBusquedaKeyReleased
+
+      public void llenarTabla() {
 
         df.setColumnCount(0);
         df.setRowCount(0);
 
-        String[] cabezera = {"#", "N° de documento", "Nombres", "Apellidos", "Telefono", "Género", "Correo"};
+        String[] cabezera = {"#", "N° de documento", "Tipo Doc", "Nombres", "Apellidos", "Telefono", "Nacionalidad", "Correo", "Direccion", "Género"};
         df.setColumnIdentifiers(cabezera);
 
         Object[] datos = new Object[df.getColumnCount()];
@@ -419,11 +574,14 @@ public class Form_Cliente extends javax.swing.JPanel {
 
                 datos[0] = c.getIdCliente();
                 datos[1] = c.getNumDocumento();
-                datos[2] = c.getNombres();
-                datos[3] = c.getApellidos();
-                datos[4] = c.getTelefono();
-                datos[5] = c.getGenero();
-                datos[6] = c.getCorreo();
+                datos[2] = c.getTipoDocumentoID();
+                datos[3] = c.getNombres();
+                datos[4] = c.getApellidos();
+                datos[5] = c.getTelefono();
+                datos[6] = c.getNacionalidad();
+                datos[7] = c.getCorreo();
+                datos[8] = c.getDireccion();
+                datos[9] = c.getGenero();
 
                 df.addRow(datos);
             }
@@ -462,6 +620,7 @@ public class Form_Cliente extends javax.swing.JPanel {
     private javax.swing.JButton btn_Actualizar;
     private javax.swing.JButton btn_Agregar;
     private javax.swing.JButton btn_Buscar;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbo_genero;
     private javax.swing.JComboBox<String> cbo_nacionalidad;
     private javax.swing.JComboBox<String> cbo_tipoDoc;
@@ -475,8 +634,15 @@ public class Form_Cliente extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton rbApellidos;
+    private javax.swing.JRadioButton rbCorreo;
+    private javax.swing.JRadioButton rbDni;
+    private javax.swing.JRadioButton rbNombre;
+    private javax.swing.JRadioButton rbTelefono;
     private javax.swing.JTable tabla;
+    private javax.swing.JTextField txtBusqueda;
     private javax.swing.JTextField txt_apellidos;
     private javax.swing.JTextField txt_correo;
     private javax.swing.JTextField txt_direccion;

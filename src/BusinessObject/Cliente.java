@@ -66,4 +66,55 @@ public class Cliente {
         }
         return obj;
     }
+
+    public List<ClienteDTO> buscarPorDniFiltro(String dni) {
+        ClienteDTO cli = new ClienteDTO();
+        cli.setNumDocumento(dni);
+        if (clienteDAO.buscarDniFiltro(cli) != null) {
+            return clienteDAO.buscarDniFiltro(cli);
+        } else {
+            return null;
+        }
+    }
+
+    public List<ClienteDTO> buscarPorCorreo(String correo) {
+        ClienteDTO cli = new ClienteDTO();
+        cli.setCorreo(correo);
+        if (clienteDAO.buscarCorreo(cli) != null) {
+            return clienteDAO.buscarCorreo(cli);
+        } else {
+            return null;
+        }
+    }
+
+    public List<ClienteDTO> buscarPorNombre(String nombre) {
+        ClienteDTO cli = new ClienteDTO();
+        cli.setNombres(nombre);
+        if (clienteDAO.buscarNombres(cli) != null) {
+            return clienteDAO.buscarNombres(cli);
+        } else {
+            return null;
+        }
+    }
+
+    public List<ClienteDTO> buscarPorApellido(String apellidos) {
+        ClienteDTO cli = new ClienteDTO();
+        cli.setApellidos(apellidos);
+        if (clienteDAO.buscarApellidos(cli) != null) {
+            return clienteDAO.buscarApellidos(cli);
+        } else {
+            return null;
+        }
+    }
+
+    public List<ClienteDTO> buscarPorTelefono(String telefono) {
+        ClienteDTO cli = new ClienteDTO();
+        cli.setTelefono(telefono);
+        if (clienteDAO.buscarTelefono(cli) != null) {
+            return clienteDAO.buscarTelefono(cli);
+        } else {
+            return null;
+        }
+
+    }
 }

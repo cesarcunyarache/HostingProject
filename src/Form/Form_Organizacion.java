@@ -63,26 +63,31 @@ public class Form_Organizacion extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         txtNom = new javax.swing.JTextField();
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("Nombre");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
-        jPanel1.add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 315, 36));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
+        jPanel1.add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 315, 36));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Razon social");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
         jPanel1.add(txt_razon, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 649, 36));
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("RUC");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, -1, -1));
 
         txt_ruc.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_rucKeyTyped(evt);
             }
         });
-        jPanel1.add(txt_ruc, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 284, 36));
+        jPanel1.add(txt_ruc, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, 290, 36));
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Descripcion");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, -1, -1));
 
@@ -90,13 +95,14 @@ public class Form_Organizacion extends javax.swing.JPanel {
         txt_descripcion.setRows(5);
         jScrollPane1.setViewportView(txt_descripcion);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 649, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 649, -1));
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("Estado");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, -1, -1));
 
         cbo_estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
-        jPanel1.add(cbo_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 238, -1));
+        jPanel1.add(cbo_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 238, 30));
 
         btn_Agregar.setText("Agregar");
         btn_Agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -104,7 +110,7 @@ public class Form_Organizacion extends javax.swing.JPanel {
                 btn_AgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 460, -1, -1));
+        jPanel1.add(btn_Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, 90, 30));
 
         btn_Buscar.setText("Buscar");
         btn_Buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -112,7 +118,7 @@ public class Form_Organizacion extends javax.swing.JPanel {
                 btn_BuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 460, -1, -1));
+        jPanel1.add(btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 390, 80, 30));
 
         btn_Actualizar.setText("Actualizar");
         btn_Actualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +126,7 @@ public class Form_Organizacion extends javax.swing.JPanel {
                 btn_ActualizarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 460, -1, -1));
+        jPanel1.add(btn_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 390, 90, 30));
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -140,11 +146,11 @@ public class Form_Organizacion extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tabla);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 520, 680, 220));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, 650, 280));
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 30, 30, 740));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 30, 740));
 
         jLabel49.setFont(new java.awt.Font("Roboto", 1, 30)); // NOI18N
         jLabel49.setText("Información de organizaciones");

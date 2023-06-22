@@ -7,12 +7,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 
 public class ClienteDAO implements Crud<ClienteDTO> {
 
     Conexion conexion;
-
 
     public ClienteDAO() {
         conexion = new Conexion();
@@ -22,7 +22,7 @@ public class ClienteDAO implements Crud<ClienteDTO> {
     public boolean Create(ClienteDTO cliente) {
         Connection con = conexion.getConnection();
         PreparedStatement ps = null;
-        
+
         try {
             ps = con.prepareStatement("INSERT INTO Cliente(numDoc, tipoDocumentoID, nombres, apellidos, telefono, nacionalidad, correo, direccion, genero) VALUES(?,?,?,?,?,?,?,?,?)");
 
@@ -211,7 +211,7 @@ public class ClienteDAO implements Crud<ClienteDTO> {
         return cliente;
     }
 
-    public ClienteDTO SearchDNI(ClienteDTO clie) {
+    public ClienteDTO SearchDNI(ClienteDTO cli) {
         Connection con = conexion.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -219,7 +219,7 @@ public class ClienteDAO implements Crud<ClienteDTO> {
         try {
 
             ps = con.prepareStatement("SELECT * FROM Cliente WHERE numDoc=?");
-            ps.setString(1, clie.getNumDocumento());
+            ps.setString(1, cli.getNumDocumento());
 
             rs = ps.executeQuery();
 
@@ -252,5 +252,186 @@ public class ClienteDAO implements Crud<ClienteDTO> {
         }
 
         return cliente;
+    }
+
+    //BUSQUEDAS
+    //BUSQUEDA POR NOMBRE 
+    public List<ClienteDTO> buscarNombres(ClienteDTO cli) {
+        List<ClienteDTO> listaClientes = new ArrayList<>();
+
+        try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            ps = conexion.getConnection().prepareStatement("{CALL filtrarNombreCliente(?)}");
+            ps.setString(1, cli.getNombres());
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ClienteDTO t = new ClienteDTO();
+                t.setIdCliente(rs.getInt(1));
+                t.setNumDocumento(rs.getString(2));
+                t.setTipoDocumentoID(rs.getInt(3));
+                t.setNombres(rs.getString(4));
+                t.setApellidos(rs.getString(5));
+                t.setTelefono(rs.getString(6));
+                t.setNacionalidad(rs.getString(7));
+                t.setCorreo(rs.getString(8));
+                t.setDireccion(rs.getString(9));
+                t.setGenero(rs.getString(10).charAt(0));
+
+                listaClientes.add(t);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        } finally {
+            conexion.desconectar();
+        }
+
+        return listaClientes;
+    }
+
+    //BUSQUEDA POR APELLIDOS
+    public List<ClienteDTO> buscarApellidos(ClienteDTO cli) {
+        List<ClienteDTO> listaClientes = new ArrayList<>();
+
+        try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            ps = conexion.getConnection().prepareStatement("{CALL filtrarApellidoCliente(?)}");
+            ps.setString(1, cli.getApellidos());
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ClienteDTO t = new ClienteDTO();
+                t.setIdCliente(rs.getInt(1));
+                t.setNumDocumento(rs.getString(2));
+                t.setTipoDocumentoID(rs.getInt(3));
+                t.setNombres(rs.getString(4));
+                t.setApellidos(rs.getString(5));
+                t.setTelefono(rs.getString(6));
+                t.setNacionalidad(rs.getString(7));
+                t.setCorreo(rs.getString(8));
+                t.setDireccion(rs.getString(9));
+                t.setGenero(rs.getString(10).charAt(0));
+
+                listaClientes.add(t);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        } finally {
+            conexion.desconectar();
+        }
+
+        return listaClientes;
+    }
+
+    //BUSQUEDA POR TELEFONO
+    public List<ClienteDTO> buscarTelefono(ClienteDTO cli) {
+        List<ClienteDTO> listaClientes = new ArrayList<>();
+
+        try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            ps = conexion.getConnection().prepareStatement("{CALL filtrarTelefonoCliente(?)}");
+            ps.setString(1, cli.getTelefono());
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ClienteDTO t = new ClienteDTO();
+                t.setIdCliente(rs.getInt(1));
+                t.setNumDocumento(rs.getString(2));
+                t.setTipoDocumentoID(rs.getInt(3));
+                t.setNombres(rs.getString(4));
+                t.setApellidos(rs.getString(5));
+                t.setTelefono(rs.getString(6));
+                t.setNacionalidad(rs.getString(7));
+                t.setCorreo(rs.getString(8));
+                t.setDireccion(rs.getString(9));
+                t.setGenero(rs.getString(10).charAt(0));
+
+                listaClientes.add(t);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        } finally {
+            conexion.desconectar();
+        }
+
+        return listaClientes;
+    }
+
+    //BUSQUEDA POR DNI
+    public List<ClienteDTO> buscarDniFiltro(ClienteDTO cli) {
+        List<ClienteDTO> listaClientes = new ArrayList<>();
+
+        try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            ps = conexion.getConnection().prepareStatement("{CALL filtrarDniCliente(?)}");
+            ps.setString(1, cli.getNumDocumento());
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ClienteDTO t = new ClienteDTO();
+                t.setIdCliente(rs.getInt(1));
+                t.setNumDocumento(rs.getString(2));
+                t.setTipoDocumentoID(rs.getInt(3));
+                t.setNombres(rs.getString(4));
+                t.setApellidos(rs.getString(5));
+                t.setTelefono(rs.getString(6));
+                t.setNacionalidad(rs.getString(7));
+                t.setCorreo(rs.getString(8));
+                t.setDireccion(rs.getString(9));
+                t.setGenero(rs.getString(10).charAt(0));
+
+                listaClientes.add(t);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        } finally {
+            conexion.desconectar();
+        }
+
+        return listaClientes;
+    }
+
+    //BUSQUEDA POR CORREO
+    public List<ClienteDTO> buscarCorreo(ClienteDTO cli) {
+        List<ClienteDTO> listaClientes = new ArrayList<>();
+
+        try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            ps = conexion.getConnection().prepareStatement("{CALL filtrarCorreoCliente(?)}");
+            ps.setString(1, cli.getCorreo());
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ClienteDTO t = new ClienteDTO();
+                t.setIdCliente(rs.getInt(1));
+                t.setNumDocumento(rs.getString(2));
+                t.setTipoDocumentoID(rs.getInt(3));
+                t.setNombres(rs.getString(4));
+                t.setApellidos(rs.getString(5));
+                t.setTelefono(rs.getString(6));
+                t.setNacionalidad(rs.getString(7));
+                t.setCorreo(rs.getString(8));
+                t.setDireccion(rs.getString(9));
+                t.setGenero(rs.getString(10).charAt(0));
+
+                listaClientes.add(t);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        } finally {
+            conexion.desconectar();
+        }
+
+        return listaClientes;
     }
 }

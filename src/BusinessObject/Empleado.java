@@ -44,16 +44,6 @@ public class Empleado {
         }
     }
 
-    public List<EmpleadoDTO> buscarPorNombre(String nombre) {
-        EmpleadoDTO emp = new EmpleadoDTO();
-        emp.setNombres(nombre);
-        if (empleadoDAO.SearchNames(emp) != null) {
-            return empleadoDAO.SearchNames(emp);
-        } else {
-            return null;
-        }
-    }
-
     public EmpleadoDTO buscarPorDNI(String dni) {
 
         EmpleadoDTO nue = null;
@@ -92,6 +82,67 @@ public class Empleado {
     public List<EmpleadoDTO> listar() {
         if (empleadoDAO.Read() != null) {
             return empleadoDAO.Read();
+        } else {
+            return null;
+        }
+    }
+
+    //Busquedas 
+    public List<EmpleadoDTO> buscarPorNombre(String nombre) {
+        EmpleadoDTO emp = new EmpleadoDTO();
+        emp.setNombres(nombre);
+        if (empleadoDAO.buscarNombres(emp) != null) {
+            return empleadoDAO.buscarNombres(emp);
+        } else {
+            return null;
+        }
+    }
+
+    public List<EmpleadoDTO> buscarPorApellido(String apellidos) {
+        EmpleadoDTO emp = new EmpleadoDTO();
+        emp.setApellidos(apellidos);
+        if (empleadoDAO.buscarApellidos(emp) != null) {
+            return empleadoDAO.buscarApellidos(emp);
+        } else {
+            return null;
+        }
+    }
+
+    public List<EmpleadoDTO> buscarPorTelefono(String telefono) {
+        EmpleadoDTO emp = new EmpleadoDTO();
+        emp.setTelefono(telefono);
+        if (empleadoDAO.buscarTelefono(emp) != null) {
+            return empleadoDAO.buscarTelefono(emp);
+        } else {
+            return null;
+        }
+    }
+
+    public List<EmpleadoDTO> buscarPorDniFiltro(String dni) {
+        EmpleadoDTO emp = new EmpleadoDTO();
+        emp.setNumDocumento(dni);
+        if (empleadoDAO.buscarDniFiltro(emp) != null) {
+            return empleadoDAO.buscarDniFiltro(emp);
+        } else {
+            return null;
+        }
+    }
+
+    public List<EmpleadoDTO> buscarPorNacionalidad(String nacionalidad) {
+        EmpleadoDTO emp = new EmpleadoDTO();
+        emp.setNacionalidad(nacionalidad);
+        if (empleadoDAO.buscarNacionalidad(emp) != null) {
+            return empleadoDAO.buscarNacionalidad(emp);
+        } else {
+            return null;
+        }
+    }
+
+    public List<EmpleadoDTO> buscarPorCorreo(String correo) {
+        EmpleadoDTO emp = new EmpleadoDTO();
+        emp.setCorreo(correo);
+        if (empleadoDAO.buscarCorreo(emp) != null) {
+            return empleadoDAO.buscarCorreo(emp);
         } else {
             return null;
         }
