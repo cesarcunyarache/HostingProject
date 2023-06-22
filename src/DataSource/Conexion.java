@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class Conexion {
 
-    private String url = "jdbc:sqlserver://localhost;databaseName=BDELEmperador;trustServerCertificate=true";
+    private String url = "jdbc:sqlserver://localhost;databaseName=BDELEmperador1;trustServerCertificate=true";
     private String usuario = "sa";
     private String password = "yourStrong(!)Password";
     private Connection conex;

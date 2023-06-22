@@ -2,6 +2,7 @@ package Menu;
 
 import Form.Form_Cliente;
 import Form.Form_Empleados;
+import Form.Form_Habitacion;
 import Form.Form_Habitaciones;
 import Form.Form_NuevaReserva;
 import Form.Form_Organizacion;
@@ -30,13 +31,14 @@ import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 public class Menu extends javax.swing.JPanel {
+
     private MigLayout layout;
     private JPanel panelMenu;
-    
+
     private JButton cmdMenu;
     private JButton cmdLogOut;
     private Header header;
-    
+
     private Bottom bottom;
     private EventMenuSelected event;
     private JPanel main;
@@ -45,7 +47,7 @@ public class Menu extends javax.swing.JPanel {
     private boolean menuShow;
     private Menu menu;
     private Menu comp = this;
-    
+
     //Formularios
     Form_Cliente cliente;
     Form_Empleados empleado;
@@ -54,6 +56,7 @@ public class Menu extends javax.swing.JPanel {
     Form_Organizacion organizacion;
     Form_Usuarios usuario;
     Form_NuevaReserva reserva;
+    Form_Habitacion gesHab;
 
     public Menu(JPanel main, JPanel body, Menu menu) {
         initComponents();
@@ -63,10 +66,11 @@ public class Menu extends javax.swing.JPanel {
         cliente = new Form_Cliente();
         empleado = new Form_Empleados();
         tipo = new Form_TipoDocumento();
-        habitacion = new Form_Habitaciones();
+        habitacion = new Form_Habitaciones(this);
         organizacion = new Form_Organizacion();
         usuario = new Form_Usuarios();
         reserva = new Form_NuevaReserva();
+        gesHab = new Form_Habitacion();
         setOpaque(false);
         init();
 
@@ -78,7 +82,7 @@ public class Menu extends javax.swing.JPanel {
 
     public void inicio() {
 
-        layout = new MigLayout("fill", "0[]10[]5", "0[fill]0");
+        layout = new MigLayout("fill", "0[]0[]5", "0[fill]0");
         body.setLayout(layout);
         main.setOpaque(false);
         main.setLayout(new BorderLayout());
@@ -133,34 +137,36 @@ public class Menu extends javax.swing.JPanel {
         // agregar evento al menu
         setEvent(new EventMenuSelected() {
             @Override
-            
-            
+
             public void selected(int index) {
                 if (index == 0) {
-                   showForm(habitacion);
+                    showForm(habitacion);
                 } else if (index == 1) {
+                    showForm(gesHab);
+                } else if (index == 2) {
                     showForm(reserva);
                     //showForm(new Form_Reservas());
-                } else if (index == 2) {
-                    showForm(cliente);
                 } else if (index == 3) {
-                    showForm(tipo);
+                    showForm(cliente);
                 } else if (index == 4) {
-                    showForm(organizacion);
+                    showForm(tipo);
                 } else if (index == 5) {
+                    showForm(organizacion);
+                } else if (index == 6) {
                     showForm(empleado);
-                } else if (index == 6){
+                } else if (index == 7) {
                     showForm(usuario);
-                } else if (index == 7){
-                  
-                } else if (index == 9){
-                    
+                } else if (index == 8) {
+
+                } else if (index == 9) {
+
                 }
             }
         });
         // agrega menus
         //addMenu(new ModelMenu("Inicio", new ImageIcon(getClass().getResource("/Image/home.png"))));
         addMenu(new ModelMenu("Habitaciones", new ImageIcon(getClass().getResource("/Image/habitacion.png"))));
+        addMenu(new ModelMenu("Gestion Habitacion", new ImageIcon(getClass().getResource("/Image/habitacion.png"))));
         addMenu(new ModelMenu("Reservas", new ImageIcon(getClass().getResource("/Image/reserva.png"))));
         addMenu(new ModelMenu("Clientes", new ImageIcon(getClass().getResource("/Image/cliente.png"))));
         addMenu(new ModelMenu("Documento", new ImageIcon(getClass().getResource("/Image/tipoDocumento.png"))));
@@ -177,10 +183,10 @@ public class Menu extends javax.swing.JPanel {
             public void timingEvent(float fraction) {
                 double width;
                 if (menuShow) {
-                    width = 50 + (150 * (1f - fraction));
+                    width = 50 + (200 * (1f - fraction));
                     setAlpha(1f - fraction);
                 } else {
-                    width = 50 + (150 * fraction);
+                    width = 50 + (200 * fraction);
                     setAlpha(fraction);
                 }
 
@@ -237,6 +243,17 @@ public class Menu extends javax.swing.JPanel {
         item.addEvent(event);
         panelMenu.add(item);
     }
+    
+    public void SelectMenu(int id, Component comp) {
+        for (Component com : panelMenu.getComponents()) {
+            MenuItem item = (MenuItem) com;
+            if (item.getIndex() == id) {
+                item.setSelected(true);
+                showForm(comp);
+                clearMenu(id);
+            }
+        }
+    }
 
     private void createButtonMenu() {
         cmdMenu = new JButton();
@@ -270,7 +287,7 @@ public class Menu extends javax.swing.JPanel {
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
-         
+
         GradientPaint gra = new GradientPaint(0, 0, Color.decode("#E4E4E4"), 0, getHeight(), Color.decode("#E4E4E4"));
         g2.setPaint(gra);
         g2.fillRect(0, 0, getWidth(), getHeight());
