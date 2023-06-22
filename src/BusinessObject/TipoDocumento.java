@@ -1,7 +1,5 @@
 package BusinessObject;
 
-
-
 import java.util.List;
 import TransferObject.TipoDocumentoDTO;
 import DataAccessObject.TipoDocumentoDAO;

@@ -9,6 +9,11 @@
       </Properties>
     </Component>
   </NonVisualComponents>
+  <Properties>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+    </Property>
+  </Properties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -24,12 +29,20 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel11" min="-2" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanel11" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel11" min="-2" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanel11" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -45,23 +58,21 @@
           </Border>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jPanel11MouseClicked"/>
+      </Events>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jPanel12" alignment="0" max="32767" attributes="0"/>
+              <Component id="jPColorEstado" alignment="0" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jRadioButton9" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jRadioButton10" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="jLabel20" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel19" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLTipoHabitacion" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLNumeroHabitacion" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="84" max="32767" attributes="0"/>
+                  <EmptySpace pref="223" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -69,22 +80,17 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                  <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                  <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLNumeroHabitacion" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jRadioButton9" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButton10" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="12" max="32767" attributes="0"/>
-                  <Component id="jPanel12" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLTipoHabitacion" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="14" max="32767" attributes="0"/>
+                  <Component id="jPColorEstado" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="jPanel12">
+        <Container class="javax.swing.JPanel" name="jPColorEstado">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="8a" green="c8" red="1c" type="rgb"/>
@@ -96,7 +102,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLEstadoHabitacion" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
@@ -108,7 +114,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLEstadoHabitacion" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="14" max="32767" attributes="0"/>
@@ -117,15 +123,15 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel17">
+            <Component class="javax.swing.JLabel" name="jLEstadoHabitacion">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Roboto" size="14" style="0"/>
+                  <Font name="Roboto" size="14" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="DISPONIBLE:"/>
+                <Property name="text" type="java.lang.String" value="Disponible"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel18">
@@ -141,13 +147,13 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="jLabel19">
+        <Component class="javax.swing.JLabel" name="jLNumeroHabitacion">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Roboto Medium" size="36" style="0"/>
+              <Font name="Roboto" size="32" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -155,25 +161,15 @@
             <Property name="text" type="java.lang.String" value="NRO: 201"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel20">
+        <Component class="javax.swing.JLabel" name="jLTipoHabitacion">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="14" style="0"/>
+              <Font name="Roboto" size="14" style="0"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="66" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Habitaci&#xf3;n simple"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton9">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Aire acondicionado"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton10">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Frigobar"/>
           </Properties>
         </Component>
       </SubComponents>

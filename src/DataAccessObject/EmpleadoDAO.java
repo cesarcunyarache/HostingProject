@@ -189,7 +189,7 @@ public class EmpleadoDAO implements Crud<EmpleadoDTO> {
 
     public EmpleadoDTO SearchDNI(EmpleadoDTO t) {
         Connection con = conexion.getConnection();
-        EmpleadoDTO objeto = new EmpleadoDTO();
+        EmpleadoDTO objeto = null;
         try {
             PreparedStatement ps = null;
             ResultSet rs = null;
@@ -199,6 +199,7 @@ public class EmpleadoDAO implements Crud<EmpleadoDTO> {
 
             //registros por leer
            if (rs.next()) {
+               objeto =  new EmpleadoDTO();
                 objeto.setIdEmpleado(rs.getInt("idEmpleado"));
                 objeto.setNombres(rs.getString("nombre"));
                 objeto.setApellidos(rs.getString("apellido"));

@@ -65,7 +65,5 @@ public class Cliente {
             obj = clienteDAO.SearchDNI(clienteDTO);
         }
         return obj;
-
     }
-
 }

@@ -9,11 +9,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Date;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class ReservaDAO implements Crud<ReservaDTO> {
 
     Conexion conexion;
     ReservaDTO reserva;
+    DefaultTableModel dt;
+    DefaultComboBoxModel modelo;
+
 
     public ReservaDAO() {
         conexion = new Conexion();
@@ -194,4 +198,5 @@ public class ReservaDAO implements Crud<ReservaDTO> {
 
         return reserva;
     }
+    
 }

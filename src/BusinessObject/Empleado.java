@@ -34,15 +34,6 @@ public class Empleado {
         return mensaje;
     }
 
-//    public String eliminar(int idEmpleado) {
-//        String mensaje = "";
-//        if (empleadoDAO.eliminar(new EmpleadoDTO(idEmpleado))) {
-//            mensaje = "El registro se eliminó";
-//        } else {
-//            mensaje = "ERROR: El registro no se pudo eliminar";
-//        }
-//        return mensaje;
-//    }
     public EmpleadoDTO buscarPorID(int idEmpleado) {
         empleadoDTO = empleadoDAO.Search(new EmpleadoDTO(idEmpleado));
         if (empleadoDTO != null) {
@@ -103,16 +94,4 @@ public class Empleado {
             return null;
         }
     }
-
-//    public boolean loginEmpleado(int id, String contrasenaDNI) {
-//        boolean encontrado = false;
-//        EmpleadoDTO p = new EmpleadoDTO();
-//        p.setIdEmpleado(id);
-//        p.setDni(contrasenaDNI);
-//        if (empleadoDAO.validarUSuario(p) != null) {
-//            encontrado = true;
-//        }
-//
-//        return encontrado;
-//    }
-}//end Empleado
+}

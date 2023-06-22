@@ -9,7 +9,7 @@ public interface Crud<T> {
     public boolean Update(T t);
 
     public List<T> Read();
-
+    
     public boolean Delete(T t);
 
     public T Search(T t);

@@ -1,8 +1,5 @@
 package BusinessObject;
 
-
-
-
 import DataAccessObject.OrganizacionDAO;
 import TransferObject.OrganizacionDTO;
 import java.util.List;

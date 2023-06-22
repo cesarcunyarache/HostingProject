@@ -1096,7 +1096,6 @@ public class NewJPanel extends javax.swing.JPanel {
         add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, 30));
     }// </editor-fold>//GEN-END:initComponents
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> jComboBox1;

@@ -156,12 +156,8 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
                 String contraseña = rs.getString(4);
                 String rol = rs.getString(5);
                 
-                obj = new UsuarioDTO(id, idEmpleado, usuario, contraseña, rol);
-
-               
+                obj = new UsuarioDTO(id, idEmpleado, usuario, contraseña, rol);  
             }
-
-            
         } catch (SQLException ex) {
             
 
@@ -173,7 +169,7 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
     }
 
     public UsuarioDTO SearchUpadate(UsuarioDTO t) {
-       UsuarioDTO obj = new UsuarioDTO();
+       UsuarioDTO obj = null;
 
         try {
             PreparedStatement ps = null;
@@ -186,7 +182,7 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
 
             //registros por leer
             if (rs.next()) {
-
+                obj = new UsuarioDTO();
                 obj.setIdUsuario(rs.getInt(1));
                 obj.setEmpleadoID(rs.getInt(2));
                 obj.setUsuario(rs.getString(3));

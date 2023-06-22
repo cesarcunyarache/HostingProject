@@ -1,9 +1,9 @@
 package Menu;
 
-
 import Form.Form_Cliente;
 import Form.Form_Empleados;
 import Form.Form_Habitaciones;
+import Form.Form_NuevaReserva;
 import Form.Form_Organizacion;
 import Form.Form_TipoDocumento;
 import Form.Form_Usuarios;
@@ -30,12 +30,13 @@ import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 public class Menu extends javax.swing.JPanel {
-
     private MigLayout layout;
     private JPanel panelMenu;
+    
     private JButton cmdMenu;
     private JButton cmdLogOut;
     private Header header;
+    
     private Bottom bottom;
     private EventMenuSelected event;
     private JPanel main;
@@ -44,12 +45,15 @@ public class Menu extends javax.swing.JPanel {
     private boolean menuShow;
     private Menu menu;
     private Menu comp = this;
+    
+    //Formularios
     Form_Cliente cliente;
     Form_Empleados empleado;
     Form_TipoDocumento tipo;
     Form_Habitaciones habitacion;
     Form_Organizacion organizacion;
     Form_Usuarios usuario;
+    Form_NuevaReserva reserva;
 
     public Menu(JPanel main, JPanel body, Menu menu) {
         initComponents();
@@ -62,6 +66,7 @@ public class Menu extends javax.swing.JPanel {
         habitacion = new Form_Habitaciones();
         organizacion = new Form_Organizacion();
         usuario = new Form_Usuarios();
+        reserva = new Form_NuevaReserva();
         setOpaque(false);
         init();
 
@@ -128,24 +133,25 @@ public class Menu extends javax.swing.JPanel {
         // agregar evento al menu
         setEvent(new EventMenuSelected() {
             @Override
+            
+            
             public void selected(int index) {
                 if (index == 0) {
-                    //showForm(new Form_Home());
+                   showForm(habitacion);
                 } else if (index == 1) {
-                    showForm(habitacion);
-                } else if (index == 2) {
+                    showForm(reserva);
                     //showForm(new Form_Reservas());
-                } else if (index == 3) {
+                } else if (index == 2) {
                     showForm(cliente);
-                } else if (index == 4) {
+                } else if (index == 3) {
                     showForm(tipo);
-                } else if (index == 5) {
+                } else if (index == 4) {
                     showForm(organizacion);
-                } else if (index == 6) {
+                } else if (index == 5) {
                     showForm(empleado);
-                } else if (index == 7){
+                } else if (index == 6){
                     showForm(usuario);
-                } else if (index == 8){
+                } else if (index == 7){
                   
                 } else if (index == 9){
                     
@@ -153,7 +159,7 @@ public class Menu extends javax.swing.JPanel {
             }
         });
         // agrega menus
-        addMenu(new ModelMenu("Home", new ImageIcon(getClass().getResource("/Image/home.png"))));
+        //addMenu(new ModelMenu("Inicio", new ImageIcon(getClass().getResource("/Image/home.png"))));
         addMenu(new ModelMenu("Habitaciones", new ImageIcon(getClass().getResource("/Image/habitacion.png"))));
         addMenu(new ModelMenu("Reservas", new ImageIcon(getClass().getResource("/Image/reserva.png"))));
         addMenu(new ModelMenu("Clientes", new ImageIcon(getClass().getResource("/Image/cliente.png"))));
@@ -264,7 +270,7 @@ public class Menu extends javax.swing.JPanel {
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
-        //fondo de menu 
+         
         GradientPaint gra = new GradientPaint(0, 0, Color.decode("#E4E4E4"), 0, getHeight(), Color.decode("#E4E4E4"));
         g2.setPaint(gra);
         g2.fillRect(0, 0, getWidth(), getHeight());

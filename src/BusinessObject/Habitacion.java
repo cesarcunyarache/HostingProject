@@ -58,6 +58,16 @@ public class Habitacion {
             return null;
         }
     }
+    
+    
+    public HabitacionDTO buscar(String nHabitacion) {
+        habitacionDTO = habitacionDAO.SearchNHabitacion(new HabitacionDTO(nHabitacion));
+        if (habitacionDTO != null) {
+            return habitacionDTO;
+        } else {
+            return null;
+        }
+    }
 
     public List<HabitacionDTO> listarR() {
         if (habitacionDAO.Read() != null) {
@@ -67,13 +77,28 @@ public class Habitacion {
         }
     }
 
-//    public List<HabitacionDTO> listar(int idTipo) {
-//        HabitacionDTO t = new HabitacionDTO();
-//        t.setTipoHabitacion(idTipo);
-//        if (habitacionDAO.listarPorTipo(t) != null) {
-//            return habitacionDAO.listarPorTipo(t);
-//        } else {
-//            return null;
-//        }
-//    }
-}//end Habitacion
+    public List<HabitacionDTO> listarR(String filtro) {
+        if (habitacionDAO.Read() != null) {
+            return habitacionDAO.Read(filtro);
+        } else {
+            return null;
+        }
+    }
+
+    public HabitacionDAO getHabitacionDAO() {
+        return habitacionDAO;
+    }
+
+    public void setHabitacionDAO(HabitacionDAO habitacionDAO) {
+        this.habitacionDAO = habitacionDAO;
+    }
+
+    public HabitacionDTO getHabitacionDTO() {
+        return habitacionDTO;
+    }
+
+    public void setHabitacionDTO(HabitacionDTO habitacionDTO) {
+        this.habitacionDTO = habitacionDTO;
+    }
+    
+}

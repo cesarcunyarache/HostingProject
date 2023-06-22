@@ -20,7 +20,8 @@ public class ReservaDTO {
     public ReservaDTO(int idReserva) {
         this.idReserva = idReserva;
     }
-
+    
+    
     public ReservaDTO(int idReserva, int idHabitacion, int idCliente, int idEmpleado, Date fechaReserva, Date fechaInicio, Date fechaFin, String estado) {
         this.idReserva = idReserva;
         this.idHabitacion = idHabitacion;
@@ -43,7 +44,7 @@ public class ReservaDTO {
     
         
 
-    public ReservaDTO(int idHabitacion, int idCliente, int idEmpleado, Date fechaReserva, Date fechaInicio, Date fechaFin, String estado) {
+    public ReservaDTO(int idHabitacion, int idCliente, int idEmpleado, Date fechaInicio, Date fechaFin, String estado) {
         this.idHabitacion = idHabitacion;
         this.idCliente = idCliente;
         this.idEmpleado = idEmpleado;

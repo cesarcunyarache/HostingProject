@@ -4,6 +4,7 @@
  */
 package Form;
 
+import Form.Components.ComponentRoom;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,11 +72,11 @@ public class Test extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ComponentRoom hb = new ComponentRoom();
-        panel.add(hb);
-        hab.add(hb);
-        indice++;
-        panel.updateUI();
+//        //ComponentRoom hb = new ComponentRoom();
+//        panel.add(hb);
+//        hab.add(hb);
+//        indice++;
+//        panel.updateUI();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -46,16 +46,6 @@ public class Usuario {
         return mensaje;
     }
 
-//    public String Eliminar(int id) {
-//        String mensaje = "";
-//        tipoEmpleadoDTO = new TipoEmpleadoDTO(id);
-//        if (tipoEmpleadoDAO.Delete(tipoEmpleadoDTO)) {
-//            mensaje = "El registro se eliminó existosamente";
-//        } else {
-//            mensaje = "ERROR: El registro no se pudo eliminar";
-//        }
-//        return mensaje;
-//    }
     public UsuarioDTO Buscar(int id) {
         usuarioDTO = new UsuarioDTO(id);
         if (usuarioDAO.Search(usuarioDTO) != null) {
@@ -85,23 +75,14 @@ public class Usuario {
         return obj;
     }
     
-    
-
-//    public UsuarioDTO ValidadUsuario(String user, String password) {
-//        usuarioDTO = new UsuarioDTO(user, password);
-//        if (usuarioDAO.validar(usuarioDTO) != null) {
-//            return usuarioDAO.validar(usuarioDTO);
-//        } else {
-//            return null;
-//        }
-//
-//    }
     public UsuarioDTO ValidarUsuario(String user, String password) {
         usuarioDTO = new UsuarioDTO(user);
+        UsuarioDTO searchUser = null;
         if (usuarioDAO.SearchUser(usuarioDTO) != null) {
-            String contraseña = enc.deecnode(usuarioDTO.getContrasena());
+            searchUser = usuarioDAO.SearchUser(usuarioDTO) ;
+            String contraseña = enc.deecnode(searchUser.getContrasena());
             if (password.equals(contraseña)) {
-                return usuarioDAO.validar(usuarioDTO);
+                return searchUser;
             } else {
                 return null;
             }

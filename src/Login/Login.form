@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -22,221 +22,218 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,2,0,0,3,-4"/>
   </AuxValues>
 
-  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-    <Property name="useNullLayout" type="boolean" value="false"/>
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <Component id="jPanel1" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLFondoEmpeador" min="-2" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jLFondoEmpeador" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="difuminado">
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="0" width="1020" height="770"/>
-        </Constraint>
-      </Constraints>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-        <Property name="useNullLayout" type="boolean" value="false"/>
-      </Layout>
-      <SubComponents>
-        <Container class="javax.swing.JPanel" name="jPanel1">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="2a" green="17" red="f" type="rgb"/>
-            </Property>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="340" y="160" width="-1" height="460"/>
-            </Constraint>
-          </Constraints>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel8" max="32767" attributes="0"/>
-                  <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="40" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jlIconLock" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jlIconUser" alignment="1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnacceder" min="-2" pref="154" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="txtpass" max="32767" attributes="0"/>
-                              <Component id="txtuser" pref="208" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                      <Component id="jLabel3" min="-2" pref="41" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                              <Component id="txtuser" min="-2" pref="55" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                              <Component id="jlIconLock" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtpass" min="-2" pref="55" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                              <Component id="jlIconUser" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                      <Component id="btnacceder" min="-2" pref="40" max="-2" attributes="0"/>
-                      <EmptySpace pref="53" max="32767" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-          <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel3">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Roboto Black" size="48" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Bienvenido"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel8">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Roboto Light" size="16" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Ingresar los datos proporcionados"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JPasswordField" name="txtpass">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="2a" green="17" red="f" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="18" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="1234"/>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                    <MatteColorBorder bottom="1" left="0" right="0" top="0">
-                      <Color PropertyName="color" blue="ff" green="ff" red="ff" type="rgb"/>
-                    </MatteColorBorder>
-                  </Border>
-                </Property>
-                <Property name="caretColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtpassMouseEntered"/>
-                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtpassMouseExited"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtuser">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="2a" green="17" red="f" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Roboto Light" size="18" style="2"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Introduzca su usuario"/>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                    <MatteColorBorder bottom="1" left="0" right="0" top="0">
-                      <Color PropertyName="color" blue="ff" green="ff" red="ff" type="rgb"/>
-                    </MatteColorBorder>
-                  </Border>
-                </Property>
-                <Property name="caretColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtuserMouseEntered"/>
-                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtuserMouseExited"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jlIconLock">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Image/lock-32.png"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jlIconUser">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Image/usuario.png"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnacceder">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="39" green="30" red="2f" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Roboto Light" size="18" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Ingresar"/>
-                <Property name="borderPainted" type="boolean" value="false"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnaccederActionPerformed"/>
-              </Events>
-            </Component>
-          </SubComponents>
-        </Container>
-      </SubComponents>
-    </Container>
-    <Component class="javax.swing.JLabel" name="jlFondo">
+    <Component class="javax.swing.JLabel" name="jLFondoEmpeador">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Image/hospedajeEmpeador (Mediana).jpg"/>
         </Property>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="0" width="1020" height="-1"/>
-        </Constraint>
-      </Constraints>
     </Component>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Component id="jlbLinea" alignment="0" max="32767" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLbBienvenido" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLbIngresaLas" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="btnIniciarsesion" max="32767" attributes="0"/>
+                                  <Component id="jCbxRecordarContraseña" pref="275" max="32767" attributes="0"/>
+                                  <Component id="jlbContraseña" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jlUsuario" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTxtUsuario" max="32767" attributes="0"/>
+                                  <Component id="jPsContraseña" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
+                          <Component id="btnCerrar" min="-2" pref="275" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace pref="83" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
+                  <Component id="jLbBienvenido" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                  <Component id="jLbIngresaLas" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="jlUsuario" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                  <Component id="jTxtUsuario" min="-2" pref="50" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <Component id="jlbContraseña" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                  <Component id="jPsContraseña" min="-2" pref="50" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <Component id="jCbxRecordarContraseña" min="-2" pref="33" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <Component id="btnIniciarsesion" min="-2" pref="50" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jlbLinea" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnCerrar" min="-2" pref="50" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JTextField" name="jTxtUsuario">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto" size="15" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="66" type="rgb"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlUsuario">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto" size="15" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Usuario"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlbContrase&#xf1;a">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto" size="15" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="jPsContrase&#xf1;a">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto" size="15" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="66" type="rgb"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jPsContrase&#xf1;aMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jPsContrase&#xf1;aMouseExited"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="jCbxRecordarContrase&#xf1;a">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Recordar contrase&#xf1;a"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCbxRecordarContrase&#xf1;aActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnIniciarsesion">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="e6" green="6e" red="0" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto" size="14" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Iniciar Sesi&#xf3;n"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIniciarsesionActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLbIngresaLas">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto" size="16" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="66" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Ingresa las credenciales asignadas:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLbBienvenido">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto" size="40" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Bienvenido"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnCerrar">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto" size="14" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="66" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Cerrar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCerrarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlbLinea">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="_____________________________________________"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>

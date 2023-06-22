@@ -51,35 +51,6 @@ public class Reserva {
         return mensaje;
     }
 
-//    public List<ReservaDTO> buscarIDHabitacion(int idHabitacion) {
-//        registroHabitacionDTO = new RegistroHabitacionDTO();
-//        registroHabitacionDTO.setHabitacionID(idHabitacion);
-//        List<RegistroHabitacionDTO> listaIDhabitaciones = new RegistroHabitacionDAO().buscarIDhabitacion(registroHabitacionDTO);
-//        if (listaIDhabitaciones != null) {
-//            return listaIDhabitaciones;
-//        }
-//        return null;
-//    }
-//    public List<RegistroHabitacionDTO> buscarIDcliente(int idCliente) {
-//        registroHabitacionDTO = new RegistroHabitacionDTO();
-//        registroHabitacionDTO.setClienteID(idCliente);
-//        List<RegistroHabitacionDTO> listaIDClientes = new RegistroHabitacionDAO().buscarIDCliente(registroHabitacionDTO);
-//        if (listaIDClientes != null) {
-//            return listaIDClientes;
-//        }
-//        return null;
-//
-//    }
-//
-//    public List<RegistroHabitacionDTO> buscarIDEmpleado(int idEmpleado) {
-//        registroHabitacionDTO = new RegistroHabitacionDTO();
-//        registroHabitacionDTO.setEmpleadoID(idEmpleado);
-//        List<RegistroHabitacionDTO> listaIDEmpleados = new RegistroHabitacionDAO().buscarIDEmpleado(registroHabitacionDTO);
-//        if (listaIDEmpleados != null) {
-//            return listaIDEmpleados;
-//        }
-//        return null;
-//    }
     public String actualizar(int idHabitacion, int idCliente, int idEmpleado, Date fechaIngreso, Date fechaSalida) {
         return "";
     }

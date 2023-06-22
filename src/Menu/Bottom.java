@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
 public class Bottom extends javax.swing.JPanel {
@@ -26,13 +25,10 @@ public class Bottom extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        imageAvatar1 = new Swing.ImageAvatar();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-
-        imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/user.png")));
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -46,24 +42,19 @@ public class Bottom extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(3, 3, 3)
-                        .addComponent(jLabel2))
-                    .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(45, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(3, 3, 3)
+                .addComponent(jLabel2)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -83,7 +74,6 @@ public class Bottom extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Swing.ImageAvatar imageAvatar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

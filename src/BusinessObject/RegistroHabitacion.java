@@ -37,19 +37,6 @@ public class RegistroHabitacion {
         return mensaje;
     }
 
-//    public String eliminar(int idHabitacion, int idCliente, int idEmpleado, Date fechaIngreso) {
-//        return "";
-//    }
-//
-//    public RegistroHabitacionDTO buscarIDregistro(int idRegistro) {
-//        RegistroHabitacionDTO t = new RegistroHabitacionDTO();
-//        t.setIdRegistro(idRegistro);
-//        if (registroHabitacionDAO.buscarID(t) != null) {
-//            return registroHabitacionDAO.buscarID(t);
-//        } else {
-//            return null;
-//        }
-//    }
     public List<RegistroHabitacionDTO> buscarIDHabitacion(int idHabitacion) {
         registroHabitacionDTO = new RegistroHabitacionDTO();
         registroHabitacionDTO.setHabitacionID(idHabitacion);
@@ -114,4 +101,4 @@ public class RegistroHabitacion {
             return null;
         }
     }
-}//end RegistroHabitacion
+}

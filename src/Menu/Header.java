@@ -24,10 +24,10 @@ public class Header extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 36));
-        jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(7, 98, 177));
+        jLabel1.setFont(new java.awt.Font("sansserif", 1, 16)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/hotel2.png")));
-        jLabel1.setText("Hospedaje");
+        jLabel1.setText(" El Emperador");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -42,8 +42,8 @@ public class Header extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 

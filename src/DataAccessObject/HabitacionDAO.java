@@ -65,7 +65,6 @@ public class HabitacionDAO implements Crud<HabitacionDTO> {
                 habitacion = new HabitacionDTO(id, numHabitacion, tipoHabitacionID, estado);
                 habitaciones.add(habitacion);
             }
-
         } catch (Exception e) {
             System.out.println(e);
 
@@ -81,6 +80,47 @@ public class HabitacionDAO implements Crud<HabitacionDTO> {
         return habitaciones;
     }
 
+    public ArrayList<HabitacionDTO> Read(String estadoH) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = conexion.getConnection();
+
+        ArrayList<HabitacionDTO> habitaciones = new ArrayList<>();
+
+        try {
+            
+            if (!estadoH.equals("Todos")){
+                ps = con.prepareStatement("SELECT * FROM buscarHabitaciones('" + estadoH + "')");
+            } else {
+                ps = con.prepareStatement("SELECT * FROM Habitacion;");
+            }
+            
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String numHabitacion = rs.getString("numHabitacion");
+                int tipoHabitacionID = rs.getInt("tipoHabitacionID");
+                String estado = rs.getString("estado");
+                habitacion = new HabitacionDTO(id, numHabitacion, tipoHabitacionID, estado);
+                habitaciones.add(habitacion);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+
+        } finally {
+            try {
+                con.close();
+                ps.close();
+                rs.close();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+        }
+        return habitaciones;
+    }
+    
+    
     @Override
     public boolean Update(HabitacionDTO habitacion) {
         Connection con = conexion.getConnection();
@@ -149,7 +189,40 @@ public class HabitacionDAO implements Crud<HabitacionDTO> {
         ResultSet rs = null;
 
         try {
-            ps = con.prepareStatement("SELECT * FROM Habitacion WHERE id=?");
+            ps = con.prepareStatement("SELECT * FROM Habitacion WHERE numHabitacion=?");
+            ps.setInt(1, habitacion.getId());
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String numHabitacion = rs.getString("numHabitacion");
+                int tipoHabitacionID = rs.getInt("tipoHabitacionID");
+                String estado = rs.getString("estado");
+                habitacion = new HabitacionDTO(id, numHabitacion, tipoHabitacionID, estado);
+            }
+
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            try {
+                con.close();
+                ps.close();
+                rs.close();
+            } catch (SQLException ex) {
+                System.err.println(ex);
+            }
+        }
+
+        return habitacion;
+    }
+    
+    public HabitacionDTO SearchNHabitacion(HabitacionDTO habitacion) {
+        Connection con = conexion.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = con.prepareStatement("SELECT * FROM Habitacion WHERE numHabitacion=?");
             ps.setInt(1, habitacion.getId());
             rs = ps.executeQuery();
 

@@ -57,6 +57,7 @@ public class Form_Organizacion extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel49 = new javax.swing.JLabel();
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -129,11 +130,15 @@ public class Form_Organizacion extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tabla);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, 559, 296));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 710, 296));
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 30, 30, 740));
+
+        jLabel49.setFont(new java.awt.Font("Roboto", 1, 30)); // NOI18N
+        jLabel49.setText("Información de organizaciones");
+        jPanel1.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -246,6 +251,7 @@ public class Form_Organizacion extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

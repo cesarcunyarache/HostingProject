@@ -14,7 +14,7 @@ public class ButtonCustom extends JButton {
         setCursor(new Cursor(Cursor.HAND_CURSOR));
         setBackground(new Color(65, 152, 216));
     }
-
+    
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
