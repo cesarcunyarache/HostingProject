@@ -197,9 +197,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_formMousePressed
 
     private void btnIniciarsesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarsesionActionPerformed
-        
 
-        
         String usu = jTxtUsuario.getText();
         char[] contraseñaArray = jPsContraseña.getPassword();
         String contrasena = new String(contraseñaArray);
@@ -207,14 +205,12 @@ public class Login extends javax.swing.JFrame {
         if (usu.matches("^[a-zA-Z0-9_]+$")) {
             UsuarioDTO obj = usuario.ValidarUsuario(usu, contrasena);
             if (obj != null) {
-                
+
                 EmpleadoDTO empleadoDTO = new EmpleadoDTO(obj.getEmpleadoID());
-                
-              
-                
+
                 Dashboard dash = new Dashboard();
-        dash.setVisible(true);
-        this.dispose();
+                dash.setVisible(true);
+                this.dispose();
                 //Dashboard ven2 = new Dashboard(empleadoDTO);
                 //ven2.setVisible(true);
                 //this.dispose();
@@ -223,8 +219,8 @@ public class Login extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(null, "Error: valores admitidos [a-zA-Z0-9_]");
-        }      
-        
+        }
+
     }//GEN-LAST:event_btnIniciarsesionActionPerformed
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
@@ -239,14 +235,12 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jPsContraseñaMouseEntered
 
     private void jPsContraseñaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPsContraseñaMouseExited
-       
+
     }//GEN-LAST:event_jPsContraseñaMouseExited
 
     private void jCbxRecordarContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbxRecordarContraseñaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCbxRecordarContraseñaActionPerformed
-
-    
 
     public static void main(String args[]) {
         try {

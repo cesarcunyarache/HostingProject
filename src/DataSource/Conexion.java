@@ -6,7 +6,7 @@ public class Conexion {
 
     private String url = "jdbc:sqlserver://localhost;databaseName=BDELEmperador;trustServerCertificate=true";
     private String usuario = "sa";
-    private String password = "sa";
+    private String password = "yourStrong(!)Password";
     private Connection conex;
 
     public Conexion() {
