@@ -28,7 +28,7 @@ public class EmpleadoDAO implements Crud<EmpleadoDTO> {
                     + ",telefono"
                     + ",correo"
                     + ",direccion"
-                    + ",edad"
+                    + ",fechaNacimiento"
                     + ",nacionalidad"
                     + ",genero"
                     + ",dni"
@@ -40,7 +40,7 @@ public class EmpleadoDAO implements Crud<EmpleadoDTO> {
             ps.setString(3, t.getTelefono());
             ps.setString(4, t.getCorreo());
             ps.setString(5, t.getDireccion());
-            ps.setInt(6, t.getEdad());
+            ps.setDate(6, t.getFechaNacimiento());
             ps.setString(7, t.getNacionalidad());
             ps.setString(8, String.valueOf(t.getGenero()));
             ps.setString(9, t.getNumDocumento());
@@ -59,8 +59,9 @@ public class EmpleadoDAO implements Crud<EmpleadoDTO> {
     @Override
     public boolean Update(EmpleadoDTO t) {
         int r = 0;
+        boolean isUpdate = false;
         try {
-             PreparedStatement ps = null;
+            PreparedStatement ps = null;
             ps = conexion.getConnection().prepareStatement(
                     "UPDATE Empleado set "
                     + "nombre=?"
@@ -68,7 +69,7 @@ public class EmpleadoDAO implements Crud<EmpleadoDTO> {
                     + ",telefono=?"
                     + ",correo=?"
                     + ",direccion=?"
-                    + ",edad=?"
+                    + ",fechaNacimiento=?"
                     + ",nacionalidad=?"
                     + ",genero=?"
                     + ",dni=?"
@@ -81,7 +82,8 @@ public class EmpleadoDAO implements Crud<EmpleadoDTO> {
             ps.setString(3, t.getTelefono());
             ps.setString(4, t.getCorreo());
             ps.setString(5, t.getDireccion());
-            ps.setInt(6, t.getEdad());
+            System.out.println("Segunda fecha " + t.getFechaNacimiento());
+            ps.setDate(6, t.getFechaNacimiento());
             ps.setString(7, t.getNacionalidad());
             ps.setString(8, String.valueOf(t.getGenero()));
             ps.setString(9, t.getNumDocumento());
@@ -89,13 +91,20 @@ public class EmpleadoDAO implements Crud<EmpleadoDTO> {
             ps.setInt(11, t.getEstado());
             ps.setInt(12, t.getIdEmpleado());
 
-            r = ps.executeUpdate();
-            return r == 1;
+            int res = ps.executeUpdate();
+            if (res > 0) {
+                isUpdate = true;
+            }
+            
         } catch (SQLException ex) {
-            return false;
+            System.out.println(ex);
+            
+            
         } finally {
             conexion.desconectar();
         }
+        
+        return isUpdate;
 
     }
 
@@ -119,7 +128,7 @@ public class EmpleadoDAO implements Crud<EmpleadoDTO> {
                 t.setTelefono(rs.getString(4));
                 t.setCorreo(rs.getString(5));
                 t.setDireccion(rs.getString(6));
-                t.setEdad(rs.getInt(7));
+                t.setFechaNacimiento(rs.getDate(7));
                 t.setNacionalidad(rs.getString(8));
                 t.setGenero(rs.getString(9).charAt(0));
                 t.setNumDocumento(rs.getString(10));
@@ -164,7 +173,7 @@ public class EmpleadoDAO implements Crud<EmpleadoDTO> {
                 t.setTelefono(rs.getString(4));
                 t.setCorreo(rs.getString(5));
                 t.setDireccion(rs.getString(6));
-                t.setEdad(rs.getInt(7));
+                t.setFechaNacimiento(rs.getDate(7));
                 t.setNacionalidad(rs.getString(8));
                 t.setGenero(rs.getString(9).charAt(0));
                 t.setNumDocumento(rs.getString(10));
@@ -206,7 +215,7 @@ public class EmpleadoDAO implements Crud<EmpleadoDTO> {
                 objeto.setTelefono(rs.getString("telefono"));
                 objeto.setCorreo(rs.getString("correo"));
                 objeto.setDireccion(rs.getString("direccion"));
-                objeto.setEdad(rs.getInt("edad"));
+                objeto.setFechaNacimiento(rs.getDate("fechaNacimiento"));
                 objeto.setNacionalidad(rs.getString("nacionalidad"));
                 objeto.setGenero(rs.getString("genero").charAt(0));
                 objeto.setNumDocumento(rs.getString("dni"));
@@ -246,7 +255,7 @@ public class EmpleadoDAO implements Crud<EmpleadoDTO> {
                     t.setTelefono(rs.getString(4));
                     t.setCorreo(rs.getString(5));
                     t.setDireccion(rs.getString(6));
-                    t.setEdad(rs.getInt(7));
+                    t.setFechaNacimiento(rs.getDate(7));
                     t.setNacionalidad(rs.getString(8));
                     t.setGenero(rs.getString(9).charAt(0));
                     t.setNumDocumento(rs.getString(10));

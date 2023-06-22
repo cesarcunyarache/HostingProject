@@ -9,6 +9,8 @@ import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.sql.*;
+import javax.swing.JTextField;
 
 /**
  *
@@ -16,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Form_Empleados extends javax.swing.JPanel {
 
-    int id;
+    int id = 0;
     Empleado emp;
     TipoEmpleado tp;
     DefaultTableModel dt;
@@ -55,7 +57,7 @@ public class Form_Empleados extends javax.swing.JPanel {
     public void limpiar() {
         txt_nombres.setText("");
         txt_apellidos1.setText("");
-        txt_edad.setText("");
+
         txt_telefono.setText("");
         txt_correo.setText("");
         cbo_estado.setSelectedIndex(0);
@@ -65,7 +67,7 @@ public class Form_Empleados extends javax.swing.JPanel {
         txt_direccion.setText("");
         cbo_genero1.setSelectedIndex(0);
         tabla.clearSelection();
-        id = -1;
+        id = 0;
     }
 
     public void llenarTabla() {
@@ -80,7 +82,7 @@ public class Form_Empleados extends javax.swing.JPanel {
             "Telefono",
             "Correo",
             "Direccion",
-            "Edad",
+            "Fecha Nacimiento",
             "Nacionalidad",
             "Género",
             "DNI",
@@ -102,7 +104,7 @@ public class Form_Empleados extends javax.swing.JPanel {
                 datos[3] = c.getTelefono();
                 datos[4] = c.getCorreo();
                 datos[5] = c.getDireccion();
-                datos[6] = c.getEdad();
+                datos[6] = c.getFechaNacimiento();
                 datos[7] = c.getNacionalidad();
                 datos[8] = c.getGenero();
                 datos[9] = c.getNumDocumento();
@@ -147,7 +149,6 @@ public class Form_Empleados extends javax.swing.JPanel {
         btn_Agregar = new javax.swing.JButton();
         btn_Buscar = new javax.swing.JButton();
         cbo_estado = new javax.swing.JComboBox<>();
-        txt_edad = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -169,6 +170,7 @@ public class Form_Empleados extends javax.swing.JPanel {
         txt_nombres = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         btn_nuevo = new javax.swing.JButton();
+        jDtFechaNacimiento = new com.toedter.calendar.JDateChooser();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -231,14 +233,8 @@ public class Form_Empleados extends javax.swing.JPanel {
             }
         });
 
-        txt_edad.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_edadKeyPressed(evt);
-            }
-        });
-
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel4.setText("Edad");
+        jLabel4.setText("Fecha Nacimiento");
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel11.setText("Estado");
@@ -290,9 +286,17 @@ public class Form_Empleados extends javax.swing.JPanel {
             }
         });
 
+        txt_numDoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_numDocActionPerformed(evt);
+            }
+        });
         txt_numDoc.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_numDocKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_numDocKeyTyped(evt);
             }
         });
 
@@ -324,6 +328,9 @@ public class Form_Empleados extends javax.swing.JPanel {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_telefonoKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_telefonoKeyTyped(evt);
+            }
         });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -354,61 +361,57 @@ public class Form_Empleados extends javax.swing.JPanel {
                 .addGap(246, 246, 246)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(cbo_genero1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_Agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                            .addComponent(txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txt_correo, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18))
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                            .addGap(300, 300, 300)
-                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(txt_apellidos1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cbo_nacionalidad1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cbo_tipoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txt_nombres, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(40, 40, 40)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txt_numDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txt_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(16, 16, 16)))
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbo_estado, 0, 103, Short.MAX_VALUE)
-                                    .addComponent(txt_edad)
-                                    .addComponent(btn_nuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(205, 205, 205))
+                        .addComponent(cbo_genero1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                        .addComponent(btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_Agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(220, 220, 220))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40)
+                                .addComponent(txt_correo, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(300, 300, 300)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_apellidos1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbo_nacionalidad1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbo_tipoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_nombres, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(40, 40, 40)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_numDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDtFechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                            .addComponent(cbo_estado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 6, Short.MAX_VALUE)
+                .addGap(0, 1, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -418,8 +421,8 @@ public class Form_Empleados extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txt_apellidos1, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                     .addComponent(txt_nombres)
-                    .addComponent(txt_edad))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jDtFechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -486,7 +489,7 @@ public class Form_Empleados extends javax.swing.JPanel {
             txt_telefono.setText(empDTO.getTelefono());
             txt_correo.setText(empDTO.getCorreo());
             txt_direccion.setText(empDTO.getDireccion());
-            txt_edad.setText(String.valueOf(empDTO.getEdad()));
+            jDtFechaNacimiento.setDate(empDTO.getFechaNacimiento());
             cbo_nacionalidad1.setSelectedItem(String.valueOf(empDTO.getNacionalidad()));
 
             switch (empDTO.getGenero()) {
@@ -520,8 +523,9 @@ public class Form_Empleados extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_BuscarActionPerformed
 
     private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
+
         if (!txt_numDoc.getText().isEmpty()
-                && !txt_nombres.getText().isEmpty() && !txt_edad.getText().isEmpty()
+                && !txt_nombres.getText().isEmpty() && !(jDtFechaNacimiento.getDate() == null)
                 && !txt_telefono.getText().isEmpty() && !txt_correo.getText().isEmpty()
                 && !txt_direccion.getText().isEmpty() && !cbo_genero1.getSelectedItem().equals("-Seleccione-")
                 && !cbo_tipoEmpleado.getSelectedItem().equals("-Seleccione-")
@@ -538,20 +542,27 @@ public class Form_Empleados extends javax.swing.JPanel {
             String direccion = txt_direccion.getText();
             String generoSeleccionado = cbo_genero1.getSelectedItem().toString();
             char genero = generoSeleccionado.charAt(0);
+            
+            if (correo.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
 
-            Byte edad = Byte.parseByte(txt_edad.getText());
-            String mensaje = emp.agregar(tp.BuscarName(tipoEmpleado).getIdTipoEmpleado(), nombres, apellidos, telefono, correo, direccion, edad, nacionaldad, genero, numDoc);
+                java.sql.Date fechaNacimiento = new java.sql.Date(jDtFechaNacimiento.getDate().getTime());
+                String mensaje = emp.agregar(tp.BuscarName(tipoEmpleado).getIdTipoEmpleado(), nombres, apellidos, telefono, correo, direccion, fechaNacimiento, nacionaldad, genero, numDoc);
+                limpiar();
+                llenarTabla();
+                if (!mensaje.equals("")) {
+                    JOptionPane.showMessageDialog(null, mensaje);
 
-            if (!mensaje.equals("")) {
-                JOptionPane.showMessageDialog(null, mensaje);
-
+                } else {
+                    JOptionPane.showMessageDialog(null, mensaje);
+                }
             } else {
-                JOptionPane.showMessageDialog(null, mensaje);
+                JOptionPane.showMessageDialog(null, "Error, formato de correo erróneo");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Error, uno o más campos vacios!");
         }
-        llenarTabla();
+
+
     }//GEN-LAST:event_btn_AgregarActionPerformed
 
     private void cbo_estadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_estadoActionPerformed
@@ -576,7 +587,7 @@ public class Form_Empleados extends javax.swing.JPanel {
                 txt_telefono.setText(empDTO.getTelefono());
                 txt_correo.setText(empDTO.getCorreo());
                 txt_direccion.setText(empDTO.getDireccion());
-                txt_edad.setText(String.valueOf(empDTO.getEdad()));
+                jDtFechaNacimiento.setDate(empDTO.getFechaNacimiento());
                 cbo_nacionalidad1.setSelectedItem(String.valueOf(empDTO.getNacionalidad()));
 
                 switch (empDTO.getGenero()) {
@@ -609,7 +620,7 @@ public class Form_Empleados extends javax.swing.JPanel {
 
     private void btn_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ActualizarActionPerformed
         if (!txt_numDoc.getText().isEmpty() && !cbo_estado.getSelectedItem().equals("-Seleccione-")
-                && !txt_nombres.getText().isEmpty() && !txt_edad.getText().isEmpty()
+                && !txt_nombres.getText().isEmpty() && !(jDtFechaNacimiento.getDate() == null)
                 && !txt_telefono.getText().isEmpty() && !txt_correo.getText().isEmpty()
                 && !txt_direccion.getText().isEmpty() && !cbo_genero1.getSelectedItem().equals("-Seleccione-")
                 && !cbo_tipoEmpleado.getSelectedItem().equals("-Seleccione-")
@@ -620,11 +631,10 @@ public class Form_Empleados extends javax.swing.JPanel {
             String telefono = txt_telefono.getText();
             String correo = txt_correo.getText();
             String direccion = txt_direccion.getText();
-            byte edad = Byte.parseByte(txt_edad.getText());
-            String nacionaldad = cbo_nacionalidad1.getSelectedItem().toString();
+
             String generoSeleccionado = cbo_genero1.getSelectedItem().toString();
             char genero = generoSeleccionado.charAt(0);
-
+            String nacionalidad = (String) cbo_nacionalidad1.getSelectedItem();
             String numDoc = txt_numDoc.getText();
 
             String tipoEmpleado = cbo_tipoEmpleado.getSelectedItem().toString();
@@ -641,19 +651,26 @@ public class Form_Empleados extends javax.swing.JPanel {
                 default ->
                     throw new AssertionError();
             }
+            if (correo.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+                java.sql.Date fechaNacimiento = new java.sql.Date(jDtFechaNacimiento.getDate().getTime());
+                System.out.println(fechaNacimiento);
+                String mensaje = emp.actualizar(id, tp.BuscarName(tipoEmpleado).getIdTipoEmpleado(), nombres, apellidos, telefono, correo, direccion, fechaNacimiento, nacionalidad, genero, numDoc, estado);
+                limpiar();
+                llenarTabla();
+                id = 0;
+                if (!mensaje.equals("")) {
+                    JOptionPane.showMessageDialog(null, mensaje);
 
-            String mensaje = emp.actualizar(id, tp.BuscarName(tipoEmpleado).getIdTipoEmpleado(), nombres, apellidos, telefono, correo, direccion, edad, nacionaldad, genero, numDoc, estado);
-
-            if (!mensaje.equals("")) {
-                JOptionPane.showMessageDialog(null, mensaje);
-
+                } else {
+                    JOptionPane.showMessageDialog(null, mensaje);
+                }
             } else {
-                JOptionPane.showMessageDialog(null, mensaje);
+                JOptionPane.showMessageDialog(null, "Error, formato de correo erróneo");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Error, uno o más campos vacios!");
         }
-        llenarTabla();
+
 
     }//GEN-LAST:event_btn_ActualizarActionPerformed
 
@@ -696,10 +713,6 @@ public class Form_Empleados extends javax.swing.JPanel {
         btn_nuevo.setEnabled(true);
     }//GEN-LAST:event_txt_numDocKeyPressed
 
-    private void txt_edadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_edadKeyPressed
-        btn_nuevo.setEnabled(true);
-    }//GEN-LAST:event_txt_edadKeyPressed
-
     private void cbo_estadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbo_estadoMouseClicked
         btn_nuevo.setEnabled(true);
     }//GEN-LAST:event_cbo_estadoMouseClicked
@@ -716,6 +729,30 @@ public class Form_Empleados extends javax.swing.JPanel {
         btn_nuevo.setEnabled(true);
     }//GEN-LAST:event_cbo_genero1MouseClicked
 
+    private void txt_numDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_numDocActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_numDocActionPerformed
+
+    private void txt_numDocKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_numDocKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+        if (txt_numDoc.getText().length() > 7) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_numDocKeyTyped
+
+    private void txt_telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_telefonoKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+        if (txt_telefono.getText().length() > 8) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_telefonoKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Actualizar;
@@ -726,6 +763,7 @@ public class Form_Empleados extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbo_genero1;
     private javax.swing.JComboBox<String> cbo_nacionalidad1;
     private javax.swing.JComboBox<String> cbo_tipoEmpleado;
+    private com.toedter.calendar.JDateChooser jDtFechaNacimiento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -744,7 +782,6 @@ public class Form_Empleados extends javax.swing.JPanel {
     private javax.swing.JTextField txt_apellidos1;
     private javax.swing.JTextField txt_correo;
     private javax.swing.JTextField txt_direccion;
-    private javax.swing.JTextField txt_edad;
     private javax.swing.JTextField txt_nombres;
     private javax.swing.JTextField txt_numDoc;
     private javax.swing.JTextField txt_telefono;

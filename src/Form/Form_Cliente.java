@@ -83,15 +83,26 @@ public class Form_Cliente extends javax.swing.JPanel {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Número de documento");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
-        jPanel1.add(txt_numDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 210, 30));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, -1, -1));
+
+        txt_numDoc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_numDocKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txt_numDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, 210, 30));
 
         jLabel2.setText("Tipo de documento");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, -1, -1));
 
         cbo_tipoDoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Seleccione-", "DNI", "Pasaporte" }));
         cbo_tipoDoc.setToolTipText("");
-        jPanel1.add(cbo_tipoDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 210, -1));
+        cbo_tipoDoc.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbo_tipoDocItemStateChanged(evt);
+            }
+        });
+        jPanel1.add(cbo_tipoDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 210, -1));
         jPanel1.add(txt_nombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 210, 30));
 
         jLabel3.setText("Nombres");
@@ -100,6 +111,12 @@ public class Form_Cliente extends javax.swing.JPanel {
 
         jLabel4.setText("Apellidos");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, -1, -1));
+
+        txt_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_telefonoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 210, 30));
 
         jLabel5.setText("Telefono");
@@ -250,11 +267,16 @@ public class Form_Cliente extends javax.swing.JPanel {
                 String genero = cbo_genero.getSelectedItem().toString();
                 String nacionaldad = cbo_nacionalidad.getSelectedItem().toString();
 
-                String mensaje = cliente.Agregar(numDoc, tipoDoc, nombres, apellidos, telefono, nacionaldad, correo, direccion, genero.charAt(0));
-                JOptionPane.showMessageDialog(null, mensaje);
-                llenarTabla();
-                limpiar();
-            }else {
+                if (correo.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+                    String mensaje = cliente.Agregar(numDoc, tipoDoc, nombres, apellidos, telefono, nacionaldad, correo, direccion, genero.charAt(0));
+                    JOptionPane.showMessageDialog(null, mensaje);
+                    llenarTabla();
+                    limpiar();
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error, formato de correo erróneo");
+                }
+            } else {
                 JOptionPane.showMessageDialog(null, "Error, solo ingresa valores númericos");
             }
 
@@ -322,21 +344,61 @@ public class Form_Cliente extends javax.swing.JPanel {
             String genero = cbo_genero.getSelectedItem().toString();
             String nacionaldad = cbo_nacionalidad.getSelectedItem().toString();
 
-            String mensaje = cliente.Actualizar(id, numDoc, tipoDoc, nombres, apellidos, telefono, nacionaldad, correo, direccion, genero.charAt(0));
+            if (correo.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+                String mensaje = cliente.Actualizar(id, numDoc, tipoDoc, nombres, apellidos, telefono, nacionaldad, correo, direccion, genero.charAt(0));
 
-            JOptionPane.showMessageDialog(null, mensaje);
-            id = 0;
-
+                JOptionPane.showMessageDialog(null, mensaje);
+                llenarTabla();
+                limpiar();
+                id = 0;
+            } else {
+                JOptionPane.showMessageDialog(null, "Error, formato de correo erróneo");
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Error, uno o más campos vacios!");
         }
-        llenarTabla();
-        limpiar();
+
     }//GEN-LAST:event_btn_ActualizarActionPerformed
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
 
     }//GEN-LAST:event_jPanel1MouseClicked
+
+    private void txt_telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_telefonoKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+        if (txt_telefono.getText().length() > 8) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_telefonoKeyTyped
+
+    private void txt_numDocKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_numDocKeyTyped
+        TipoDocumentoDTO obj = (TipoDocumentoDTO) modelo.getSelectedItem();
+        String sw = obj.getNombre();
+        char c = evt.getKeyChar();
+
+        if (sw.equals("DNI")) {
+            if (!Character.isDigit(c)) {
+                evt.consume();
+            }
+            if (txt_numDoc.getText().length() > 7) {
+                evt.consume();
+            }
+        } else if (sw.equals("Pasaporte") || sw.equals("Carnet extranjeria")) {
+            if (!Character.isDigit(c)) {
+                evt.consume();
+            }
+            if (txt_numDoc.getText().length() > 8) {
+                evt.consume();
+            }
+        } 
+    }//GEN-LAST:event_txt_numDocKeyTyped
+
+    private void cbo_tipoDocItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbo_tipoDocItemStateChanged
+        txt_numDoc.setText("");
+    }//GEN-LAST:event_cbo_tipoDocItemStateChanged
 
     public void llenarTabla() {
 

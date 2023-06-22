@@ -3,6 +3,7 @@ package BusinessObject;
 import DataAccessObject.EmpleadoDAO;
 import TransferObject.EmpleadoDTO;
 import java.util.List;
+import java.sql.*;
 
 public class Empleado {
 
@@ -13,7 +14,7 @@ public class Empleado {
         empleadoDAO = new EmpleadoDAO();
     }
 
-    public String agregar(int tipoEmpleadoID, String nombre, String apellido, String telefono, String correo, String direccion, Byte edad, String nacionalidad, char genero, String numDoc) {
+    public String agregar(int tipoEmpleadoID, String nombre, String apellido, String telefono, String correo, String direccion, Date fecha, String nacionalidad, char genero, String numDoc) {
         String mensaje = "";
         empleadoDTO = new EmpleadoDTO(
                 tipoEmpleadoID,
@@ -22,7 +23,7 @@ public class Empleado {
                 telefono,
                 correo,
                 direccion,
-                edad,
+                fecha,
                 nacionalidad,
                 genero,
                 numDoc);
@@ -71,14 +72,15 @@ public class Empleado {
             String telefono,
             String correo,
             String direccion,
-            Byte edad,
+            Date fecha,
             String nacionalidad,
             char genero,
             String numDoc,
             int estado) {
 
         String mensaje = "";
-        empleadoDTO = new EmpleadoDTO(idEmpleado, tipoEmpleadoID, estado, nombre, apellido, telefono, correo, direccion, edad, nacionalidad, genero, numDoc);
+        empleadoDTO = new EmpleadoDTO(idEmpleado, tipoEmpleadoID, estado, nombre, apellido, telefono, correo, direccion, fecha, nacionalidad, genero, numDoc);
+        System.out.println("Tercer fecha " + empleadoDTO.getFechaNacimiento());
         if (empleadoDAO.Update(empleadoDTO)) {
             mensaje = "El registro se actualizo correctamente";
         } else {

@@ -1,23 +1,26 @@
 package TransferObject;
-
+import java.sql.*;
 public class EmpleadoDTO extends PersonaDTO {
 
     private int idEmpleado;
     private int TipoEmpleadoID;
     private int estado;
+    private Date fechaNacimiento;
 
-    public EmpleadoDTO(int idEmpleado, String cargo, int TipoEmpleadoID, int estado, String nombres, String apellidos, String telefono, String correo, String direccion, int edad, String nacionalidad, char genero, String numDocumento) {
-        super(nombres, apellidos, telefono, correo, direccion, edad, nacionalidad, genero, numDocumento);
+    public EmpleadoDTO(int idEmpleado, String cargo, int TipoEmpleadoID, int estado, String nombres, String apellidos, String telefono, String correo, String direccion, Date fechaNacimiento, String nacionalidad, char genero, String numDocumento) {
+        super(nombres, apellidos, telefono, correo, direccion, nacionalidad, genero, numDocumento);
         this.idEmpleado = idEmpleado;
+        this.fechaNacimiento = fechaNacimiento;
 
         this.TipoEmpleadoID = TipoEmpleadoID;
         this.estado = estado;
     }
 
-    public EmpleadoDTO(int idEmpleado, int TipoEmpleadoID, int estado, String nombres, String apellidos, String telefono, String correo, String direccion, int edad, String nacionalidad, char genero, String numDocumento) {
-        super(nombres, apellidos, telefono, correo, direccion, edad, nacionalidad, genero, numDocumento);
+    public EmpleadoDTO(int idEmpleado, int TipoEmpleadoID, int estado, String nombres, String apellidos, String telefono, String correo, String direccion, Date fechaNacimiento, String nacionalidad, char genero, String numDocumento) {
+        super(nombres, apellidos, telefono, correo, direccion, nacionalidad, genero, numDocumento);
         this.idEmpleado = idEmpleado;
         this.TipoEmpleadoID = TipoEmpleadoID;
+        this.fechaNacimiento = fechaNacimiento;
         this.estado = estado;
     }
 
@@ -34,13 +37,16 @@ public class EmpleadoDTO extends PersonaDTO {
         super(numDocumento);
     }
 
-    public EmpleadoDTO(int TipoEmpleadoID, String nombres, String apellidos, String telefono, String correo, String direccion, int edad, String nacionalidad, char genero, String numDocumento) {
-        super(nombres, apellidos, telefono, correo, direccion, edad, nacionalidad, genero, numDocumento);
+    public EmpleadoDTO(int TipoEmpleadoID, String nombres, String apellidos, String telefono, String correo, String direccion, Date fechaNacimiento, String nacionalidad, char genero, String numDocumento) {
+        super(nombres, apellidos, telefono, correo, direccion, nacionalidad, genero, numDocumento);
         this.TipoEmpleadoID = TipoEmpleadoID;
+         this.fechaNacimiento = fechaNacimiento;
+        
     }
 
-    public EmpleadoDTO(String nombres, String apellidos, String telefono, String correo, String direccion, int edad, String nacionalidad, char genero, String numDocumento) {
-        super(nombres, apellidos, telefono, correo, direccion, edad, nacionalidad, genero, numDocumento);
+    public EmpleadoDTO(String nombres, String apellidos, String telefono, String correo, String direccion, Date fechaNacimiento, String nacionalidad, char genero, String numDocumento) {
+        super(nombres, apellidos, telefono, correo, direccion, nacionalidad, genero, numDocumento);
+         this.fechaNacimiento = fechaNacimiento;
     }
 
     public EmpleadoDTO() {
@@ -69,6 +75,16 @@ public class EmpleadoDTO extends PersonaDTO {
     public void setEstado(int estado) {
         this.estado = estado;
     }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+    
+    
 
 
 }//end EmpleadoDTO

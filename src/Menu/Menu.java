@@ -119,7 +119,7 @@ public class Menu extends javax.swing.JPanel {
         addEventLogout(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                System.out.println("Logout");
+                //System.out.println("Logout");
                 System.exit(0);
             }
         });
@@ -129,7 +129,7 @@ public class Menu extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent ae) {
                 if (!animator.isRunning()) {
                     animator.start();
-                    System.out.println("Acción");
+                    //System.out.println("Acción");
                 }
             }
         });
@@ -163,6 +163,7 @@ public class Menu extends javax.swing.JPanel {
                 }
             }
         });
+       
         // agrega menus
         //addMenu(new ModelMenu("Inicio", new ImageIcon(getClass().getResource("/Image/home.png"))));
         addMenu(new ModelMenu("Habitaciones", new ImageIcon(getClass().getResource("/Image/habitacion.png"))));

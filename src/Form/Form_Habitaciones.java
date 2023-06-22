@@ -31,7 +31,7 @@ public class Form_Habitaciones extends javax.swing.JPanel {
 
     public Form_Habitaciones(Menu menu) {
         initComponents();
-        
+
         this.menu = menu;
 //        habilitarCBX();
         setEventSelect(new EventItem() {
@@ -49,13 +49,13 @@ public class Form_Habitaciones extends javax.swing.JPanel {
             public void itemClick(Component com, HabitacionDTO item) {
                 if (itemSelected != item) {
                     setSelected(com);
-                    menu.SelectMenu(3, formHabitacion);
+                    menu.SelectMenu(1, formHabitacion);
                     formHabitacion.setData(item);
                 }
             }
 
         });
-        
+
         cargarHabitaciones();
     }
 
