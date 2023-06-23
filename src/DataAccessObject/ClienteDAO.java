@@ -254,6 +254,52 @@ public class ClienteDAO implements Crud<ClienteDTO> {
         return cliente;
     }
 
+    // listar clientes por Organizacion
+    public ArrayList<ClienteDTO> ListOrg(int idOrg) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = conexion.getConnection();
+        ClienteDTO cliente;
+        ArrayList<ClienteDTO> clientes = new ArrayList<>();
+
+        try {
+            ps = con.prepareStatement("SELECT c.idCliente, numDoc, TipoDocumentoID, nombres, apellidos, telefono, nacionalidad, correo, direccion, genero  FROM Cliente c \n"
+                    + "INNER JOIN ClienteOrganizacion co \n"
+                    + "on c.idCliente = co.idCliente\n"
+                    + "WHERE co.idOrganizacion = ?");
+            ps.setInt(1, idOrg);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("idCliente");
+                String dni = rs.getString("numDoc");
+                int tipoDocumentoID = rs.getInt("tipoDocumentoID");
+                String nombres = rs.getString("nombres");
+                String apellidos = rs.getString("apellidos");
+                String telefono = rs.getString("telefono");
+                String nacionalidad = rs.getString("nacionalidad");
+                String correo = rs.getString("correo");
+                String direccion = rs.getString("direccion");
+                String genero = rs.getString("genero");
+                cliente = new ClienteDTO(id, dni, tipoDocumentoID, nombres, apellidos, telefono, nacionalidad, correo, direccion, genero.charAt(0));
+                clientes.add(cliente);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+
+        } finally {
+            try {
+                con.close();
+                ps.close();
+                rs.close();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+        }
+        return clientes;
+    }
+
     //BUSQUEDAS
     //BUSQUEDA POR NOMBRE 
     public List<ClienteDTO> buscarNombres(ClienteDTO cli) {

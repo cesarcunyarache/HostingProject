@@ -7,6 +7,8 @@ import Form.Form_Habitaciones;
 import Form.Form_NuevaReserva;
 import Form.Form_Organizacion;
 import Form.Form_TipoDocumento;
+import Form.Form_TipoPago;
+import Form.Form_TipoPago2;
 import Form.Form_Usuarios;
 import Swing.ButtonCustom;
 import Swing.MenuItem;
@@ -57,6 +59,7 @@ public class Menu extends javax.swing.JPanel {
     Form_Usuarios usuario;
     Form_NuevaReserva reserva;
     Form_Habitacion gesHab;
+    Form_TipoPago2 tipoPago;
 
     public Menu(JPanel main, JPanel body, Menu menu) {
         initComponents();
@@ -64,6 +67,7 @@ public class Menu extends javax.swing.JPanel {
         this.body = body;
         this.menu = menu;
         cliente = new Form_Cliente();
+        cliente.setMenu(this);
         empleado = new Form_Empleados();
         tipo = new Form_TipoDocumento();
         habitacion = new Form_Habitaciones(this);
@@ -71,6 +75,7 @@ public class Menu extends javax.swing.JPanel {
         usuario = new Form_Usuarios();
         reserva = new Form_NuevaReserva();
         gesHab = new Form_Habitacion();
+        tipoPago = new Form_TipoPago2();
         setOpaque(false);
         init();
 
@@ -157,7 +162,7 @@ public class Menu extends javax.swing.JPanel {
                 } else if (index == 7) {
                     showForm(usuario);
                 } else if (index == 8) {
-
+                    showForm(tipoPago);
                 } else if (index == 9) {
 
                 }

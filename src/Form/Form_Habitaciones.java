@@ -155,7 +155,7 @@ public class Form_Habitaciones extends javax.swing.JPanel {
         jBAplicarFiltros.setBackground(new java.awt.Color(0, 110, 230));
         jBAplicarFiltros.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jBAplicarFiltros.setForeground(new java.awt.Color(255, 255, 255));
-        jBAplicarFiltros.setText("Aplcar filtros");
+        jBAplicarFiltros.setText("Aplicar filtros");
         jBAplicarFiltros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBAplicarFiltrosActionPerformed(evt);
@@ -169,16 +169,14 @@ public class Form_Habitaciones extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel49)
-                        .addGap(65, 65, 65))
+                    .addComponent(jLabel49)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(jCbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jBAplicarFiltros)))
-                .addContainerGap(641, Short.MAX_VALUE))
+                .addContainerGap(637, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

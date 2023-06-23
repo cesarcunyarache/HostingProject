@@ -2,6 +2,7 @@ package Form;
 
 import BusinessObject.Cliente;
 import BusinessObject.TipoDocumento;
+import Menu.Menu;
 import TransferObject.ClienteDTO;
 import TransferObject.TipoDocumentoDTO;
 import java.util.ArrayList;
@@ -22,12 +23,16 @@ public class Form_Cliente extends javax.swing.JPanel {
     DefaultTableModel df;
     DefaultComboBoxModel modelo;
     Vector<TipoDocumentoDTO> combo;
+    Menu menu;
+    Form_Organizacion formOrg;
     int id = 0;
 
     public Form_Cliente() {
         initComponents();
+        this.menu = menu;
         tipoDocumento = new TipoDocumento();
         cliente = new Cliente();
+        formOrg = new Form_Organizacion();
         combo = new Vector<>();
         modelo = new DefaultComboBoxModel(llenarCombo());
         cbo_tipoDoc.setModel(modelo);
@@ -41,6 +46,12 @@ public class Form_Cliente extends javax.swing.JPanel {
         llenarTabla();
         cbo_nacionalidad.setSelectedItem("Perú");
     }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -83,6 +94,7 @@ public class Form_Cliente extends javax.swing.JPanel {
         rbApellidos = new javax.swing.JRadioButton();
         rbNombre = new javax.swing.JRadioButton();
         txtBusqueda = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -158,7 +170,7 @@ public class Form_Cliente extends javax.swing.JPanel {
                 btn_ActualizarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 370, 120, 30));
+        jPanel1.add(btn_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, 120, 40));
 
         btn_Buscar.setText("Buscar");
         btn_Buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -166,7 +178,7 @@ public class Form_Cliente extends javax.swing.JPanel {
                 btn_BuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, 120, 30));
+        jPanel1.add(btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, 120, 40));
 
         btn_Agregar.setText("Agregar");
         btn_Agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -174,7 +186,7 @@ public class Form_Cliente extends javax.swing.JPanel {
                 btn_AgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 120, 30));
+        jPanel1.add(btn_Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 120, 40));
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -262,7 +274,15 @@ public class Form_Cliente extends javax.swing.JPanel {
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 140, -1, 270));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 130, -1, 270));
+
+        jButton1.setText("Asociar a organización");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 370, -1, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -279,12 +299,12 @@ public class Form_Cliente extends javax.swing.JPanel {
     private void btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BuscarActionPerformed
         String dni = JOptionPane.showInputDialog("Ingrese el DNI a buscar");
 
-        if (!dni.equals("")) {
+        if (dni != null && !dni.equals("") ) {
             if (dni.matches("[0-9]*")) {
                 ClienteDTO clienteDTO = cliente.BuscarDNI(dni);
 
                 if (clienteDTO != null) {
-                    txt_numDoc.setText(clienteDTO.getNumDocumento());
+                   
                     for (TipoDocumentoDTO tipoDocumentoDTO : combo) {
                         if (tipoDocumentoDTO.getIdTipoDocumento() == clienteDTO.getTipoDocumentoID()) {
                             modelo.setSelectedItem(tipoDocumentoDTO);
@@ -306,6 +326,7 @@ public class Form_Cliente extends javax.swing.JPanel {
                     }
 
                     cbo_nacionalidad.setSelectedItem(clienteDTO.getNacionalidad());
+                     txt_numDoc.setText(clienteDTO.getNumDocumento());
                     id = clienteDTO.getIdCliente();
 
                 } else {
@@ -367,7 +388,7 @@ public class Form_Cliente extends javax.swing.JPanel {
 
             if (clienteDTO != null) {
 
-                txt_numDoc.setText(clienteDTO.getNumDocumento());
+                
 
                 for (TipoDocumentoDTO tipoDocumentoDTO : combo) {
                     if (tipoDocumentoDTO.getIdTipoDocumento() == clienteDTO.getTipoDocumentoID()) {
@@ -391,7 +412,7 @@ public class Form_Cliente extends javax.swing.JPanel {
 
                 }
                 cbo_nacionalidad.setSelectedItem(clienteDTO.getNacionalidad());
-
+                 txt_numDoc.setText(clienteDTO.getNumDocumento());
             } else {
                 JOptionPane.showMessageDialog(null, "Valor no encontrado");
             }
@@ -555,6 +576,22 @@ public class Form_Cliente extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtBusquedaKeyReleased
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (!txt_numDoc.getText().isEmpty()) {
+            
+            ClienteDTO obj = cliente.BuscarDNI(txt_numDoc.getText());
+            
+            if (obj != null){
+                formOrg.setDataClient(obj);
+                menu.SelectMenu(5, formOrg);
+            }
+   
+        } else {
+            JOptionPane.showMessageDialog(null, "Error, ingresa el Número de documento del cliente!");
+        }
+       
+    }//GEN-LAST:event_jButton1ActionPerformed
+
       public void llenarTabla() {
 
         df.setColumnCount(0);
@@ -624,6 +661,7 @@ public class Form_Cliente extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbo_genero;
     private javax.swing.JComboBox<String> cbo_nacionalidad;
     private javax.swing.JComboBox<String> cbo_tipoDoc;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

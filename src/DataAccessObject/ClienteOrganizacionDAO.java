@@ -146,17 +146,17 @@ public class ClienteOrganizacionDAO implements Crud<ClienteOrganizacionDTO> {
         Connection con = conexion.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-
+        ClienteOrganizacionDTO clientSerch = null;
         try {
-            ps = con.prepareStatement("SELECT * FROM ClienteOrganizacion WHERE id=?");
-            ps.setInt(1, clienteOrganizacion.getId());
+            ps = con.prepareStatement("SELECT * FROM ClienteOrganizacion WHERE idCliente=?");
+            ps.setInt(1, clienteOrganizacion.getIdCliente());
             rs = ps.executeQuery();
 
             if (rs.next()) {
                 int id = rs.getInt("id");
                 int idCliente = rs.getInt("idCliente");
                 int idOrganizacion = rs.getInt("idOrganizacion");
-                clienteOrganizacion = new ClienteOrganizacionDTO(id, idCliente, idOrganizacion);
+                clientSerch = new ClienteOrganizacionDTO(id, idCliente, idOrganizacion);
             }
 
         } catch (Exception e) {
@@ -171,6 +171,6 @@ public class ClienteOrganizacionDAO implements Crud<ClienteOrganizacionDTO> {
             }
         }
 
-        return clienteOrganizacion;
+        return clientSerch;
     }
 }

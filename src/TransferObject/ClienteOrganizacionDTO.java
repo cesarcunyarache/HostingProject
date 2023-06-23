@@ -10,9 +10,11 @@ public class ClienteOrganizacionDTO {
 
     }
 
-    public ClienteOrganizacionDTO(int id) {
-        this.id = id;
+    public ClienteOrganizacionDTO(int idCliente) {
+        this.idCliente = idCliente;
     }
+
+    
 
     public ClienteOrganizacionDTO(int id, int idCliente, int idOrganizacion) {
         this.id = id;

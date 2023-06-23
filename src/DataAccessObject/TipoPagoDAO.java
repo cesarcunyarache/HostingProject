@@ -135,12 +135,12 @@ public class TipoPagoDAO implements Crud<TipoPagoDTO> {
         return isDelete;
     }
 
-        @Override
+     @Override
     public TipoPagoDTO Search(TipoPagoDTO tipoPago) {
         Connection con = conexion.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-
+        TipoPagoDTO ti = null;
         try {
             ps = con.prepareStatement("SELECT * FROM TipoPago WHERE idTipo=?");
             ps.setInt(1, tipoPago.getIdTPago());
@@ -149,7 +149,7 @@ public class TipoPagoDAO implements Crud<TipoPagoDTO> {
             if (rs.next()) {
                 int idTPago = rs.getInt("idTipo");
                 String nombre = rs.getString("nombre");
-                tipoPago = new TipoPagoDTO(idTPago, nombre);
+                ti = new TipoPagoDTO(idTPago, nombre);
             }
 
         } catch (Exception e) {
@@ -164,7 +164,7 @@ public class TipoPagoDAO implements Crud<TipoPagoDTO> {
             }
         }
 
-        return tipoPago;
+        return ti;
     }
 
     public TipoPagoDTO SearchName(TipoPagoDTO tipoPago) {

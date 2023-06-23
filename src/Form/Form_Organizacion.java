@@ -1,10 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package Form;
 
+import BusinessObject.Cliente;
+import BusinessObject.ClienteOrganizacion;
 import BusinessObject.Organizacion;
+import TransferObject.ClienteDTO;
+import TransferObject.ClienteOrganizacionDTO;
 import TransferObject.OrganizacionDTO;
 
 import java.util.ArrayList;
@@ -18,13 +19,20 @@ import javax.swing.table.DefaultTableModel;
 public class Form_Organizacion extends javax.swing.JPanel {
 
     Organizacion organizacion;
+    ClienteDTO cliente;
+    OrganizacionDTO organizacionDTO;
+    ClienteOrganizacion clienteOrganizacion;
+    Cliente clie;
     DefaultTableModel df;
+    DefaultTableModel dfCliente;
+    
     int id = 0;
 
     public Form_Organizacion() {
         initComponents();
         organizacion = new Organizacion();
-
+        clienteOrganizacion = new ClienteOrganizacion();
+        clie = new Cliente();
         df = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -32,7 +40,24 @@ public class Form_Organizacion extends javax.swing.JPanel {
             }
 
         };
+        
+        dfCliente = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+
+        };
+        
+        
         llenarTabla();
+        btnListar.setVisible(false);
+    }
+
+    public void setDataClient(ClienteDTO obj) {
+        this.cliente = obj;
+        txtNumDoc.setText(obj.getNumDocumento());
+        txtNom.setText(obj.getNombres() + " " + obj.getApellidos());
     }
 
     @SuppressWarnings("unchecked")
@@ -62,6 +87,10 @@ public class Form_Organizacion extends javax.swing.JPanel {
         txtNumDoc = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtNom = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablaClientes = new javax.swing.JTable();
+        btnListar = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -110,7 +139,7 @@ public class Form_Organizacion extends javax.swing.JPanel {
                 btn_AgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, 90, 30));
+        jPanel1.add(btn_Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 390, 90, 30));
 
         btn_Buscar.setText("Buscar");
         btn_Buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +147,7 @@ public class Form_Organizacion extends javax.swing.JPanel {
                 btn_BuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 390, 80, 30));
+        jPanel1.add(btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 390, 80, 30));
 
         btn_Actualizar.setText("Actualizar");
         btn_Actualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -126,7 +155,7 @@ public class Form_Organizacion extends javax.swing.JPanel {
                 btn_ActualizarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 390, 90, 30));
+        jPanel1.add(btn_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 390, 90, 30));
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -156,13 +185,44 @@ public class Form_Organizacion extends javax.swing.JPanel {
         jLabel49.setText("Información de organizaciones");
         jPanel1.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
 
-        jLabel6.setText("Número de documeto");
+        jLabel6.setText("Número de documento");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 50, -1, -1));
         jPanel1.add(txtNumDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 70, 240, 30));
 
-        jLabel7.setText("Nombres y apeliidos");
+        jLabel7.setText("Nombres y apellidos");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 130, -1, -1));
-        jPanel1.add(txtNom, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 150, 230, 30));
+        jPanel1.add(txtNom, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 150, 240, 30));
+
+        jButton1.setText("Asociar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 390, -1, -1));
+
+        tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tablaClientes);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 260, 430, 250));
+
+        btnListar.setText("Listar ");
+        btnListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnListar, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 220, 100, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -205,22 +265,26 @@ public class Form_Organizacion extends javax.swing.JPanel {
     private void btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BuscarActionPerformed
         String ID = JOptionPane.showInputDialog("Ingrese el ID a buscar");
 
-        if (ID.matches("[0-9]*")) {
-            OrganizacionDTO org = organizacion.Buscar(Integer.parseInt(ID));
+        if (ID != null && !ID.equals("")) {
+            if (ID.matches("[0-9]*")) {
+                OrganizacionDTO org = organizacion.Buscar(Integer.parseInt(ID));
 
-            if (org != null) {
-                txt_nombre.setText(org.getNombre());
-                txt_razon.setText(org.getRazonSocial());
-                txt_ruc.setText(org.getRuc());
-                txt_descripcion.setText(org.getDescripcion());
-                cbo_estado.setSelectedItem(org.getEstado());
-                id = org.getIdOrganizacion();
+                if (org != null) {
+                    this.organizacionDTO = org;
+                    txt_nombre.setText(org.getNombre());
+                    txt_razon.setText(org.getRazonSocial());
+                    txt_ruc.setText(org.getRuc());
+                    txt_descripcion.setText(org.getDescripcion());
+                    cbo_estado.setSelectedItem(org.getEstado());
+                    id = org.getIdOrganizacion();
+                } else {
+                    JOptionPane.showMessageDialog(null, "No encontrado");
+                }
+
             } else {
-                JOptionPane.showMessageDialog(null, "No encontrado");
+                JOptionPane.showMessageDialog(null, "Ingrese solo valores enteros");
             }
- 
-        } else {
-             JOptionPane.showMessageDialog(null, "Ingrese solo valores enteros");
+
         }
     }//GEN-LAST:event_btn_BuscarActionPerformed
 
@@ -231,11 +295,13 @@ public class Form_Organizacion extends javax.swing.JPanel {
             OrganizacionDTO org = organizacion.Buscar(id);
 
             if (org != null) {
+                this.organizacionDTO = org;
                 txt_nombre.setText(org.getNombre());
                 txt_razon.setText(org.getRazonSocial());
                 txt_ruc.setText(org.getRuc());
                 txt_descripcion.setText(org.getDescripcion());
                 cbo_estado.setSelectedItem(org.getEstado());
+                llenarTablaClientes(org.getIdOrganizacion());
             }
         } else {
             JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
@@ -254,15 +320,16 @@ public class Form_Organizacion extends javax.swing.JPanel {
 
             String mensaje = organizacion.Actualizar(id, nombre, razon, ruc, descripcion, estado);
 
-            JOptionPane.showMessageDialog(null, mensaje );
+            JOptionPane.showMessageDialog(null, mensaje);
             id = 0;
+            Limpiar();
+            llenarTabla();
 
         } else {
-            JOptionPane.showMessageDialog(null, "ERROR : Uno o más campos vacios HOLA");
+            JOptionPane.showMessageDialog(null, "ERROR : Uno o más campos vacios");
         }
-        
-        llenarTabla();
-        Limpiar();
+
+
     }//GEN-LAST:event_btn_ActualizarActionPerformed
 
     private void txt_rucKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_rucKeyTyped
@@ -275,33 +342,64 @@ public class Form_Organizacion extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txt_rucKeyTyped
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (cliente != null) {
+            if (organizacionDTO != null) {
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_Actualizar;
-    private javax.swing.JButton btn_Agregar;
-    private javax.swing.JButton btn_Buscar;
-    private javax.swing.JComboBox<String> cbo_estado;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel49;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable tabla;
-    private javax.swing.JTextField txtNom;
-    private javax.swing.JTextField txtNumDoc;
-    private javax.swing.JTextArea txt_descripcion;
-    private javax.swing.JTextField txt_nombre;
-    private javax.swing.JTextField txt_razon;
-    private javax.swing.JTextField txt_ruc;
-    // End of variables declaration//GEN-END:variables
+                ClienteOrganizacionDTO cl = clienteOrganizacion.Buscar(cliente.getIdCliente());
+                if (cl == null) {
+                    clienteOrganizacion.Agregar(cliente.getIdCliente(), organizacionDTO.getIdOrganizacion());
+                    Limpiar();
+                } else {
+                    JOptionPane.showMessageDialog(null, "ERROR : El cliente ya esta asociado a una organizacion");
+                }
 
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR : seleccione o busque una organizacion");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR : desde el panel Clientes seleccione uno para asociar");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
+       if (this.organizacionDTO != null){
+           llenarTablaClientes(organizacionDTO.getIdOrganizacion());
+       } else {
+            JOptionPane.showMessageDialog(null, "ERROR : seleccione o busque una organizacion");
+       }
+    }//GEN-LAST:event_btnListarActionPerformed
+
+     private void llenarTablaClientes(int idOrg) {
+        dfCliente.setColumnCount(0);
+        dfCliente.setRowCount(0);
+
+        String[] cabezera = {"#", "Número de documento", "Nombres", "Apellidos"};
+        dfCliente.setColumnIdentifiers(cabezera);
+
+        Object[] datos = new Object[dfCliente.getColumnCount()];
+
+        ArrayList<ClienteDTO> lista = new ArrayList<>();
+        lista = (ArrayList<ClienteDTO>) clie.listarPorOrganizacion(idOrg);
+        if (lista != null) {
+
+            for (int i = 0; i < lista.size(); i++) {
+                ClienteDTO obj = lista.get(i);
+
+                datos[0] = i;
+                datos[1] = obj.getNumDocumento();
+                datos[2] = obj.getNombres();
+                datos[3] = obj.getApellidos();
+          
+
+                dfCliente.addRow(datos);
+            }
+
+            tablaClientes.setModel(dfCliente);
+
+        }
+    }
+    
     private void llenarTabla() {
         df.setColumnCount(0);
         df.setRowCount(0);
@@ -336,8 +434,44 @@ public class Form_Organizacion extends javax.swing.JPanel {
         txt_nombre.setText("");
         txt_razon.setText("");
         txt_ruc.setText("");
-        txt_descripcion.append("");
+        txt_descripcion.setText("");
         cbo_estado.setSelectedIndex(0);
+        this.cliente = null;
+        this.organizacionDTO = null;
+        txtNumDoc.setText("");
+        txtNom.setText("");
     }
 
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnListar;
+    private javax.swing.JButton btn_Actualizar;
+    private javax.swing.JButton btn_Agregar;
+    private javax.swing.JButton btn_Buscar;
+    private javax.swing.JComboBox<String> cbo_estado;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel49;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable tabla;
+    private javax.swing.JTable tablaClientes;
+    private javax.swing.JTextField txtNom;
+    private javax.swing.JTextField txtNumDoc;
+    private javax.swing.JTextArea txt_descripcion;
+    private javax.swing.JTextField txt_nombre;
+    private javax.swing.JTextField txt_razon;
+    private javax.swing.JTextField txt_ruc;
+    // End of variables declaration//GEN-END:variables
+
+   
 }

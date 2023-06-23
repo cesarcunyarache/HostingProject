@@ -232,8 +232,8 @@ public class Form_TipoPago extends javax.swing.JFrame {
         }
         llenarTabla();
     }//GEN-LAST:event_btn_ActualizarActionPerformed
-    public void clean(){
-         txt_idTipo.setText("");
+    public void clean() {
+        txt_idTipo.setText("");
         txt_nombre.setText("");
         tabla.clearSelection();
         id = -1;
@@ -249,7 +249,7 @@ public class Form_TipoPago extends javax.swing.JFrame {
             String nombre = txt_nombre.getText();
 
             String mensaje = tp.agregar(nombre);
-            
+
             if (!mensaje.equals("")) {
                 JOptionPane.showMessageDialog(null, mensaje);
                 clean();

@@ -66,6 +66,16 @@ public class Cliente {
         }
         return obj;
     }
+    
+    public List<ClienteDTO> listarPorOrganizacion(int id) {
+        if (clienteDAO.ListOrg(id) != null) {
+            return clienteDAO.ListOrg(id);
+        } else {
+            return null;
+        }
+    }
+    
+    
 
     public List<ClienteDTO> buscarPorDniFiltro(String dni) {
         ClienteDTO cli = new ClienteDTO();
