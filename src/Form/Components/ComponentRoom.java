@@ -6,9 +6,19 @@ import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import javax.swing.JMenuItem;
 
 public class ComponentRoom extends javax.swing.JPanel {
 
+    
+    public ComponentRoom(HabitacionDTO habitacion) {
+        initComponents();
+        habitacionFrame = habitacion;
+        cargarInfoHabitacion();
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
+        inicializarMenu();
+    }
+    
     HabitacionDTO habitacionFrame = new HabitacionDTO(SOMEBITS, SOMEBITS, TOOL_TIP_TEXT_KEY);
     private boolean selected;
 
@@ -21,12 +31,6 @@ public class ComponentRoom extends javax.swing.JPanel {
         repaint();
     }
 
-    public ComponentRoom(HabitacionDTO habitacion) {
-        initComponents();
-        habitacionFrame = habitacion;
-        cargarInfoHabitacion();
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }
 
     private void cargarInfoHabitacion() {
         jLNumeroHabitacion.setText("N° " + habitacionFrame.getNumHabitacion());
@@ -95,17 +99,14 @@ public class ComponentRoom extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
+        jPMOpcionesHabitacion = new javax.swing.JPopupMenu();
         jPanel11 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        jpContenedor = new javax.swing.JPanel();
         jPColorEstado = new javax.swing.JPanel();
         jLEstadoHabitacion = new javax.swing.JLabel();
         btnUpdate = new javax.swing.JLabel();
         jLTipoHabitacion = new javax.swing.JLabel();
         jLNumeroHabitacion = new javax.swing.JLabel();
-
-        jRadioButtonMenuItem1.setSelected(true);
-        jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
 
         jPanel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel11.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -114,8 +115,8 @@ public class ComponentRoom extends javax.swing.JPanel {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpContenedor.setBackground(new java.awt.Color(255, 255, 255));
+        jpContenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPColorEstado.setBackground(new java.awt.Color(28, 200, 138));
 
@@ -148,18 +149,18 @@ public class ComponentRoom extends javax.swing.JPanel {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPColorEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(-9, 102, 320, -1));
+        jpContenedor.add(jPColorEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(-9, 102, 320, -1));
 
         jLTipoHabitacion.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLTipoHabitacion.setForeground(new java.awt.Color(102, 102, 102));
         jLTipoHabitacion.setText("Habitación simple");
-        jPanel1.add(jLTipoHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 71, -1, -1));
+        jpContenedor.add(jLTipoHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 71, -1, -1));
 
         jLNumeroHabitacion.setBackground(new java.awt.Color(255, 255, 255));
         jLNumeroHabitacion.setFont(new java.awt.Font("Roboto", 1, 32)); // NOI18N
         jLNumeroHabitacion.setForeground(new java.awt.Color(0, 0, 0));
         jLNumeroHabitacion.setText("NRO: 201");
-        jPanel1.add(jLNumeroHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 21, -1, -1));
+        jpContenedor.add(jLNumeroHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 21, -1, -1));
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -167,11 +168,11 @@ public class ComponentRoom extends javax.swing.JPanel {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jpContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jpContenedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -197,9 +198,20 @@ public class ComponentRoom extends javax.swing.JPanel {
     private javax.swing.JLabel jLNumeroHabitacion;
     private javax.swing.JLabel jLTipoHabitacion;
     private javax.swing.JPanel jPColorEstado;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPopupMenu jPMOpcionesHabitacion;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JPanel jpContenedor;
     // End of variables declaration//GEN-END:variables
+
+    private void inicializarMenu() {
+        JMenuItem Alquilar = new JMenuItem("Alquilar Habitación");
+        JMenuItem Rerservar = new JMenuItem("Reservar Habitación");
+        JMenuItem Masinfo = new JMenuItem("Más Información de habitación");
+        jPMOpcionesHabitacion.add(Alquilar);
+        jPMOpcionesHabitacion.add(Rerservar);
+        jPMOpcionesHabitacion.add(Masinfo);
+        
+        jpContenedor.setComponentPopupMenu(jPMOpcionesHabitacion);
+    }
 
 }
