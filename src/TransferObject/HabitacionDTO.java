@@ -2,43 +2,24 @@ package TransferObject;
 
 public class HabitacionDTO {
 
-    private int id;
-    private String numHabitacion;
+    private int numHabitacion;
     private int tipoHabitacionID;
     private String estado;
 
-    public HabitacionDTO() {
-    }
-    public HabitacionDTO(int id) {
-        this.id = id;
+    public HabitacionDTO(int nHabitacion) {
+        numHabitacion = nHabitacion;
     }
     
-    public HabitacionDTO(String nHabitacion) {
-        this.id = Integer.valueOf(nHabitacion);
-    }
-    
-    
-    public HabitacionDTO(String numHabitacion, int tipoHabitacionID, String estado) {
+    public HabitacionDTO(int numHabitacion, int tipoHabitacionID, String estado) {
         this.numHabitacion = numHabitacion;
         this.tipoHabitacionID = tipoHabitacionID;
         this.estado = estado;
     }
-    public HabitacionDTO(int id, String numHabitacion, int tipoHabitacionID, String estado) {
-        this.id = id;
-        this.numHabitacion = numHabitacion;
-        this.tipoHabitacionID = tipoHabitacionID;
-        this.estado = estado;
-    }
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public String getNumHabitacion() {
+    
+    public int getNumHabitacion() {
         return numHabitacion;
     }
-    public void setNumHabitacion(String numHabitacion) {
+    public void setNumHabitacion(int numHabitacion) {
         this.numHabitacion = numHabitacion;
     }
     public int getTipoHabitacionID() {
@@ -56,4 +37,4 @@ public class HabitacionDTO {
     public void finalize() throws Throwable {
 
     }
-}//end HabitacionDTO
+}

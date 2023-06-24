@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.sql.*;
 import javax.swing.*;
 
-
 public class HabitacionDAO implements Crud<HabitacionDTO> {
 
     Conexion conexion;
@@ -15,14 +14,14 @@ public class HabitacionDAO implements Crud<HabitacionDTO> {
     public HabitacionDAO() {
         conexion = new Conexion();
     }
-
+    
     @Override
     public boolean Create(HabitacionDTO habitacion) {
         Connection con = conexion.getConnection();
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement("INSERT INTO Habitacion(numHabitacion, tipoHabitacionID, estado) VALUES(?,?,?)");
-            ps.setString(1, habitacion.getNumHabitacion());
+            ps.setInt(1, habitacion.getNumHabitacion());
             ps.setInt(2, habitacion.getTipoHabitacionID());
             ps.setString(3, habitacion.getEstado());
             int res = ps.executeUpdate();
@@ -58,11 +57,10 @@ public class HabitacionDAO implements Crud<HabitacionDTO> {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String numHabitacion = rs.getString("numHabitacion");
+                int numHabitacion = rs.getInt("numHabitacion");
                 int tipoHabitacionID = rs.getInt("tipoHabitacionID");
                 String estado = rs.getString("estado");
-                habitacion = new HabitacionDTO(id, numHabitacion, tipoHabitacionID, estado);
+                habitacion = new HabitacionDTO(numHabitacion, tipoHabitacionID, estado);
                 habitaciones.add(habitacion);
             }
         } catch (Exception e) {
@@ -98,11 +96,10 @@ public class HabitacionDAO implements Crud<HabitacionDTO> {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String numHabitacion = rs.getString("numHabitacion");
+                int numHabitacion = rs.getInt("numHabitacion");
                 int tipoHabitacionID = rs.getInt("tipoHabitacionID");
                 String estado = rs.getString("estado");
-                habitacion = new HabitacionDTO(id, numHabitacion, tipoHabitacionID, estado);
+                habitacion = new HabitacionDTO(numHabitacion, tipoHabitacionID, estado);
                 habitaciones.add(habitacion);
             }
         } catch (Exception e) {
@@ -128,10 +125,10 @@ public class HabitacionDAO implements Crud<HabitacionDTO> {
         boolean isUpdate = false;
 
         try {
-            ps = con.prepareStatement("UPDATE Habitacion SET numHabitacion=?, tipoHabitacionID=?, estado=? WHERE id=" + habitacion.getId());
-            ps.setString(1, habitacion.getNumHabitacion());
-            ps.setInt(2, habitacion.getTipoHabitacionID());
-            ps.setString(3, habitacion.getEstado());
+            ps = con.prepareStatement("UPDATE Habitacion SET tipoHabitacionID=?, estado=? WHERE numHabitacion=" + habitacion.getNumHabitacion());
+            //ps.setInt(1, habitacion.getNumHabitacion());
+            ps.setInt(1, habitacion.getTipoHabitacionID());
+            ps.setString(2, habitacion.getEstado());
 
             int res = ps.executeUpdate();
             if (res > 0) {
@@ -159,8 +156,8 @@ public class HabitacionDAO implements Crud<HabitacionDTO> {
         Connection con = conexion.getConnection();
         boolean isDelete = false;
         try {
-            ps = con.prepareStatement("DELETE FROM Habitacion WHERE id=?");
-            ps.setInt(1, habitacion.getId());
+            ps = con.prepareStatement("DELETE FROM Habitacion WHERE numHabitacion=?");
+            ps.setInt(1, habitacion.getNumHabitacion());
             int res = ps.executeUpdate();
 
             if (res > 0) {
@@ -190,7 +187,7 @@ public class HabitacionDAO implements Crud<HabitacionDTO> {
 
         try {
             ps = con.prepareStatement("SELECT * FROM Habitacion WHERE numHabitacion=?");
-            ps.setInt(1, habitacion.getId());
+            //ps.setInt(1, habitacion.getId());
             rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -198,7 +195,7 @@ public class HabitacionDAO implements Crud<HabitacionDTO> {
                 String numHabitacion = rs.getString("numHabitacion");
                 int tipoHabitacionID = rs.getInt("tipoHabitacionID");
                 String estado = rs.getString("estado");
-                habitacion = new HabitacionDTO(id, numHabitacion, tipoHabitacionID, estado);
+                habitacion = new HabitacionDTO(tipoHabitacionID, tipoHabitacionID, estado);
             }
 
         } catch (Exception e) {
@@ -216,36 +213,4 @@ public class HabitacionDAO implements Crud<HabitacionDTO> {
         return habitacion;
     }
     
-    public HabitacionDTO SearchNHabitacion(HabitacionDTO habitacion) {
-        Connection con = conexion.getConnection();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-
-        try {
-            ps = con.prepareStatement("SELECT * FROM Habitacion WHERE numHabitacion=?");
-            ps.setInt(1, habitacion.getId());
-            rs = ps.executeQuery();
-
-            if (rs.next()) {
-                int id = rs.getInt("id");
-                String numHabitacion = rs.getString("numHabitacion");
-                int tipoHabitacionID = rs.getInt("tipoHabitacionID");
-                String estado = rs.getString("estado");
-                habitacion = new HabitacionDTO(id, numHabitacion, tipoHabitacionID, estado);
-            }
-
-        } catch (Exception e) {
-            System.err.println(e);
-        } finally {
-            try {
-                con.close();
-                ps.close();
-                rs.close();
-            } catch (SQLException ex) {
-                System.err.println(ex);
-            }
-        }
-
-        return habitacion;
-    }
 }

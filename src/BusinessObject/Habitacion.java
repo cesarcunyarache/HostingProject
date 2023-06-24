@@ -5,7 +5,7 @@ import TransferObject.HabitacionDTO;
 import java.util.List;
 
 public class Habitacion {
-
+    
     private HabitacionDAO habitacionDAO;
     private HabitacionDTO habitacionDTO;
 
@@ -17,7 +17,7 @@ public class Habitacion {
 
     }
 
-    public String agregar(String numHabitacion, int tipoHabitacion, String estadoHabitacion) {
+    public String agregar(int numHabitacion, int tipoHabitacion, String estadoHabitacion) {
         String mensaje = "";
         habitacionDTO = new HabitacionDTO(numHabitacion, tipoHabitacion, estadoHabitacion);
         if (habitacionDAO.Create(habitacionDTO)) {
@@ -28,9 +28,9 @@ public class Habitacion {
         return mensaje;
     }
 
-    public String actualizar(int idHabitacion, String numHabitacion, int tipoHabitacion, String estadoHabitacion) {
+    public String actualizar(int numHabitacion, int tipoHabitacion, String estadoHabitacion) {
         String mensaje = "";
-        habitacionDTO = new HabitacionDTO(idHabitacion, numHabitacion, tipoHabitacion, mensaje);
+        habitacionDTO = new HabitacionDTO(numHabitacion, tipoHabitacion, mensaje);
         if (habitacionDAO.Update(habitacionDTO)) {
             mensaje = "El registro se actualizo correctamente";
         } else {
@@ -39,9 +39,9 @@ public class Habitacion {
         return mensaje;
     }
 
-    public String eliminar(int idHabitacion) {
+    public String eliminar(int numHabitacion) {
         String mensaje = "";
-        habitacionDTO = new HabitacionDTO(idHabitacion);
+        habitacionDTO = new HabitacionDTO(numHabitacion);
         if (habitacionDAO.Delete(habitacionDTO)) {
             mensaje = "El registro se eliminó correctamente";
         } else {
@@ -50,8 +50,8 @@ public class Habitacion {
         return mensaje;
     }
 
-    public HabitacionDTO buscar(int idHabitacion) {
-        habitacionDTO = habitacionDAO.Search(new HabitacionDTO(idHabitacion));
+    public HabitacionDTO buscar(int numHabitacion) {
+        habitacionDTO = habitacionDAO.Search(new HabitacionDTO(numHabitacion));
         if (habitacionDTO != null) {
             return habitacionDTO;
         } else {
@@ -59,15 +59,6 @@ public class Habitacion {
         }
     }
     
-    
-    public HabitacionDTO buscar(String nHabitacion) {
-        habitacionDTO = habitacionDAO.SearchNHabitacion(new HabitacionDTO(nHabitacion));
-        if (habitacionDTO != null) {
-            return habitacionDTO;
-        } else {
-            return null;
-        }
-    }
 
     public List<HabitacionDTO> listarR() {
         if (habitacionDAO.Read() != null) {

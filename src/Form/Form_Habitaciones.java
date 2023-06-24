@@ -33,6 +33,8 @@ public class Form_Habitaciones extends javax.swing.JPanel {
         initComponents();
 
         this.menu = menu;
+        
+        cargarHabitaciones();
 //        habilitarCBX();
         setEventSelect(new EventItem() {
             @Override
@@ -56,7 +58,6 @@ public class Form_Habitaciones extends javax.swing.JPanel {
 
         });
 
-        cargarHabitaciones();
     }
 
     private void cargarHabitaciones() {

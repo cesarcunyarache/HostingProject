@@ -16,8 +16,6 @@ public class UsuarioDTO {
 
     }
     
-    
-
     public UsuarioDTO(String usuario) {
         this.usuario = usuario;
     }
@@ -31,9 +29,6 @@ public class UsuarioDTO {
         this.usuario = usuario;
     }
     
-
-    
-
     public UsuarioDTO(String usuario, String contrasena) {
         this.usuario = usuario;
         this.contrasena = contrasena;
@@ -98,7 +93,5 @@ public class UsuarioDTO {
     public String toString() {
         return "UsuarioDTO{" + "idUsuario=" + idUsuario + ", empleadoID=" + empleadoID + ", usuario=" + usuario + ", contrasena=" + contrasena + ", rol=" + rol + '}';
     }
-    
-    
 
 }//end UsuarioDTO

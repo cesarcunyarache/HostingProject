@@ -5,12 +5,12 @@ import TransferObject.UsuarioDTO;
 import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.xml.transform.sax.SAXSource;
 
 public class UsuarioDAO implements Crud<UsuarioDTO> {
 
     private Conexion conexion;
-    
 
     public UsuarioDAO() {
         conexion = new Conexion();
@@ -44,23 +44,23 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
         boolean isUpdate = false;
         try {
             PreparedStatement ps = null;
-            ps = con.prepareStatement("UPDATE Usuario SET idEmpleado=?,[user]=?,password=?,rol=?  WHERE idUsuario="+t.getIdUsuario());
+            ps = con.prepareStatement("UPDATE Usuario SET idEmpleado=?,[user]=?,password=?,rol=?  WHERE idUsuario=" + t.getIdUsuario());
             ps.setInt(1, t.getEmpleadoID());
             ps.setString(2, t.getUsuario());
             ps.setString(3, t.getContrasena());
             ps.setString(4, t.getRol());
-           
+
             int res = ps.executeUpdate();
             if (res > 0) {
                 isUpdate = true;
             }
         } catch (SQLException ex) {
             System.out.println(ex);
-         
+
         } finally {
             conexion.desconectar();
         }
-        
+
         return isUpdate;
     }
 
@@ -107,8 +107,8 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
         try {
             PreparedStatement ps = null;
             ResultSet rs = null;
-            ps = conexion.getConnection().prepareStatement("SELECT * FROM Usuario WHERE idEmpleado=?");
-            ps.setInt(1, t.getEmpleadoID());
+            ps = conexion.getConnection().prepareStatement("SELECT * FROM Usuario WHERE idUsuario=?");
+            ps.setInt(1, t.getIdUsuario());
             rs = ps.executeQuery();
 
             //registros por leer
@@ -119,13 +119,14 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
                 t.setUsuario(rs.getString(3));
                 t.setContrasena(rs.getString(4));
                 t.setRol(rs.getString(5));
-
                 encontrado = true;
             }
 
             if (encontrado) {
+                System.out.println("Se logro encontrar al usuario");
                 return t;
             } else {
+                System.out.println("No se encontro al usuario");
                 return null;
             }
         } catch (SQLException ex) {
@@ -155,11 +156,10 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
                 String usuario = rs.getString(3);
                 String contraseña = rs.getString(4);
                 String rol = rs.getString(5);
-                
-                obj = new UsuarioDTO(id, idEmpleado, usuario, contraseña, rol);  
+
+                obj = new UsuarioDTO(id, idEmpleado, usuario, contraseña, rol);
             }
         } catch (SQLException ex) {
-            
 
         } finally {
             conexion.desconectar();
@@ -168,13 +168,15 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
 
     }
 
+    
+    
     public UsuarioDTO SearchUpadate(UsuarioDTO t) {
-       UsuarioDTO obj = null;
+        UsuarioDTO obj = null;
 
         try {
             PreparedStatement ps = null;
             ResultSet rs = null;
-            
+
             ps = conexion.getConnection().prepareStatement("SELECT * FROM Usuario WHERE [user]=? AND NOT idUsuario =?");
             ps.setString(1, t.getUsuario());
             ps.setInt(2, t.getIdUsuario());
@@ -189,10 +191,8 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
                 obj.setContrasena(rs.getString(4));
                 obj.setRol(rs.getString(5));
 
-               
             }
 
-            
         } catch (SQLException ex) {
             return null;
 
@@ -203,41 +203,78 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
 
     }
 
-    public UsuarioDTO validar(UsuarioDTO t) {
-        boolean encontrado = false;
+    public void guardarDatosUsuario(int usuario) {
+        try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            ps = conexion.getConnection().prepareStatement("EXEC ValidarActualizarUsuarioGuardado @nuevoID = '" + usuario + "'");
+            rs = ps.executeQuery();
+        } catch (SQLException e) {
+
+        }
+    }
+
+    public void noGuardarDatosUsuario() {
+        try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            ps = conexion.getConnection().prepareStatement("EXEC BorrarRegistrosUsuarioGuardado;");
+            rs = ps.executeQuery();
+        } catch (SQLException e) {
+
+        }
+    }
+
+    public UsuarioDTO obtenerDatosGuardados() {
+        UsuarioDTO obj = null;
 
         try {
             PreparedStatement ps = null;
             ResultSet rs = null;
-            ps = conexion.getConnection().prepareStatement("SELECT * FROM Usuario WHERE [user]=? AND password=?");
-            ps.setString(1, t.getUsuario());
-            ps.setString(2, t.getContrasena());
+            ps = conexion.getConnection().prepareStatement("select * from UsuarioGuardado");
             rs = ps.executeQuery();
 
             //registros por leer
-            while (rs.next()) {
-
-                t.setIdUsuario(rs.getInt(1));
-                t.setEmpleadoID(rs.getInt(2));
-                t.setUsuario(rs.getString(3));
-                t.setContrasena(rs.getString(4));
-                t.setRol(rs.getString(5));
-
-                encontrado = true;
-            }
-
-            if (encontrado) {
-                return t;
-            } else {
-                return null;
+            if (rs.next()) {
+                int idUsuario = rs.getInt(1);
+                obj = SearchUserId(idUsuario);
             }
         } catch (SQLException ex) {
-            return null;
+        } finally {
+            conexion.desconectar();
+        }
+        return obj;        
+    }
+
+    
+    public UsuarioDTO SearchUserId(int id) {
+        UsuarioDTO obj = null;
+
+        try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            ps = conexion.getConnection().prepareStatement("SELECT * FROM Usuario WHERE idUsuario=?");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+
+            //registros por leer
+            if (rs.next()) {
+
+                int idUsuario = rs.getInt(1);
+                int idEmpleado = rs.getInt(2);
+                String usuario = rs.getString(3);
+                String contraseña = rs.getString(4);
+                String rol = rs.getString(5);
+
+                obj = new UsuarioDTO(idUsuario, idEmpleado, usuario, contraseña, rol);
+            }
+        } catch (SQLException ex) {
 
         } finally {
             conexion.desconectar();
         }
+        return obj;
 
     }
-
+    
 }

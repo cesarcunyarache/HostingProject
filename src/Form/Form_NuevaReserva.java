@@ -548,13 +548,13 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
         java.sql.Date sqlDate1 = new java.sql.Date( jDtFechaEntrada.getDate().getTime());
         java.sql.Date sqlDate2 = new java.sql.Date(jDtFechaSalida.getDate().getTime());
 
-        reserva.create(objHabitacion.getId(), objCliente.getIdCliente(), 1, sqlDate, sqlDate1, sqlDate2);
+        reserva.create(objHabitacion.getNumHabitacion(), objCliente.getIdCliente(), 1, sqlDate, sqlDate1, sqlDate2);
         llenarTabla();
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
     private void txt_NHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_NHabitacionActionPerformed
 
-        objHabitacion = habitacion.buscar(txt_NHabitacion.getText());
+        objHabitacion = habitacion.buscar(Integer.valueOf(txt_NHabitacion.getText()));
         if (objHabitacion != null) {
             txtTipoHabitacion.setText(cargarTipoHab(objHabitacion.getTipoHabitacionID()));
             txt_PrecioHabitacion.setText(cargarPrecio(objHabitacion.getTipoHabitacionID()));

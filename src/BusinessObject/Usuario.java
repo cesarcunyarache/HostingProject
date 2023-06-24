@@ -48,12 +48,14 @@ public class Usuario {
 
     public UsuarioDTO Buscar(int id) {
         usuarioDTO = new UsuarioDTO(id);
+        
         if (usuarioDAO.Search(usuarioDTO) != null) {
-            return usuarioDAO.Search(usuarioDTO);
+            System.out.println(usuarioDTO.getUsuario() + "usuario en meotoods");
+            usuarioDTO = usuarioDAO.Search(usuarioDTO);
+            return usuarioDTO;
         } else {
             return null;
         }
-
     }
 
     public UsuarioDTO BuscarUsuario(String user) {
@@ -90,7 +92,18 @@ public class Usuario {
         } else {
             return null;
         }
-
+    }   
+    
+    public UsuarioDTO obtenerRecordarDatos() {
+        return usuarioDAO.obtenerDatosGuardados();
     }
-
+    
+    public void recordarDatos(int idUser){
+        usuarioDAO.guardarDatosUsuario(idUser);
+    }
+    
+    public void noRecordarDatos(){
+        usuarioDAO.noGuardarDatosUsuario();
+    }
+    
 }

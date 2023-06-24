@@ -1,8 +1,10 @@
 package Login;
 
 import BusinessObject.Usuario;
+import DataAccessObject.UsuarioDAO;
 import Menu.Dashboard;
 import TransferObject.EmpleadoDTO;
+import TransferObject.Encriptado;
 import TransferObject.UsuarioDTO;
 import javax.swing.UIManager;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
@@ -21,6 +23,7 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);//Centrar 
         usuario = new Usuario();
+        cargarDatosGuardados();
     }
 
     @SuppressWarnings("unchecked")
@@ -69,14 +72,6 @@ public class Login extends javax.swing.JFrame {
         jPsContraseña.setFont(new java.awt.Font("Roboto", 0, 15)); // NOI18N
         jPsContraseña.setForeground(new java.awt.Color(102, 102, 102));
         jPsContraseña.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPsContraseña.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPsContraseñaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jPsContraseñaMouseExited(evt);
-            }
-        });
 
         jCbxRecordarContraseña.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jCbxRecordarContraseña.setText("Recordar contraseña");
@@ -197,30 +192,31 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_formMousePressed
 
     private void btnIniciarsesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarsesionActionPerformed
-
+        UsuarioDTO obj;
+        Encriptado e = new Encriptado();
         String usu = jTxtUsuario.getText();
         char[] contraseñaArray = jPsContraseña.getPassword();
         String contrasena = new String(contraseñaArray);
-
         if (usu.matches("^[a-zA-Z0-9_]+$")) {
-            UsuarioDTO obj = usuario.ValidarUsuario(usu, contrasena);
+            obj = usuario.ValidarUsuario(usu, contrasena);
+            
             if (obj != null) {
-
-                EmpleadoDTO empleadoDTO = new EmpleadoDTO(obj.getEmpleadoID());
-
                 Dashboard dash = new Dashboard();
                 dash.setVisible(true);
-                this.dispose();
-                //Dashboard ven2 = new Dashboard(empleadoDTO);
-                //ven2.setVisible(true);
-                //this.dispose();
+                if(jCbxRecordarContraseña.isSelected()){    
+                
+                    usuario.recordarDatos(obj.getIdUsuario());
+                
+                } else {
+                    usuario.noRecordarDatos();
+                }
+                this.dispose();       
             } else {
                 JOptionPane.showMessageDialog(null, "Datos incorrectos");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Error: valores admitidos [a-zA-Z0-9_]");
         }
-
     }//GEN-LAST:event_btnIniciarsesionActionPerformed
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
@@ -229,14 +225,6 @@ public class Login extends javax.swing.JFrame {
         int y = evt.getYOnScreen();
         this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_formMouseDragged
-
-    private void jPsContraseñaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPsContraseñaMouseEntered
-
-    }//GEN-LAST:event_jPsContraseñaMouseEntered
-
-    private void jPsContraseñaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPsContraseñaMouseExited
-
-    }//GEN-LAST:event_jPsContraseñaMouseExited
 
     private void jCbxRecordarContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbxRecordarContraseñaActionPerformed
         // TODO add your handling code here:
@@ -248,12 +236,11 @@ public class Login extends javax.swing.JFrame {
         } catch (UnsupportedLookAndFeelException e) {
             System.err.print("Error en Look And Feel");
         }
-
         java.awt.EventQueue.invokeLater(() -> {
             new Login().setVisible(true);
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnIniciarsesion;
@@ -268,4 +255,19 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jlbContraseña;
     private javax.swing.JLabel jlbLinea;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarDatosGuardados() {
+        try {
+            Encriptado e = new Encriptado();
+            UsuarioDTO user = usuario.obtenerRecordarDatos();
+            if (user != null) {
+
+                jTxtUsuario.setText(user.getUsuario());
+                jPsContraseña.setText(e.deecnode(user.getContrasena()));
+                jCbxRecordarContraseña.setSelected(true);
+            }
+        } catch (Exception e) {
+        }
+
+    }
 }

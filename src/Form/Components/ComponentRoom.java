@@ -9,7 +9,7 @@ import java.awt.RenderingHints;
 
 public class ComponentRoom extends javax.swing.JPanel {
 
-    HabitacionDTO habitacionFrame = new HabitacionDTO();
+    HabitacionDTO habitacionFrame = new HabitacionDTO(SOMEBITS, SOMEBITS, TOOL_TIP_TEXT_KEY);
     private boolean selected;
 
     public boolean isSelected() {
