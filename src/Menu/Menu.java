@@ -2,7 +2,7 @@ package Menu;
 
 import Form.Form_Cliente;
 import Form.Form_Empleados;
-import Form.Form_Habitacion;
+import Form.Form_InfoHabitacion;
 import Form.Form_Habitaciones;
 import Form.Form_NuevaReserva;
 import Form.Form_Organizacion;
@@ -49,17 +49,18 @@ public class Menu extends javax.swing.JPanel {
     private boolean menuShow;
     private Menu menu;
     private Menu comp = this;
+    private int index = 0;
 
     //Formularios
-    Form_Cliente cliente;
-    Form_Empleados empleado;
-    Form_TipoDocumento tipo;
-    Form_Habitaciones habitacion;
-    Form_Organizacion organizacion;
-    Form_Usuarios usuario;
-    Form_NuevaReserva reserva;
-    Form_Habitacion gesHab;
-    Form_TipoPago2 tipoPago;
+    public Form_Cliente cliente;
+    public Form_Empleados empleado;
+    public Form_TipoDocumento tipo;
+    public Form_Habitaciones habitacion;
+    public Form_Organizacion organizacion;
+    public Form_Usuarios usuario;
+    public Form_NuevaReserva reserva;
+    public Form_InfoHabitacion gesHab;
+    public Form_TipoPago2 tipoPago;
 
     public Menu(JPanel main, JPanel body, Menu menu) {
         initComponents();
@@ -74,11 +75,13 @@ public class Menu extends javax.swing.JPanel {
         organizacion = new Form_Organizacion();
         usuario = new Form_Usuarios();
         reserva = new Form_NuevaReserva();
-        gesHab = new Form_Habitacion();
+        reserva.setMenu(this);
+        gesHab = new Form_InfoHabitacion();
         tipoPago = new Form_TipoPago2();
+        
         setOpaque(false);
         init();
-
+        
     }
 
     public void setEvent(EventMenuSelected event) {
@@ -139,6 +142,7 @@ public class Menu extends javax.swing.JPanel {
             }
         });
 
+        
         // agregar evento al menu
         setEvent(new EventMenuSelected() {
             @Override
@@ -322,6 +326,15 @@ public class Menu extends javax.swing.JPanel {
         bottom.setAlpha(alpha);
     }
 
+    public int getIndex() {
+        return index;
+    }
+
+
+    
+}
+
+    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-}
