@@ -36,6 +36,15 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
         initComponents();
          dt = new DefaultTableModel();
          re = new Reserva();
+         llenarCamposCliente(clienteDTO);
+    }
+    
+    public Form_NuevaReserva(ClienteDTO clienteDTO) {
+        initComponents();
+         dt = new DefaultTableModel();
+         re = new Reserva();
+         this.clienteDTO = clienteDTO;
+         llenarCamposCliente(this.clienteDTO);
     }
     
     @SuppressWarnings("unchecked")
@@ -79,7 +88,6 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
         jLabel23 = new javax.swing.JLabel();
         jCheckBox2 = new javax.swing.JCheckBox();
         jComboBox2 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
         btnBuscar1 = new javax.swing.JButton();
         jDtFechaEntrada = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
@@ -259,7 +267,7 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel1.setText("Buscar cliente");
+        jLabel1.setText("N° Documento:");
 
         jTxtBuscar.setFont(new java.awt.Font("Roboto", 0, 15)); // NOI18N
         jTxtBuscar.setForeground(new java.awt.Color(102, 102, 102));
@@ -331,8 +339,6 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
 
         jCheckBox2.setText("Aire Acondicionado");
 
-        jButton1.setText("Visualizar Habitaciones");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -347,14 +353,12 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
                     .addComponent(jCheckBox1)
                     .addComponent(jCheckBox2))
                 .addGap(43, 43, 43)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel22)
-                        .addComponent(jLabel11)
-                        .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox2, 0, 169, Short.MAX_VALUE)))
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel22)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBox2, 0, 169, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -378,10 +382,8 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
                     .addComponent(jCheckBox1)
                     .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jCheckBox2)
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         btnBuscar1.setBackground(new java.awt.Color(0, 110, 230));
@@ -436,19 +438,15 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(19, 19, 19)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLbBienvenido)
-                                .addGap(254, 254, 254))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(12, 12, 12))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLbBienvenido)
+                        .addGap(254, 254, 254))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -477,7 +475,7 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(201, 201, 201)
                                 .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 87, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -532,16 +530,16 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(169, Short.MAX_VALUE)
+                .addContainerGap(167, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(243, Short.MAX_VALUE))
+                .addContainerGap(241, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     
@@ -597,6 +595,10 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(this, "Este usuario no se encuentra registrado. Serás redirigido al formulario para su registro.", " ERROR ",
                     JOptionPane.ERROR_MESSAGE);
+            //Enviamos el numero de documeto
+            menu.cliente.setNumDoc(jTxtBuscar.getText());
+            limpiarCampos();
+            menu.SelectMenu(3, menu.cliente);
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -614,7 +616,6 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
     private void txt_NHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_NHabitacionActionPerformed
-
         objHabitacion = habitacion.buscar(Integer.valueOf(txt_NHabitacion.getText()));
         if (objHabitacion != null) {
             //txtTipoHabitacion.setText(cargarTipoHab(objHabitacion.getTipoHabitacionID()));
@@ -667,21 +668,24 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
     }
    
     
-    private void llenarCamposCliente(ClienteDTO client) {
-        txt_nombre.setText(client.getNombres());
-        txt_telefono.setText(client.getTelefono());
-        txt_direccion.setText(client.getDireccion());
-        txt_apellido.setText(client.getApellidos());
-        txt_numDoc.setText(client.getNumDocumento());
-        txt_correo.setText(client.getCorreo());
-        cbo_nacionalidad1.setSelectedItem(client.getNacionalidad());
-        switch (client.getGenero()) {
-            case 'M' ->
-                cbo_genero.setSelectedIndex(1);
-            case 'F' ->
-                cbo_genero.setSelectedIndex(2);
-            default ->
-                cbo_genero.setSelectedIndex(0);
+    public void llenarCamposCliente(ClienteDTO client) {
+        if (client != null) {
+
+            txt_nombre.setText(client.getNombres());
+            txt_telefono.setText(client.getTelefono());
+            txt_direccion.setText(client.getDireccion());
+            txt_apellido.setText(client.getApellidos());
+            txt_numDoc.setText(client.getNumDocumento());
+            txt_correo.setText(client.getCorreo());
+            cbo_nacionalidad1.setSelectedItem(client.getNacionalidad());
+            switch (client.getGenero()) {
+                case 'M' ->
+                    cbo_genero.setSelectedIndex(1);
+                case 'F' ->
+                    cbo_genero.setSelectedIndex(2);
+                default ->
+                    cbo_genero.setSelectedIndex(0);
+            }
         }
     }
     
@@ -696,8 +700,11 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
         txt_correo.setText(VACIO);
         cbo_nacionalidad1.setSelectedIndex(0);
         cbo_genero.setSelectedIndex(0);
-        
     }
+   public void limpiarBusqueda(){
+       jTxtBuscar.setText("");
+       limpiarBusqueda();
+   }
 
     
     
@@ -743,6 +750,16 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
     public void setMenu(Menu menu) {
         this.menu = menu;
     }
+
+    public ClienteDTO getClienteDTO() {
+        return clienteDTO;
+    }
+
+    public void setClienteDTO(ClienteDTO clienteDTO) {
+        this.clienteDTO = clienteDTO;
+    }
+    
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -751,7 +768,6 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
     private javax.swing.JButton btn_Agregar;
     private javax.swing.JComboBox<String> cbo_genero;
     private javax.swing.JComboBox<String> cbo_nacionalidad1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JComboBox<String> jComboBox1;

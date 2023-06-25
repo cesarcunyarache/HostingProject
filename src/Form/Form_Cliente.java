@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class Form_Cliente extends javax.swing.JPanel {
 
     Cliente cliente;
+    ClienteDTO clienteDTO;
     TipoDocumento tipoDocumento;
     DefaultTableModel df;
     DefaultComboBoxModel modelo;
@@ -95,6 +96,8 @@ public class Form_Cliente extends javax.swing.JPanel {
         rbNombre = new javax.swing.JRadioButton();
         txtBusqueda = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -170,7 +173,7 @@ public class Form_Cliente extends javax.swing.JPanel {
                 btn_ActualizarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, 120, 40));
+        jPanel1.add(btn_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 370, 120, 40));
 
         btn_Buscar.setText("Buscar");
         btn_Buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -178,7 +181,7 @@ public class Form_Cliente extends javax.swing.JPanel {
                 btn_BuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, 120, 40));
+        jPanel1.add(btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 370, 120, 40));
 
         btn_Agregar.setText("Agregar");
         btn_Agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -186,7 +189,7 @@ public class Form_Cliente extends javax.swing.JPanel {
                 btn_AgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 120, 40));
+        jPanel1.add(btn_Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, 120, 40));
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -282,7 +285,23 @@ public class Form_Cliente extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 370, -1, 40));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 370, -1, 40));
+
+        jButton2.setText("Alquilar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 320, 90, 40));
+
+        jButton3.setText("Reservar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 370, 90, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -344,10 +363,9 @@ public class Form_Cliente extends javax.swing.JPanel {
     private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
         if (!txt_numDoc.getText().isEmpty() && !cbo_tipoDoc.getSelectedItem().equals("-Seleccione-")
                 && !txt_nombres.getText().isEmpty() && !txt_apellidos.getText().isEmpty()
-                && !txt_telefono.getText().isEmpty() && !txt_correo.getText().isEmpty()
-                && !txt_direccion.getText().isEmpty() && !cbo_genero.getSelectedItem().equals("-Seleccione-")
+                && !txt_telefono.getText().isEmpty()
+                && !cbo_genero.getSelectedItem().equals("-Seleccione-")
                 && !cbo_tipoDoc.getSelectedItem().equals("")) {
-
             String numDoc = txt_numDoc.getText();
             if (numDoc.matches("[0-9]*")) {
                 TipoDocumentoDTO var = (TipoDocumentoDTO) cbo_tipoDoc.getSelectedItem();
@@ -359,20 +377,20 @@ public class Form_Cliente extends javax.swing.JPanel {
                 String direccion = txt_direccion.getText();
                 String genero = cbo_genero.getSelectedItem().toString();
                 String nacionaldad = cbo_nacionalidad.getSelectedItem().toString();
-
                 if (correo.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
                     String mensaje = cliente.Agregar(numDoc, tipoDoc, nombres, apellidos, telefono, nacionaldad, correo, direccion, genero.charAt(0));
+                    
+                    clienteDTO = new ClienteDTO(numDoc, tipoDoc, nombres, apellidos, telefono, nacionaldad, correo, direccion, genero.charAt(0));
+                    
                     JOptionPane.showMessageDialog(null, mensaje);
                     llenarTabla();
                     limpiar();
-
                 } else {
                     JOptionPane.showMessageDialog(null, "Error, formato de correo erróneo");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Error, solo ingresa valores númericos");
             }
-
         } else {
             JOptionPane.showMessageDialog(null, "Error, uno o más campos vacios!");
         }
@@ -592,6 +610,21 @@ public class Form_Cliente extends javax.swing.JPanel {
        
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        //Enviamos los datos del cliente al nuevo formulario
+        if (clienteDTO != null) {
+            menu.reserva.setClienteDTO(clienteDTO);
+            //Llenamos el formulario con aquellos datos
+            menu.reserva.llenarCamposCliente(clienteDTO);
+            //Abrimos formulario
+            menu.SelectMenu(2, menu.reserva);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
       public void llenarTabla() {
 
         df.setColumnCount(0);
@@ -653,6 +686,10 @@ public class Form_Cliente extends javax.swing.JPanel {
 
     }
 
+    public void setNumDoc(String nDoc){
+        txt_numDoc.setText(nDoc);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Actualizar;
     private javax.swing.JButton btn_Agregar;
@@ -662,6 +699,8 @@ public class Form_Cliente extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbo_nacionalidad;
     private javax.swing.JComboBox<String> cbo_tipoDoc;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
