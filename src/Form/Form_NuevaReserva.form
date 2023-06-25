@@ -742,7 +742,7 @@
                           <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel23" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jComboBox2" pref="169" max="32767" attributes="0"/>
+                          <Component id="cbx_tipoHabitacion" pref="169" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="80" max="32767" attributes="0"/>
                   </Group>
@@ -760,7 +760,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jComboBox2" pref="42" max="32767" attributes="0"/>
+                          <Component id="cbx_tipoHabitacion" pref="42" max="32767" attributes="0"/>
                           <Component id="txt_NHabitacion" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
@@ -844,7 +844,7 @@
                 <Property name="text" type="java.lang.String" value="Aire Acondicionado"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox2">
+            <Component class="javax.swing.JComboBox" name="cbx_tipoHabitacion">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>

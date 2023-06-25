@@ -199,18 +199,18 @@ public class Login extends javax.swing.JFrame {
         String contrasena = new String(contraseñaArray);
         if (usu.matches("^[a-zA-Z0-9_]+$")) {
             obj = usuario.ValidarUsuario(usu, contrasena);
-            
+
             if (obj != null) {
                 Dashboard dash = new Dashboard();
                 dash.setVisible(true);
-                if(jCbxRecordarContraseña.isSelected()){    
-                
+                if (jCbxRecordarContraseña.isSelected()) {
+
                     usuario.recordarDatos(obj.getIdUsuario());
-                
+
                 } else {
                     usuario.noRecordarDatos();
                 }
-                this.dispose();       
+                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Datos incorrectos");
             }
@@ -240,7 +240,7 @@ public class Login extends javax.swing.JFrame {
             new Login().setVisible(true);
         });
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnIniciarsesion;

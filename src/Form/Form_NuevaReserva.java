@@ -15,6 +15,8 @@ import TransferObject.TipoHabitacionDTO;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 public class Form_NuevaReserva extends javax.swing.JPanel {
@@ -22,31 +24,58 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
     Cliente cliente = new Cliente();
     ClienteDTO clienteDTO;
     ClienteDAO clienteDAO;
-    
+
     TipoHabitacion tipoHabitacion = new TipoHabitacion();
     Habitacion habitacion = new Habitacion();
     HabitacionDTO objHabitacion;
     HabitacionDAO habitacionDAO = new HabitacionDAO();
-    
+
     Menu menu;
-    
+
     Reserva re;
     DefaultTableModel dt;
+    DefaultComboBoxModel modelo;
+
+    TipoHabitacion tH;
+
     public Form_NuevaReserva() {
         initComponents();
-         dt = new DefaultTableModel();
-         re = new Reserva();
-         llenarCamposCliente(clienteDTO);
+        tH = new TipoHabitacion();
+        modelo = new DefaultComboBoxModel(llenarCombo());
+        cbx_tipoHabitacion.setModel(modelo);
+        dt = new DefaultTableModel();
+        re = new Reserva();
+        llenarCamposCliente(clienteDTO);
     }
-    
+
     public Form_NuevaReserva(ClienteDTO clienteDTO) {
         initComponents();
-         dt = new DefaultTableModel();
-         re = new Reserva();
-         this.clienteDTO = clienteDTO;
-         llenarCamposCliente(this.clienteDTO);
+        dt = new DefaultTableModel();
+        re = new Reserva();
+        this.clienteDTO = clienteDTO;
+        llenarCamposCliente(this.clienteDTO);
     }
-    
+
+    public Vector<String> llenarCombo() {
+        Vector<String> combo = new Vector<String>();
+        ArrayList<TipoHabitacionDTO> lista = new ArrayList<>();
+        combo.add("-Seleccione-");
+        lista = (ArrayList<TipoHabitacionDTO>) tH.listar();
+        if (lista != null) {
+            for (TipoHabitacionDTO tADTO : lista) {
+                combo.add(tADTO.getNombre());
+            }
+        }
+        return combo;
+    }
+
+    public void llenarCamposHabitacion(HabitacionDTO hab) {
+
+        txt_NHabitacion.setText(String.valueOf(hab.getNumHabitacion()));
+        modelo.setSelectedItem(String.valueOf(tH.buscar(hab.getTipoHabitacionID())));
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -87,7 +116,7 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jCheckBox2 = new javax.swing.JCheckBox();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbx_tipoHabitacion = new javax.swing.JComboBox<>();
         btnBuscar1 = new javax.swing.JButton();
         jDtFechaEntrada = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
@@ -357,7 +386,7 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
                     .addComponent(jLabel22)
                     .addComponent(jLabel11)
                     .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox2, 0, 169, Short.MAX_VALUE))
+                    .addComponent(cbx_tipoHabitacion, 0, 169, Short.MAX_VALUE))
                 .addContainerGap(80, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -371,7 +400,7 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(cbx_tipoHabitacion, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
                     .addComponent(txt_NHabitacion))
                 .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -542,7 +571,7 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
                 .addContainerGap(35, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void txt_apellidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_apellidoKeyPressed
 
     }//GEN-LAST:event_txt_apellidoKeyPressed
@@ -551,17 +580,16 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
     }//GEN-LAST:event_cbo_nacionalidad1ActionPerformed
 
     private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
-       menu.SelectMenu(3, menu.cliente);
+        menu.SelectMenu(3, menu.cliente);
     }//GEN-LAST:event_btn_AgregarActionPerformed
 
-    
-    
+
     private void btn_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ActualizarActionPerformed
-    if (!txt_numDoc.getText().isEmpty() 
-            && !txt_nombre.getText().isEmpty()
-            && !txt_telefono.getText().isEmpty() && !txt_correo.getText().isEmpty()
-            && !txt_direccion.getText().isEmpty() 
-            && !txt_apellido.getText().isEmpty()) {
+        if (!txt_numDoc.getText().isEmpty()
+                && !txt_nombre.getText().isEmpty()
+                && !txt_telefono.getText().isEmpty() && !txt_correo.getText().isEmpty()
+                && !txt_direccion.getText().isEmpty()
+                && !txt_apellido.getText().isEmpty()) {
             String dni = txt_numDoc.getText();
             String nombres = txt_nombre.getText();
             String apellidos = txt_apellido.getText();
@@ -574,14 +602,14 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
 
             String numDoc = txt_numDoc.getText();
 
-            cliente.Actualizar(cliente.BuscarDNI(numDoc).getIdCliente(), 
+            cliente.Actualizar(cliente.BuscarDNI(numDoc).getIdCliente(),
                     numDoc, 2,
-                    nombres, 
-                    apellidos, 
-                    telefono, 
-                    nacionaldad, 
-                    correo, 
-                    direccion, 
+                    nombres,
+                    apellidos,
+                    telefono,
+                    nacionaldad,
+                    correo,
+                    direccion,
                     genero);
         } else {
             JOptionPane.showMessageDialog(null, "Error, uno o más campos vacios!");
@@ -604,11 +632,11 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
         Date fechaActual = new Date();
-        
+
         Reserva reserva = new Reserva();
-        
+
         java.sql.Date sqlDate = new java.sql.Date(jDtFechaEntrada.getDate().getTime());
-        java.sql.Date sqlDate1 = new java.sql.Date( jDtFechaEntrada.getDate().getTime());
+        java.sql.Date sqlDate1 = new java.sql.Date(jDtFechaEntrada.getDate().getTime());
         java.sql.Date sqlDate2 = new java.sql.Date(jDtFechaSalida.getDate().getTime());
 
         reserva.create(objHabitacion.getNumHabitacion(), clienteDTO.getIdCliente(), 1, sqlDate, sqlDate1, sqlDate2);
@@ -626,8 +654,7 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
     private void txt_PrecioHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_PrecioHabitacionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_PrecioHabitacionActionPerformed
-     
-    
+
     private String cargarPrecio(int id) {
         String tipoHabitacion = "S/.";
         switch (id) {
@@ -647,7 +674,6 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
         return "S/." + tipoHabitacion;
     }
 
-    
     private String cargarTipoHab(int id) {
         String tipoHabitacion = "";
         switch (id) {
@@ -666,8 +692,7 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
         }
         return tipoHabitacion;
     }
-   
-    
+
     public void llenarCamposCliente(ClienteDTO client) {
         if (client != null) {
 
@@ -688,9 +713,8 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
             }
         }
     }
-    
-    
-    private void limpiarCampos(){
+
+    private void limpiarCampos() {
         final String VACIO = "";
         txt_nombre.setText(VACIO);
         txt_telefono.setText(VACIO);
@@ -701,13 +725,12 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
         cbo_nacionalidad1.setSelectedIndex(0);
         cbo_genero.setSelectedIndex(0);
     }
-   public void limpiarBusqueda(){
-       jTxtBuscar.setText("");
-       limpiarBusqueda();
-   }
 
-    
-    
+    public void limpiarBusqueda() {
+        jTxtBuscar.setText("");
+        limpiarBusqueda();
+    }
+
     public void llenarTabla() {
         dt.setColumnCount(0);
         dt.setRowCount(0);
@@ -738,15 +761,13 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
                 datos[5] = c.getFechaInicio();
                 datos[6] = c.getFechaFin();
                 datos[7] = c.getEstado();
-               
-   
+
                 dt.addRow(datos);
             }
-            
+
         }
     }
-    
-    
+
     public void setMenu(Menu menu) {
         this.menu = menu;
     }
@@ -758,9 +779,8 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
     public void setClienteDTO(ClienteDTO clienteDTO) {
         this.clienteDTO = clienteDTO;
     }
-    
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnBuscar1;
@@ -768,10 +788,10 @@ public class Form_NuevaReserva extends javax.swing.JPanel {
     private javax.swing.JButton btn_Agregar;
     private javax.swing.JComboBox<String> cbo_genero;
     private javax.swing.JComboBox<String> cbo_nacionalidad1;
+    private javax.swing.JComboBox<String> cbx_tipoHabitacion;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private com.toedter.calendar.JDateChooser jDtFechaEntrada;
     private com.toedter.calendar.JDateChooser jDtFechaSalida;
     private javax.swing.JLabel jLabel1;

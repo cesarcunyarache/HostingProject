@@ -13,7 +13,7 @@ public class TipoHabitacionDTO {
     public TipoHabitacionDTO(int idTipo) {
         this.idTipo = idTipo;
     }
-    
+
     public TipoHabitacionDTO(int idTipo, String nombre, double precio) {
         this.idTipo = idTipo;
         this.nombre = nombre;
@@ -51,11 +51,8 @@ public class TipoHabitacionDTO {
 
     @Override
     public String toString() {
-        return "TipoHabitacionDTO{" + "idTipo=" + idTipo + ", nombre=" + nombre + ", precio=" + precio + '}';
+        return nombre;
     }
-    
-    
-    
 
     public void finalize() throws Throwable {
 

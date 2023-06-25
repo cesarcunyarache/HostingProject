@@ -5,9 +5,10 @@ import Form.Form_Empleados;
 import Form.Form_InfoHabitacion;
 import Form.Form_Habitaciones;
 import Form.Form_NuevaReserva;
+import Form.Form_NuevoAlquiler;
 import Form.Form_Organizacion;
 import Form.Form_TipoDocumento;
-import Form.Form_TipoPago;
+import Form.Form_TipoPago2;
 import Form.Form_TipoPago2;
 import Form.Form_Usuarios;
 import Swing.ButtonCustom;
@@ -61,6 +62,7 @@ public class Menu extends javax.swing.JPanel {
     public Form_NuevaReserva reserva;
     public Form_InfoHabitacion gesHab;
     public Form_TipoPago2 tipoPago;
+    public Form_NuevoAlquiler alquiler;
 
     public Menu(JPanel main, JPanel body, Menu menu) {
         initComponents();
@@ -76,12 +78,16 @@ public class Menu extends javax.swing.JPanel {
         usuario = new Form_Usuarios();
         reserva = new Form_NuevaReserva();
         reserva.setMenu(this);
+
+        alquiler = new Form_NuevoAlquiler();
+        alquiler.setMenu(this);
+
         gesHab = new Form_InfoHabitacion();
         tipoPago = new Form_TipoPago2();
-        
+
         setOpaque(false);
         init();
-        
+
     }
 
     public void setEvent(EventMenuSelected event) {
@@ -142,7 +148,6 @@ public class Menu extends javax.swing.JPanel {
             }
         });
 
-        
         // agregar evento al menu
         setEvent(new EventMenuSelected() {
             @Override
@@ -154,7 +159,6 @@ public class Menu extends javax.swing.JPanel {
                     showForm(gesHab);
                 } else if (index == 2) {
                     showForm(reserva);
-                    //showForm(new Form_Reservas());
                 } else if (index == 3) {
                     showForm(cliente);
                 } else if (index == 4) {
@@ -168,12 +172,13 @@ public class Menu extends javax.swing.JPanel {
                 } else if (index == 8) {
                     showForm(tipoPago);
                 } else if (index == 9) {
-
+                    //
+                } else if (index == 10) {
+                    showForm(alquiler);
                 }
             }
         });
-       
-        // agrega menus
+
         //addMenu(new ModelMenu("Inicio", new ImageIcon(getClass().getResource("/Image/home.png"))));
         addMenu(new ModelMenu("Habitaciones", new ImageIcon(getClass().getResource("/Image/habitacion.png"))));
         addMenu(new ModelMenu("Gestion Habitacion", new ImageIcon(getClass().getResource("/Image/habitacion.png"))));
@@ -185,6 +190,7 @@ public class Menu extends javax.swing.JPanel {
         addMenu(new ModelMenu("Usuarios", new ImageIcon(getClass().getResource("/Image/usuarios.png"))));
         addMenu(new ModelMenu("Pagos", new ImageIcon(getClass().getResource("/Image/pagos.png"))));
         addMenu(new ModelMenu("Reportes", new ImageIcon(getClass().getResource("/Image/reportes.png"))));
+        addMenu(new ModelMenu("Alquiler", new ImageIcon(getClass().getResource("/Image/alquiler.png"))));
         body.add(comp, "w 50!");
         body.add(main, "w 100%");
 
@@ -253,7 +259,7 @@ public class Menu extends javax.swing.JPanel {
         item.addEvent(event);
         panelMenu.add(item);
     }
-    
+
     public void SelectMenu(int id, Component comp) {
         for (Component com : panelMenu.getComponents()) {
             MenuItem item = (MenuItem) com;
@@ -330,11 +336,8 @@ public class Menu extends javax.swing.JPanel {
         return index;
     }
 
-
-    
 }
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

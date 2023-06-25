@@ -1,16 +1,71 @@
 package Form;
+
+import BusinessObject.Habitacion;
+import BusinessObject.TipoHabitacion;
 import TransferObject.HabitacionDTO;
+import TransferObject.TipoHabitacionDTO;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 
 public class Form_InfoHabitacion extends javax.swing.JPanel {
 
+    DefaultTableModel dt;
+    DefaultComboBoxModel modeloTipo;
+    DefaultComboBoxModel modeloEstado;
+    TipoHabitacion tH;
+    Habitacion ha;
+
     public Form_InfoHabitacion() {
         initComponents();
+        tH = new TipoHabitacion();
+        ha = new Habitacion();
+        modeloTipo = new DefaultComboBoxModel(llenarComboTipo());
+        modeloEstado = new DefaultComboBoxModel(llenarComboEstado());
+        cboTipo.setModel(modeloTipo);
+        cboEstado.setModel(modeloEstado);
+        dt = new DefaultTableModel();
+
     }
-    
-    
-    public void setData (HabitacionDTO obj){
+
+    public void setData(HabitacionDTO obj) {
         txtCod.setText(String.valueOf(obj.getNumHabitacion()));
- 
+
+    }
+
+    public Vector<String> llenarComboTipo() {
+        Vector<String> combo = new Vector<String>();
+        ArrayList<TipoHabitacionDTO> lista = new ArrayList<>();
+        combo.add("-Seleccione-");
+        lista = (ArrayList<TipoHabitacionDTO>) tH.listar();
+        if (lista != null) {
+            for (TipoHabitacionDTO tADTO : lista) {
+                combo.add(tADTO.getNombre());
+            }
+        }
+        return combo;
+    }
+
+    public Vector<String> llenarComboEstado() {
+        Vector<String> combo = new Vector<String>();
+        ArrayList<HabitacionDTO> lista = new ArrayList<>();
+        combo.add("-Seleccione-");
+        lista = (ArrayList<HabitacionDTO>) ha.listarR();
+        if (lista != null) {
+            for (HabitacionDTO tADTO : lista) {
+                combo.add(tADTO.getEstado());
+            }
+        }
+        return combo;
+    }
+
+    public void llenarCamposHabitacion(HabitacionDTO hab) {
+
+        txtCod.setText(String.valueOf(hab.getNumHabitacion()));
+        modeloTipo.setSelectedItem(String.valueOf(tH.buscar(hab.getTipoHabitacionID())));
+        modeloEstado.setSelectedItem(String.valueOf(hab.getEstado()));
+
     }
 
     @SuppressWarnings("unchecked")

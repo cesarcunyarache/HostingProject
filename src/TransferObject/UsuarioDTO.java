@@ -15,7 +15,7 @@ public class UsuarioDTO {
     public void finalize() throws Throwable {
 
     }
-    
+
     public UsuarioDTO(String usuario) {
         this.usuario = usuario;
     }
@@ -28,7 +28,7 @@ public class UsuarioDTO {
         this.idUsuario = idUsuario;
         this.usuario = usuario;
     }
-    
+
     public UsuarioDTO(String usuario, String contrasena) {
         this.usuario = usuario;
         this.contrasena = contrasena;

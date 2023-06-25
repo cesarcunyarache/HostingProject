@@ -1,24 +1,31 @@
 package Form.Components;
 
+import Form.Form_NuevoAlquiler;
+import Menu.Menu;
 import TransferObject.HabitacionDTO;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 
 public class ComponentRoom extends javax.swing.JPanel {
 
-    
+    Menu menu;
+    public HabitacionDTO objHabitacion;
+
     public ComponentRoom(HabitacionDTO habitacion) {
         initComponents();
+        this.objHabitacion = habitacion;
         habitacionFrame = habitacion;
         cargarInfoHabitacion();
         setCursor(new Cursor(Cursor.HAND_CURSOR));
         inicializarMenu();
     }
-    
+
     HabitacionDTO habitacionFrame = new HabitacionDTO(SOMEBITS, SOMEBITS, TOOL_TIP_TEXT_KEY);
     private boolean selected;
 
@@ -30,7 +37,6 @@ public class ComponentRoom extends javax.swing.JPanel {
         this.selected = selected;
         repaint();
     }
-
 
     private void cargarInfoHabitacion() {
         jLNumeroHabitacion.setText("N° " + habitacionFrame.getNumHabitacion());
@@ -79,14 +85,14 @@ public class ComponentRoom extends javax.swing.JPanel {
         }
         return habitacionFrame.getEstado();
     }
-    
-     @Override
+
+    @Override
     public void paint(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setColor(new Color(242, 242, 242));
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), 0, 0);
-       
+
         if (selected) {
             g2.setColor(new Color(94, 156, 255));
             g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 0, 0);
@@ -190,7 +196,13 @@ public class ComponentRoom extends javax.swing.JPanel {
     private void jPanel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MouseClicked
         //
     }//GEN-LAST:event_jPanel11MouseClicked
+    public Menu getMenu() {
+        return menu;
+    }
 
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel btnUpdate;
@@ -210,7 +222,41 @@ public class ComponentRoom extends javax.swing.JPanel {
         jPMOpcionesHabitacion.add(Alquilar);
         jPMOpcionesHabitacion.add(Rerservar);
         jPMOpcionesHabitacion.add(Masinfo);
-        
+
+        // Asociar eventos a cada JMenuItem
+        Alquilar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Evento para Alquilar Habitación
+                // Aquí puedes agregar la lógica para abrir la ventana correspondiente
+
+                menu.SelectMenu(10, menu.alquiler);
+
+//                objHabitacion = hab.buscar(habitacionFrame.getNumHabitacion());
+                menu.alquiler.llenarCamposHabitacion(objHabitacion);
+            }
+        });
+
+        Masinfo.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Evento para Alquilar Habitación
+                // Aquí puedes agregar la lógica para abrir la ventana correspondiente
+
+                menu.SelectMenu(2, menu.gesHab);
+
+//                objHabitacion = hab.buscar(habitacionFrame.getNumHabitacion());
+                menu.gesHab.llenarCamposHabitacion(objHabitacion);
+            }
+        });
+
+        Rerservar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                menu.SelectMenu(2, menu.reserva);
+
+                menu.reserva.llenarCamposHabitacion(objHabitacion);
+            }
+        });
+
         jpContenedor.setComponentPopupMenu(jPMOpcionesHabitacion);
     }
 
