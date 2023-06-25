@@ -62,4 +62,38 @@ public class Reserva {
             return null;
         }
     }
+
+    public List<ReservaDTO> buscarNombres(String nombres, Date fechaIn, Date fechaFi) {
+        if (reservaDAO.buscarNombres(nombres, fechaIn, fechaFi) != null) {
+            return reservaDAO.buscarNombres(nombres, fechaIn, fechaFi);
+        } else {
+            return null;
+        }
+    }
+
+    public List<ReservaDTO> buscarApellidos(String nombres, Date fechaIn, Date fechaFi) {
+        if (reservaDAO.buscarApellidos(nombres, fechaIn, fechaFi) != null) {
+            return reservaDAO.buscarApellidos(nombres, fechaIn, fechaFi);
+        } else {
+            return null;
+        }
+    }
+    
+    
+    public List<ReservaDTO> buscarNumeroDoc(String nombres, Date fechaIn, Date fechaFi) {
+        if (reservaDAO.buscarNumeroDoc(nombres, fechaIn, fechaFi) != null) {
+            return reservaDAO.buscarNumeroDoc(nombres, fechaIn, fechaFi);
+        } else {
+            return null;
+        }
+    }
+    
+    
+     public List<ReservaDTO> buscarHabitacion (String nombres, Date fechaIn, Date fechaFi) {
+        if (reservaDAO.buscarHabitacion(nombres, fechaIn, fechaFi) != null) {
+            return reservaDAO.buscarHabitacion(nombres, fechaIn, fechaFi);
+        } else {
+            return null;
+        }
+    }
 }

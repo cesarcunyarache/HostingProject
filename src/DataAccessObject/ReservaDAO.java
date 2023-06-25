@@ -1,6 +1,7 @@
 package DataAccessObject;
 
 import DataSource.Conexion;
+import TransferObject.ClienteDTO;
 import TransferObject.ReservaDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Date;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,7 +19,6 @@ public class ReservaDAO implements Crud<ReservaDTO> {
     ReservaDTO reserva;
     DefaultTableModel dt;
     DefaultComboBoxModel modelo;
-
 
     public ReservaDAO() {
         conexion = new Conexion();
@@ -198,5 +199,155 @@ public class ReservaDAO implements Crud<ReservaDTO> {
 
         return reserva;
     }
+
+    public List<ReservaDTO> buscarNombres(String nombres, Date fechaIn, Date fechaFi) {
+        ArrayList<ReservaDTO> reservas = new ArrayList<>();
+
+        try {
+           
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            ps = conexion.getConnection().prepareStatement("{CALL filtrarNombresReservas(?, ?, ?)}");
+            ps.setString(1, nombres);
+            ps.setDate(2, fechaIn);
+            ps.setDate(3, fechaFi);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int idReserva = rs.getInt("idReserva");
+                int idHabitacion = rs.getInt("idHabitacion");
+                int idCliente = rs.getInt("idCliente");
+                int idEmpleado = rs.getInt("idEmpleado");
+                Date fechaReserva = rs.getDate("fechaReserva");
+                Date fechaInicio = rs.getDate("fechaInicio");
+                Date fechaFin = rs.getDate("fechaFin");
+                String estado = rs.getString("estado");
+                reserva = new ReservaDTO(idReserva, idHabitacion, idCliente, idEmpleado, fechaReserva, fechaInicio, fechaFin, estado);
+                reservas.add(reserva);
+
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        } finally {
+            conexion.desconectar();
+        }
+
+        return reservas;
+    }
     
+    
+     public List<ReservaDTO> buscarApellidos(String busquedad, Date fechaIn, Date fechaFi) {
+        ArrayList<ReservaDTO> reservas = new ArrayList<>();
+
+        try {
+           
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            ps = conexion.getConnection().prepareStatement("{CALL filtrarApellidosReservas(?, ?, ?)}");
+            ps.setString(1, busquedad);
+            ps.setDate(2, fechaIn);
+            ps.setDate(3, fechaFi);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int idReserva = rs.getInt("idReserva");
+                int idHabitacion = rs.getInt("idHabitacion");
+                int idCliente = rs.getInt("idCliente");
+                int idEmpleado = rs.getInt("idEmpleado");
+                Date fechaReserva = rs.getDate("fechaReserva");
+                Date fechaInicio = rs.getDate("fechaInicio");
+                Date fechaFin = rs.getDate("fechaFin");
+                String estado = rs.getString("estado");
+                reserva = new ReservaDTO(idReserva, idHabitacion, idCliente, idEmpleado, fechaReserva, fechaInicio, fechaFin, estado);
+                reservas.add(reserva);
+
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        } finally {
+            conexion.desconectar();
+        }
+
+        return reservas;
+    }
+
+
+     
+      public List<ReservaDTO> buscarNumeroDoc(String busquedad, Date fechaIn, Date fechaFi) {
+        ArrayList<ReservaDTO> reservas = new ArrayList<>();
+
+        try {
+           
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            ps = conexion.getConnection().prepareStatement("{CALL filtrarNumeroDocReservas(?, ?, ?)}");
+            ps.setString(1, busquedad);
+            ps.setDate(2, fechaIn);
+            ps.setDate(3, fechaFi);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int idReserva = rs.getInt("idReserva");
+                int idHabitacion = rs.getInt("idHabitacion");
+                int idCliente = rs.getInt("idCliente");
+                int idEmpleado = rs.getInt("idEmpleado");
+                Date fechaReserva = rs.getDate("fechaReserva");
+                Date fechaInicio = rs.getDate("fechaInicio");
+                Date fechaFin = rs.getDate("fechaFin");
+                String estado = rs.getString("estado");
+                reserva = new ReservaDTO(idReserva, idHabitacion, idCliente, idEmpleado, fechaReserva, fechaInicio, fechaFin, estado);
+                reservas.add(reserva);
+
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        } finally {
+            conexion.desconectar();
+        }
+
+        return reservas;
+    }
+
+      
+      public List<ReservaDTO>  buscarHabitacion (String busquedad, Date fechaIn, Date fechaFi) {
+        ArrayList<ReservaDTO> reservas = new ArrayList<>();
+
+        try {
+           
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            ps = conexion.getConnection().prepareStatement("{CALL filtrarHabitacionReservas(?, ?, ?)}");
+            ps.setString(1, busquedad);
+            ps.setDate(2, fechaIn);
+            ps.setDate(3, fechaFi);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int idReserva = rs.getInt("idReserva");
+                int idHabitacion = rs.getInt("idHabitacion");
+                int idCliente = rs.getInt("idCliente");
+                int idEmpleado = rs.getInt("idEmpleado");
+                Date fechaReserva = rs.getDate("fechaReserva");
+                Date fechaInicio = rs.getDate("fechaInicio");
+                Date fechaFin = rs.getDate("fechaFin");
+                String estado = rs.getString("estado");
+                reserva = new ReservaDTO(idReserva, idHabitacion, idCliente, idEmpleado, fechaReserva, fechaInicio, fechaFin, estado);
+                reservas.add(reserva);
+
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        } finally {
+            conexion.desconectar();
+        }
+
+        return reservas;
+    }
+
+
+
 }

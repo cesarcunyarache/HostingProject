@@ -33,7 +33,8 @@ public class Form_Usuarios extends javax.swing.JPanel {
             }
 
         };
-        tabla.setVisible(false);
+        
+        llenarTabla();
 
     }
 
@@ -216,7 +217,7 @@ public class Form_Usuarios extends javax.swing.JPanel {
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton2)
                     .addComponent(jRadioButton4))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 580, 720, 60));
@@ -260,6 +261,7 @@ public class Form_Usuarios extends javax.swing.JPanel {
                                         String mensaje = usuario.Agregar(obj.getIdEmpleado(), user, enc.ecnode(pass), rol);
                                         JOptionPane.showMessageDialog(null, mensaje);
                                         limpiar();
+                                        llenarTabla();
                                         obj = null;
                                     } else {
                                         JOptionPane.showMessageDialog(null, "El usuario ya existe");
@@ -423,10 +425,10 @@ public class Form_Usuarios extends javax.swing.JPanel {
         ArrayList<UsuarioDTO> lista = new ArrayList<>();
         lista = (ArrayList<UsuarioDTO>) usuario.Listar();
         if (lista != null) {
-
+           
             for (int i = 0; i < lista.size(); i++) {
                 UsuarioDTO u = lista.get(i);
-
+         
                 datos[0] = u.getIdUsuario();
                 datos[1] = u.getUsuario();
                 datos[2] = u.getRol();

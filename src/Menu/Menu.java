@@ -1,5 +1,6 @@
 package Menu;
 
+import Form.Form_AdministrarReservas;
 import Form.Form_Cliente;
 import Form.Form_Empleados;
 import Form.Form_InfoHabitacion;
@@ -63,6 +64,7 @@ public class Menu extends javax.swing.JPanel {
     public Form_InfoHabitacion gesHab;
     public Form_TipoPago2 tipoPago;
     public Form_NuevoAlquiler alquiler;
+    public Form_AdministrarReservas adminReservas;
 
     public Menu(JPanel main, JPanel body, Menu menu) {
         initComponents();
@@ -84,6 +86,8 @@ public class Menu extends javax.swing.JPanel {
 
         gesHab = new Form_InfoHabitacion();
         tipoPago = new Form_TipoPago2();
+        
+        adminReservas = new Form_AdministrarReservas();
 
         setOpaque(false);
         init();
@@ -175,6 +179,8 @@ public class Menu extends javax.swing.JPanel {
                     //
                 } else if (index == 10) {
                     showForm(alquiler);
+                } else if (index == 11){
+                    showForm(adminReservas);
                 }
             }
         });
@@ -191,6 +197,7 @@ public class Menu extends javax.swing.JPanel {
         addMenu(new ModelMenu("Pagos", new ImageIcon(getClass().getResource("/Image/pagos.png"))));
         addMenu(new ModelMenu("Reportes", new ImageIcon(getClass().getResource("/Image/reportes.png"))));
         addMenu(new ModelMenu("Alquiler", new ImageIcon(getClass().getResource("/Image/alquiler.png"))));
+        addMenu(new ModelMenu("Administrar Reservas", new ImageIcon(getClass().getResource("/Image/alquiler.png"))));
         body.add(comp, "w 50!");
         body.add(main, "w 100%");
 

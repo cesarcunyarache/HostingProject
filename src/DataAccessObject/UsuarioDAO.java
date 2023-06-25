@@ -77,17 +77,18 @@ public class UsuarioDAO implements Crud<UsuarioDTO> {
             //registros por leer
             while (rs.next()) {
                 UsuarioDTO t = new UsuarioDTO();
-                t.setIdUsuario(rs.getInt(1));
-                t.setEmpleadoID(rs.getInt(2));
-                t.setUsuario(rs.getString(3));
-                t.setContrasena(rs.getString(4));
-                t.setRol(rs.getString(5));
+                t.setIdUsuario(rs.getInt("idUsuario"));
+                t.setEmpleadoID(rs.getInt("idEmpleado"));
+                t.setUsuario(rs.getString("user"));
+                t.setContrasena(rs.getString("password"));
+                t.setRol(rs.getString("rol"));
 
                 listaUsuarios.add(t);
             }
 
             return listaUsuarios;
         } catch (SQLException ex) {
+            System.out.println(ex);
             return null;
 
         } finally {
