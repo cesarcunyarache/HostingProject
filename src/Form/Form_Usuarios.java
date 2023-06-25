@@ -2,8 +2,10 @@ package Form;
 
 import BusinessObject.Empleado;
 import BusinessObject.Usuario;
+import TransferObject.ClienteDTO;
 import TransferObject.EmpleadoDTO;
 import TransferObject.Encriptado;
+import TransferObject.TipoDocumentoDTO;
 import TransferObject.UsuarioDTO;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -33,7 +35,7 @@ public class Form_Usuarios extends javax.swing.JPanel {
             }
 
         };
-        
+
         llenarTabla();
 
     }
@@ -138,6 +140,11 @@ public class Form_Usuarios extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabla);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 370, 400));
@@ -324,7 +331,7 @@ public class Form_Usuarios extends javax.swing.JPanel {
             if (dni.matches("[0-9]*")) {
                 EmpleadoDTO empleadoDTO = empleado.buscarPorDNI(dni);
                 if (empleadoDTO != null) {
-                    UsuarioDTO us = usuario.Buscar(empleadoDTO.getIdEmpleado());
+                    UsuarioDTO us = usuario.BuscarIDEmpleado(empleadoDTO.getIdEmpleado());
                     if (us != null) {
                         obj = empleadoDTO;
                         txt_user.setText(us.getUsuario());
@@ -364,7 +371,7 @@ public class Form_Usuarios extends javax.swing.JPanel {
                         if (pass.equals(confirPass)) {
                             EmpleadoDTO empleadoDTO = empleado.buscarPorDNI(dni);
                             if (empleadoDTO != null) {
-                                UsuarioDTO usr = usuario.Buscar(empleadoDTO.getIdEmpleado());
+                                UsuarioDTO usr = usuario.BuscarIDEmpleado(empleadoDTO.getIdEmpleado());
                                 if (usr != null) {
                                     UsuarioDTO var = usuario.BuscarActualizar(user, usr.getIdUsuario());
                                     if (var.getUsuario() == null) {
@@ -402,6 +409,31 @@ public class Form_Usuarios extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btn_ActualizarActionPerformed
 
+    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+        id = (int) (tabla.getValueAt(tabla.getSelectedRow(), 0));
+        if (id == 0) {
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
+        } else {
+            UsuarioDTO userSerch = usuario.Buscar(id);
+
+            if (userSerch != null) {
+                EmpleadoDTO empSearch = empleado.buscarPorID(userSerch.getEmpleadoID());
+
+                if (empSearch != null) {
+                    txt_dni.setText(empSearch.getNumDocumento());
+                    txt_nombre.setText(empSearch.getNombres() + " "+ empSearch.getApellidos());
+                    txt_user.setText(userSerch.getUsuario());
+                    txt_pass.setText(enc.deecnode(userSerch.getContrasena()));
+                    txt_confi_pass.setText(enc.deecnode(userSerch.getContrasena()));
+                    cbo_rol.setSelectedItem(userSerch.getRol());
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Valor no encontrado");
+            }
+        }
+    }//GEN-LAST:event_tablaMouseClicked
+
     public void Disabled(boolean var) {
         txt_nombre.setEnabled(var);
         txt_user.setEnabled(var);
@@ -417,7 +449,7 @@ public class Form_Usuarios extends javax.swing.JPanel {
         df.setColumnCount(0);
         df.setRowCount(0);
 
-        String[] cabezera = {"#", "Usuario", "Rol"};
+        String[] cabezera = {"#", "Usuario", "Contraseña", "Rol"};
         df.setColumnIdentifiers(cabezera);
 
         Object[] datos = new Object[df.getColumnCount()];
@@ -425,13 +457,14 @@ public class Form_Usuarios extends javax.swing.JPanel {
         ArrayList<UsuarioDTO> lista = new ArrayList<>();
         lista = (ArrayList<UsuarioDTO>) usuario.Listar();
         if (lista != null) {
-           
+
             for (int i = 0; i < lista.size(); i++) {
                 UsuarioDTO u = lista.get(i);
-         
+
                 datos[0] = u.getIdUsuario();
                 datos[1] = u.getUsuario();
-                datos[2] = u.getRol();
+                datos[2] = enc.deecnode(u.getContrasena());
+                datos[3] = u.getRol();
 
                 df.addRow(datos);
             }

@@ -68,6 +68,7 @@ public class Form_Empleados extends javax.swing.JPanel {
         txt_direccion.setText("");
         cbo_genero1.setSelectedIndex(0);
         tabla.clearSelection();
+        jDtFechaNacimiento.setDate(null);
         id = 0;
     }
 

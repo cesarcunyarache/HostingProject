@@ -187,10 +187,16 @@ public class Form_Organizacion extends javax.swing.JPanel {
 
         jLabel6.setText("Número de documento");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 50, -1, -1));
+
+        txtNumDoc.setEditable(false);
+        txtNumDoc.setEnabled(false);
         jPanel1.add(txtNumDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 70, 240, 30));
 
         jLabel7.setText("Nombres y apellidos");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 130, -1, -1));
+
+        txtNom.setEditable(false);
+        txtNom.setEnabled(false);
         jPanel1.add(txtNom, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 150, 240, 30));
 
         jButton1.setText("Asociar");
@@ -209,7 +215,7 @@ public class Form_Organizacion extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "#", "N° de documento", "Nombres", "Apellidos"
             }
         ));
         jScrollPane3.setViewportView(tablaClientes);
@@ -374,7 +380,7 @@ public class Form_Organizacion extends javax.swing.JPanel {
         dfCliente.setColumnCount(0);
         dfCliente.setRowCount(0);
 
-        String[] cabezera = {"#", "Número de documento", "Nombres", "Apellidos"};
+        String[] cabezera = {"#", "N° de documento", "Nombres", "Apellidos"};
         dfCliente.setColumnIdentifiers(cabezera);
 
         Object[] datos = new Object[dfCliente.getColumnCount()];

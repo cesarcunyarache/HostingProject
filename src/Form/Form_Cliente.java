@@ -46,6 +46,7 @@ public class Form_Cliente extends javax.swing.JPanel {
         };
         llenarTabla();
         cbo_nacionalidad.setSelectedItem("Perú");
+        rbNombre.setSelected(true);
     }
 
     public void setMenu(Menu menu) {
@@ -216,18 +217,43 @@ public class Form_Cliente extends javax.swing.JPanel {
 
         buttonGroup1.add(rbCorreo);
         rbCorreo.setText("Correo");
+        rbCorreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbCorreoActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(rbDni);
         rbDni.setText("Dni");
+        rbDni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbDniActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(rbTelefono);
         rbTelefono.setText("Telefono");
+        rbTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbTelefonoActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(rbApellidos);
         rbApellidos.setText("Apellidos");
+        rbApellidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbApellidosActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(rbNombre);
         rbNombre.setText("Nombres");
+        rbNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbNombreActionPerformed(evt);
+            }
+        });
 
         txtBusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -301,7 +327,7 @@ public class Form_Cliente extends javax.swing.JPanel {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 370, 90, 40));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 370, 90, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -440,8 +466,8 @@ public class Form_Cliente extends javax.swing.JPanel {
     private void btn_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ActualizarActionPerformed
         if (!txt_numDoc.getText().isEmpty() && !cbo_tipoDoc.getSelectedItem().equals("-Seleccione-")
                 && !txt_nombres.getText().isEmpty() && !txt_apellidos.getText().isEmpty()
-                && !txt_telefono.getText().isEmpty() && !txt_correo.getText().isEmpty()
-                && !txt_direccion.getText().isEmpty() && !cbo_genero.getSelectedItem().equals("-Seleccione-")
+                && !txt_telefono.getText().isEmpty() 
+                && !cbo_genero.getSelectedItem().equals("-Seleccione-")
                 && !cbo_tipoDoc.getSelectedItem().equals("")) {
 
             String numDoc = txt_numDoc.getText();
@@ -624,6 +650,26 @@ public class Form_Cliente extends javax.swing.JPanel {
             menu.SelectMenu(2, menu.reserva);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void rbNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbNombreActionPerformed
+       txtBusqueda.setText("");
+    }//GEN-LAST:event_rbNombreActionPerformed
+
+    private void rbApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbApellidosActionPerformed
+         txtBusqueda.setText("");
+    }//GEN-LAST:event_rbApellidosActionPerformed
+
+    private void rbTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbTelefonoActionPerformed
+        txtBusqueda.setText("");
+    }//GEN-LAST:event_rbTelefonoActionPerformed
+
+    private void rbDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDniActionPerformed
+         txtBusqueda.setText("");
+    }//GEN-LAST:event_rbDniActionPerformed
+
+    private void rbCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbCorreoActionPerformed
+         txtBusqueda.setText("");
+    }//GEN-LAST:event_rbCorreoActionPerformed
 
       public void llenarTabla() {
 

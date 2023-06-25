@@ -19,6 +19,8 @@ public class UsuarioDTO {
     public UsuarioDTO(String usuario) {
         this.usuario = usuario;
     }
+    
+    
 
     public UsuarioDTO(int empleadoID) {
         this.empleadoID = empleadoID;

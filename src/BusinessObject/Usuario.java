@@ -47,16 +47,27 @@ public class Usuario {
     }
 
     public UsuarioDTO Buscar(int id) {
-        usuarioDTO = new UsuarioDTO(id);
-        
+        usuarioDTO = new UsuarioDTO();
+        usuarioDTO.setIdUsuario(id);
         if (usuarioDAO.Search(usuarioDTO) != null) {
-            System.out.println(usuarioDTO.getUsuario() + "usuario en meotoods");
             usuarioDTO = usuarioDAO.Search(usuarioDTO);
             return usuarioDTO;
         } else {
             return null;
         }
     }
+    
+     public UsuarioDTO BuscarIDEmpleado(int id) {
+        usuarioDTO = new UsuarioDTO();
+        usuarioDTO.setEmpleadoID(id);
+        if (usuarioDAO.BuscarIDEmpleado(usuarioDTO) != null) {
+            usuarioDTO = usuarioDAO.BuscarIDEmpleado(usuarioDTO);
+            return usuarioDTO;
+        } else {
+            return null;
+        }
+    }
+
 
     public UsuarioDTO BuscarUsuario(String user) {
         usuarioDTO = new UsuarioDTO(user);

@@ -8,6 +8,7 @@ import Form.Form_Habitaciones;
 import Form.Form_NuevaReserva;
 import Form.Form_NuevoAlquiler;
 import Form.Form_Organizacion;
+import Form.Form_Reportes;
 import Form.Form_TipoDocumento;
 import Form.Form_TipoPago2;
 import Form.Form_TipoPago2;
@@ -65,6 +66,7 @@ public class Menu extends javax.swing.JPanel {
     public Form_TipoPago2 tipoPago;
     public Form_NuevoAlquiler alquiler;
     public Form_AdministrarReservas adminReservas;
+    public Form_Reportes reportes;
 
     public Menu(JPanel main, JPanel body, Menu menu) {
         initComponents();
@@ -88,6 +90,8 @@ public class Menu extends javax.swing.JPanel {
         tipoPago = new Form_TipoPago2();
         
         adminReservas = new Form_AdministrarReservas();
+        
+        reportes = new Form_Reportes();
 
         setOpaque(false);
         init();
@@ -176,7 +180,7 @@ public class Menu extends javax.swing.JPanel {
                 } else if (index == 8) {
                     showForm(tipoPago);
                 } else if (index == 9) {
-                    //
+                    showForm(reportes);
                 } else if (index == 10) {
                     showForm(alquiler);
                 } else if (index == 11){
@@ -187,17 +191,17 @@ public class Menu extends javax.swing.JPanel {
 
         //addMenu(new ModelMenu("Inicio", new ImageIcon(getClass().getResource("/Image/home.png"))));
         addMenu(new ModelMenu("Habitaciones", new ImageIcon(getClass().getResource("/Image/habitacion.png"))));
-        addMenu(new ModelMenu("Gestion Habitacion", new ImageIcon(getClass().getResource("/Image/habitacion.png"))));
+        addMenu(new ModelMenu("Gestión Habitación", new ImageIcon(getClass().getResource("/Image/gestionHab.png"))));
         addMenu(new ModelMenu("Reservas", new ImageIcon(getClass().getResource("/Image/reserva.png"))));
         addMenu(new ModelMenu("Clientes", new ImageIcon(getClass().getResource("/Image/cliente.png"))));
         addMenu(new ModelMenu("Documento", new ImageIcon(getClass().getResource("/Image/tipoDocumento.png"))));
-        addMenu(new ModelMenu("Organizacion", new ImageIcon(getClass().getResource("/Image/organizacion.png"))));
+        addMenu(new ModelMenu("Organización", new ImageIcon(getClass().getResource("/Image/organizacion.png"))));
         addMenu(new ModelMenu("Empleados", new ImageIcon(getClass().getResource("/Image/empleado.png"))));
         addMenu(new ModelMenu("Usuarios", new ImageIcon(getClass().getResource("/Image/usuarios.png"))));
         addMenu(new ModelMenu("Pagos", new ImageIcon(getClass().getResource("/Image/pagos.png"))));
         addMenu(new ModelMenu("Reportes", new ImageIcon(getClass().getResource("/Image/reportes.png"))));
         addMenu(new ModelMenu("Alquiler", new ImageIcon(getClass().getResource("/Image/alquiler.png"))));
-        addMenu(new ModelMenu("Administrar Reservas", new ImageIcon(getClass().getResource("/Image/alquiler.png"))));
+        addMenu(new ModelMenu("Administrar Reservas", new ImageIcon(getClass().getResource("/Image/adminReservas.png"))));
         body.add(comp, "w 50!");
         body.add(main, "w 100%");
 

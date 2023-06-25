@@ -573,6 +573,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Correo"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbCorreoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="rbDni">
               <Properties>
@@ -581,6 +584,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Dni"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbDniActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="rbTelefono">
               <Properties>
@@ -589,6 +595,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Telefono"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbTelefonoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="rbApellidos">
               <Properties>
@@ -597,6 +606,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Apellidos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbApellidosActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="rbNombre">
               <Properties>
@@ -605,6 +617,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nombres"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbNombreActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtBusqueda">
               <Events>
@@ -649,7 +664,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="760" y="370" width="90" height="40"/>
+              <AbsoluteConstraints x="790" y="370" width="90" height="40"/>
             </Constraint>
           </Constraints>
         </Component>

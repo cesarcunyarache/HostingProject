@@ -11,9 +11,11 @@ import BusinessObject.Reserva;
 import TransferObject.ClienteDTO;
 import TransferObject.PagoDTO;
 import TransferObject.ReservaDTO;
+import TransferObject.TipoDocumentoDTO;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,9 +27,10 @@ public class Form_AdministrarReservas extends javax.swing.JPanel {
     Reserva reserva;
     Cliente cliente;
     Habitacion habitacion;
-    ;
+    int id = 0;
     Pago pago;
     DefaultTableModel df;
+    ReservaDTO objReserva;
 
     public Form_AdministrarReservas() {
         initComponents();
@@ -44,6 +47,7 @@ public class Form_AdministrarReservas extends javax.swing.JPanel {
 
         };
         llenarTabla();
+        rbNombre.setSelected(true);
     }
 
     public void llenarTabla() {
@@ -94,12 +98,12 @@ public class Form_AdministrarReservas extends javax.swing.JPanel {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNumHab = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtNumDoc = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtNombres = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
@@ -112,16 +116,30 @@ public class Form_AdministrarReservas extends javax.swing.JPanel {
         jDtFechaEntrada = new com.toedter.calendar.JDateChooser();
         jDtFechaFin = new com.toedter.calendar.JDateChooser();
         rbApellidos = new javax.swing.JRadioButton();
+        jDtFechaReserva = new com.toedter.calendar.JDateChooser();
+        jLabel14 = new javax.swing.JLabel();
+        jDtFechaInicio = new com.toedter.calendar.JDateChooser();
+        jLabel15 = new javax.swing.JLabel();
+        jDtFechaSalida = new com.toedter.calendar.JDateChooser();
+        jLabel16 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+
+        txtNumHab.setEditable(false);
+        txtNumHab.setEnabled(false);
 
         jLabel1.setText("Numero de habitación");
 
-        jTextField2.setText("jTextField2");
+        txtNumDoc.setEditable(false);
+        txtNumDoc.setEnabled(false);
 
-        jLabel2.setText("jLabel2");
+        jLabel2.setText("N° de documento ");
 
-        jLabel3.setText("jLabel3");
+        jLabel3.setText("Nombres y Apellidos");
 
-        jTextField3.setText("jTextField3");
+        txtNombres.setEditable(false);
+        txtNombres.setEnabled(false);
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -134,6 +152,11 @@ public class Form_AdministrarReservas extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabla);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -176,6 +199,30 @@ public class Form_AdministrarReservas extends javax.swing.JPanel {
         rbApellidos.setText("Apellidos");
         jPanel3.add(rbApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
 
+        jDtFechaReserva.setEnabled(false);
+
+        jLabel14.setText("Fecha de Reserva");
+
+        jLabel15.setText("Fecha de Inicio");
+
+        jLabel16.setText("Fecha de Salida");
+
+        jButton1.setText("Actualizar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Ingresar Registro de habitación");
+
+        jButton3.setText("Nuevo");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -183,47 +230,90 @@ public class Form_AdministrarReservas extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 952, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextField1)
-                            .addComponent(jLabel2))
-                        .addGap(96, 96, 96)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(79, 79, 79)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(158, 158, 158))))
+                            .addComponent(jLabel15)
+                            .addComponent(jDtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(593, 593, 593))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 952, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtNumDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(txtNumHab)
+                                    .addComponent(jLabel2))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(68, 68, 68)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jDtFechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel16)
+                                            .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(70, 70, 70)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel14)
+                                            .addComponent(jDtFechaReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(172, 172, 172)
+                .addComponent(jButton1)
+                .addGap(38, 38, 38)
+                .addComponent(jButton2)
+                .addGap(42, 42, 42)
+                .addComponent(jButton3)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(43, 43, 43)
-                                .addComponent(jLabel2))
+                                .addComponent(txtNumHab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(jLabel3)
+                                .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jDtFechaReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNumDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addGap(3, 3, 3)
+                                .addComponent(jDtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jDtFechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(69, 69, 69))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -233,16 +323,15 @@ public class Form_AdministrarReservas extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(279, Short.MAX_VALUE))
+                .addContainerGap(217, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -253,61 +342,129 @@ public class Form_AdministrarReservas extends javax.swing.JPanel {
     private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
         try {
 
-            if (!txtBusqueda.getText().isEmpty()) {
-                limpiarTabla();
+            if (jDtFechaEntrada.getDate() != null && jDtFechaFin.getDate() != null) {
+                Date fecha = new java.sql.Date(jDtFechaEntrada.getDate().getTime());
+                Date fecha2 = new java.sql.Date(jDtFechaFin.getDate().getTime());
 
-                df = (DefaultTableModel) tabla.getModel();
-                Object[] ob = new Object[8];
-                if (rbNombre.isSelected()) {
-                    Date fecha = new java.sql.Date(jDtFechaEntrada.getDate().getTime());
-                    Date fecha2 = new java.sql.Date(jDtFechaFin.getDate().getTime());
-                    List<ReservaDTO> listaCliente = reserva.buscarNombres(txtBusqueda.getText(), fecha, fecha2);
-                    if (listaCliente != null) {
-                        for (ReservaDTO c : listaCliente) {
-                            asignarFilaDeDatos(df, ob, c);
+                if (fecha.before(fecha2)) {
+
+                    if (!txtBusqueda.getText().isEmpty()) {
+                        limpiarTabla();
+
+                        df = (DefaultTableModel) tabla.getModel();
+                        Object[] ob = new Object[8];
+                        if (rbNombre.isSelected()) {
+
+                            List<ReservaDTO> listaCliente = reserva.buscarNombres(txtBusqueda.getText(), fecha, fecha2);
+                            if (listaCliente != null) {
+                                for (ReservaDTO c : listaCliente) {
+                                    asignarFilaDeDatos(df, ob, c);
+                                }
+                            }
+                        } else if (rbApellidos.isSelected()) {
+
+                            List<ReservaDTO> listaCliente = reserva.buscarApellidos(txtBusqueda.getText(), fecha, fecha2);
+                            if (listaCliente != null) {
+                                for (ReservaDTO c : listaCliente) {
+                                    asignarFilaDeDatos(df, ob, c);
+                                }
+                            }
+                        } else if (rbNumeroDoc.isSelected()) {
+
+                            List<ReservaDTO> listaCliente = reserva.buscarNumeroDoc(txtBusqueda.getText(), fecha, fecha2);
+                            if (listaCliente != null) {
+                                for (ReservaDTO c : listaCliente) {
+                                    asignarFilaDeDatos(df, ob, c);
+                                }
+                            }
+                        } else if (rbHabitacion.isSelected()) {
+
+                            List<ReservaDTO> listaCliente = reserva.buscarHabitacion(txtBusqueda.getText(), fecha, fecha2);
+                            if (listaCliente != null) {
+                                for (ReservaDTO c : listaCliente) {
+                                    asignarFilaDeDatos(df, ob, c);
+                                }
+                            }
+                        } else {
+
+                            limpiarTabla();
                         }
-                    }
-                } else if (rbApellidos.isSelected()) {
-                    Date fecha = new java.sql.Date(jDtFechaEntrada.getDate().getTime());
-                    Date fecha2 = new java.sql.Date(jDtFechaFin.getDate().getTime());
-                    List<ReservaDTO> listaCliente = reserva.buscarApellidos(txtBusqueda.getText(), fecha, fecha2);
-                    if (listaCliente != null) {
-                        for (ReservaDTO c : listaCliente) {
-                            asignarFilaDeDatos(df, ob, c);
-                        }
-                    }
-                } else if (rbNumeroDoc.isSelected()) {
-                    Date fecha = new java.sql.Date(jDtFechaEntrada.getDate().getTime());
-                    Date fecha2 = new java.sql.Date(jDtFechaFin.getDate().getTime());
-                    List<ReservaDTO> listaCliente = reserva.buscarNumeroDoc(txtBusqueda.getText(), fecha, fecha2);
-                    if (listaCliente != null) {
-                        for (ReservaDTO c : listaCliente) {
-                            asignarFilaDeDatos(df, ob, c);
-                        }
-                    }
-                } else if (rbHabitacion.isSelected()) {
-                    Date fecha = new java.sql.Date(jDtFechaEntrada.getDate().getTime());
-                    Date fecha2 = new java.sql.Date(jDtFechaFin.getDate().getTime());
-                    List<ReservaDTO> listaCliente = reserva.buscarHabitacion(txtBusqueda.getText(), fecha, fecha2);
-                    if (listaCliente != null) {
-                        for (ReservaDTO c : listaCliente) {
-                            asignarFilaDeDatos(df, ob, c);
-                        }
+                        tabla.setModel(df);
+
+                    } else {
+
+                        llenarTabla();
+
                     }
                 } else {
-
-                    limpiarTabla();
+                    txtBusqueda.setText("");
+                    JOptionPane.showMessageDialog(null, "La fecha de Inicio no puede ser mayor a la fecha de Fin");
                 }
-                tabla.setModel(df);
 
             } else {
-
-                llenarTabla();
-
+                txtBusqueda.setText("");
+                JOptionPane.showMessageDialog(null, "Debes ingresar valores de intervalo en las fechas");
             }
         } catch (Exception e) {
+            System.out.println(e);
         }
     }//GEN-LAST:event_txtBusquedaKeyReleased
+
+    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+        id = (int) (tabla.getValueAt(tabla.getSelectedRow(), 0));
+        if (id == 0) {
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
+        } else {
+            ReservaDTO reservaSearch = reserva.buscarIDregistro(id);
+
+            if (reservaSearch != null) {
+                ClienteDTO clienteDTO = cliente.Buscar(reservaSearch.getIdCliente());
+                PagoDTO pagoDTO = pago.buscar(reservaSearch.getIdHabitacion());
+
+                if (clienteDTO != null) {
+                    if (pagoDTO != null) {
+                        txtNumHab.setText(String.valueOf(reservaSearch.getIdHabitacion()));
+                        txtNombres.setText(clienteDTO.getNombres() + " " + clienteDTO.getApellidos());
+                        txtNumDoc.setText(clienteDTO.getNumDocumento());
+                        jDtFechaReserva.setDate(reservaSearch.getFechaReserva());
+                        jDtFechaInicio.setDate(reservaSearch.getFechaInicio());
+                        jDtFechaSalida.setDate(reservaSearch.getFechaFin());
+                        this.objReserva = reservaSearch;
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Valor no encontrado");
+                }
+            }
+        }
+
+    }//GEN-LAST:event_tablaMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (jDtFechaInicio.getDate() != null && jDtFechaSalida.getDate() != null) {
+            Date fecha = new java.sql.Date(jDtFechaInicio.getDate().getTime());
+            Date fecha2 = new java.sql.Date(jDtFechaSalida.getDate().getTime());
+
+            if (fecha.before(fecha2)) {
+                
+                Date fechaReserva =new java.sql.Date(jDtFechaReserva.getDate().getTime());
+                String mensaje = reserva.actualizar(objReserva.getIdReserva(), objReserva.getIdHabitacion(), objReserva.getIdCliente(), objReserva.getIdEmpleado(),fechaReserva, fecha, fecha2, objReserva.getEstado());
+                JOptionPane.showMessageDialog(null, mensaje);
+                limpiar();
+                llenarTabla();
+            } else {
+                 JOptionPane.showMessageDialog(null, "La fecha de Inicio no puede ser mayor a la fecha de Fin");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Error: uno o más campos vacios");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+      limpiar();
+      llenarTabla();
+      
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void asignarFilaDeDatos(DefaultTableModel modelo, Object[] datos, ReservaDTO obj) {
 
@@ -331,27 +488,46 @@ public class Form_AdministrarReservas extends javax.swing.JPanel {
         df.getDataVector().removeAllElements();
         tabla.removeAll();
     }
+    
+    public void limpiar(){
+        txtBusqueda.setText("");
+        txtNumHab.setText("");
+        txtNumDoc.setText("");
+        txtNombres.setText("");
+        jDtFechaReserva.setDate(null);
+        jDtFechaInicio.setDate(null);
+        jDtFechaSalida.setDate(null);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private com.toedter.calendar.JDateChooser jDtFechaEntrada;
     private com.toedter.calendar.JDateChooser jDtFechaFin;
+    private com.toedter.calendar.JDateChooser jDtFechaInicio;
+    private com.toedter.calendar.JDateChooser jDtFechaReserva;
+    private com.toedter.calendar.JDateChooser jDtFechaSalida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JRadioButton rbApellidos;
     private javax.swing.JRadioButton rbHabitacion;
     private javax.swing.JRadioButton rbNombre;
     private javax.swing.JRadioButton rbNumeroDoc;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txtBusqueda;
+    private javax.swing.JTextField txtNombres;
+    private javax.swing.JTextField txtNumDoc;
+    private javax.swing.JTextField txtNumHab;
     // End of variables declaration//GEN-END:variables
 }

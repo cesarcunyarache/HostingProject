@@ -51,9 +51,7 @@ public class Reserva {
         return mensaje;
     }
 
-    public String actualizar(int idHabitacion, int idCliente, int idEmpleado, Date fechaIngreso, Date fechaSalida) {
-        return "";
-    }
+    
 
     public List<ReservaDTO> listar() {
         if (reservaDAO.Read() != null) {

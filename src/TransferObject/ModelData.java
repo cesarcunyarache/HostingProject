@@ -47,9 +47,8 @@ public class ModelData {
         this.cost = cost;
     }
 
-   
-    
     public ModelData() {
+        
     }
 
     private String month;
