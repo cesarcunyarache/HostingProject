@@ -90,7 +90,7 @@ public class HabitacionDAO implements Crud<HabitacionDTO> {
         try {
 
             if (!estadoH.equals("Todos")) {
-                ps = con.prepareStatement("SELECT * FROM buscarHabitaciones('" + estadoH + "')");
+                ps = con.prepareStatement("SELECT * FROM filtrarHabitaciones('" + estadoH + "')");
             } else {
                 ps = con.prepareStatement("SELECT * FROM Habitacion;");
             }

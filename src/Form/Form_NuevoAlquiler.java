@@ -25,7 +25,7 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
     Menu menu;
     TipoHabitacion tH;
     DefaultComboBoxModel modelo;
-    HabitacionDTO habitacionU;
+    HabitacionDTO habitacionDTO;
     CaracteristicaHabitacionDTO caracDTO;
     CaracteristicaHabitacion carac;
 
@@ -47,7 +47,7 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
     }
 
     public void llenarCamposHabitacion(HabitacionDTO hab) {
-        this.habitacionU = hab;
+        this.habitacionDTO = hab;
         txt_NHabitacion.setText(String.valueOf(hab.getNumHabitacion()));
         modelo.setSelectedItem(String.valueOf(tH.buscar(hab.getTipoHabitacionID())));
         textArea_Descripcion.setText(String.valueOf(hab.getDescripcion()));
@@ -68,6 +68,13 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
     }
 
     public int restarFechas(Date fecha1, Date fecha2) {
+        int totalDays = -1; // Obtener la fecha actual
+        Calendar fechaActual = Calendar.getInstance();
+        fechaActual.set(Calendar.HOUR_OF_DAY, 0);
+        fechaActual.set(Calendar.MINUTE, 0);
+        fechaActual.set(Calendar.SECOND, 0);
+        fechaActual.set(Calendar.MILLISECOND, 0);
+
         // Crear objetos Calendar y establecer las fechas
         Calendar cal1 = Calendar.getInstance();
         cal1.setTime(fecha1);
@@ -78,16 +85,24 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
         cal1.set(Calendar.HOUR_OF_DAY, 0);
         cal1.set(Calendar.MINUTE, 0);
         cal1.set(Calendar.SECOND, 0);
+        cal1.set(Calendar.MILLISECOND, 0);
         cal2.set(Calendar.HOUR_OF_DAY, 0);
         cal2.set(Calendar.MINUTE, 0);
         cal2.set(Calendar.SECOND, 0);
+        cal2.set(Calendar.MILLISECOND, 0);
 
-        // Calcular la diferencia en milisegundos entre las fechas
-        long diffMillis = cal2.getTimeInMillis() - cal1.getTimeInMillis();
+        // Verificar que ambas fechas no sean anteriores a la fecha actual
+        if (cal1.before(fechaActual) || cal2.before(fechaActual)) {
+            JOptionPane.showMessageDialog(null, "Ambas fechas deben ser posteriores o iguales a la fecha actual", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
 
-        // Calcular la diferencia en días
-        int totalDays = (int) (diffMillis / (24 * 60 * 60 * 1000));
+            // Calcular la diferencia en milisegundos entre las fechas
+            long diffMillis = cal2.getTimeInMillis() - cal1.getTimeInMillis();
 
+            // Calcular la diferencia en días
+            totalDays = (int) (diffMillis / (24 * 60 * 60 * 1000));
+
+        }
         return totalDays;
     }
 
@@ -128,6 +143,7 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jTxtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
+        btnBuscar2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         txt_NHabitacion = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -159,7 +175,6 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
         jLabel19 = new javax.swing.JLabel();
         txtCostoTotal1 = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
-        btnBuscar2 = new javax.swing.JButton();
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -205,21 +220,23 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(161, 161, 161)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(btn_Agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txt_telefono)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txt_correo)
-                        .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(161, 161, 161)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txt_telefono)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txt_correo)
+                                .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(172, 172, 172)
+                        .addComponent(btn_Agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(176, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,6 +285,16 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
             }
         });
 
+        btnBuscar2.setBackground(new java.awt.Color(255, 127, 80));
+        btnBuscar2.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        btnBuscar2.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscar2.setText("X");
+        btnBuscar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscar2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -275,14 +302,14 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jTxtBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jTxtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,13 +317,15 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTxtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTxtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 560, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Información de la habitación", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Roboto", 0, 16), new java.awt.Color(102, 102, 102))); // NOI18N
@@ -362,6 +391,8 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
                 cbAireAcondicionadoMouseClicked(evt);
             }
         });
+
+        cbx_tipoHabitacion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setText("Visualizar Habitaciones");
@@ -609,17 +640,6 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
 
         jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 370, 540, -1));
 
-        btnBuscar2.setBackground(new java.awt.Color(0, 110, 230));
-        btnBuscar2.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        btnBuscar2.setForeground(new java.awt.Color(255, 255, 255));
-        btnBuscar2.setText("Limpiar");
-        btnBuscar2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscar2ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnBuscar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 210, 90, -1));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -682,10 +702,8 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
 
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
+        if (clienteDTO != null) {
 
-        if (clienteDTO == null) {
-            JOptionPane.showMessageDialog(null, "Aún no se tiene información del cliente");
-        } else {
             // Obtener las fechas seleccionadas de los JDateChooser
             Date fecha1 = jDtFechaEntrada.getDate();
             Date fecha2 = jDtFechaSalida.getDate();
@@ -693,25 +711,30 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
             // Calcular la diferencia de días utilizando el método restarFechas()
             // Mostrar el resultado en un JOptionPane
             double costoTotal;
-
             double costoHabitacionPorDia = Double.parseDouble(txt_PrecioHabitacion.getText());
             int dias = restarFechas(fecha1, fecha2);
-            double adicional = Double.parseDouble(txtCostoAdicional.getText());
+            if (dias > -1) {
 
-            costoTotal = (costoHabitacionPorDia * dias) + adicional;
-            txtCostoTotal1.setText(String.valueOf(costoTotal));
-            int respuesta = JOptionPane.showConfirmDialog(this, "El costo total es de " + costoTotal + "\n¿Estás seguro de realizar el alquiler?",
-                    "Confirmación", JOptionPane.YES_NO_OPTION);
+                double adicional = Double.parseDouble(txtCostoAdicional.getText());
 
-            if (respuesta == JOptionPane.YES_OPTION) {
-                // Acción a realizar si se selecciona "Sí" en la confirmación
-                System.out.println("Confirmación: Sí");
-            } else if (respuesta == JOptionPane.NO_OPTION) {
-                // Acción a realizar si se selecciona "No" en la confirmación
-                System.out.println("Confirmación: No");
+                costoTotal = (costoHabitacionPorDia * dias) + adicional;
+                txtCostoTotal1.setText(String.valueOf(costoTotal));
+
+                int respuesta = JOptionPane.showConfirmDialog(this, "El costo total es de " + costoTotal + "\n¿Estás seguro de realizar el alquiler?",
+                        "Confirmación", JOptionPane.YES_NO_OPTION);
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    // Acción a realizar si se selecciona "Sí" en la confirmación
+                    System.out.println("Confirmación: Sí");
+                } else if (respuesta == JOptionPane.NO_OPTION) {
+                    // Acción a realizar si se selecciona "No" en la confirmación
+                    System.out.println("Confirmación: No");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Introduzca los días de alquiler correctamente", "Error", JOptionPane.ERROR_MESSAGE);
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Aún no se tiene información del cliente");
         }
-
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
     private void txt_PrecioHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_PrecioHabitacionActionPerformed
@@ -726,6 +749,10 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_cbFrigoFabKeyPressed
+    private void setInfoCaracteristicas() {
+
+    }
+
     public void comprobarCambiosOpciones2() {
         try {
             if (cbFrigoFab.isSelected()) {
