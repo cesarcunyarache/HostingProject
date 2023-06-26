@@ -5,7 +5,7 @@ import TransferObject.HabitacionDTO;
 import java.util.List;
 
 public class Habitacion {
-    
+
     private HabitacionDAO habitacionDAO;
     private HabitacionDTO habitacionDTO;
 
@@ -17,7 +17,7 @@ public class Habitacion {
 
     }
 
-    public String agregar(int numHabitacion, int tipoHabitacion, String estadoHabitacion) {
+    public String agregar(int numHabitacion, int tipoHabitacion, String estadoHabitacion, String descripcion) {
         String mensaje = "";
         habitacionDTO = new HabitacionDTO(numHabitacion, tipoHabitacion, estadoHabitacion);
         if (habitacionDAO.Create(habitacionDTO)) {
@@ -28,9 +28,9 @@ public class Habitacion {
         return mensaje;
     }
 
-    public String actualizar(int numHabitacion, int tipoHabitacion, String estadoHabitacion) {
+    public String actualizar(int numHabitacion, int tipoHabitacion, String estadoHabitacion, String descripcion) {
         String mensaje = "";
-        habitacionDTO = new HabitacionDTO(numHabitacion, tipoHabitacion, mensaje);
+        habitacionDTO = new HabitacionDTO(numHabitacion, tipoHabitacion, estadoHabitacion, descripcion);
         if (habitacionDAO.Update(habitacionDTO)) {
             mensaje = "El registro se actualizo correctamente";
         } else {
@@ -58,7 +58,6 @@ public class Habitacion {
             return null;
         }
     }
-    
 
     public List<HabitacionDTO> listarR() {
         if (habitacionDAO.Read() != null) {
@@ -91,5 +90,5 @@ public class Habitacion {
     public void setHabitacionDTO(HabitacionDTO habitacionDTO) {
         this.habitacionDTO = habitacionDTO;
     }
-    
+
 }

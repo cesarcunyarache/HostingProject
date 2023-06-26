@@ -14,16 +14,17 @@ public class HabitacionDAO implements Crud<HabitacionDTO> {
     public HabitacionDAO() {
         conexion = new Conexion();
     }
-    
+
     @Override
     public boolean Create(HabitacionDTO habitacion) {
         Connection con = conexion.getConnection();
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement("INSERT INTO Habitacion(numHabitacion, tipoHabitacionID, estado) VALUES(?,?,?)");
+            ps = con.prepareStatement("INSERT INTO Habitacion(numHabitacion, tipoHabitacionID, estado,descripcion ) VALUES(?,?,?,?)");
             ps.setInt(1, habitacion.getNumHabitacion());
             ps.setInt(2, habitacion.getTipoHabitacionID());
             ps.setString(3, habitacion.getEstado());
+            ps.setString(4, habitacion.getDescripcion());
             int res = ps.executeUpdate();
             if (res > 0) {
                 return true;
@@ -60,7 +61,8 @@ public class HabitacionDAO implements Crud<HabitacionDTO> {
                 int numHabitacion = rs.getInt("numHabitacion");
                 int tipoHabitacionID = rs.getInt("tipoHabitacionID");
                 String estado = rs.getString("estado");
-                habitacion = new HabitacionDTO(numHabitacion, tipoHabitacionID, estado);
+                String descripcion = rs.getString("descripcion");
+                habitacion = new HabitacionDTO(numHabitacion, tipoHabitacionID, estado, descripcion);
                 habitaciones.add(habitacion);
             }
         } catch (Exception e) {
@@ -86,20 +88,21 @@ public class HabitacionDAO implements Crud<HabitacionDTO> {
         ArrayList<HabitacionDTO> habitaciones = new ArrayList<>();
 
         try {
-            
-            if (!estadoH.equals("Todos")){
+
+            if (!estadoH.equals("Todos")) {
                 ps = con.prepareStatement("SELECT * FROM buscarHabitaciones('" + estadoH + "')");
             } else {
                 ps = con.prepareStatement("SELECT * FROM Habitacion;");
             }
-            
+
             rs = ps.executeQuery();
 
             while (rs.next()) {
                 int numHabitacion = rs.getInt("numHabitacion");
                 int tipoHabitacionID = rs.getInt("tipoHabitacionID");
                 String estado = rs.getString("estado");
-                habitacion = new HabitacionDTO(numHabitacion, tipoHabitacionID, estado);
+                String descripcion = rs.getString("descripcion");
+                habitacion = new HabitacionDTO(numHabitacion, tipoHabitacionID, estado, descripcion);
                 habitaciones.add(habitacion);
             }
         } catch (Exception e) {
@@ -116,8 +119,7 @@ public class HabitacionDAO implements Crud<HabitacionDTO> {
         }
         return habitaciones;
     }
-    
-    
+
     @Override
     public boolean Update(HabitacionDTO habitacion) {
         Connection con = conexion.getConnection();
@@ -212,5 +214,5 @@ public class HabitacionDAO implements Crud<HabitacionDTO> {
 
         return habitacion;
     }
-    
+
 }
