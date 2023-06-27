@@ -771,11 +771,12 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
     private void txt_PrecioHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_PrecioHabitacionActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txt_PrecioHabitacionActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+       menu.SelectMenu(0, menu.habitacion);
+       limpiarCampos();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cbFrigoFabKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbFrigoFabKeyPressed
