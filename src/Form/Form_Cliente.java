@@ -52,8 +52,6 @@ public class Form_Cliente extends javax.swing.JPanel {
     public void setMenu(Menu menu) {
         this.menu = menu;
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -319,7 +317,7 @@ public class Form_Cliente extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 320, 90, 40));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 320, 90, 40));
 
         jButton3.setText("Reservar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -327,7 +325,7 @@ public class Form_Cliente extends javax.swing.JPanel {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 370, 90, 40));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 370, 90, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -344,12 +342,12 @@ public class Form_Cliente extends javax.swing.JPanel {
     private void btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BuscarActionPerformed
         String dni = JOptionPane.showInputDialog("Ingrese el DNI a buscar");
 
-        if (dni != null && !dni.equals("") ) {
+        if (dni != null && !dni.equals("")) {
             if (dni.matches("[0-9]*")) {
                 ClienteDTO clienteDTO = cliente.BuscarDNI(dni);
 
                 if (clienteDTO != null) {
-                   
+
                     for (TipoDocumentoDTO tipoDocumentoDTO : combo) {
                         if (tipoDocumentoDTO.getIdTipoDocumento() == clienteDTO.getTipoDocumentoID()) {
                             modelo.setSelectedItem(tipoDocumentoDTO);
@@ -371,7 +369,7 @@ public class Form_Cliente extends javax.swing.JPanel {
                     }
 
                     cbo_nacionalidad.setSelectedItem(clienteDTO.getNacionalidad());
-                     txt_numDoc.setText(clienteDTO.getNumDocumento());
+                    txt_numDoc.setText(clienteDTO.getNumDocumento());
                     id = clienteDTO.getIdCliente();
 
                 } else {
@@ -403,17 +401,14 @@ public class Form_Cliente extends javax.swing.JPanel {
                 String direccion = txt_direccion.getText();
                 String genero = cbo_genero.getSelectedItem().toString();
                 String nacionaldad = cbo_nacionalidad.getSelectedItem().toString();
-                if (correo.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
-                    String mensaje = cliente.Agregar(numDoc, tipoDoc, nombres, apellidos, telefono, nacionaldad, correo, direccion, genero.charAt(0));
-                    
-                    clienteDTO = new ClienteDTO(numDoc, tipoDoc, nombres, apellidos, telefono, nacionaldad, correo, direccion, genero.charAt(0));
-                    
-                    JOptionPane.showMessageDialog(null, mensaje);
-                    llenarTabla();
-                    limpiar();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error, formato de correo erróneo");
-                }
+                String mensaje = cliente.Agregar(numDoc, tipoDoc, nombres, apellidos, telefono, nacionaldad, correo, direccion, genero.charAt(0));
+
+                clienteDTO = new ClienteDTO(numDoc, tipoDoc, nombres, apellidos, telefono, nacionaldad, correo, direccion, genero.charAt(0));
+
+                JOptionPane.showMessageDialog(null, mensaje);
+                llenarTabla();
+                limpiar();
+                JOptionPane.showMessageDialog(null, "Se registró al empleado correctamente.");
             } else {
                 JOptionPane.showMessageDialog(null, "Error, solo ingresa valores númericos");
             }
@@ -431,8 +426,6 @@ public class Form_Cliente extends javax.swing.JPanel {
             ClienteDTO clienteDTO = cliente.Buscar(id);
 
             if (clienteDTO != null) {
-
-                
 
                 for (TipoDocumentoDTO tipoDocumentoDTO : combo) {
                     if (tipoDocumentoDTO.getIdTipoDocumento() == clienteDTO.getTipoDocumentoID()) {
@@ -456,7 +449,8 @@ public class Form_Cliente extends javax.swing.JPanel {
 
                 }
                 cbo_nacionalidad.setSelectedItem(clienteDTO.getNacionalidad());
-                 txt_numDoc.setText(clienteDTO.getNumDocumento());
+                txt_numDoc.setText(clienteDTO.getNumDocumento());
+
             } else {
                 JOptionPane.showMessageDialog(null, "Valor no encontrado");
             }
@@ -466,7 +460,7 @@ public class Form_Cliente extends javax.swing.JPanel {
     private void btn_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ActualizarActionPerformed
         if (!txt_numDoc.getText().isEmpty() && !cbo_tipoDoc.getSelectedItem().equals("-Seleccione-")
                 && !txt_nombres.getText().isEmpty() && !txt_apellidos.getText().isEmpty()
-                && !txt_telefono.getText().isEmpty() 
+                && !txt_telefono.getText().isEmpty()
                 && !cbo_genero.getSelectedItem().equals("-Seleccione-")
                 && !cbo_tipoDoc.getSelectedItem().equals("")) {
 
@@ -530,7 +524,7 @@ public class Form_Cliente extends javax.swing.JPanel {
             if (txt_numDoc.getText().length() > 8) {
                 evt.consume();
             }
-        } 
+        }
     }//GEN-LAST:event_txt_numDocKeyTyped
 
     private void cbo_tipoDocItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbo_tipoDocItemStateChanged
@@ -540,7 +534,7 @@ public class Form_Cliente extends javax.swing.JPanel {
     private void txtBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusquedaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBusquedaActionPerformed
-  private void limpiarTabla() {
+    private void limpiarTabla() {
         df = (DefaultTableModel) tabla.getModel();
         df.getDataVector().removeAllElements();
         tabla.removeAll();
@@ -622,26 +616,25 @@ public class Form_Cliente extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (!txt_numDoc.getText().isEmpty()) {
-            
+
             ClienteDTO obj = cliente.BuscarDNI(txt_numDoc.getText());
-            
-            if (obj != null){
+
+            if (obj != null) {
                 formOrg.setDataClient(obj);
                 menu.SelectMenu(5, formOrg);
             }
-   
+
         } else {
             JOptionPane.showMessageDialog(null, "Error, ingresa el Número de documento del cliente!");
         }
-       
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        //Enviamos los datos del cliente al nuevo formulario
         if (clienteDTO != null) {
             menu.reserva.setClienteDTO(clienteDTO);
             //Llenamos el formulario con aquellos datos
@@ -652,11 +645,11 @@ public class Form_Cliente extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void rbNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbNombreActionPerformed
-       txtBusqueda.setText("");
+        txtBusqueda.setText("");
     }//GEN-LAST:event_rbNombreActionPerformed
 
     private void rbApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbApellidosActionPerformed
-         txtBusqueda.setText("");
+        txtBusqueda.setText("");
     }//GEN-LAST:event_rbApellidosActionPerformed
 
     private void rbTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbTelefonoActionPerformed
@@ -664,14 +657,14 @@ public class Form_Cliente extends javax.swing.JPanel {
     }//GEN-LAST:event_rbTelefonoActionPerformed
 
     private void rbDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDniActionPerformed
-         txtBusqueda.setText("");
+        txtBusqueda.setText("");
     }//GEN-LAST:event_rbDniActionPerformed
 
     private void rbCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbCorreoActionPerformed
-         txtBusqueda.setText("");
+        txtBusqueda.setText("");
     }//GEN-LAST:event_rbCorreoActionPerformed
 
-      public void llenarTabla() {
+    public void llenarTabla() {
 
         df.setColumnCount(0);
         df.setRowCount(0);
@@ -732,10 +725,10 @@ public class Form_Cliente extends javax.swing.JPanel {
 
     }
 
-    public void setNumDoc(String nDoc){
+    public void setNumDoc(String nDoc) {
         txt_numDoc.setText(nDoc);
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Actualizar;
     private javax.swing.JButton btn_Agregar;

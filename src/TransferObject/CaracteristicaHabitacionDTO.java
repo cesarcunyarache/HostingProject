@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package TransferObject;
 
-/**
- *
- * @author chero
- */
 public class CaracteristicaHabitacionDTO {
 
     private int id;
@@ -18,8 +10,6 @@ public class CaracteristicaHabitacionDTO {
         this.id = id;
         this.nombre = nombre;
         this.valor = valor;
-        
-        
     }
 
     public CaracteristicaHabitacionDTO(int id) {

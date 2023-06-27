@@ -63,15 +63,19 @@ public class ComponentRoom extends javax.swing.JPanel {
         switch (habitacionFrame.getTipoHabitacionID()) {
             case 1:
                 tipoHabitacion = tipoHabitacion + "Simple";
+                jlIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/simple (Personalizado).PNG")));
                 break;
             case 2:
                 tipoHabitacion = tipoHabitacion + "Familiar";
+                jlIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/familiar (Personalizado).PNG")));
                 break;
             case 3:
                 tipoHabitacion = tipoHabitacion + "Doble";
+                jlIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/doble (Personalizado).PNG")));
                 break;
             case 4:
                 tipoHabitacion = tipoHabitacion + "Matrimonial";
+                jlIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/matrimonial (Personalizado).PNG")));
                 break;
         }
         jLTipoHabitacion.setForeground(new Color(102, 102, 102));
@@ -128,6 +132,7 @@ public class ComponentRoom extends javax.swing.JPanel {
         jPColorEstado = new javax.swing.JPanel();
         jLEstadoHabitacion = new javax.swing.JLabel();
         btnUpdate = new javax.swing.JLabel();
+        jlIcon = new javax.swing.JLabel();
 
         jPanel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel11.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -146,7 +151,7 @@ public class ComponentRoom extends javax.swing.JPanel {
         jLNumeroHabitacion.setFont(new java.awt.Font("Roboto", 1, 32)); // NOI18N
         jLNumeroHabitacion.setText("NRO: 201");
 
-        jLCaracteristicas.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jLCaracteristicas.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         jLCaracteristicas.setForeground(new java.awt.Color(102, 102, 102));
 
         jPColorEstado.setBackground(new java.awt.Color(28, 200, 138));
@@ -180,6 +185,8 @@ public class ComponentRoom extends javax.swing.JPanel {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
+        jlIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout jpContenedorLayout = new javax.swing.GroupLayout(jpContenedor);
         jpContenedor.setLayout(jpContenedorLayout);
         jpContenedorLayout.setHorizontalGroup(
@@ -190,18 +197,23 @@ public class ComponentRoom extends javax.swing.JPanel {
                 .addGroup(jpContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLTipoHabitacion)
                     .addComponent(jLNumeroHabitacion)
-                    .addComponent(jLCaracteristicas, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLCaracteristicas, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jlIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jpContenedorLayout.setVerticalGroup(
             jpContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpContenedorLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(jLNumeroHabitacion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jpContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpContenedorLayout.createSequentialGroup()
+                        .addComponent(jLNumeroHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLCaracteristicas, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jlIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLCaracteristicas, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPColorEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -248,6 +260,7 @@ public class ComponentRoom extends javax.swing.JPanel {
     private javax.swing.JPanel jPColorEstado;
     private javax.swing.JPopupMenu jPMOpcionesHabitacion;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JLabel jlIcon;
     private javax.swing.JPanel jpContenedor;
     // End of variables declaration//GEN-END:variables
 
