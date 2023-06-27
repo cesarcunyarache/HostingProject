@@ -3,6 +3,7 @@ package Form;
 import BusinessObject.CaracteristicaHabitacion;
 import BusinessObject.Cliente;
 import BusinessObject.TipoHabitacion;
+import DataAccessObject.CaracteristicaHabitacionDAO;
 import Form.Components.ComponentRoom;
 import Menu.Menu;
 import TransferObject.CaracteristicaHabitacionDTO;
@@ -13,10 +14,13 @@ import com.toedter.calendar.JDateChooser;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import org.apache.commons.collections4.list.AbstractLinkedList;
 
 public class Form_NuevoAlquiler extends javax.swing.JPanel {
 
@@ -52,6 +56,7 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
         modelo.setSelectedItem(String.valueOf(tH.buscar(hab.getTipoHabitacionID())));
         textArea_Descripcion.setText(String.valueOf(hab.getDescripcion()));
         txt_PrecioHabitacion.setText(String.valueOf(tH.buscar(hab.getTipoHabitacionID()).getPrecio()));
+        añadirCaracteristicasHabitacion();
     }
 
     public Vector<String> llenarCombo() {
@@ -148,17 +153,18 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
         txt_NHabitacion = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        cbFrigoFab = new javax.swing.JCheckBox();
         jLabel17 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        cbAireAcondicionado = new javax.swing.JCheckBox();
         cbx_tipoHabitacion = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         textArea_Descripcion = new javax.swing.JTextArea();
         jLabel18 = new javax.swing.JLabel();
         txtCostoAdicional = new javax.swing.JTextField();
+        jPCaracteristicas = new javax.swing.JPanel();
+        cbFrigoFab = new javax.swing.JCheckBox();
+        cbAireAcondicionado = new javax.swing.JCheckBox();
         jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -346,29 +352,6 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
         jLabel15.setForeground(new java.awt.Color(102, 102, 102));
         jLabel15.setText("N° Habitación");
 
-        cbFrigoFab.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        cbFrigoFab.setForeground(new java.awt.Color(102, 102, 102));
-        cbFrigoFab.setSelected(true);
-        cbFrigoFab.setText("Frigobar");
-        cbFrigoFab.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbFrigoFabItemStateChanged(evt);
-            }
-        });
-        cbFrigoFab.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbFrigoFabMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                cbFrigoFabMousePressed(evt);
-            }
-        });
-        cbFrigoFab.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                cbFrigoFabKeyPressed(evt);
-            }
-        });
-
         jLabel17.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(102, 102, 102));
         jLabel17.setText("Caracteristicas Opcionales");
@@ -377,25 +360,11 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
         jLabel22.setForeground(new java.awt.Color(102, 102, 102));
         jLabel22.setText("Descripción");
 
-        cbAireAcondicionado.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        cbAireAcondicionado.setForeground(new java.awt.Color(102, 102, 102));
-        cbAireAcondicionado.setSelected(true);
-        cbAireAcondicionado.setText("Aire Acondicionado");
-        cbAireAcondicionado.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbAireAcondicionadoItemStateChanged(evt);
-            }
-        });
-        cbAireAcondicionado.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbAireAcondicionadoMouseClicked(evt);
-            }
-        });
-
         cbx_tipoHabitacion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        cbx_tipoHabitacion.setEnabled(false);
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setText("Visualizar Habitaciones");
+        jButton1.setText("X");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -420,21 +389,84 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
             }
         });
 
+        cbFrigoFab.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        cbFrigoFab.setForeground(new java.awt.Color(102, 102, 102));
+        cbFrigoFab.setSelected(true);
+        cbFrigoFab.setText("Frigobar");
+        cbFrigoFab.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbFrigoFabItemStateChanged(evt);
+            }
+        });
+        cbFrigoFab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbFrigoFabMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cbFrigoFabMousePressed(evt);
+            }
+        });
+        cbFrigoFab.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cbFrigoFabKeyPressed(evt);
+            }
+        });
+
+        cbAireAcondicionado.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        cbAireAcondicionado.setForeground(new java.awt.Color(102, 102, 102));
+        cbAireAcondicionado.setSelected(true);
+        cbAireAcondicionado.setText("Aire Acondicionado");
+        cbAireAcondicionado.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbAireAcondicionadoItemStateChanged(evt);
+            }
+        });
+        cbAireAcondicionado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbAireAcondicionadoMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPCaracteristicasLayout = new javax.swing.GroupLayout(jPCaracteristicas);
+        jPCaracteristicas.setLayout(jPCaracteristicasLayout);
+        jPCaracteristicasLayout.setHorizontalGroup(
+            jPCaracteristicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPCaracteristicasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPCaracteristicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbFrigoFab)
+                    .addComponent(cbAireAcondicionado))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPCaracteristicasLayout.setVerticalGroup(
+            jPCaracteristicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPCaracteristicasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cbFrigoFab)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbAireAcondicionado)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbFrigoFab)
-                    .addComponent(cbAireAcondicionado)
-                    .addComponent(jLabel18)
-                    .addComponent(txtCostoAdicional, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_NHabitacion))
-                .addGap(83, 83, 83)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel15)
+                                .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txt_NHabitacion))
+                            .addComponent(jLabel18)
+                            .addComponent(txtCostoAdicional, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPCaracteristicas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -469,13 +501,14 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
                         .addComponent(txt_NHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                         .addComponent(jLabel17)
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbFrigoFab, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(16, 16, 16)
-                        .addComponent(cbAireAcondicionado)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addComponent(jPCaracteristicas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(12, 12, 12)
                         .addComponent(jLabel18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCostoAdicional, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -858,6 +891,7 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLbBienvenido;
+    private javax.swing.JPanel jPCaracteristicas;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -876,4 +910,34 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
     private javax.swing.JTextField txt_nombre;
     private javax.swing.JTextField txt_telefono;
     // End of variables declaration//GEN-END:variables
+
+    private void añadirCaracteristicasHabitacion() {
+        //Validamos que existe una habitacion seleccionada
+        if (habitacionDTO != null) {
+
+            CaracteristicaHabitacionDAO dao = new CaracteristicaHabitacionDAO();
+            List<CaracteristicaHabitacionDTO> listaCaracteristicas = dao.Read(habitacionDTO.getNumHabitacion());
+            try {
+
+                if (listaCaracteristicas.get(0).getNombre().equals("Aire Acondicionado")) {
+                    System.out.println("Tiene caracteristicas");
+
+                    desactivarCheckBox(cbFrigoFab, true);
+                    desactivarCheckBox(cbAireAcondicionado, true);
+                }
+
+            } catch (Exception e) {
+
+                desactivarCheckBox(cbFrigoFab, false);
+                desactivarCheckBox(cbAireAcondicionado, false);
+
+            }
+
+        }
+    }
+
+    private void desactivarCheckBox(JCheckBox jcb, boolean estado) {
+        jcb.setSelected(estado);
+        jcb.setEnabled(estado);
+    }
 }

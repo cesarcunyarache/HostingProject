@@ -18,6 +18,8 @@ public class CaracteristicaHabitacionDTO {
         this.id = id;
         this.nombre = nombre;
         this.valor = valor;
+        
+        
     }
 
     public CaracteristicaHabitacionDTO(int id) {
@@ -25,6 +27,7 @@ public class CaracteristicaHabitacionDTO {
     }
     
     public CaracteristicaHabitacionDTO() {
+        
     }
     
     public CaracteristicaHabitacionDTO(String nombre, double valor) {

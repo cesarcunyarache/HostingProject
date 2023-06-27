@@ -90,6 +90,36 @@ public class CaracteristicaHabitacionDAO implements Crud<CaracteristicaHabitacio
         }
     }
 
+    public List<CaracteristicaHabitacionDTO> Read(int idHabitacion) {
+        List<CaracteristicaHabitacionDTO> listaPelis = new ArrayList<>();
+        try {
+            ps = conexion.getConnection().prepareStatement("EXEC ObtenerCaracteristicasHabitacion @idHabitacion = " + idHabitacion + ";");
+            rs = ps.executeQuery();
+
+            // registros por leer
+            while (rs.next()) {
+                CaracteristicaHabitacionDTO t = new CaracteristicaHabitacionDTO();
+                        
+                t.setId(rs.getInt(1));
+                t.setNombre(rs.getString(2));
+                t.setValor(rs.getDouble(3));
+                
+
+                listaPelis.add(t);
+            }
+
+            for (CaracteristicaHabitacionDTO listaPeli : listaPelis) {
+                System.out.println(listaPeli.getNombre());
+            }
+            
+            return listaPelis;
+        } catch (SQLException ex) {
+            return null;
+        } finally {
+            conexion.desconectar();
+        }
+    }
+
     @Override
     public boolean Delete(CaracteristicaHabitacionDTO t) {
         return false;

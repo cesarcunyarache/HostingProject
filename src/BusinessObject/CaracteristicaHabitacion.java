@@ -31,6 +31,18 @@ public class CaracteristicaHabitacion {
             return null;
         }
     }
+    
+    public List<CaracteristicaHabitacionDTO> Listar(int idHabitacion) {
+        if (cHabitacionDAO.Read(idHabitacion) != null) {
+            for (CaracteristicaHabitacionDTO listaPeli : cHabitacionDAO.Read(idHabitacion) ) {
+                System.out.println(listaPeli.getNombre());
+            }
+            return cHabitacionDAO.Read();
+        } else {
+            return null;
+        }
+    }
+
 
     public String Actualizar(int id, String nombre, Double sueldo) {
         String mensaje = "";
