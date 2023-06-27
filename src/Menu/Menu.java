@@ -88,11 +88,10 @@ public class Menu extends javax.swing.JPanel {
 
         gesHab = new Form_InfoHabitacion();
         tipoPago = new Form_TipoPago2();
-        
-        adminReservas = new Form_AdministrarReservas();
-        
-        reportes = new Form_Reportes();
 
+        adminReservas = new Form_AdministrarReservas();
+
+//        reportes = new Form_Reportes();
         setOpaque(false);
         init();
 
@@ -183,7 +182,7 @@ public class Menu extends javax.swing.JPanel {
                     showForm(reportes);
                 } else if (index == 10) {
                     showForm(alquiler);
-                } else if (index == 11){
+                } else if (index == 11) {
                     showForm(adminReservas);
                 }
             }

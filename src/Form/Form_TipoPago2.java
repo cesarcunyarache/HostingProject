@@ -21,7 +21,7 @@ public class Form_TipoPago2 extends javax.swing.JPanel {
     TipoPago tp;
     DefaultTableModel dt;
     DefaultComboBoxModel modelo;
-    
+
     public Form_TipoPago2() {
         initComponents();
         tp = new TipoPago();
@@ -35,7 +35,7 @@ public class Form_TipoPago2 extends javax.swing.JPanel {
 
         llenarTabla();
     }
-    
+
     public void llenarTabla() {
 
         dt.setColumnCount(0);
@@ -68,9 +68,9 @@ public class Form_TipoPago2 extends javax.swing.JPanel {
 
         }
     }
-    
-    public void clean(){
-         txt_idTipo.setText("");
+
+    public void clean() {
+        txt_idTipo.setText("");
         txt_nombre.setText("");
         tabla.clearSelection();
         id = -1;

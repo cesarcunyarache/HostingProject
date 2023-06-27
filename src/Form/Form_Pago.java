@@ -20,12 +20,12 @@ import javax.swing.JOptionPane;
  */
 public class Form_Pago extends javax.swing.JPanel {
 
-     int id;
+    int id;
     Pago pg;
     TipoPago tp;
     DefaultTableModel dt;
     DefaultComboBoxModel modelo;
-    
+
     public Form_Pago() {
         initComponents();
         tp = new TipoPago();
@@ -70,6 +70,7 @@ public class Form_Pago extends javax.swing.JPanel {
         dt.setRowCount(0);
 
         String[] cabezera = {
+            "id",
             "#",
             "Monto",
             "TipoPago",
@@ -86,9 +87,10 @@ public class Form_Pago extends javax.swing.JPanel {
                 PagoDTO c = lista.get(i);
 
                 datos[0] = c.getIdPago();
-                datos[1] = c.getMonto();
-                datos[2] = tp.buscar(c.getIdTipo()).getNombre();
-                datos[3] = c.getDescripcion();
+                datos[1] = c.getId();
+                datos[2] = c.getMonto();
+                datos[3] = tp.buscar(c.getIdTipo()).getNombre();
+                datos[4] = c.getDescripcion();
 
                 dt.addRow(datos);
 
@@ -101,6 +103,7 @@ public class Form_Pago extends javax.swing.JPanel {
             tabla.getColumnModel().getColumn(3).setPreferredWidth(50);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -278,7 +281,7 @@ public class Form_Pago extends javax.swing.JPanel {
 
     private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
         if (!txt_monto.getText().isEmpty()
-            && !txt_descripcion.getText().isEmpty() && !cbo_tipo.getSelectedItem().equals("-Seleccione-")) {
+                && !txt_descripcion.getText().isEmpty() && !cbo_tipo.getSelectedItem().equals("-Seleccione-")) {
 
             Double monto = Double.valueOf(txt_monto.getText());
             String tipo = cbo_tipo.getSelectedItem().toString();
@@ -300,7 +303,7 @@ public class Form_Pago extends javax.swing.JPanel {
 
     private void btn_AcutalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AcutalizarActionPerformed
         if (!txt_monto.getText().isEmpty() && !cbo_tipo.getSelectedItem().equals("-Seleccione-")
-            && !txt_descripcion.getText().isEmpty()) {
+                && !txt_descripcion.getText().isEmpty()) {
 
             Double monto = Double.parseDouble(txt_monto.getText());
             String descripcion = txt_descripcion.getText();

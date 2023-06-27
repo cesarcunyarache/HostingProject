@@ -32,6 +32,8 @@ public class RegistroHabitacion {
 
         RegistroHabitacionDTO t = new RegistroHabitacionDTO(idCliente, idEmpleado, idHabitacion, fechaIngreso, fechaSalida);
         PagoDTO p = new PagoDTO(monto, tipoPago, descripcion);
+        
+ 
         if (registroHabitacionDAO.registrarAlquiler(t, p)) {
             mensaje = "El alquiler se ha logrado satisfactoriamente";
         } else {

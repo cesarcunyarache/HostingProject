@@ -55,7 +55,7 @@ public class Form_AdministrarReservas extends javax.swing.JPanel {
         df.setColumnCount(0);
         df.setRowCount(0);
 
-        String[] cabezera = {"#", "N° de Habitaciín", "N° documento del cliente", "Nombres y Apellidos", "Fecha de Reserva", "Fecha de inicio", "Fecha salida", "Costo"};
+        String[] cabezera = {"#", "N° de Habitación", "N° documento del cliente", "Nombres y Apellidos", "Fecha de Reserva", "Fecha de inicio", "Fecha salida", "Costo"};
         df.setColumnIdentifiers(cabezera);
 
         Object[] datos = new Object[df.getColumnCount()];

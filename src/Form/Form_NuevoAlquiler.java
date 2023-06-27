@@ -864,10 +864,11 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
             // Formatear la fecha utilizando el objeto SimpleDateFormat
             String fechaFormateada2 = formatoFecha2.format(fechaSalida);
             double monto = Double.parseDouble(txtCostoTotal1.getText());
-            int tipoPago = tHP.buscarName(cbx_TipoPago.getSelectedItem().toString()).getIdTPago();
+            int AtipoPago = tHP.buscarName(cbx_TipoPago.getSelectedItem().toString()).getIdTPago();
             String descripcion = txtDescripcionPago.getText();
+          
 
-            JOptionPane.showMessageDialog(null, rH.registrarAlquiler(idHabitacion, idCliente, idEmpleado, fechaIngreso, fechaSalida, monto, tipoPago, descripcion));
+            JOptionPane.showMessageDialog(null, rH.registrarAlquiler(idHabitacion, idCliente, idEmpleado, fechaIngreso, fechaSalida, monto, AtipoPago, descripcion));
         } else {
 
         }

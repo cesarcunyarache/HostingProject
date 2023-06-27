@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 public class RegistroHabitacionDAO implements Crud<RegistroHabitacionDTO> {
 
@@ -46,6 +47,8 @@ public class RegistroHabitacionDAO implements Crud<RegistroHabitacionDTO> {
 
     public boolean registrarAlquiler(RegistroHabitacionDTO t, PagoDTO p) {
         try {
+
+
             ps = conexion.getConnection().prepareStatement("{CALL InsertarRegistroHabitacionPago(?,?,?,?,?,?,?,?)}");
             ps.setInt(1, t.getHabitacionID());
             ps.setInt(2, t.getClienteID());
@@ -53,7 +56,7 @@ public class RegistroHabitacionDAO implements Crud<RegistroHabitacionDTO> {
             ps.setDate(4, new java.sql.Date(t.getFechaIngreso().getTime()));
             ps.setDate(5, new java.sql.Date(t.getFechaSalida().getTime()));
             ps.setDouble(6, p.getMonto());
-            ps.setInt(7, p.getIdPago());
+            ps.setInt(7, p.getIdTipo());
             ps.setString(8, p.getDescripcion());
 
             boolean result = ps.execute();
