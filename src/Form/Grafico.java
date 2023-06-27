@@ -9,8 +9,11 @@ import DataAccessObject.Graf;
 import DataSource.Conexion;
 import Graphic.ModelChart;
 import TransferObject.ModelData;
+import excel.Report;
 import java.awt.Color;
+import java.io.File;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -19,6 +22,7 @@ import java.util.ArrayList;
 public class Grafico extends javax.swing.JFrame {
 
     Graf detalle;
+    Report reporte;
     public Grafico() {
         initComponents();
         detalle = new Graf();
@@ -26,8 +30,9 @@ public class Grafico extends javax.swing.JFrame {
         chart.setTitle("Gráfico");
         chart.addLegend("Monto total", Color.decode("#0093E9"), Color.decode("#80D0C7"));
         chart.addLegend("Cantidad", Color.decode("#e65c00"), Color.decode("#F9D423"));
-        chart.addLegend("Importes", Color.decode("#F4D03F"), Color.decode("#16A085"));
+//        chart.addLegend("Importes", Color.decode("#F4D03F"), Color.decode("#16A085"));
         llenarGrafico();
+        reporte = new Report();
     }
 
     
@@ -56,10 +61,18 @@ public class Grafico extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         chart = new Graphic.CurveLineChart();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jButton1.setText("Generar Reporte");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -68,14 +81,20 @@ public class Grafico extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(chart, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(298, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(chart, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(55, 55, 55)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -97,6 +116,47 @@ public class Grafico extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+
+            JFileChooser guardar = new JFileChooser();
+            guardar.showSaveDialog(null);
+            guardar.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+
+            File archivo = guardar.getSelectedFile();
+
+            String query = "SELECT\n"
+                    + "    th.nombre AS 'Tipo de habitación',\n"
+                    + "    COUNT(h.numHabitacion) AS 'Total de habitaciones',\n"
+                    + "    COUNT(CASE WHEN rh.idRegistro IS NOT NULL THEN 1 END) AS 'Habitaciones ocupadas',\n"
+                    + "    CAST(CAST(COUNT(CASE WHEN rh.idRegistro IS NOT NULL THEN 1 END) AS decimal) / COUNT(h.numHabitacion) * 100  AS DECIMAL(10, 2)) AS 'Porcentaje de ocupación'\n"
+                    + "FROM\n"
+                    + "    Habitacion h\n"
+                    + "    INNER JOIN TipoHabitacion th ON h.tipoHabitacionID = th.idTipo\n"
+                    + "    LEFT JOIN RegistroHabitacion rh ON h.numHabitacion = rh.idHabitacion\n"
+                    + "GROUP BY\n"
+                    + "    th.nombre;";
+            
+            
+            String[] encabezado = new String[]{"Tipo de Habitacion", "Total de Habitaciones", "Habitaciones ocupadas", "Porcentaje de ocupacion"};
+
+            String titulo = "Reporte de ocupación de Habitacion";
+            
+            String img = "src/img/hospedaje.jpg";
+            
+            String pagina = "Habitaciones";
+            
+            String arch =  archivo.toString();
+            
+            reporte.reporte(query, encabezado, titulo, img, pagina, arch);
+
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,6 +196,7 @@ public class Grafico extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Graphic.CurveLineChart chart;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -80,44 +80,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-
-            JFileChooser guardar = new JFileChooser();
-            guardar.showSaveDialog(null);
-            guardar.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-
-            File archivo = guardar.getSelectedFile();
-
-            String query = "SELECT\n"
-                    + "    th.nombre AS 'Tipo de habitación',\n"
-                    + "    COUNT(h.numHabitacion) AS 'Total de habitaciones',\n"
-                    + "    COUNT(CASE WHEN rh.idRegistro IS NOT NULL THEN 1 END) AS 'Habitaciones ocupadas',\n"
-                    + "    CAST(CAST(COUNT(CASE WHEN rh.idRegistro IS NOT NULL THEN 1 END) AS decimal) / COUNT(h.numHabitacion) * 100  AS DECIMAL(10, 2)) AS 'Porcentaje de ocupación'\n"
-                    + "FROM\n"
-                    + "    Habitacion h\n"
-                    + "    INNER JOIN TipoHabitacion th ON h.tipoHabitacionID = th.idTipo\n"
-                    + "    LEFT JOIN RegistroHabitacion rh ON h.numHabitacion = rh.idHabitacion\n"
-                    + "GROUP BY\n"
-                    + "    th.nombre;";
-            
-            
-            String[] encabezado = new String[]{"Tipo de Habitacion", "Total de Habitaciones", "Habitaciones ocupadas", "Porcentaje de ocupacion"};
-
-            String titulo = "Reporte de ocupación de Habitacion";
-            
-            String img = "src/img/hospedaje.jpg";
-            
-            String pagina = "Habitaciones";
-            
-            String arch =  archivo.toString();
-            
-            reporte.reporte(query, encabezado, titulo, img, pagina, arch);
-
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
-
-
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
