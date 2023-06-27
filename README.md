@@ -32,5 +32,5 @@ A continuacion te explicare la forma rapida y sencilla para poder importar el pr
 
 ###  SOFTWARE
 [![interface login](https://imparteconocimientos.com/wp-content/uploads/2023/06/foto-software.png "interface login")](https://imparteconocimientos.com/wp-content/uploads/2023/06/foto-software.png "interface login")
-
+[Ejecutable](https://drive.google.com/drive/folders/1pS5zQD8gidQ7ro_HfabFr8AREcL6r4Ig?usp=sharing "Ejecutable")
 # FIN
