@@ -1,7 +1,9 @@
 package Form.Components;
 
+import DataAccessObject.CaracteristicaHabitacionDAO;
 import Form.Form_NuevoAlquiler;
 import Menu.Menu;
+import TransferObject.CaracteristicaHabitacionDTO;
 import TransferObject.HabitacionDTO;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -10,12 +12,16 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JMenuItem;
+
 
 public class ComponentRoom extends javax.swing.JPanel {
 
     Menu menu;
     public HabitacionDTO objHabitacion;
+    CaracteristicaHabitacionDAO CaracDAO = new CaracteristicaHabitacionDAO();
 
     public ComponentRoom(HabitacionDTO habitacion) {
         initComponents();
@@ -42,6 +48,15 @@ public class ComponentRoom extends javax.swing.JPanel {
         jLNumeroHabitacion.setText("N° " + habitacionFrame.getNumHabitacion());
         jLTipoHabitacion.setText(cargarTipoHabitacion());
         jLEstadoHabitacion.setText(cargarEstadoHabitacion());
+        try {
+            String caracteristicas = "";
+            List<CaracteristicaHabitacionDTO> listaCarac = CaracDAO.Read(habitacionFrame.getNumHabitacion());
+            for (CaracteristicaHabitacionDTO caracteristica : listaCarac) {
+                caracteristicas = caracteristicas + caracteristica.getNombre() + " - ";
+            }
+            jLCaracteristicas.setText(caracteristicas);
+        } catch (Exception e) {
+        }
     }
 
     private String cargarTipoHabitacion() {
@@ -108,11 +123,12 @@ public class ComponentRoom extends javax.swing.JPanel {
         jPMOpcionesHabitacion = new javax.swing.JPopupMenu();
         jPanel11 = new javax.swing.JPanel();
         jpContenedor = new javax.swing.JPanel();
+        jLTipoHabitacion = new javax.swing.JLabel();
+        jLNumeroHabitacion = new javax.swing.JLabel();
+        jLCaracteristicas = new javax.swing.JLabel();
         jPColorEstado = new javax.swing.JPanel();
         jLEstadoHabitacion = new javax.swing.JLabel();
         btnUpdate = new javax.swing.JLabel();
-        jLTipoHabitacion = new javax.swing.JLabel();
-        jLNumeroHabitacion = new javax.swing.JLabel();
 
         jPanel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel11.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -122,7 +138,17 @@ public class ComponentRoom extends javax.swing.JPanel {
         });
 
         jpContenedor.setBackground(new java.awt.Color(255, 255, 255));
-        jpContenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLTipoHabitacion.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jLTipoHabitacion.setForeground(new java.awt.Color(102, 102, 102));
+        jLTipoHabitacion.setText("Habitación simple");
+
+        jLNumeroHabitacion.setBackground(new java.awt.Color(255, 255, 255));
+        jLNumeroHabitacion.setFont(new java.awt.Font("Roboto", 1, 32)); // NOI18N
+        jLNumeroHabitacion.setText("NRO: 201");
+
+        jLCaracteristicas.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jLCaracteristicas.setForeground(new java.awt.Color(102, 102, 102));
 
         jPColorEstado.setBackground(new java.awt.Color(28, 200, 138));
 
@@ -141,7 +167,7 @@ public class ComponentRoom extends javax.swing.JPanel {
             .addGroup(jPColorEstadoLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLEstadoHabitacion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
                 .addComponent(btnUpdate)
                 .addGap(16, 16, 16))
         );
@@ -155,30 +181,40 @@ public class ComponentRoom extends javax.swing.JPanel {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        jpContenedor.add(jPColorEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(-9, 102, 320, -1));
-
-        jLTipoHabitacion.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jLTipoHabitacion.setForeground(new java.awt.Color(102, 102, 102));
-        jLTipoHabitacion.setText("Habitación simple");
-        jpContenedor.add(jLTipoHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 71, -1, -1));
-
-        jLNumeroHabitacion.setBackground(new java.awt.Color(255, 255, 255));
-        jLNumeroHabitacion.setFont(new java.awt.Font("Roboto", 1, 32)); // NOI18N
-        jLNumeroHabitacion.setForeground(new java.awt.Color(0, 0, 0));
-        jLNumeroHabitacion.setText("NRO: 201");
-        jpContenedor.add(jLNumeroHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 21, -1, -1));
+        javax.swing.GroupLayout jpContenedorLayout = new javax.swing.GroupLayout(jpContenedor);
+        jpContenedor.setLayout(jpContenedorLayout);
+        jpContenedorLayout.setHorizontalGroup(
+            jpContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPColorEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jpContenedorLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jpContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLTipoHabitacion)
+                    .addComponent(jLNumeroHabitacion)
+                    .addComponent(jLCaracteristicas, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        jpContenedorLayout.setVerticalGroup(
+            jpContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpContenedorLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jLNumeroHabitacion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLCaracteristicas, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPColorEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jpContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jpContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpContenedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jpContenedor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -206,6 +242,7 @@ public class ComponentRoom extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel btnUpdate;
+    private javax.swing.JLabel jLCaracteristicas;
     private javax.swing.JLabel jLEstadoHabitacion;
     private javax.swing.JLabel jLNumeroHabitacion;
     private javax.swing.JLabel jLTipoHabitacion;
