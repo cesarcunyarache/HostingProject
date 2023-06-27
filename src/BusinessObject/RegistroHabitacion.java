@@ -1,6 +1,7 @@
 package BusinessObject;
 
 import DataAccessObject.RegistroHabitacionDAO;
+import TransferObject.PagoDTO;
 import TransferObject.RegistroHabitacionDTO;
 import java.util.Date;
 import java.util.List;
@@ -14,14 +15,27 @@ public class RegistroHabitacion {
         registroHabitacionDAO = new RegistroHabitacionDAO();
     }
 
-    public String create(int idHabitacion, int idCliente, int idEmpleado, Date fechaIngreso) {
+    public String create(int idHabitacion, int idCliente, int idEmpleado, Date fechaIngreso, Date fechaSalida) {
         String mensaje = "";
 
-        RegistroHabitacionDTO t = new RegistroHabitacionDTO(idCliente, idEmpleado, idHabitacion, fechaIngreso);
+        RegistroHabitacionDTO t = new RegistroHabitacionDTO(idCliente, idEmpleado, idHabitacion, fechaIngreso, fechaSalida);
         if (registroHabitacionDAO.Create(t)) {
             mensaje = "Se ha asignado correctamente la habitacion";
         } else {
             mensaje = "No se ha podido asignar";
+        }
+        return mensaje;
+    }
+
+    public String registrarAlquiler(int idHabitacion, int idCliente, int idEmpleado, Date fechaIngreso, Date fechaSalida, double monto, int tipoPago, String descripcion) {
+        String mensaje = "";
+
+        RegistroHabitacionDTO t = new RegistroHabitacionDTO(idCliente, idEmpleado, idHabitacion, fechaIngreso, fechaSalida);
+        PagoDTO p = new PagoDTO(monto, tipoPago, descripcion);
+        if (registroHabitacionDAO.registrarAlquiler(t, p)) {
+            mensaje = "El alquiler se ha logrado satisfactoriamente";
+        } else {
+            mensaje = "Ocurrió un error";
         }
         return mensaje;
     }

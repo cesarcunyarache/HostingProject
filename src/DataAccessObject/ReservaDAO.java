@@ -204,7 +204,7 @@ public class ReservaDAO implements Crud<ReservaDTO> {
         ArrayList<ReservaDTO> reservas = new ArrayList<>();
 
         try {
-           
+
             PreparedStatement ps = null;
             ResultSet rs = null;
             ps = conexion.getConnection().prepareStatement("{CALL filtrarNombresReservas(?, ?, ?)}");
@@ -235,13 +235,12 @@ public class ReservaDAO implements Crud<ReservaDTO> {
 
         return reservas;
     }
-    
-    
-     public List<ReservaDTO> buscarApellidos(String busquedad, Date fechaIn, Date fechaFi) {
+
+    public List<ReservaDTO> buscarApellidos(String busquedad, Date fechaIn, Date fechaFi) {
         ArrayList<ReservaDTO> reservas = new ArrayList<>();
 
         try {
-           
+
             PreparedStatement ps = null;
             ResultSet rs = null;
             ps = conexion.getConnection().prepareStatement("{CALL filtrarApellidosReservas(?, ?, ?)}");
@@ -273,13 +272,11 @@ public class ReservaDAO implements Crud<ReservaDTO> {
         return reservas;
     }
 
-
-     
-      public List<ReservaDTO> buscarNumeroDoc(String busquedad, Date fechaIn, Date fechaFi) {
+    public List<ReservaDTO> buscarNumeroDoc(String busquedad, Date fechaIn, Date fechaFi) {
         ArrayList<ReservaDTO> reservas = new ArrayList<>();
 
         try {
-           
+
             PreparedStatement ps = null;
             ResultSet rs = null;
             ps = conexion.getConnection().prepareStatement("{CALL filtrarNumeroDocReservas(?, ?, ?)}");
@@ -311,12 +308,11 @@ public class ReservaDAO implements Crud<ReservaDTO> {
         return reservas;
     }
 
-      
-      public List<ReservaDTO>  buscarHabitacion (String busquedad, Date fechaIn, Date fechaFi) {
+    public List<ReservaDTO> buscarHabitacion(String busquedad, Date fechaIn, Date fechaFi) {
         ArrayList<ReservaDTO> reservas = new ArrayList<>();
 
         try {
-           
+
             PreparedStatement ps = null;
             ResultSet rs = null;
             ps = conexion.getConnection().prepareStatement("{CALL filtrarHabitacionReservas(?, ?, ?)}");
@@ -347,7 +343,5 @@ public class ReservaDAO implements Crud<ReservaDTO> {
 
         return reservas;
     }
-
-
 
 }

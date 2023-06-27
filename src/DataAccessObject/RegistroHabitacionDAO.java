@@ -1,6 +1,7 @@
 package DataAccessObject;
 
 import DataSource.Conexion;
+import TransferObject.PagoDTO;
 import TransferObject.RegistroHabitacionDTO;
 import java.util.List;
 import java.sql.ResultSet;
@@ -26,16 +27,54 @@ public class RegistroHabitacionDAO implements Crud<RegistroHabitacionDTO> {
     public boolean Create(RegistroHabitacionDTO t) {
         int r = 0;
         try {
-            ps = conexion.getConnection().prepareStatement("INSERT INTO RegistroHabitacion(idHabitacion, idCliente, idEmpleado,fechaIngreso) values(?,?,?,?) ");
+            ps = conexion.getConnection().prepareStatement("INSERT INTO RegistroHabitacion(idHabitacion, idCliente, idEmpleado,fechaIngreso,fechaSalida) values(?,?,?,?,?) ");
             ps.setInt(1, t.getHabitacionID());
             ps.setInt(2, t.getClienteID());
             ps.setInt(3, t.getEmpleadoID());
             ps.setDate(4, new java.sql.Date(t.getFechaIngreso().getTime()));
+            ps.setDate(5, new java.sql.Date(t.getFechaSalida().getTime()));
 
             r = ps.executeUpdate();
             return r == 1;
         } catch (SQLException ex) {
 
+            return false;
+        } finally {
+            conexion.desconectar();
+        }
+    }
+
+    public boolean registrarAlquiler(RegistroHabitacionDTO t, PagoDTO p) {
+        try {
+            ps = conexion.getConnection().prepareStatement("{CALL InsertarRegistroHabitacionPago(?,?,?,?,?,?,?,?)}");
+            ps.setInt(1, t.getHabitacionID());
+            ps.setInt(2, t.getClienteID());
+            ps.setInt(3, t.getEmpleadoID());
+            ps.setDate(4, new java.sql.Date(t.getFechaIngreso().getTime()));
+            ps.setDate(5, new java.sql.Date(t.getFechaSalida().getTime()));
+            ps.setDouble(6, p.getMonto());
+            ps.setInt(7, p.getIdPago());
+            ps.setString(8, p.getDescripcion());
+
+            boolean result = ps.execute();
+            int updateCount = -1;
+
+            while (result || updateCount != -1) {
+                if (result) {
+                    // ResultSet obtenido, puedes realizar operaciones adicionales si es necesario
+                } else {
+                    updateCount = ps.getUpdateCount();
+                    if (updateCount == -1) {
+                        // No hay más resultados
+                    } else {
+                        // Operaciones adicionales después de la inserción en cada tabla
+                    }
+                }
+                result = ps.getMoreResults();
+            }
+
+            return true; // Indicar que se ejecutó sin errores
+        } catch (SQLException ex) {
             return false;
         } finally {
             conexion.desconectar();

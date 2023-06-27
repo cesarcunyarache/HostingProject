@@ -39,6 +39,14 @@ public class RegistroHabitacionDTO {
         this.fechaIngreso = fechaIngreso;
     }
 
+    public RegistroHabitacionDTO(int ClienteID, int EmpleadoID, int HabitacionID, Date fechaIngreso, Date fechaSalida) {
+        this.ClienteID = ClienteID;
+        this.EmpleadoID = EmpleadoID;
+        this.HabitacionID = HabitacionID;
+        this.fechaIngreso = fechaIngreso;
+        this.fechaSalida = fechaSalida;
+    }
+
     public RegistroHabitacionDTO(int idRegistroHabitacion, int ClienteID, int EmpleadoID, int HabitacionID, Date fechaIngreso, Date fechaSalida) {
         this.idRegistroHabitacion = idRegistroHabitacion;
         this.ClienteID = ClienteID;

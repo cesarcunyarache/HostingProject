@@ -31,7 +31,7 @@ public class HabitacionDTO {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
+
     public HabitacionDTO(int numHabitacion, int tipoHabitacionID, String estado) {
         this.numHabitacion = numHabitacion;
         this.tipoHabitacionID = tipoHabitacionID;

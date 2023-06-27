@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JMenuItem;
 
-
 public class ComponentRoom extends javax.swing.JPanel {
 
     Menu menu;

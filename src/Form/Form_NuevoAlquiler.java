@@ -2,7 +2,9 @@ package Form;
 
 import BusinessObject.CaracteristicaHabitacion;
 import BusinessObject.Cliente;
+import BusinessObject.RegistroHabitacion;
 import BusinessObject.TipoHabitacion;
+import BusinessObject.TipoPago;
 import DataAccessObject.CaracteristicaHabitacionDAO;
 import Form.Components.ComponentRoom;
 import Menu.Menu;
@@ -10,7 +12,9 @@ import TransferObject.CaracteristicaHabitacionDTO;
 import TransferObject.ClienteDTO;
 import TransferObject.HabitacionDTO;
 import TransferObject.TipoHabitacionDTO;
+import TransferObject.TipoPagoDTO;
 import com.toedter.calendar.JDateChooser;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -32,6 +36,11 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
     HabitacionDTO habitacionDTO;
     CaracteristicaHabitacionDTO caracDTO;
     CaracteristicaHabitacion carac;
+    DefaultComboBoxModel modeloPago;
+    TipoPago tHP;
+
+    RegistroHabitacion rH;
+    boolean sw = true;
 
     public Form_NuevoAlquiler() {
 
@@ -39,12 +48,15 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
         txtCostoAdicional.setText("0");
         carac = new CaracteristicaHabitacion();
         caracDTO = new CaracteristicaHabitacionDTO();
-
+        tHP = new TipoPago();
+        rH = new RegistroHabitacion();
         clienteDTO = null;
         cliente = new Cliente();
         tH = new TipoHabitacion();
         modelo = new DefaultComboBoxModel(llenarCombo());
         cbx_tipoHabitacion.setModel(modelo);
+        modeloPago = new DefaultComboBoxModel(llenarComboPago());
+        cbx_TipoPago.setModel(modeloPago);
         comprobarCambiosOpciones();
         comprobarCambiosOpciones2();
 
@@ -66,6 +78,19 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
         lista = (ArrayList<TipoHabitacionDTO>) tH.listar();
         if (lista != null) {
             for (TipoHabitacionDTO tADTO : lista) {
+                combo.add(tADTO.getNombre());
+            }
+        }
+        return combo;
+    }
+
+    public Vector<String> llenarComboPago() {
+        Vector<String> combo = new Vector<String>();
+        ArrayList<TipoPagoDTO> lista = new ArrayList<>();
+        combo.add("-Seleccione-");
+        lista = (ArrayList<TipoPagoDTO>) tHP.listar();
+        if (lista != null) {
+            for (TipoPagoDTO tADTO : lista) {
                 combo.add(tADTO.getNombre());
             }
         }
@@ -172,15 +197,16 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jDtFechaSalida = new com.toedter.calendar.JDateChooser();
         btnBuscar1 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbx_TipoPago = new javax.swing.JComboBox<>();
         jLabel20 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtDescripcionPago = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         txt_PrecioHabitacion = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         txtCostoTotal1 = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
+        btnBuscar3 = new javax.swing.JButton();
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -346,7 +372,7 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
 
         jLabel11.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel11.setText("Tipo de habitación:");
+        jLabel11.setText("Tipo de habitación");
 
         jLabel15.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(102, 102, 102));
@@ -383,6 +409,7 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
         jLabel18.setForeground(new java.awt.Color(102, 102, 102));
         jLabel18.setText("Costo adicional");
 
+        txtCostoAdicional.setEditable(false);
         txtCostoAdicional.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCostoAdicionalActionPerformed(evt);
@@ -445,7 +472,7 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
                 .addComponent(cbFrigoFab)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbAireAcondicionado)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -453,74 +480,61 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel15)
-                                .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txt_NHabitacion))
-                            .addComponent(jLabel18)
-                            .addComponent(txtCostoAdicional, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel15)
+                        .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txt_NHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel18)
+                    .addComponent(txtCostoAdicional, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jPCaracteristicas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel22)
-                                .addGap(275, 275, 275))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbx_tipoHabitacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(83, 83, 83)))
-                        .addComponent(jLabel23))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(40, 40, 40)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addComponent(cbx_tipoHabitacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel22)
+                    .addComponent(jLabel11)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addComponent(jLabel23)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel15))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel11)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap(139, Short.MAX_VALUE)
+                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(115, 115, 115))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txt_NHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_NHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel17)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(jPCaracteristicas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(12, 12, 12)
+                        .addGap(11, 11, 11)
+                        .addComponent(jPCaracteristicas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbx_tipoHabitacion, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel22)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCostoAdicional, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cbx_tipoHabitacion)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel22)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)))
-                .addGap(17, 17, 17))
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(12, 12, 12))
         );
 
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 60, 540, 300));
@@ -552,16 +566,18 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
         btnBuscar1.setBackground(new java.awt.Color(0, 110, 230));
         btnBuscar1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         btnBuscar1.setForeground(new java.awt.Color(255, 255, 255));
-        btnBuscar1.setText("Reservar");
+        btnBuscar1.setText("Alquiler");
+        btnBuscar1.setEnabled(false);
         btnBuscar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscar1ActionPerformed(evt);
             }
         });
 
-        jComboBox1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(102, 102, 102));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbx_TipoPago.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        cbx_TipoPago.setForeground(new java.awt.Color(102, 102, 102));
+        cbx_TipoPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbx_TipoPago.setEnabled(false);
 
         jLabel20.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(102, 102, 102));
@@ -586,9 +602,21 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
         jLabel19.setForeground(new java.awt.Color(102, 102, 102));
         jLabel19.setText("Información de pago:");
 
+        txtCostoTotal1.setEditable(false);
+
         jLabel24.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(102, 102, 102));
         jLabel24.setText("Costo Total");
+
+        btnBuscar3.setBackground(new java.awt.Color(0, 110, 230));
+        btnBuscar3.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        btnBuscar3.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscar3.setText("Verificar");
+        btnBuscar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscar3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -618,22 +646,24 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
                                     .addGroup(jPanel5Layout.createSequentialGroup()
                                         .addGap(10, 10, 10)
                                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cbx_TipoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                                         .addComponent(jLabel19)
                                         .addGap(29, 29, 29)))
+                                .addGap(80, 80, 80)
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addGap(85, 85, 85)
-                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel24)
-                                            .addComponent(txtCostoTotal1)))
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, Short.MAX_VALUE)
                                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel21)
-                                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(txtDescripcionPago, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtCostoTotal1)
+                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                        .addGap(5, 5, 5)
+                                        .addComponent(jLabel24)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(btnBuscar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(btnBuscar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(42, 42, 42))))
         );
@@ -649,23 +679,28 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
                     .addComponent(jDtFechaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jDtFechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel24))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel24)
+                    .addComponent(jLabel16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_PrecioHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCostoTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addComponent(jLabel19)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel19))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscar3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21))
                 .addGap(13, 13, 13)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbx_TipoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDescripcionPago, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(28, Short.MAX_VALUE))
@@ -735,48 +770,51 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
 
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
-        if (clienteDTO != null) {
 
-            // Obtener las fechas seleccionadas de los JDateChooser
-            Date fecha1 = jDtFechaEntrada.getDate();
-            Date fecha2 = jDtFechaSalida.getDate();
+        int respuesta = JOptionPane.showConfirmDialog(
+                this,
+                "¿Estás seguro de realizar el alquiler?",
+                "Confirmación",
+                JOptionPane.YES_NO_OPTION
+        );
 
-            // Calcular la diferencia de días utilizando el método restarFechas()
-            // Mostrar el resultado en un JOptionPane
-            double costoTotal;
-            double costoHabitacionPorDia = Double.parseDouble(txt_PrecioHabitacion.getText());
-            int dias = restarFechas(fecha1, fecha2);
-            if (dias > -1) {
+        if (respuesta == JOptionPane.YES_OPTION) {
+            // Acción a realizar si se selecciona "Sí" en la confirmación
+            int idHabitacion = habitacionDTO.getNumHabitacion(), idCliente = clienteDTO.getIdCliente(), idEmpleado = 11;
+            Date fechaIngreso = jDtFechaEntrada.getDate();
 
-                double adicional = Double.parseDouble(txtCostoAdicional.getText());
+            // Crear el objeto SimpleDateFormat con el formato deseado
+            SimpleDateFormat formatoFecha1 = new SimpleDateFormat("yyyy-MM-dd");
 
-                costoTotal = (costoHabitacionPorDia * dias) + adicional;
-                txtCostoTotal1.setText(String.valueOf(costoTotal));
+            // Formatear la fecha utilizando el objeto SimpleDateFormat
+            String fechaFormateada1 = formatoFecha1.format(fechaIngreso);
 
-                int respuesta = JOptionPane.showConfirmDialog(this, "El costo total es de " + costoTotal + "\n¿Estás seguro de realizar el alquiler?",
-                        "Confirmación", JOptionPane.YES_NO_OPTION);
-                if (respuesta == JOptionPane.YES_OPTION) {
-                    // Acción a realizar si se selecciona "Sí" en la confirmación
-                    System.out.println("Confirmación: Sí");
-                } else if (respuesta == JOptionPane.NO_OPTION) {
-                    // Acción a realizar si se selecciona "No" en la confirmación
-                    System.out.println("Confirmación: No");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Introduzca los días de alquiler correctamente", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+            Date fechaSalida = jDtFechaSalida.getDate();
+
+            // Crear el objeto SimpleDateFormat con el formato deseado
+            SimpleDateFormat formatoFecha2 = new SimpleDateFormat("yyyy-MM-dd");
+
+            // Formatear la fecha utilizando el objeto SimpleDateFormat
+            String fechaFormateada2 = formatoFecha2.format(fechaSalida);
+            double monto = Double.parseDouble(txtCostoTotal1.getText());
+            int tipoPago = tHP.buscarName(cbx_TipoPago.getSelectedItem().toString()).getIdTPago();
+            String descripcion = txtDescripcionPago.getText();
+
+            JOptionPane.showMessageDialog(null, rH.registrarAlquiler(idHabitacion, idCliente, idEmpleado, fechaIngreso, fechaSalida, monto, tipoPago, descripcion));
         } else {
-            JOptionPane.showMessageDialog(null, "Aún no se tiene información del cliente");
+
         }
+
+
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
     private void txt_PrecioHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_PrecioHabitacionActionPerformed
-        
+
     }//GEN-LAST:event_txt_PrecioHabitacionActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       menu.SelectMenu(0, menu.habitacion);
-       limpiarCampos();
+        menu.SelectMenu(0, menu.habitacion);
+        limpiarCampos();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cbFrigoFabKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbFrigoFabKeyPressed
@@ -859,17 +897,100 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jDtFechaSalidaMouseClicked
 
+    private void btnBuscar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar3ActionPerformed
+        if (clienteDTO != null) {
+            Date fecha1 = jDtFechaEntrada.getDate();
+            Date fecha2 = jDtFechaSalida.getDate();
+
+            int dias = restarFechas(fecha1, fecha2);
+            double costoHabitacionPorDia = Double.parseDouble(txt_PrecioHabitacion.getText());
+            double costoTotal = 0.0;
+
+            if (dias == 0 && cbx_tipoHabitacion.getSelectedItem().toString().equals("Matrimonial")) {
+                JTextField additionalInfoField = new JTextField();
+                Object[] message = {
+                    "Ha seleccionado el alquiler por horas. Ingrese el monto:",
+                    additionalInfoField
+                };
+
+                int respuesta = JOptionPane.showConfirmDialog(
+                        null,
+                        message,
+                        "Confirmación",
+                        JOptionPane.YES_NO_OPTION
+                );
+
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    String additionalInfo = additionalInfoField.getText();
+                    txt_PrecioHabitacion.setText("");
+
+                    double adicional = Double.parseDouble(txtCostoAdicional.getText());
+                    costoTotal = Integer.parseInt(additionalInfo) + adicional;
+                    txtCostoTotal1.setText(String.valueOf(costoTotal));
+                    cbx_TipoPago.setEnabled(sw);
+                    btnBuscar1.setEnabled(sw);
+                    txtDescripcionPago.setEnabled(sw);
+
+                } else if (respuesta == JOptionPane.NO_OPTION) {
+                    cbx_TipoPago.setEnabled(!sw);
+                    btnBuscar1.setEnabled(!sw);
+                    txtDescripcionPago.setEnabled(!sw);
+                }
+            } else if (dias > 0) {
+                double adicional = Double.parseDouble(txtCostoAdicional.getText());
+                costoTotal = (costoHabitacionPorDia * dias) + adicional;
+                txtCostoTotal1.setText(String.valueOf(costoTotal));
+
+                int respuesta = JOptionPane.showConfirmDialog(
+                        this,
+                        "El costo total es de " + costoTotal + "\n¿Desea seguir con el Alquiler?",
+                        "Confirmación",
+                        JOptionPane.YES_NO_OPTION
+                );
+
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    // Acción a realizar si se selecciona "Sí" en la confirmación
+                    System.out.println("Confirmación: Sí");
+                    cbx_TipoPago.setEnabled(sw);
+                    btnBuscar1.setEnabled(sw);
+                    txtDescripcionPago.setEnabled(sw);
+                } else if (respuesta == JOptionPane.NO_OPTION) {
+                    cbx_TipoPago.setEnabled(!sw);
+                    btnBuscar1.setEnabled(!sw);
+                    txtDescripcionPago.setEnabled(!sw);
+                }
+            } else if (dias == 0) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Las habitaciones que no son de tipo Matrimonial no se pueden alquilar por horas",
+                        "Atención",
+                        JOptionPane.WARNING_MESSAGE
+                );
+            } else {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Introduzca los días de alquiler correctamente",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Aún no se tiene información del cliente");
+        }
+    }//GEN-LAST:event_btnBuscar3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnBuscar1;
     private javax.swing.JButton btnBuscar2;
+    private javax.swing.JButton btnBuscar3;
     private javax.swing.JButton btn_Agregar;
     private javax.swing.JCheckBox cbAireAcondicionado;
     private javax.swing.JCheckBox cbFrigoFab;
+    private javax.swing.JComboBox<String> cbx_TipoPago;
     private javax.swing.JComboBox<String> cbx_tipoHabitacion;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private com.toedter.calendar.JDateChooser jDtFechaEntrada;
     private com.toedter.calendar.JDateChooser jDtFechaSalida;
     private javax.swing.JLabel jLabel1;
@@ -899,11 +1020,11 @@ public class Form_NuevoAlquiler extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTxtBuscar;
     private javax.swing.JTextArea textArea_Descripcion;
     private javax.swing.JTextField txtCostoAdicional;
     private javax.swing.JTextField txtCostoTotal1;
+    private javax.swing.JTextField txtDescripcionPago;
     private javax.swing.JTextField txt_NHabitacion;
     private javax.swing.JTextField txt_PrecioHabitacion;
     private javax.swing.JTextField txt_apellido;

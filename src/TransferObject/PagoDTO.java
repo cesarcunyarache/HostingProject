@@ -1,14 +1,43 @@
 package TransferObject;
 
+import java.util.Date;
+
 public class PagoDTO {
 
     private int idPago;
+    private int id;
     private double monto;
     private int idTipo;
     private String descripcion;
+    private String pertenece;
+    private Date fecha;
 
     public PagoDTO() {
 
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPertenece() {
+        return pertenece;
+    }
+
+    public void setPertenece(String pertenece) {
+        this.pertenece = pertenece;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
     public PagoDTO(int idPago) {
