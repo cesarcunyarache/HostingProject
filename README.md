@@ -31,6 +31,6 @@ A continuacion te explicare la forma rapida y sencilla para poder importar el pr
 
 
 ###  SOFTWARE
-[![foto](http://imparteconocimientos.com/wp-content/uploads/2023/06/foto-software.png "foto")]
+[![interface login](https://imparteconocimientos.com/wp-content/uploads/2023/06/foto-software.png "interface login")](https://imparteconocimientos.com/wp-content/uploads/2023/06/foto-software.png "interface login")
 
 # FIN
