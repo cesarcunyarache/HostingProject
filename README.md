@@ -32,5 +32,15 @@ A continuacion te explicare la forma rapida y sencilla para poder importar el pr
 
 ###  SOFTWARE
 [![interface login](https://imparteconocimientos.com/wp-content/uploads/2023/06/foto-software.png "interface login")](https://imparteconocimientos.com/wp-content/uploads/2023/06/foto-software.png "interface login")
+
+![Imagen 1](https://github.com/cesarcunyarache/HostingProject/assets/102435094/12a9abab-0431-4950-bdc8-e3f43f1c13dd)
+
+![Imagen 2](https://github.com/cesarcunyarache/HostingProject/assets/102435094/6b9adbbf-ce68-45e8-a99b-7fc126cd21a0)
+
+![Imagen 3](https://github.com/cesarcunyarache/HostingProject/assets/102435094/3b5a7e06-1979-41e6-be37-61638b70ca0d)
+
+![Imagen 4](https://github.com/cesarcunyarache/HostingProject/assets/102435094/9c410e49-5013-41f0-808c-39b3565d20e8)
+
 [Ejecutable](https://drive.google.com/drive/folders/1pS5zQD8gidQ7ro_HfabFr8AREcL6r4Ig?usp=sharing "Ejecutable")
+
 # FIN
